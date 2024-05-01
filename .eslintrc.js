@@ -16,7 +16,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 2,
     'import/extensions': [2, {}],
     // 'no-console': 'off' for more convenient testing:
-    'no-console': 'off',
+    'no-console': 0,
   },
   settings: {
     'import/resolver': {
