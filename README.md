@@ -51,21 +51,13 @@ This application includes several key pages:
 
 ### Technology stack
 
-- <p align="left">
-  <img src="https://www.svgrepo.com/show/374144/typescript.svg" alt="ts" width="50">
-</p>
-<br>
-- <p align="left">
-  <img src="https://www.svgrepo.com/show/374061/sass.svg" alt="sass" width="50">
-</p>
-<br>
-- <p align="left">
-  <img src="https://www.svgrepo.com/show/353884/html-5.svg" alt="html-5" width="50">
-</p>
-<br>
-- <p align="left">
-  <img src="https://www.svgrepo.com/show/373700/jest.svg" alt="jest" width="50">
-</p>
+- <img src="https://www.svgrepo.com/show/374144/typescript.svg" alt="ts" width="50">
+
+- <img src="https://www.svgrepo.com/show/374061/sass.svg" alt="sass" width="50">
+
+- <img src="https://www.svgrepo.com/show/353884/html-5.svg" alt="html-5" width="50">
+
+- <img src="https://www.svgrepo.com/show/373700/jest.svg" alt="jest" width="50">
 
 ### Scripts
 
