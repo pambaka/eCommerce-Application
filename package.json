@@ -1,14 +1,26 @@
 {
   "devDependencies": {
+    "css-loader": "^7.1.1",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
-    "prettier": "3.2.5"
+    "eslint-webpack-plugin": "^4.1.0",
+    "html-webpack-plugin": "^5.6.0",
+    "mini-css-extract-plugin": "^2.9.0",
+    "prettier": "3.2.5",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
   },
   "scripts": {
     "lint": "npx eslint .",
     "format": "npx prettier . --write",
-    "ci:format": "npx prettier . --check"
+    "ci:format": "npx prettier . --check",
+    "start": "webpack serve",
+    "build-dev": "webpack",
+    "build-prod": "webpack --node-env=production"
   }
 }
