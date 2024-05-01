@@ -1,17 +1,18 @@
 <h1 align="center">
     eCommerce-Application
 </h1>
+<br>
+    <div align="center">
+         <img src="https://freeillustrations.xyz/wp-content/uploads/2021/03/Blues-Dual-tone-shopping-illustration_lg.png" alt="logo" width="250">
+    </div>
+
 Welcome to our application! eCommerce Application project is a team task in which the team of three students of RS School develop an eCommerce application.
 
 <h2 align="center">
     Deploy Link: []
 </h2>
 
-<div align="center">
-  <img src="https://freeillustrations.xyz/wp-content/uploads/2021/03/Blues-Dual-tone-shopping-illustration_lg.png" alt="logo" width="250">
-</div>
-
-<h3 align="center">
+<h3 align="left">
     Team: Keep Calm and Code
 </h3>
 
