@@ -60,6 +60,9 @@ This application includes several key pages:
 </div>
 
 ### Scripts
+`npm run lint`: to lint your code.\
+`npm run format`: to format your code.\
+`npm run ci:format`: to check code format compliance in CI.\
 
 ### Project Installation
 ```sh
