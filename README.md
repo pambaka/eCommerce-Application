@@ -51,14 +51,13 @@ This application includes several key pages:
 - [tmaltseva](https://github.com/tmaltseva)
 
 ### Technology stack
-
-<img src="https://www.svgrepo.com/show/374144/typescript.svg" alt="ts" width="50">
-
-<img src="https://www.svgrepo.com/show/374061/sass.svg" alt="sass" width="50">
-
-<img src="https://www.svgrepo.com/show/353884/html-5.svg" alt="html-5" width="50">
-
-<img src="https://www.svgrepo.com/show/373700/jest.svg" alt="jest" width="50">
+<div style="display: flex; gap: 10px;">
+    <img src="https://www.svgrepo.com/show/374144/typescript.svg" alt="ts" width="50">
+    <img src="https://www.svgrepo.com/show/374061/sass.svg" alt="sass" width="50">
+    <img src="https://www.svgrepo.com/show/353884/html-5.svg" alt="html-5" width="50">
+    <img src="https://www.svgrepo.com/show/354552/webpack.svg" alt="webpack" width="50">
+    <img src="https://www.svgrepo.com/show/373700/jest.svg" alt="jest" width="50">
+</div>
 
 ### Scripts
 
