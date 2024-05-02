@@ -1,0 +1,4 @@
+{
+  "*.{ts,css,html}": ["prettier --write"],
+  "*.ts": ["eslint --quiet --fix"]
+}
