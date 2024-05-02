@@ -12,8 +12,12 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader'],
+        test: /\.(css|scss)$/i,
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
       },
       { test: /\.ts$/i, use: 'ts-loader' },
       {
