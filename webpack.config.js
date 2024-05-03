@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
+const DotenvPlugin = require('dotenv-webpack');
 
 const mode = process.env.NODE_ENV || 'development';
 const devMode = mode === 'development';
@@ -13,11 +14,7 @@ const config = {
     rules: [
       {
         test: /\.(css|scss)$/i,
-        use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
-        ],
+        use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       { test: /\.ts$/i, use: 'ts-loader' },
       {
@@ -44,6 +41,7 @@ const config = {
     new EslintPlugin({
       extensions: 'ts',
     }),
+    new DotenvPlugin(),
   ],
 };
 
