@@ -41,7 +41,7 @@ This application includes several key pages:
 - Catalog of goods page
 - Detailed Product page
 - Profile page
-- Basket
+- Product basket
 - About Us page
 - 404 (Not Found)
 
@@ -60,9 +60,12 @@ This application includes several key pages:
 </div>
 
 ### Scripts
-`npm run lint`: to lint your code.\
-`npm run format`: to format your code.\
-`npm run ci:format`: to check code format compliance in CI.\
+`lint`: to lint your code.\
+`format`: to format your code.\
+`ci:format`: to check code format compliance in CI.\
+`test`: to run tests once.\
+`test:watch`: to run tests in observation mode.\
+`test:coverage`: to run tests and generates a code coverage report.\
 
 ### Project Installation
 ```sh
