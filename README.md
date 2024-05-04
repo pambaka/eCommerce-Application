@@ -79,6 +79,12 @@ cd ecommerce-application
 npm install
 ```
 
+### Project prepare
+```sh
+## To install git hooks automatically:
+npm run prepare
+```
+
 ### Project build
 ```sh
 ## To build the project run the following command using npm:
