@@ -1,4 +1,7 @@
-export const CLASS_NAMES = {} as const;
+export const CLASS_NAMES = {
+  loginLogin: 'login__login',
+  loginPassword: 'login__password',
+} as const;
 
 class Dom<T extends HTMLElement> {
   elements: { [key: string]: T };

@@ -1,0 +1,24 @@
+.input-module {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 auto;
+  max-width: 600px;
+  font-size: 20px;
+
+  input,
+  button {
+    font-size: inherit;
+    padding: 5px;
+  }
+
+  button:last-of-type {
+    margin-top: 20px;
+  }
+}
