@@ -1,6 +1,7 @@
 export const CLASS_NAMES = {
   loginLogin: 'login__login',
   loginPassword: 'login__password',
+  loginButton: 'login__button',
 } as const;
 
 class Dom<T extends HTMLElement> {
