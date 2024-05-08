@@ -23,6 +23,12 @@ export default function validateInput(formType: FormType, input: HTMLInputElemen
     case 'password':
       warning[formType].password = validatePassword(input.value);
       break;
+    case 'text':
+      // for the case when checkbox changes input type password to text
+      if (input.classList[0].split('__')[1] === 'password') {
+        warning[formType].password = validatePassword(input.value);
+      }
+      break;
     default:
       break;
   }
