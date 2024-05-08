@@ -1,4 +1,5 @@
-import { FORM_TYPE, FormType } from './const';
+import { FormType } from '../types/index';
+import { FORM_TYPE } from './const';
 import validateEmail from './validate-email';
 import validatePassword from './validate-password';
 

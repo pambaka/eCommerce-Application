@@ -3,8 +3,6 @@ export const FORM_TYPE = {
   registration: 'registration',
 } as const;
 
-export type FormType = typeof FORM_TYPE.login | typeof FORM_TYPE.registration;
-
 export const minLength = {
   password: 8,
 };

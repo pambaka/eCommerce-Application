@@ -6,6 +6,7 @@ export default function validateForm(event: Event) {
   const input = event.target;
 
   if (input instanceof HTMLInputElement) {
+    // class name is supposed to be in format: FORM_TYPE[key] + __ + warning[FORM_TYPE[key]] key (from validate-input.ts)
     const formType = input.classList[0].split('__')[0];
 
     if (formType === FORM_TYPE.login) {
