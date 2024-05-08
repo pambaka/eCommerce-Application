@@ -1,12 +1,8 @@
-export default class BaseTextComponent<T extends HTMLElement = HTMLElement> {
-  node: T;
+import BaseComponent from './base-component';
 
-  constructor(tag: string, text: string, className: string = '') {
-    this.node = document.createElement(tag) as T;
+export default class BaseTextComponent extends BaseComponent<HTMLElement> {
+  constructor(tag: string, className: string, text: string) {
+    super(tag, className);
     this.node.innerText = text;
-
-    if (className) {
-      this.node.classList.add(className);
-    }
   }
 }
