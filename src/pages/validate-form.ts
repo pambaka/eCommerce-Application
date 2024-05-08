@@ -19,6 +19,8 @@ export default function validateForm(event: Event): void {
       const inputName: string = input.classList[0].split('__')[1];
       if (inputModule && inputName in warning) {
         inputModule.setAttribute('warning', warning[inputName]);
+        if (warning[inputName] !== '') input.classList.add('input-invalid');
+        else input.classList.remove('input-invalid');
       }
 
       if (Object.values(warning).every((elem) => elem === '')) {
