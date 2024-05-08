@@ -1,13 +1,24 @@
+@import './variables.scss';
+
 .input-module {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
+.input-module::after {
+  content: attr(warning);
+  display: block;
+  color: $color-warning;
+  font-style: italic;
+  font-size: $font-size-warning;
+  line-height: calc($font-size-warning + 2px);
+  height: calc(($font-size-warning + 2px) * 2);
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   margin: 0 auto;
   max-width: 600px;
   font-size: 20px;
