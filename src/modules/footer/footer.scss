@@ -2,13 +2,11 @@
   display: flex;
   justify-content: space-between;
   margin: auto;
-  padding: 50px;
-  position: absolute;
-  bottom: -10px;
+  padding: 40px;
 }
 
 .contacts_title {
-  @include title;
+  font-weight: bold;
 }
 
 .footer_info,

@@ -26,6 +26,8 @@ export default class Header extends BaseComponent {
         <li class="nav_item"><a href="#catalog" class="nav_link link">Catalog</a></li>
         <li class="nav_item nav_item_login"><a href="#login" class="nav_link">Log in</a></li>
         <li class="nav_item nav_item_signup"><a href="#signup" class="nav_link">Sign up</a></li>
+        <li class="nav_item nav_item_signup"><a href="#cart" class="nav_link"> <img src="https://www.svgrepo.com/show/529445/cart-3.svg" alt="cart" class="logo" width="50" height="50"></a></li>
+
       </ul>
     `;
 
