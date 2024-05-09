@@ -1,0 +1,19 @@
+.main_page__title {
+  color: #fff;
+}
+
+.main_page__wrapper,
+.error_page__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 20px 0;
+  background-image: url('https://www.svgrepo.com/show/530300/shape-embellishment.svg');
+  background-size: 50%;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+}

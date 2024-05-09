@@ -1,0 +1,38 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  padding: 50px;
+  position: absolute;
+  bottom: -10px;
+}
+
+.contacts_title {
+  @include title;
+}
+
+.footer_info,
+.contacts_list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.footer_title {
+  margin-bottom: 15px;
+}
+
+.footer_logo {
+  display: flex;
+  font-family: 'Gill Sans';
+}
+
+.info_list {
+  gap: 15px;
+}
+
+.footer_contacts {
+  border-right: 1px solid #1f1f3f;
+  padding-right: 40px;
+  margin-right: 40px;
+}

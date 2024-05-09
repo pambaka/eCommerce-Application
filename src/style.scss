@@ -1,5 +1,140 @@
-$color-bg: #d3dfdf;
+@import url('./modules/header/header.scss');
+@import url('./modules/footer/footer.scss');
+@import url('./modules/main/main-section.scss');
 
-body {
-  background-color: $color-bg;
+$color-bg: #d3dfdf;
+$dark-blue: #182541;
+$light-green: #648b6e;
+$orange: #feba3d;
+$light-gray: #e0dcdc;
+$gray: #9b9b9b;
+$dark-gray: #2b2a2a;
+$white: #f9f8f8;
+
+@mixin title {
+  margin: 0;
+  color: $dark-blue;
+  font-weight: bold;
+}
+
+@mixin accent-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+@mixin regular-text {
+  font-family: 'Inter';
+  color: $dark-gray;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body,
+html {
+  // background-color: $color-bg;
+  font-family: Gill Sans;
+  font-size: 16px;
+  max-width: 1920px;
+  margin: auto;
+  scroll-behavior: smooth;
+  overflow: hidden;
+  background: linear-gradient(to right, $light-gray, $gray);
+  height: 100vh;
+  position: relative;
+}
+
+h1 {
+  @include title;
+  font-size: 3rem;
+}
+
+h2 {
+  @include title;
+  font-size: 2rem;
+}
+
+h3 {
+  @include title;
+  font-size: 1.5rem;
+}
+
+input {
+  outline: none;
+  border-style: none;
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  transition: transform 0.5s ease;
+  color: $dark-gray;
+
+  &:hover {
+    color: $orange;
+    transform: scale(1.1);
+  }
+}
+
+.btn {
+  @include accent-text;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1.75rem 2.5rem;
+  line-height: 1.25rem;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: 0.5s;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+
+  &--orange {
+    background-color: $orange;
+
+    &:hover {
+      background-color: lighten($orange, 10%);
+    }
+  }
+
+  &:disabled {
+    filter: saturate(75%);
+    color: $gray;
+
+    &:hover {
+      pointer-events: none;
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 450px) {
+  html,
+  body {
+    font-size: 0.5rem;
+  }
 }
