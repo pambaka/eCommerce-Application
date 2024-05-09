@@ -3,7 +3,7 @@ import { FORM_TYPE } from './const';
 import validateEmail from './validate-email';
 import validatePassword from './validate-password';
 
-const warning = {
+const warning: { [key: string]: { [key: string]: string } } = {
   [FORM_TYPE.login]: {
     email: '',
     password: '',
@@ -16,7 +16,7 @@ const warning = {
   },
 };
 
-export default function validateInput(formType: FormType, input: HTMLInputElement) {
+export default function validateInput(formType: FormType, input: HTMLInputElement): { [key: string]: string } {
   switch (input.type) {
     case 'email':
       warning[formType].email = validateEmail(input.value);

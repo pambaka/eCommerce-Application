@@ -1,5 +1,5 @@
 export const CLASS_NAMES = {
-  loginLogin: 'login__login',
+  loginLogin: 'login__email',
   loginPassword: 'login__password',
   loginButton: 'login__button',
 } as const;
