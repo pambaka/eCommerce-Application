@@ -5,8 +5,9 @@ import inputModule from '../../../modules/input-module';
 import { CLASS_NAMES, DOM } from '../../../const';
 import LabelComponent from '../../../components/label-component';
 import togglePasswordVisibility from '../logic/toggle-password-visibility';
+import handleLoginRequest from '../logic/handle-login-request';
 
-export default function renderLoginPage() {
+export default function renderLoginPage(): void {
   const loginForm = new BaseComponent<HTMLFormElement>('form', 'login-form');
 
   const inputLogin: HTMLDivElement = inputModule(CLASS_NAMES.loginLogin, 'email', 'login (e-mail) *:');
@@ -23,7 +24,7 @@ export default function renderLoginPage() {
   checkboxLabel.node.prepend(passwordCheckbox.node);
   inputPassword.append(checkboxLabel.node);
 
-  const button = new ButtonComponent(CLASS_NAMES.loginButton, () => console.log('click'), 'login', true);
+  const button = new ButtonComponent(CLASS_NAMES.loginButton, handleLoginRequest, 'login', true);
   DOM.add(CLASS_NAMES.loginButton, button.node);
 
   loginForm.node.append(inputLogin, inputPassword, button.node);
