@@ -15,7 +15,7 @@ export default function validatePassword(password: string): string {
   if (password === '') {
     warning = 'Password is required.';
   } else if (!passwordArr.every((char) => char.match(reLettersDigits))) {
-    warning = 'Only english letters and digits are allowed.';
+    warning = 'Only English letters and digits are allowed.';
   } else {
     if (password.length < minLength.password) warning = `Minimum password length is ${minLength.password} symbols.`;
 

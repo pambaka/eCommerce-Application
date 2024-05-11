@@ -2,6 +2,18 @@ export const CLASS_NAMES = {
   loginLogin: 'login__email',
   loginPassword: 'login__password',
   loginButton: 'login__button',
+  registrationForm: 'registration__form',
+  emailInput: 'registration__email',
+  passwordInput: 'registration__password',
+  firstName: 'registration__first-name',
+  lastName: 'registration__last-name',
+  birthDate: 'registration__date-of-birth',
+  address: 'registration__address',
+  street: 'registration__street',
+  city: 'registration__city',
+  postalCode: 'registration__postal-code',
+  country: 'registration__country',
+  registrationButton: 'registration__submit',
 } as const;
 
 class Dom<T extends HTMLElement> {
