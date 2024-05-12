@@ -9,8 +9,9 @@ export default function validateForm(event: Event): void {
     // class name is supposed to be in format: FORM_TYPE[key] + __ + warning[FORM_TYPE[key]] key (from validate-input.ts)
     const formType: string = input.classList[0].split('__')[0];
 
-    if (formType === FORM_TYPE.login) {
-      const button: HTMLElement = DOM.elements[CLASS_NAMES.loginButton];
+    if (formType === FORM_TYPE.login || formType === FORM_TYPE.registration) {
+      const key: 'loginButton' | 'registrationButton' = `${formType}Button`;
+      const button: HTMLElement = DOM.elements[CLASS_NAMES[key]];
       button.setAttribute('disabled', '');
 
       const warning = validateInput(formType, input);

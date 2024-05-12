@@ -10,8 +10,8 @@ import handleLoginRequest from '../logic/handle-login-request';
 export default function renderLoginPage(): void {
   const loginForm = new BaseComponent<HTMLFormElement>('form', 'login-form');
 
-  const inputLogin: HTMLDivElement = inputModule(CLASS_NAMES.loginLogin, 'email', 'login (e-mail) *:');
-  const inputPassword: HTMLDivElement = inputModule(CLASS_NAMES.loginPassword, 'password', 'password *:');
+  const inputLogin: HTMLDivElement = inputModule(CLASS_NAMES.loginLogin, 'email', 'Login (e-mail) *');
+  const inputPassword: HTMLDivElement = inputModule(CLASS_NAMES.loginPassword, 'password', 'Password *');
 
   const checkboxLabel = new LabelComponent('Show password');
   checkboxLabel.node.classList.add('password-checkbox__label');

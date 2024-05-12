@@ -1,0 +1,100 @@
+@import './variables.scss';
+
+.registration__form {
+  height: 100vh;
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 75%;
+  margin: 0 auto;
+
+  input {
+    padding: 5px;
+  }
+  .input-invalid {
+    border: 1px solid $color-warning;
+  }
+
+  input,
+  select {
+    height: 20px;
+    border-width: 1px;
+    border-color: gray;
+  }
+
+  .row-2,
+  .row-3 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .row-2 {
+    gap: 20px;
+  }
+
+  .row-3 {
+    gap: 10px;
+  }
+}
+
+.input-module {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  line-height: 0.9;
+  flex-grow: 1;
+}
+.input-module:has(input[type='date']) {
+  width: 125px;
+}
+.input-module::after {
+  content: attr(warning);
+  display: block;
+  color: $color-warning;
+  font-style: italic;
+  font-size: $font-size-warning;
+  line-height: calc($font-size-warning + 2px);
+  height: calc(($font-size-warning + 2px) * 2);
+  max-width: 350px;
+  margin-bottom: 10px;
+}
+.registration__address {
+  align-self: flex-start;
+  min-width: 300px;
+}
+
+.row-3 {
+  .input-module {
+    width: 250px;
+  }
+}
+
+.input-module,
+.registration__country-wrapper {
+  width: 50%;
+}
+
+.registration__country-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-grow: 1;
+  width: 50%;
+}
+
+.registration__country-title {
+  line-height: 0.9;
+}
+
+.registration__country-select {
+  box-sizing: content-box;
+  padding: 5px;
+}
+
+.registration__submit {
+  height: 32px;
+}
