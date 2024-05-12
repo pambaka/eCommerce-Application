@@ -37,27 +37,20 @@ export default function validateInput(formType: FormType, input: HTMLInputElemen
       // for the case when checkbox changes input type password to text
       if (inputName === 'password') {
         warning[formType].password = validatePassword(input.value);
-      }
-      if (inputName === 'first-name') {
+      } else if (inputName === 'first-name') {
         warning[formType]['first-name'] = validateName(input.value, inputName);
-      }
-      if (inputName === 'last-name') {
+      } else if (inputName === 'last-name') {
         warning[formType]['last-name'] = validateName(input.value, inputName);
-      }
-      if (inputName === 'postal-code') {
+      } else if (inputName === 'postal-code') {
         warning[formType]['postal-code'] = validatePostalCode(input.value);
-      }
-      if (inputName === 'city') {
+      } else if (inputName === 'city') {
         warning[formType].city = validateName(input.value, inputName);
-      }
-      if (inputName === 'street') {
+      } else if (inputName === 'street') {
         warning[formType].street = validateStreet(input.value);
       }
       break;
 
     case 'date':
-      console.log('+');
-      console.log(input.value);
       warning[formType]['date-of-birth'] = validateBirthDate(input.value);
       break;
     default:

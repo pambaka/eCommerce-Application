@@ -48,7 +48,9 @@
   line-height: 0.9;
   flex-grow: 1;
 }
-
+.input-module:has(input[type='date']) {
+  width: 125px;
+}
 .input-module::after {
   content: attr(warning);
   display: block;
@@ -60,7 +62,6 @@
   max-width: 350px;
   margin-bottom: 10px;
 }
-
 .registration__address {
   align-self: flex-start;
   min-width: 300px;

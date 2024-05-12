@@ -1,1 +1,1 @@
-export default function handleSubmit() {}
+export default function handleSubmitRegistration() {}

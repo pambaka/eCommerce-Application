@@ -12,6 +12,11 @@ export default function inputModule(
   const label = new LabelComponent(labelText);
   const input = new InputComponent(inputClassName, inputType, validateForm);
 
+  if (inputType === 'date') {
+    input.node.removeEventListener('keyup', validateForm);
+    input.node.addEventListener('change', validateForm);
+  }
+
   div.node.append(label.node, input.node);
 
   return div.node;

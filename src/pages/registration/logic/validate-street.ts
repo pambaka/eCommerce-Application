@@ -1,6 +1,4 @@
 export default function validateStreet(street: string): string {
-  console.log('street: ', street);
-
   let warning: string = '';
 
   if (street === '') {
@@ -9,6 +7,5 @@ export default function validateStreet(street: string): string {
     warning = 'The first and last characters should not be spaces.';
   }
 
-  console.log('warning: ', warning);
   return warning;
 }

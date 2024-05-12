@@ -1,4 +1,5 @@
 import BaseComponent from '../../../components/base-component';
+import OptionComponent from '../../../components/option-component';
 
 export default function renderSelectCountries(parentElement: HTMLElement) {
   const countryWrapper = new BaseComponent('div', 'registration__country-wrapper');
@@ -9,20 +10,10 @@ export default function renderSelectCountries(parentElement: HTMLElement) {
   const countrySelect = new BaseComponent('select', 'registration__country-select');
   countrySelect.node.setAttribute('name', 'country');
 
-  const optionFrance = new BaseComponent('option');
-  optionFrance.node.setAttribute('value', 'France');
-  optionFrance.node.innerText = 'France';
-  countrySelect.node.append(optionFrance.node);
-
-  const optionGermany = new BaseComponent('option');
-  optionGermany.node.setAttribute('value', 'Germany');
-  optionGermany.node.innerText = 'Germany';
-  countrySelect.node.append(optionGermany.node);
-
-  const optionSpain = new BaseComponent('option');
-  optionSpain.node.setAttribute('value', 'Spain');
-  optionSpain.node.innerText = 'Spain';
-  countrySelect.node.append(optionSpain.node);
+  const optionFrance = new OptionComponent('France', 'France');
+  const optionGermany = new OptionComponent('Germany', 'Germany');
+  const optionSpain = new OptionComponent('Spain', 'Spain');
+  countrySelect.node.append(optionFrance.node, optionGermany.node, optionSpain.node);
 
   countryWrapper.node.append(countrySelect.node);
   parentElement.append(countryWrapper.node);

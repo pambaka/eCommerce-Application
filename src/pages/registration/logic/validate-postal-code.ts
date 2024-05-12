@@ -1,9 +1,9 @@
-import { refiveDigits } from '../../const';
+import { reFiveDigits } from '../../const';
 
 export default function validatePostalCode(code: string): string {
   let warning: string = '';
 
-  const isValid = refiveDigits.test(code);
+  const isValid = reFiveDigits.test(code);
 
   if (code === '') {
     warning = 'Postal code is required.';
