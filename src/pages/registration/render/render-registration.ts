@@ -34,12 +34,7 @@ export default function renderRegistration() {
   const cityModule = inputModule(CLASS_NAMES.city, 'text', 'City *');
   row5.node.append(streetModule, cityModule);
 
-  const submitButton = new ButtonComponent(
-    CLASS_NAMES.registrationButton,
-    handleSubmitRegistration,
-    'Submit registration',
-    true,
-  );
+  const submitButton = new ButtonComponent(CLASS_NAMES.registrationButton, handleSubmitRegistration, 'Register', true);
   DOM.add(CLASS_NAMES.registrationButton, submitButton.node);
 
   form.node.append(row1.node, row2.node, address.node, row4.node, row5.node, submitButton.node);
