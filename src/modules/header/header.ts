@@ -21,7 +21,6 @@ export default class Header extends BaseComponent {
     const ul = new BaseComponent('ul', 'nav');
     ul.node.classList.add('nav_header');
 
-    // Logo and text
     const logoItem = new BaseComponent('li', 'nav_item');
     const logoLink = new BaseComponent('a', 'header_logo');
     logoLink.node.setAttribute('href', '#main');
