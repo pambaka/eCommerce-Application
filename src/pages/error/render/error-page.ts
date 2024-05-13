@@ -1,7 +1,7 @@
-import BaseComponent from '../../components/base-component';
-import BaseTextComponent from '../../components/base-text-component';
-import ButtonComponent from '../../components/button-component';
-import Router from '../../services/router';
+import BaseComponent from '../../../components/base-component';
+import BaseTextComponent from '../../../components/base-text-component';
+import ButtonComponent from '../../../components/button-component';
+import Router from '../../../services/router';
 
 export default class ErrorSection extends BaseComponent {
   constructor() {

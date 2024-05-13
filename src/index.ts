@@ -2,7 +2,7 @@ import './style.scss';
 
 import Header from './modules/header/header';
 import MainSection from './modules/main/main-section';
-import ErrorSection from './modules/error/error404';
+import ErrorSection from './pages/error/render/error-page';
 import Footer from './modules/footer/footer';
 import Router from './services/router';
 
