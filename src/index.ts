@@ -37,13 +37,13 @@ class App {
 
     switch (route) {
       case Router.pages.main:
-        document.body.append(this.mainSection.container);
+        document.body.append(this.mainSection.node);
         break;
       case Router.pages.notFound:
-        document.body.append(this.errorSection.container);
+        document.body.append(this.errorSection.node);
         break;
       default:
-        document.body.append(this.errorSection.container);
+        document.body.append(this.errorSection.node);
     }
 
     document.body.append(this.footer.container);
