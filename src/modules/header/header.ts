@@ -1,36 +1,64 @@
 import BaseComponent from '../../components/base-component';
+import BaseTextComponent from '../../components/base-text-component';
 
 export default class Header extends BaseComponent {
-  public container: HTMLElement;
-
   constructor() {
     super('header', 'header');
-    this.container = this.node;
     this.renderHeader();
   }
 
+  static createNavItem(href: string, text: string): HTMLElement {
+    const li = new BaseComponent('li', 'nav_item');
+    const a = new BaseComponent('a', 'nav_link');
+    a.node.setAttribute('href', href);
+    a.node.textContent = text;
+    li.node.appendChild(a.node);
+    return li.node;
+  }
+
   renderHeader() {
-    const nav = document.createElement('nav');
-    nav.className = 'main_navigation';
+    const nav = new BaseComponent('nav', 'main_navigation');
+    const ul = new BaseComponent('ul', 'nav');
+    ul.node.classList.add('nav_header');
 
-    nav.innerHTML = `
-      <ul class="nav nav_header">
-        <li class="nav_item">
-          <a href="#main" class="header_logo">
-            <img src="https://www.svgrepo.com/show/530291/leaves-2.svg" alt="logo" class="logo" width="50" height="50">
-            <h1 class="logo_text">KeepCalm</h1>
-          </a>
-        </li>
-        <li class="nav_item"><a href="#main" class="nav_link">Home</a></li>
-        <li class="nav_item"><a href="#about" class="nav_link">About</a></li>
-        <li class="nav_item"><a href="#catalog" class="nav_link link">Catalog</a></li>
-        <li class="nav_item nav_item_login"><a href="#login" class="nav_link">Log in</a></li>
-        <li class="nav_item nav_item_signup"><a href="#signup" class="nav_link">Sign up</a></li>
-        <li class="nav_item nav_item_signup"><a href="#cart" class="nav_link"> <img src="https://www.svgrepo.com/show/529445/cart-3.svg" alt="cart" class="logo" width="50" height="50"></a></li>
+    // Logo and text
+    const logoItem = new BaseComponent('li', 'nav_item');
+    const logoLink = new BaseComponent('a', 'header_logo');
+    logoLink.node.setAttribute('href', '#main');
+    const logoImage = new BaseComponent('img');
+    logoImage.node.setAttribute('src', 'https://www.svgrepo.com/show/530291/leaves-2.svg');
+    logoImage.node.setAttribute('alt', 'logo');
+    logoImage.node.setAttribute('width', '50');
+    logoImage.node.setAttribute('height', '50');
+    const logoText = new BaseTextComponent('h1', 'logo_text', 'KeepCalm');
 
-      </ul>
-    `;
+    logoLink.node.appendChild(logoImage.node);
+    logoLink.node.appendChild(logoText.node);
+    logoItem.node.appendChild(logoLink.node);
+    ul.node.appendChild(logoItem.node);
 
-    this.container.append(nav);
+    // Navigation items
+    ul.node.appendChild(Header.createNavItem('#main', 'Home'));
+    ul.node.appendChild(Header.createNavItem('#about', 'About'));
+    ul.node.appendChild(Header.createNavItem('#catalog', 'Catalog'));
+    ul.node.appendChild(Header.createNavItem('#login', 'Log in'));
+    ul.node.appendChild(Header.createNavItem('#signup', 'Sign up'));
+
+    // Cart icon
+    const cartItem = new BaseComponent('li', 'nav_item');
+    cartItem.node.classList.add('nav_item_signup');
+    const cartLink = new BaseComponent('a', 'nav_link');
+    cartLink.node.setAttribute('href', '#cart');
+    const cartIcon = new BaseComponent('img');
+    cartIcon.node.setAttribute('src', 'https://www.svgrepo.com/show/529445/cart-3.svg');
+    cartIcon.node.setAttribute('alt', 'cart');
+    cartIcon.node.setAttribute('width', '50');
+    cartIcon.node.setAttribute('height', '50');
+    cartLink.node.appendChild(cartIcon.node);
+    cartItem.node.appendChild(cartLink.node);
+    ul.node.appendChild(cartItem.node);
+
+    nav.node.appendChild(ul.node);
+    this.node.appendChild(nav.node);
   }
 }

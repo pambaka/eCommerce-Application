@@ -7,14 +7,11 @@ import Footer from './modules/footer/footer';
 
 document.addEventListener('DOMContentLoaded', () => {
   const header = new Header();
-  document.body.prepend(header.container);
+  document.body.prepend(header.node);
 
   const mainSection = new MainSection();
-  document.body.append(mainSection.container);
-
-  // const errorSection = new ErrorSection();
-  // document.body.append(errorSection.container);
+  document.body.append(mainSection.node);
 
   const footer = new Footer();
-  document.body.append(footer.container);
+  document.body.append(footer.node);
 });
