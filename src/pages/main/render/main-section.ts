@@ -1,6 +1,6 @@
-import BaseComponent from '../../components/base-component';
-import BaseTextComponent from '../../components/base-text-component';
-import ButtonComponent from '../../components/button-component';
+import BaseComponent from '../../../components/base-component';
+import BaseTextComponent from '../../../components/base-text-component';
+import ButtonComponent from '../../../components/button-component';
 
 export default class MainSection extends BaseComponent {
   constructor() {
