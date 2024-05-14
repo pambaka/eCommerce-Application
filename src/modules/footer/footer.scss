@@ -1,10 +1,8 @@
-$border-color: #1f1f3f;
-
 .footer {
   display: flex;
   justify-content: space-between;
   margin: auto;
-  padding: 40px;
+  padding: 0 40px 20px 40px;
 }
 
 .contacts_title {
@@ -15,11 +13,11 @@ $border-color: #1f1f3f;
 .contacts_list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 .footer_title {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .footer_logo {
@@ -42,7 +40,7 @@ $border-color: #1f1f3f;
 }
 
 .footer_contacts {
-  border-right: 1px solid $border-color;
+  border-right: 1px solid #1f1f3f;
   padding-right: 40px;
   margin-right: 40px;
 }

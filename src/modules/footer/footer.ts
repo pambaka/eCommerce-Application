@@ -12,7 +12,8 @@ export default class Footer extends BaseComponent {
   static addContactItem(parentNode: HTMLElement, titleText: string, href: string, linkText: string): void {
     const item = new BaseComponent('li', 'contacts_item');
     const title = new BaseTextComponent('p', 'contacts_title', titleText);
-    const link = new BaseLinkComponent(href, 'footer_text link', linkText);
+    const link = new BaseLinkComponent(href, 'link', linkText);
+    link.node.classList.add('footer_text');
     item.node.appendChild(title.node);
     item.node.appendChild(link.node);
     parentNode.appendChild(item.node);

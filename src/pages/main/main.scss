@@ -19,3 +19,9 @@ $light-text: #f9f8f8;
 .subtitle {
   font-size: 1.2rem;
 }
+
+.main_page__btn {
+  &:hover {
+    color: lighten($color-accent, 10%);
+  }
+}

@@ -117,22 +117,15 @@ a {
   cursor: pointer;
   transition: 0.5s;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
-
-  &--orange {
-    background-color: $color-accent;
-
-    &:hover {
-      background-color: lighten($color-accent, 10%);
-    }
-  }
+  background-color: $light-text;
 
   &:disabled {
     filter: saturate(75%);
-    color: $gray;
+    background-color: $color-bg3;
+  }
 
-    &:hover {
-      pointer-events: none;
-    }
+  &:hover {
+    pointer-events: none;
   }
 }
 
