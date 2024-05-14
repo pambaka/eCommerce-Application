@@ -1,0 +1,38 @@
+$border-color: #1f1f3f;
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  padding: 40px;
+}
+
+.contacts_title {
+  font-weight: bold;
+}
+
+.footer_info,
+.contacts_list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.footer_title {
+  margin-bottom: 15px;
+}
+
+.footer_logo {
+  display: flex;
+  font-family: 'Gill Sans';
+}
+
+.info_list {
+  gap: 15px;
+}
+
+.footer_contacts {
+  border-right: 1px solid $border-color;
+  padding-right: 40px;
+  margin-right: 40px;
+}
