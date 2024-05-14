@@ -1,5 +1,18 @@
 $color-bg: #d3dfdf;
 
+p {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: $color-bg;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
 }

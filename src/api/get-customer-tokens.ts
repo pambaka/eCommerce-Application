@@ -1,4 +1,5 @@
 import { region } from './const';
+import handleErrorMessage from '../pages/handle-error-message';
 
 export default async function getCustomerTokens(email: string, password: string): Promise<string | undefined> {
   let accessToken: string | undefined;
@@ -14,7 +15,12 @@ export default async function getCustomerTokens(email: string, password: string)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      accessToken = data.access_token;
+
+      if (data.statusCode === 400) {
+        handleErrorMessage(data.message);
+      } else {
+        accessToken = data.access_token;
+      }
     })
     .catch((error) => console.log(error));
 
