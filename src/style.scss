@@ -1,6 +1,13 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import url('./pages/main/main.scss');
 
 $color-bg: #d3dfdf;
+$color-head: #182541;
+$color-accent: #feba3d;
+$color-bg2: #e0dcdc;
+$color-bg3: #9b9b9b;
+$dark-text: #2b2a2a;
+$light-text: #f9f8f8;
 
 p {
   margin: 0;
@@ -17,4 +24,130 @@ button {
 
 button:disabled {
   cursor: default;
+}
+
+@mixin title {
+  margin: 0;
+  color: $color-head;
+  font-weight: bold;
+}
+
+@mixin accent-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+@mixin regular-text {
+  font-family: 'Inter';
+  color: $dark-text;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body,
+html {
+  font-family: Gill Sans;
+  font-size: 16px;
+  max-width: 1920px;
+  margin: auto;
+  scroll-behavior: smooth;
+  overflow: hidden;
+  background: linear-gradient(to right, $color-bg2, $color-bg3);
+  height: 100vh;
+}
+
+h1 {
+  @include title;
+  font-size: 3rem;
+}
+
+h2 {
+  @include title;
+  font-size: 2rem;
+}
+
+h3 {
+  @include title;
+  font-size: 1.5rem;
+}
+
+input {
+  outline: none;
+  border-style: none;
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  transition: transform 0.5s ease;
+  color: $dark-text;
+
+  &:hover {
+    color: $color-accent;
+    transform: scale(1.1);
+  }
+}
+
+.btn {
+  @include accent-text;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1.75rem 2.5rem;
+  line-height: 1.25rem;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: 0.5s;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+
+  &--orange {
+    background-color: $color-accent;
+
+    &:hover {
+      background-color: lighten($color-accent, 10%);
+    }
+  }
+
+  &:disabled {
+    filter: saturate(75%);
+    color: $gray;
+
+    &:hover {
+      pointer-events: none;
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 450px) {
+  html,
+  body {
+    font-size: 0.5rem;
+  }
 }
