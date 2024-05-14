@@ -3,6 +3,7 @@ import OptionComponent from '../../../components/option-component';
 
 export default function renderSelectCountries(parentElement: HTMLElement) {
   const countryWrapper = new BaseComponent('div', 'registration__country-wrapper');
+  countryWrapper.node.classList.add('col-md-6');
   const countryTitle = new BaseComponent('div', 'registration__country-title');
   countryTitle.node.innerText = 'Country *';
   countryWrapper.node.append(countryTitle.node);
