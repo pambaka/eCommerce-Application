@@ -1,6 +1,6 @@
-import BaseComponent from '../components/base-component';
-import BaseTextComponent from '../components/base-text-component';
-import NavItemComponent from '../components/navigation-component';
+import BaseComponent from '../../components/base-component';
+import BaseTextComponent from '../../components/base-text-component';
+import NavItemComponent from '../../components/navigation-component';
 
 export default class Header extends BaseComponent {
   constructor() {
