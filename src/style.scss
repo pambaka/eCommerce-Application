@@ -1,5 +1,7 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import url('./pages/main/main.scss');
+@import url('./modules/header/header.scss');
+@import url('./modules/footer/footer.scss');
 
 $color-bg: #d3dfdf;
 $color-head: #182541;
