@@ -1,14 +1,14 @@
 @import './variables.scss';
 
 .registration__form {
-  height: 100vh;
-  max-width: 1000px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  width: 75%;
-  margin: 0 auto;
+  // height: 100vh;
+  // max-width: 1000px;
+  // display: flex;
+  // align-items: center;
+  // flex-direction: column;
+  // justify-content: center;
+  // width: 75%;
+  // margin: 0 auto;
 
   input {
     padding: 5px;
@@ -19,7 +19,7 @@
 
   input,
   select {
-    height: 20px;
+    line-height: 20px;
     border-width: 1px;
     border-color: gray;
   }
@@ -46,11 +46,11 @@
   flex-direction: column;
   gap: 5px;
   line-height: 0.9;
-  flex-grow: 1;
+  // flex-grow: 1;
 }
-.input-module:has(input[type='date']) {
-  width: 125px;
-}
+// .input-module:has(input[type='date']) {
+//   width: 125px;
+// }
 .input-module::after {
   content: attr(warning);
   display: block;
@@ -59,12 +59,13 @@
   font-size: $font-size-warning;
   line-height: calc($font-size-warning + 2px);
   height: calc(($font-size-warning + 2px) * 2);
-  max-width: 350px;
+  // max-width: 350px;
   margin-bottom: 10px;
 }
 .registration__address {
-  align-self: flex-start;
+  // align-self: flex-start;
   min-width: 300px;
+  padding-bottom: 10px;
 }
 
 .row-3 {
@@ -73,10 +74,10 @@
   }
 }
 
-.input-module,
-.registration__country-wrapper {
-  width: 50%;
-}
+// .input-module,
+// .registration__country-wrapper {
+//   width: 50%;
+// }
 
 .registration__country-wrapper {
   display: flex;
@@ -84,6 +85,7 @@
   gap: 5px;
   flex-grow: 1;
   width: 50%;
+  padding-bottom: 45px;
 }
 
 .registration__country-title {
@@ -97,4 +99,17 @@
 
 .registration__submit {
   height: 32px;
+}
+@media screen and (max-width: 767px) {
+  form .registration__submit {
+    width: 100%;
+  }
+}
+
+fieldset,
+legend {
+  all: revert !important;
+}
+fieldset .row:nth-of-type(1) {
+  padding-top: 15px;
 }

@@ -1,42 +1,37 @@
 import BaseComponent from '../../../components/base-component';
-import BaseTextComponent from '../../../components/base-text-component';
 import ButtonComponent from '../../../components/button-component';
 import '../../../styles/registration-page.scss';
 import { CLASS_NAMES, DOM } from '../../../const';
 import inputModule from '../../../modules/input-module';
 import handleSubmitRegistration from '../logic/handle-submit';
-import renderSelectCountries from './render-select-coutries';
+import renderAddressBlock from './render-address-block';
 
-export default function renderRegistration() {
+export default function renderRegistration(): void {
   const form = new BaseComponent('form', CLASS_NAMES.registrationForm);
+  form.node.classList.add('container');
 
-  const row1 = new BaseComponent('div', 'row-2');
+  const row1 = new BaseComponent('div', 'row');
   const emailModule = inputModule(CLASS_NAMES.emailInput, 'email', 'E-mail *');
+  emailModule.classList.add('col-md-6');
   const passwordModule = inputModule(CLASS_NAMES.passwordInput, 'password', 'Password *');
+  passwordModule.classList.add('col-md-6');
   row1.node.append(emailModule, passwordModule);
 
-  const row2 = new BaseComponent('div', 'row-3');
+  const row2 = new BaseComponent('div', 'row');
   const firstNameModule = inputModule(CLASS_NAMES.firstName, 'text', 'First name *');
+  firstNameModule.classList.add('col-md-4');
   const lastNameModule = inputModule(CLASS_NAMES.lastName, 'text', 'Last name *');
+  lastNameModule.classList.add('col-md-5');
   const birthDateModule = inputModule(CLASS_NAMES.birthDate, 'date', 'Date of birth *');
+  birthDateModule.classList.add('col-md-3');
   row2.node.append(firstNameModule, lastNameModule, birthDateModule);
 
-  const address = new BaseTextComponent('div', CLASS_NAMES.address, 'Address');
-
-  const row4 = new BaseComponent('div', 'row-2');
-  const postalCodeModule = inputModule(CLASS_NAMES.postalCode, 'text', 'Postal code *');
-
-  renderSelectCountries(row4.node);
-  row4.node.append(postalCodeModule);
-
-  const row5 = new BaseComponent('div', 'row-2');
-  const streetModule = inputModule(CLASS_NAMES.street, 'text', 'Street *');
-  const cityModule = inputModule(CLASS_NAMES.city, 'text', 'City *');
-  row5.node.append(streetModule, cityModule);
+  const addressBlock = renderAddressBlock();
 
   const submitButton = new ButtonComponent(CLASS_NAMES.registrationButton, handleSubmitRegistration, 'Register', true);
+  submitButton.node.classList.add('d-grid', 'col-6', 'mt-4', 'mx-auto');
   DOM.add(CLASS_NAMES.registrationButton, submitButton.node);
 
-  form.node.append(row1.node, row2.node, address.node, row4.node, row5.node, submitButton.node);
+  form.node.append(row1.node, row2.node, addressBlock, submitButton.node);
   document.body.append(form.node);
 }
