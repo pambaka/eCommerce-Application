@@ -13,16 +13,7 @@ export default class Router {
   };
 
   constructor() {
-    this.routes = {
-      '#main': () => console.log('Main page'),
-      '#about': () => console.log('About'),
-      '#catalog': () => console.log('Catalog'),
-      '#login': () => console.log('Log in'),
-      '#signup': () => console.log('Sign up'),
-      '#profile': () => console.log('Profile'),
-      '#404': () => console.log('Not found'),
-      '#cart': () => console.log('Cart'),
-    };
+    this.routes = {};
     this.init();
   }
 
