@@ -4,7 +4,7 @@ import '../../../styles/registration-page.scss';
 import { CLASS_NAMES, DOM } from '../../../const';
 import inputModule from '../../../modules/input-module';
 import handleSubmitRegistration from '../logic/handle-submit';
-import renderAddressBlock from './render-address-block';
+import createAddressBlock from './create-address-block';
 
 export default function renderRegistration(): void {
   const form = new BaseComponent('form', CLASS_NAMES.registrationForm);
@@ -26,7 +26,7 @@ export default function renderRegistration(): void {
   birthDateModule.classList.add('col-md-3');
   row2.node.append(firstNameModule, lastNameModule, birthDateModule);
 
-  const addressBlock = renderAddressBlock();
+  const addressBlock = createAddressBlock();
 
   const submitButton = new ButtonComponent(CLASS_NAMES.registrationButton, handleSubmitRegistration, 'Register', true);
   submitButton.node.classList.add('d-grid', 'col-6', 'mt-4', 'mx-auto');

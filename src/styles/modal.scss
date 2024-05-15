@@ -11,7 +11,7 @@
   z-index: 1;
 }
 
-.modal {
+.modal-window {
   width: 360px;
   height: 200px;
   position: fixed;
@@ -32,6 +32,9 @@
     font-size: 20px;
     line-height: 1.6;
     color: $color-warning;
+  }
+  p:first-child.success {
+    color: #5f8575;
   }
 
   p:nth-child(2) {
