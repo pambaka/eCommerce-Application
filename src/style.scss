@@ -55,12 +55,11 @@ button:disabled {
 
 body,
 html {
-  font-family: Gill Sans;
+  font-family: 'Gill Sans', sans-serif;
   font-size: 16px;
   max-width: 1920px;
   margin: auto;
   scroll-behavior: smooth;
-  overflow: hidden;
   background: linear-gradient(to right, $color-bg2, $color-bg3);
   height: 100vh;
 }

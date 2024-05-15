@@ -1,27 +1,51 @@
 @import './variables.scss';
 
-.input-module {
+body {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 20px;
+  min-width: 300px;
 }
 
-.input-module::after {
-  content: attr(warning);
-  display: block;
-  color: $color-warning;
-  font-style: italic;
-  font-size: $font-size-warning;
-  line-height: calc($font-size-warning + 2px);
-  height: calc(($font-size-warning + 2px) * 2);
+.main-login {
+  min-height: fit-content;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 .login-form {
+  width: 100%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
-  max-width: 600px;
   font-size: 20px;
+
+  .input-module {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+  }
+
+  .input-module::after {
+    content: attr(warning);
+    display: block;
+    color: $color-warning;
+    font-style: italic;
+    font-size: $font-size-warning;
+    line-height: calc($font-size-warning + 2px);
+    height: calc(($font-size-warning + 2px) * 2);
+  }
+
+  label:has(input) {
+    font-size: 16px;
+    color: gray;
+    align-self: start;
+    display: flex;
+  }
 
   input,
   button {
@@ -35,13 +59,6 @@
 
   .input-invalid {
     border: 1px solid $color-warning;
-  }
-
-  label:has(input) {
-    font-size: 16px;
-    color: gray;
-    align-self: start;
-    display: flex;
   }
 
   button:last-of-type {
