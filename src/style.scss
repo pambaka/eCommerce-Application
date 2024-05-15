@@ -2,6 +2,7 @@
 @import url('./pages/main/main.scss');
 @import url('./modules/header/header.scss');
 @import url('./modules/footer/footer.scss');
+@import url('./pages/error/error-page.scss');
 
 $color-bg: #d3dfdf;
 $color-head: #182541;
@@ -14,10 +15,6 @@ $light-text: #f9f8f8;
 p {
   margin: 0;
   padding: 0;
-}
-
-body {
-  background-color: $color-bg;
 }
 
 button {
@@ -60,7 +57,6 @@ html {
   max-width: 1920px;
   margin: auto;
   scroll-behavior: smooth;
-  overflow: hidden;
   background: linear-gradient(to right, $color-bg2, $color-bg3);
   height: 100vh;
 }
