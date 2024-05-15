@@ -1,4 +1,3 @@
-// import getAccessToken from '../../../api/get-access-token';
 import signUpCustomer from '../../../api/sign-up-customer';
 import { CLASS_NAMES } from '../../../const';
 

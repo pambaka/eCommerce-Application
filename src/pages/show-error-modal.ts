@@ -22,12 +22,13 @@ export default function showErrorModal(titleText: string, descriptionText: strin
   );
 
   closeButton.node.ariaLabel = 'Close';
-  modal.node.append(title.node, closeButton.node);
 
+  modal.node.append(title.node);
   if (descriptionText) {
     const description = new BaseTextComponent('p', '', descriptionText);
     modal.node.append(description.node);
   }
+  modal.node.append(closeButton.node);
 
   document.body.append(backdrop.node, modal.node);
 }
