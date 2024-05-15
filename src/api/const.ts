@@ -6,4 +6,3 @@ export const ERROR_MESSAGE = {
 };
 
 export const oauth = 'commercetools.com/oauth';
-// export const clientСredentials = 'client_credentials';
