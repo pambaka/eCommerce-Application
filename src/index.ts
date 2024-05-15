@@ -15,38 +15,45 @@ class App {
 
   private footer: Footer;
 
+  private contentNode: HTMLElement;
+
   constructor() {
     this.header = new Header();
     this.mainSection = new MainSection();
     this.errorSection = new ErrorSection();
     this.footer = new Footer();
+    this.contentNode = document.createElement('div');
   }
 
   init() {
     document.addEventListener('DOMContentLoaded', () => {
+      this.setupInitialLayout();
       window.addEventListener('hashchange', this.render.bind(this));
       this.render();
     });
   }
 
+  setupInitialLayout() {
+    document.body.prepend(this.header.node);
+    document.body.append(this.contentNode);
+    document.body.append(this.footer.node);
+  }
+
   render() {
     const route = window.location.hash || Router.pages.main;
 
-    document.body.innerHTML = '';
-    document.body.prepend(this.header.node);
+    this.contentNode.innerHTML = '';
 
     switch (route) {
       case Router.pages.main:
-        document.body.append(this.mainSection.node);
+        this.contentNode.append(this.mainSection.node);
         break;
       case Router.pages.notFound:
-        document.body.append(this.errorSection.node);
+        this.contentNode.append(this.errorSection.node);
         break;
       default:
-        document.body.append(this.errorSection.node);
+        this.contentNode.append(this.errorSection.node);
     }
-
-    document.body.append(this.footer.node);
   }
 }
 
