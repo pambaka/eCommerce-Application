@@ -22,7 +22,7 @@ class App {
     this.mainSection = new MainSection();
     this.errorSection = new ErrorSection();
     this.footer = new Footer();
-    this.contentNode = document.createElement('div');
+    this.contentNode = document.createElement('main');
   }
 
   init() {
@@ -34,9 +34,7 @@ class App {
   }
 
   setupInitialLayout() {
-    document.body.prepend(this.header.node);
-    document.body.append(this.contentNode);
-    document.body.append(this.footer.node);
+    document.body.append(this.header.node, this.contentNode, this.footer.node);
   }
 
   render() {
