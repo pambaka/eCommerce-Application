@@ -15,18 +15,21 @@ export default class App {
 
   private contentNode: HTMLElement;
 
+  private router: Router;
+
   constructor() {
     this.header = new Header();
     this.mainSection = new MainSection();
     this.errorSection = new ErrorSection();
     this.footer = new Footer();
     this.contentNode = document.createElement('main');
+    this.router = new Router();
+    this.registerRoutes();
   }
 
   init() {
     document.addEventListener('DOMContentLoaded', () => {
       this.setupInitialLayout();
-      window.addEventListener('hashchange', this.render.bind(this));
       this.render();
     });
   }
@@ -35,20 +38,23 @@ export default class App {
     document.body.append(this.header.node, this.contentNode, this.footer.node);
   }
 
-  render() {
-    const route = window.location.hash || Router.pages.main;
+  registerRoutes() {
+    this.router.register(Router.pages.main, () => this.renderMainPage());
+    this.router.register(Router.pages.notFound, () => this.renderErrorPage());
+    // Registration of other routes
+  }
 
+  renderMainPage() {
     this.contentNode.innerHTML = '';
+    this.contentNode.append(this.mainSection.node);
+  }
 
-    switch (route) {
-      case Router.pages.main:
-        this.contentNode.append(this.mainSection.node);
-        break;
-      case Router.pages.notFound:
-        this.contentNode.append(this.errorSection.node);
-        break;
-      default:
-        this.contentNode.append(this.errorSection.node);
-    }
+  renderErrorPage() {
+    this.contentNode.innerHTML = '';
+    this.contentNode.append(this.errorSection.node);
+  }
+
+  render() {
+    this.router.onHashChange();
   }
 }
