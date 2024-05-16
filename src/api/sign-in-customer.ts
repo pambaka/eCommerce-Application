@@ -1,5 +1,7 @@
 import { region } from './const';
 import getCustomerTokens from './get-customer-tokens';
+import setLocationHash from '../utils/set-location-hash';
+import Router from '../services/router';
 
 export default async function signInCustomer(email: string, password: string): Promise<void> {
   const customerAccessToken: string | undefined = await getCustomerTokens(email, password);
@@ -18,6 +20,12 @@ export default async function signInCustomer(email: string, password: string): P
     })
       .then((res) => {
         console.log('login:', res);
+
+        if (res.status === 200) {
+          setLocationHash(Router.pages.main);
+          sessionStorage.setItem('isCustomerAuthorized', 'true');
+        }
+
         return res.json();
       })
       .then((data) => console.log(data))
