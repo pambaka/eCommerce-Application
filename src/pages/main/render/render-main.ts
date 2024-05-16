@@ -27,7 +27,7 @@ export default class MainSection extends BaseComponent {
     wrapper.node.appendChild(signupLink.node);
 
     const signupButton = new ButtonComponent('main_page__btn', () => {}, 'Create an account', false);
-    signupButton.node.classList.add('btn');
+    signupButton.node.classList.add('button');
     signupLink.node.appendChild(signupButton.node);
 
     const loginText = new BaseTextComponent('p', 'main_page__login', 'Already have an account? Log in ');

@@ -3,10 +3,19 @@ import BaseTextComponent from '../../components/base-text-component';
 import NavItemComponent from '../../components/navigation-component';
 import BaseImageComponent from '../../components/base-image-component';
 import BaseLinkComponent from '../../components/base-link-component';
+import BurgerMenuButton from '../../components/burger-menu-component';
+import BurgerMenuIcon from '../../components/burger-menu-icon';
+import SideMenuComponent from '../../components/side-menu-component';
 
 export default class Header extends BaseComponent {
+  private burgerMenuIcon: BurgerMenuButton | null = null;
+
+  private sideMenu: SideMenuComponent;
+
   constructor() {
     super('header', 'header');
+    this.sideMenu = new SideMenuComponent(this.toggleNavigation.bind(this));
+    this.node.appendChild(this.sideMenu.node);
     this.renderHeader();
   }
 
@@ -43,7 +52,22 @@ export default class Header extends BaseComponent {
     cartItem.node.appendChild(cartLink.node);
     ul.node.appendChild(cartItem.node);
 
+    // Burger icon
+    const burgerMenuButton = new BurgerMenuButton('burger-menu-wrapper', this.toggleNavigation.bind(this));
+    burgerMenuButton.node.classList.add('hidden');
+    this.burgerMenuIcon = new BurgerMenuIcon('burger-menu');
+    burgerMenuButton.node.appendChild(this.burgerMenuIcon.node);
+    ul.node.appendChild(burgerMenuButton.node);
+
     nav.node.appendChild(ul.node);
     this.node.appendChild(nav.node);
+  }
+
+  toggleNavigation(event?: Event) {
+    if (!(event?.target instanceof HTMLAnchorElement)) {
+      event?.preventDefault();
+    }
+    this.sideMenu.node.classList.toggle('hidden');
+    this.burgerMenuIcon!.node.classList.toggle('cross');
   }
 }

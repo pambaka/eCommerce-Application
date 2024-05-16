@@ -101,7 +101,7 @@ a {
   }
 }
 
-.btn {
+.button {
   @include accent-text;
   display: flex;
   align-items: center;
@@ -140,5 +140,12 @@ a {
   html,
   body {
     font-size: 0.5rem;
+  }
+}
+
+@media (max-width: 300px) {
+  html,
+  body {
+    display: none;
   }
 }

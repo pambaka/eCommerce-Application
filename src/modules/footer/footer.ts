@@ -24,12 +24,7 @@ export default class Footer extends BaseComponent {
     const contactsTitle = new BaseTextComponent('h2', 'footer_title', 'Contact Us');
     const contactsList = new BaseComponent('ul', 'contacts_list');
 
-    Footer.addContactItem(
-      contactsList.node,
-      'Email',
-      'mailto:keep_calm_and_code@gmail.com',
-      'keep_calm_and_code@gmail.com',
-    );
+    Footer.addContactItem(contactsList.node, 'Email', 'mailto:keep_calm@gmail.com', 'keep_calm@gmail.com');
     Footer.addContactItem(contactsList.node, 'Phone number', 'tel:+79995201234', '8-999-520-1234');
     Footer.addContactItem(contactsList.node, 'Address', '#', 'Lehendakarianen, 5, Bilbo');
 
@@ -47,8 +42,9 @@ export default class Footer extends BaseComponent {
     const footerText = new BaseTextComponent(
       'p',
       'footer_text',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel augue at arcu fermentum blandit. In hac habitasse platea dictumst. Pellentesque aliquam dui urna, quis fermentum massa posuere eu. Aliquam vel venenatis lectus, consequat semper risus. Vivamus libero dui, ornare vitae est pharetra, lacinia elementum ligula. Aliquam eget orci et sem posuere blandit eu ac neque. Donec bibendum venenatis ante, in varius velit dapibus at.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel augue at arcu fermentum blandit. In hac habitasse platea dictumst. Pellentesque aliquam dui urna, quis fermentum massa posuere eu.',
     );
+    footerText.node.classList.add('footer_description');
     const infoList = new BaseComponent('ul', 'info_list');
 
     const addSocialIcon = (href: string, src: string, alt: string) => {

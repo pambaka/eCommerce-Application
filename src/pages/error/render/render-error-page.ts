@@ -27,7 +27,7 @@ export default class ErrorSection extends BaseComponent {
       'Return',
       false,
     );
-    returnButton.node.classList.add('btn');
+    returnButton.node.classList.add('button');
 
     const linkWrapper = new BaseLinkComponent(Router.pages.main, 'main_page__signup', '');
     linkWrapper.node.append(returnButton.node);

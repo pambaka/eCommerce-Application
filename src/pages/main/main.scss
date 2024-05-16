@@ -1,5 +1,10 @@
 $light-text: #f9f8f8;
 
+.main_page {
+  margin-top: 20px;
+  padding: 20px 0;
+}
+
 .main_page__title {
   color: $light-text;
 }
@@ -12,8 +17,20 @@ $light-text: #f9f8f8;
   justify-content: space-around;
   gap: 20px;
   padding: 20px 0;
-  background-image: url('https://www.svgrepo.com/show/530300/shape-embellishment.svg');
+  margin-top: 20px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
   background-size: 50%;
+}
+
+.main_page__wrapper {
+  .main_page__signup,
+  .main_page__login {
+    font-size: 1.2rem;
+
+    @media (min-width: 300px) and (max-width: 768px) {
+      font-size: 1.4rem;
+    }
+  }
 }
 
 .subtitle {
@@ -21,6 +38,8 @@ $light-text: #f9f8f8;
 }
 
 .main_page__btn {
+  margin-top: 15px;
+
   &:hover {
     color: lighten($color-accent, 10%);
   }
