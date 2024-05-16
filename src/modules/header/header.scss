@@ -16,6 +16,21 @@
         font-family: 'Gill Sans';
       }
 
+      .header_logo {
+        .logo_text {
+          margin: 1% 0 0 0;
+          font-size: 2.5rem;
+
+          @media (min-width: 400px) and (max-width: 768px) {
+            margin: 5% 0 0 0;
+          }
+
+          @media (min-width: 300px) and (max-width: 400px) {
+            margin: 10% 0 0 0;
+          }
+        }
+      }
+
       .nav_item {
         font-size: 1.5rem;
 
@@ -93,16 +108,6 @@
     .nav {
       display: flex;
       justify-content: space-between;
-    }
-
-    .logo_text {
-      margin: 2% 0 0 0;
-    }
-  }
-
-  @media (max-width: 400px) {
-    .logo_text {
-      margin: 5% 0 0 0;
     }
   }
 }
