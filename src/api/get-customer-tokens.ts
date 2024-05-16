@@ -1,5 +1,5 @@
 import { region } from './const';
-import handleErrorMessage from '../pages/handle-message';
+import handleErrorMessage from '../pages/handle-error-message';
 
 export default async function getCustomerTokens(email: string, password: string): Promise<string | undefined> {
   let accessToken: string | undefined;
