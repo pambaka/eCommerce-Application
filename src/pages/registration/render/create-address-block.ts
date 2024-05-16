@@ -4,7 +4,7 @@ import { CLASS_NAMES } from '../../../const';
 import inputModule from '../../../modules/input-module';
 import renderSelectCountries from './render-select-coutries';
 
-export default function renderAddressBlock(): HTMLElement {
+export default function createAddressBlock(): HTMLElement {
   const addressBlock = new BaseComponent('fieldset', CLASS_NAMES.address);
   const title = new BaseTextComponent('legend', '', 'Address');
 
