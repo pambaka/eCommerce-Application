@@ -1,6 +1,6 @@
 import '../styles/modal.scss';
 import { ERROR_MESSAGE } from '../api/const';
-import showErrorModal from './show-error-modal';
+import showModal from './show-modal';
 
 export default function handleErrorMessage(message: string): void {
   let descriptionText: string | undefined;
@@ -14,6 +14,6 @@ export default function handleErrorMessage(message: string): void {
   }
 
   if (descriptionText) {
-    showErrorModal(message, descriptionText);
+    showModal(message, descriptionText);
   }
 }
