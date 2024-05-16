@@ -1,6 +1,7 @@
 @import './variables.scss';
 
 .registration__form {
+  font-size: 16px;
   input {
     padding: 5px;
   }
@@ -79,7 +80,7 @@
 }
 
 .registration__submit {
-  height: 32px;
+  padding: 5px;
 }
 @media screen and (max-width: 767px) {
   form .registration__submit {

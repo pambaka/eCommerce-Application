@@ -1,4 +1,4 @@
-import showErrorModal from '../pages/show-error-modal';
+import showModal from '../pages/show-modal';
 import { Address } from '../types/index';
 import { region } from './const';
 import getAccessToken from './get-access-token';
@@ -32,13 +32,20 @@ export default async function signUpCustomer(
       .then((res) => {
         console.log('res:', res);
         if (res.status === 201) {
-          showErrorModal('Customer was successfully created', '', true);
+          showModal('Customer was successfully created', '', true);
+        }
+        if (res.status === 400) {
+          showModal(
+            'Account with the provided email address already exists.',
+            'Log in with this email address or use another email address for registration.',
+          );
+        }
+        if (res.status === 500 || res.status === 502 || res.status === 503 || res.status === 504) {
+          showModal('Unfortunately, something went wrong during the registration process.', 'Please try again later.');
         }
         return res.json();
       })
-      .then((data) => {
-        console.log(data);
-      })
+      .then((data) => console.log(data))
       .catch((error) => console.log(error));
   }
 }

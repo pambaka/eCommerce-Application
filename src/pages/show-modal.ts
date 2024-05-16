@@ -3,7 +3,7 @@ import BaseTextComponent from '../components/base-text-component';
 import ButtonComponent from '../components/button-component';
 import '../styles/modal.scss';
 
-export default function showErrorModal(titleText: string, descriptionText: string, success?: boolean): void {
+export default function showModal(titleText: string, descriptionText: string, success?: boolean): void {
   const backdrop = new BaseComponent('div', 'backdrop');
 
   const modal = new BaseComponent('div', 'modal-window');
