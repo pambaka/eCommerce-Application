@@ -7,6 +7,7 @@ export default class Router {
     catalog: '#catalog',
     login: '#login',
     signup: '#signup',
+    registration: '#signup',
     profile: '#profile',
     notFound: '#404',
     cart: '#cart',
@@ -23,8 +24,8 @@ export default class Router {
   }
 
   onHashChange() {
-    const hash = window.location.hash || '#main';
-    const route = this.routes[hash] || this.routes['#404'];
+    const hash = window.location.hash || Router.pages.main;
+    const route = this.routes[hash] || this.routes[Router.pages.notFound];
     route();
   }
 
