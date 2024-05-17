@@ -1,5 +1,7 @@
 import showModal from '../pages/show-modal';
+import Router from '../services/router';
 import { Address } from '../types/index';
+import setLocationHash from '../utils/set-location-hash';
 import { region } from './const';
 import getAccessToken from './get-access-token';
 
@@ -32,6 +34,8 @@ export default async function signUpCustomer(
       .then((res) => {
         console.log('res:', res);
         if (res.status === 201) {
+          sessionStorage.setItem('isCustomerAuthorized', 'true');
+          setLocationHash(Router.pages.main);
           showModal('Customer was successfully created', '', true);
         }
         if (res.status === 400) {

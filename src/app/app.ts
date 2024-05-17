@@ -43,8 +43,22 @@ export default class App {
   registerRoutes() {
     this.router.register(Router.pages.main, () => this.renderMainPage());
     this.router.register(Router.pages.notFound, () => this.renderErrorPage());
-    this.router.register(Router.pages.login, () => renderLoginPage());
-    this.router.register(Router.pages.registration, () => this.renderRegistrationPage());
+    this.router.register(Router.pages.login, () => {
+      if (!sessionStorage.getItem('isCustomerAuthorized')) {
+        renderLoginPage();
+      } else {
+        window.location.hash = 'main';
+        this.renderMainPage();
+      }
+    });
+    this.router.register(Router.pages.registration, () => {
+      if (!sessionStorage.getItem('isCustomerAuthorized')) {
+        this.renderRegistrationPage();
+      } else {
+        window.location.hash = 'main';
+        this.renderMainPage();
+      }
+    });
     // Registration of other routes
   }
 
