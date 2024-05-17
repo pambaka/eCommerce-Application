@@ -46,7 +46,7 @@ export default class App {
     this.router.register(Router.pages.notFound, () => this.renderErrorPage());
     this.router.register(Router.pages.login, () => {
       if (!isCustomerAuthorized()) {
-        renderLoginPage();
+        this.renderLogInPage();
       } else {
         window.location.hash = Router.pages.main;
       }
@@ -74,6 +74,11 @@ export default class App {
   private renderRegistrationPage() {
     this.contentNode.innerHTML = '';
     this.contentNode.append(renderRegistration());
+  }
+
+  private renderLogInPage() {
+    this.contentNode.innerHTML = '';
+    this.contentNode.append(renderLoginPage());
   }
 
   render() {
