@@ -44,7 +44,7 @@ export default class Header extends BaseComponent {
 
     // Cart icon
     const cartItem = new BaseComponent('li', 'nav_item');
-    cartItem.node.classList.add('nav_item_signup');
+    cartItem.node.classList.add('nav_item_cart');
     const cartLink = new BaseLinkComponent('#cart', 'nav_link', '');
     const cartIcon = new BaseImageComponent('cart_icon', 'https://www.svgrepo.com/show/529445/cart-3.svg', 'cart');
     cartIcon.node.classList.add('cart');

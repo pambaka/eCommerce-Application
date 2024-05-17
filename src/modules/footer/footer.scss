@@ -8,7 +8,7 @@
     padding-right: 40px;
     margin-right: 40px;
 
-    @media (min-width: 300px) and (max-width: 768px) {
+    @media (max-width: 768px) {
       border-right: none;
       border-left: 1px solid #1f1f3f;
       align-self: end;
@@ -22,7 +22,7 @@
   }
 
   .footer_info {
-    @media (min-width: 300px) and (max-width: 768px) {
+    @media (max-width: 768px) {
       border-right: 1px solid #1f1f3f;
     }
   }
@@ -43,7 +43,7 @@
   }
 
   .footer_info {
-    @media (min-width: 300px) and (max-width: 768px) {
+    @media (max-width: 768px) {
       width: 70%;
     }
   }
@@ -53,7 +53,7 @@
     font-size: 1.8rem;
     white-space: nowrap;
 
-    @media (min-width: 300px) and (max-width: 768px) {
+    @media (max-width: 768px) {
       margin-top: 20px;
     }
   }
@@ -70,6 +70,7 @@
       font-size: 2.5rem;
 
       @media (max-width: 399px) {
+        font-size: 2.2rem;
         margin: 8% 0 0 0;
       }
     }
