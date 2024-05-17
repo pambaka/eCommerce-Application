@@ -56,7 +56,6 @@
 
   .footer_logo {
     display: flex;
-    font-family: 'Gill Sans';
 
     .footer_logo-img {
       width: 50px;
@@ -91,7 +90,7 @@
       padding-right: 20px;
     }
 
-    @media (min-width: 300px) and (max-width: 400px) {
+    @media (max-width: 399px) {
       font-size: 12px;
       padding-right: 20px;
     }
