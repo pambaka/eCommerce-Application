@@ -23,11 +23,11 @@ export default class MainSection extends BaseComponent {
     const logoImg = new BaseImageComponent('logo_img', 'https://www.svgrepo.com/show/530309/bird.svg', 'logo');
     wrapper.node.appendChild(logoImg.node);
 
-    const signupLink = new BaseLinkComponent('#signup', 'main_page__signup', 'Do not have an accoutn yet?');
+    const signupLink = new BaseLinkComponent('#signup', 'main_page__signup', 'Do not have an account yet?');
     wrapper.node.appendChild(signupLink.node);
 
     const signupButton = new ButtonComponent('main_page__btn', () => {}, 'Create an account', false);
-    signupButton.node.classList.add('btn');
+    signupButton.node.classList.add('button');
     signupLink.node.appendChild(signupButton.node);
 
     const loginText = new BaseTextComponent('p', 'main_page__login', 'Already have an account? Log in ');
