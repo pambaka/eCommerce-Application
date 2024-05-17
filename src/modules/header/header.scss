@@ -24,7 +24,7 @@
             margin: 5% 0 0 0;
           }
 
-          @media (min-width: 300px) and (max-width: 400px) {
+          @media (max-width: 399px) {
             margin: 10% 0 0 0;
           }
         }
@@ -34,7 +34,7 @@
         font-size: 1.5rem;
 
         &:not(:first-child) {
-          @media (min-width: 300px) and (max-width: 768px) {
+          @media (max-width: 768px) {
             display: none;
           }
         }
@@ -48,7 +48,7 @@
     }
   }
 
-  @media (min-width: 300px) and (max-width: 768px) {
+  @media (max-width: 768px) {
     .burger-menu-wrapper {
       width: 90px;
       position: relative;
