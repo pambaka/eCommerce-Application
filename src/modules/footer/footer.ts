@@ -2,6 +2,7 @@ import BaseComponent from '../../components/base-component';
 import BaseTextComponent from '../../components/base-text-component';
 import BaseImageComponent from '../../components/base-image-component';
 import BaseLinkComponent from '../../components/base-link-component';
+import ContactItem from '../../components/contact-component';
 
 export default class Footer extends BaseComponent {
   constructor() {
@@ -9,24 +10,16 @@ export default class Footer extends BaseComponent {
     this.renderFooter();
   }
 
-  static addContactItem(parentNode: HTMLElement, titleText: string, href: string, linkText: string): void {
-    const item = new BaseComponent('li', 'contacts_item');
-    const title = new BaseTextComponent('p', 'contacts_title', titleText);
-    const link = new BaseLinkComponent(href, 'link', linkText);
-    link.node.classList.add('footer_text');
-    item.node.appendChild(title.node);
-    item.node.appendChild(link.node);
-    parentNode.appendChild(item.node);
-  }
-
   private renderFooter(): void {
     const contactsDiv = new BaseComponent('div', 'footer_contacts');
     const contactsTitle = new BaseTextComponent('h2', 'footer_title', 'Contact Us');
     const contactsList = new BaseComponent('ul', 'contacts_list');
 
-    Footer.addContactItem(contactsList.node, 'Email', 'mailto:keep_calm@gmail.com', 'keep_calm@gmail.com');
-    Footer.addContactItem(contactsList.node, 'Phone number', 'tel:+79995201234', '8-999-520-1234');
-    Footer.addContactItem(contactsList.node, 'Address', '#', 'Lehendakarianen, 5, Bilbo');
+    const emailContact = new ContactItem('Email', 'mailto:keep_calm@gmail.com', 'keep_calm@gmail.com').getNode();
+    const phoneContact = new ContactItem('Phone number', 'tel:+79995201234', '8-999-520-1234').getNode();
+    const addressContact = new ContactItem('Address', '#', 'Lehendakarianen, 5, Bilbo').getNode();
+
+    contactsList.node.append(emailContact, phoneContact, addressContact);
 
     contactsDiv.node.appendChild(contactsTitle.node);
     contactsDiv.node.appendChild(contactsList.node);
