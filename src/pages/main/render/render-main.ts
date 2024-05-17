@@ -3,6 +3,7 @@ import BaseTextComponent from '../../../components/base-text-component';
 import ButtonComponent from '../../../components/button-component';
 import BaseLinkComponent from '../../../components/base-link-component';
 import BaseImageComponent from '../../../components/base-image-component';
+import Router from '../../../services/router';
 
 export default class MainSection extends BaseComponent {
   constructor() {
@@ -23,7 +24,11 @@ export default class MainSection extends BaseComponent {
     const logoImg = new BaseImageComponent('logo_img', 'https://www.svgrepo.com/show/530309/bird.svg', 'logo');
     wrapper.node.appendChild(logoImg.node);
 
-    const signupLink = new BaseLinkComponent('#signup', 'main_page__signup', 'Do not have an account yet?');
+    const signupLink = new BaseLinkComponent(
+      Router.pages.registration,
+      'main_page__signup',
+      'Do not have an account yet?',
+    );
     wrapper.node.appendChild(signupLink.node);
 
     const signupButton = new ButtonComponent('main_page__btn', () => {}, 'Create an account', false);
