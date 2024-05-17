@@ -6,6 +6,7 @@ import Router from '../services/router';
 import renderLoginPage from '../pages/login/render/render-login';
 import renderRegistration from '../pages/registration/render/render-registration';
 import isCustomerAuthorized from '../utils/is-customer-authorized';
+import setLocationHash from '../utils/set-location-hash';
 
 export default class App {
   private header: Header;
