@@ -6,7 +6,7 @@ import inputModule from '../../../modules/input-module';
 import handleSubmitRegistration from '../logic/handle-submit';
 import createAddressBlock from './create-address-block';
 
-export default function renderRegistration(): void {
+export default function renderRegistration(): HTMLElement {
   const form = new BaseComponent('form', CLASS_NAMES.registrationForm);
   form.node.classList.add('container');
 
@@ -33,5 +33,6 @@ export default function renderRegistration(): void {
   DOM.add(CLASS_NAMES.registrationButton, submitButton.node);
 
   form.node.append(row1.node, row2.node, addressBlock, submitButton.node);
-  document.body.append(form.node);
+  return form.node;
+  // document.body.append(form.node);
 }

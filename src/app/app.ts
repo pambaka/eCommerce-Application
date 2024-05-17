@@ -44,10 +44,7 @@ export default class App {
     this.router.register(Router.pages.main, () => this.renderMainPage());
     this.router.register(Router.pages.notFound, () => this.renderErrorPage());
     this.router.register(Router.pages.login, () => renderLoginPage());
-    this.router.register(Router.pages.registration, () => {
-      document.body.innerHTML = '';
-      renderRegistration();
-    });
+    this.router.register(Router.pages.registration, () => this.renderRegistrationPage());
     // Registration of other routes
   }
 
@@ -59,6 +56,11 @@ export default class App {
   private renderErrorPage() {
     this.contentNode.innerHTML = '';
     this.contentNode.append(this.errorSection.node);
+  }
+
+  private renderRegistrationPage() {
+    this.contentNode.innerHTML = '';
+    this.contentNode.append(renderRegistration());
   }
 
   render() {
