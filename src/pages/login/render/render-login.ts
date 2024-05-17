@@ -7,6 +7,7 @@ export default function renderLoginPage(): void {
   document.body.innerHTML = '';
 
   const header = new Header();
+  header.renderLogo();
   header.renderUserNavPanel(['register']);
 
   const main = new BaseComponent('main', 'main-login');

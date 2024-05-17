@@ -3,6 +3,8 @@ import MainSection from '../pages/main/render/render-main';
 import ErrorSection from '../pages/error/render/render-error-page';
 import Footer from '../modules/footer/footer';
 import Router from '../services/router';
+import renderLoginPage from '../pages/login/render/render-login';
+import renderRegistration from '../pages/registration/render/render-registration';
 
 export default class App {
   private header: Header;
@@ -41,15 +43,20 @@ export default class App {
   registerRoutes() {
     this.router.register(Router.pages.main, () => this.renderMainPage());
     this.router.register(Router.pages.notFound, () => this.renderErrorPage());
+    this.router.register(Router.pages.login, () => renderLoginPage());
+    this.router.register(Router.pages.registration, () => {
+      document.body.innerHTML = '';
+      renderRegistration();
+    });
     // Registration of other routes
   }
 
-  renderMainPage() {
+  private renderMainPage() {
     this.contentNode.innerHTML = '';
     this.contentNode.append(this.mainSection.node);
   }
 
-  renderErrorPage() {
+  private renderErrorPage() {
     this.contentNode.innerHTML = '';
     this.contentNode.append(this.errorSection.node);
   }
