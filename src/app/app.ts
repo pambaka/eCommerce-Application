@@ -5,6 +5,7 @@ import Footer from '../modules/footer/footer';
 import Router from '../services/router';
 import renderLoginPage from '../pages/login/render/render-login';
 import renderRegistration from '../pages/registration/render/render-registration';
+import isCustomerAuthorized from '../utils/is-customer-authorized';
 
 export default class App {
   private header: Header;
@@ -44,19 +45,17 @@ export default class App {
     this.router.register(Router.pages.main, () => this.renderMainPage());
     this.router.register(Router.pages.notFound, () => this.renderErrorPage());
     this.router.register(Router.pages.login, () => {
-      if (!sessionStorage.getItem('isCustomerAuthorized')) {
+      if (!isCustomerAuthorized()) {
         renderLoginPage();
       } else {
-        window.location.hash = 'main';
-        this.renderMainPage();
+        setLocationHash(Router.pages.main);
       }
     });
     this.router.register(Router.pages.registration, () => {
-      if (!sessionStorage.getItem('isCustomerAuthorized')) {
+      if (!isCustomerAuthorized()) {
         this.renderRegistrationPage();
       } else {
-        window.location.hash = 'main';
-        this.renderMainPage();
+        setLocationHash(Router.pages.main);
       }
     });
     // Registration of other routes

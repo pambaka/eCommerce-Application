@@ -34,5 +34,4 @@ export default function renderRegistration(): HTMLElement {
 
   form.node.append(row1.node, row2.node, addressBlock, submitButton.node);
   return form.node;
-  // document.body.append(form.node);
 }
