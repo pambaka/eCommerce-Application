@@ -10,8 +10,7 @@ export default class ContactItem extends BaseComponent {
     const link = new BaseLinkComponent(href, 'link', linkText);
     link.node.classList.add('footer_text');
 
-    this.node.appendChild(title.node);
-    this.node.appendChild(link.node);
+    this.node.append(title.node, link.node);
   }
 
   getNode() {
