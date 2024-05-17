@@ -5,6 +5,7 @@ import Footer from '../modules/footer/footer';
 import Router from '../services/router';
 import renderLoginPage from '../pages/login/render/render-login';
 import renderRegistration from '../pages/registration/render/render-registration';
+import isCustomerAuthorized from '../utils/is-customer-authorized';
 
 export default class App {
   private header: Header;
@@ -43,10 +44,19 @@ export default class App {
   registerRoutes() {
     this.router.register(Router.pages.main, () => this.renderMainPage());
     this.router.register(Router.pages.notFound, () => this.renderErrorPage());
-    this.router.register(Router.pages.login, () => renderLoginPage());
+    this.router.register(Router.pages.login, () => {
+      if (!isCustomerAuthorized()) {
+        renderLoginPage();
+      } else {
+        setLocationHash(Router.pages.main);
+      }
+    });
     this.router.register(Router.pages.registration, () => {
-      document.body.innerHTML = '';
-      renderRegistration();
+      if (!isCustomerAuthorized()) {
+        this.renderRegistrationPage();
+      } else {
+        setLocationHash(Router.pages.main);
+      }
     });
     // Registration of other routes
   }
@@ -59,6 +69,11 @@ export default class App {
   private renderErrorPage() {
     this.contentNode.innerHTML = '';
     this.contentNode.append(this.errorSection.node);
+  }
+
+  private renderRegistrationPage() {
+    this.contentNode.innerHTML = '';
+    this.contentNode.append(renderRegistration());
   }
 
   render() {
