@@ -41,7 +41,7 @@ export default class Header extends BaseComponent {
     ul.node.appendChild(new NavItemComponent(Router.pages.about, 'About').node);
     ul.node.appendChild(new NavItemComponent(Router.pages.catalog, 'Catalog').node);
     ul.node.appendChild(new NavItemComponent(Router.pages.login, 'Log in').node);
-    ul.node.appendChild(new NavItemComponent(Router.pages.signup, 'Sign up').node);
+    ul.node.appendChild(new NavItemComponent(Router.pages.registration, 'Sign up').node);
 
     // Cart icon
     const cartItem = new BaseComponent('li', 'nav_item');

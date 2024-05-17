@@ -17,7 +17,7 @@ export default class SideMenuComponent extends BaseComponent {
       new NavItemComponent(Router.pages.about, 'About'),
       new NavItemComponent(Router.pages.catalog, 'Catalog'),
       new NavItemComponent(Router.pages.login, 'Log in'),
-      new NavItemComponent(Router.pages.signup, 'Sign up'),
+      new NavItemComponent(Router.pages.registration, 'Sign up'),
       new NavItemComponent(Router.pages.cart, 'Cart'),
     ];
 
