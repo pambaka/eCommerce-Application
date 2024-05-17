@@ -15,6 +15,10 @@
       width: 35%;
       padding-left: 20px;
     }
+
+    @media (max-width: 299px) {
+      border-right: none;
+    }
   }
 
   .footer_info {
@@ -26,7 +30,7 @@
   .contacts_title {
     font-weight: bold;
 
-    @media (min-width: 300px) and (max-width: 768px) {
+    @media (max-width: 768px) {
       font-size: 1.5rem;
     }
   }
@@ -56,7 +60,6 @@
 
   .footer_logo {
     display: flex;
-    font-family: 'Gill Sans';
 
     .footer_logo-img {
       width: 50px;
@@ -66,7 +69,7 @@
     .logo_text {
       font-size: 2.5rem;
 
-      @media (min-width: 300px) and (max-width: 400px) {
+      @media (max-width: 399px) {
         margin: 8% 0 0 0;
       }
     }
@@ -91,7 +94,7 @@
       padding-right: 20px;
     }
 
-    @media (min-width: 300px) and (max-width: 400px) {
+    @media (max-width: 399px) {
       font-size: 12px;
       padding-right: 20px;
     }
