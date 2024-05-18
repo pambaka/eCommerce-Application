@@ -1,10 +1,11 @@
 import BaseComponent from '../../../components/base-component';
 import ButtonComponent from '../../../components/button-component';
 import '../../../styles/registration-page.scss';
-import { CLASS_NAMES, DOM } from '../../../const';
+import { CLASS_NAMES, DOM, ID_NAMES } from '../../../const';
 import inputModule from '../../../modules/input-module';
 import handleSubmitRegistration from '../logic/handle-submit';
 import createAddressBlock from './create-address-block';
+import LabelComponent from '../../../components/label-component';
 
 export default function renderRegistration(): HTMLElement {
   const form = new BaseComponent('form', CLASS_NAMES.registrationForm);
@@ -27,6 +28,15 @@ export default function renderRegistration(): HTMLElement {
   row2.node.append(firstNameModule, lastNameModule, birthDateModule);
 
   const addressBlock = createAddressBlock();
+
+  const defaultLabel = new LabelComponent('Set as default address', ID_NAMES.defaultShipping);
+  const isDefaultAddress = new BaseComponent<HTMLInputElement>('input');
+  isDefaultAddress.node.type = 'checkbox';
+  isDefaultAddress.node.id = ID_NAMES.defaultShipping;
+  isDefaultAddress.node.name = ID_NAMES.defaultShipping;
+  isDefaultAddress.node.name = ID_NAMES.defaultShipping;
+
+  addressBlock.append(isDefaultAddress.node, defaultLabel.node);
 
   const submitButton = new ButtonComponent(CLASS_NAMES.registrationButton, handleSubmitRegistration, 'Register', true);
   submitButton.node.classList.add('d-grid', 'col-6', 'mt-4', 'mx-auto');

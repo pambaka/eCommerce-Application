@@ -1,6 +1,6 @@
 import showModal from '../pages/show-modal';
 import Router from '../services/router';
-import { Address } from '../types/index';
+import { Address, CustomerData } from '../types/index';
 import setLocationHash from '../utils/set-location-hash';
 import { region } from './const';
 import getAccessToken from './get-access-token';
@@ -12,8 +12,21 @@ export default async function signUpCustomer(
   lastName: string,
   dateOfBirth: string,
   shippingAddress: Address,
+  isDefaultShipping: boolean,
 ): Promise<void> {
   const customerAccessToken: string | undefined = await getAccessToken();
+
+  const customerData: CustomerData = {
+    email,
+    password,
+    firstName,
+    lastName,
+    dateOfBirth,
+    addresses: [shippingAddress],
+    shippingAddresses: [0],
+  };
+
+  if (isDefaultShipping) customerData.defaultShippingAddress = 0;
 
   if (customerAccessToken) {
     await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/customers`, {
@@ -22,14 +35,7 @@ export default async function signUpCustomer(
         Authorization: `Bearer ${customerAccessToken}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        email,
-        password,
-        firstName,
-        lastName,
-        dateOfBirth,
-        addresses: [shippingAddress],
-      }),
+      body: JSON.stringify(customerData),
     })
       .then((res) => {
         console.log('res:', res);

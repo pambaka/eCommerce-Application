@@ -16,6 +16,10 @@ export const CLASS_NAMES = {
   registrationButton: 'registration__submit',
 } as const;
 
+export const ID_NAMES = {
+  defaultShipping: 'default-shipping',
+};
+
 class Dom<T extends HTMLElement> {
   elements: { [key: string]: T };
 

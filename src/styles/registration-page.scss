@@ -4,6 +4,7 @@
   font-size: 16px;
   input {
     padding: 5px;
+    border: 1px solid #ffffff;
   }
   .input-invalid {
     border: 1px solid $color-warning;
@@ -53,6 +54,9 @@
 .registration__address {
   min-width: 300px;
   padding-bottom: 10px;
+  label[for='default-shipping'] {
+    padding-left: 7px;
+  }
 }
 
 .row-3 {

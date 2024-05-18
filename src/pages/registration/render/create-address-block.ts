@@ -6,7 +6,7 @@ import renderSelectCountries from './render-select-coutries';
 
 export default function createAddressBlock(): HTMLElement {
   const addressBlock = new BaseComponent('fieldset', CLASS_NAMES.address);
-  const title = new BaseTextComponent('legend', '', 'Address');
+  const title = new BaseTextComponent('legend', '', 'Shipping address');
 
   const innerRow1 = new BaseComponent('div', 'row');
   const postalCodeModule = inputModule(CLASS_NAMES.postalCode, 'text', 'Postal code *');

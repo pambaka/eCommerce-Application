@@ -1,12 +1,12 @@
 import BaseComponent from '../../../components/base-component';
+import BaseTextComponent from '../../../components/base-text-component';
 import OptionComponent from '../../../components/option-component';
 import { CLASS_NAMES } from '../../../const';
 
 export default function renderSelectCountries(parentElement: HTMLElement) {
   const countryWrapper = new BaseComponent('div', 'registration__country-wrapper');
   countryWrapper.node.classList.add('col-md-6');
-  const countryTitle = new BaseComponent('div', 'registration__country-title');
-  countryTitle.node.innerText = 'Country *';
+  const countryTitle = new BaseTextComponent('p', 'registration__country-title', 'Country *');
   countryWrapper.node.append(countryTitle.node);
 
   const countrySelect = new BaseComponent('select', CLASS_NAMES.country);
