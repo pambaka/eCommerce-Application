@@ -7,9 +7,9 @@ import getAccessToken from './get-access-token';
 
 export default async function signUpCustomer(
   email: string,
+  password: string,
   firstName: string,
   lastName: string,
-  password: string,
   dateOfBirth: string,
   shippingAddress: Address,
 ): Promise<void> {
@@ -24,9 +24,9 @@ export default async function signUpCustomer(
       },
       body: JSON.stringify({
         email,
+        password,
         firstName,
         lastName,
-        password,
         dateOfBirth,
         addresses: [shippingAddress],
       }),
