@@ -1,3 +1,4 @@
+import './user-navigation.scss';
 import BaseComponent from '../../components/base-component';
 import ButtonComponent from '../../components/button-component';
 import Router from '../../services/router';
