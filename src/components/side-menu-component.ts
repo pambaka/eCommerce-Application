@@ -1,5 +1,6 @@
 import BaseComponent from './base-component';
 import NavItemComponent from './navigation-component';
+import Router from '../services/router';
 
 export default class SideMenuComponent extends BaseComponent {
   constructor(toggleFunction: (event?: Event) => void) {
@@ -12,12 +13,12 @@ export default class SideMenuComponent extends BaseComponent {
     const ul = new BaseComponent('ul', 'side-menu-nav');
 
     const menuItems = [
-      new NavItemComponent('#main', 'Home'),
-      new NavItemComponent('#about', 'About'),
-      new NavItemComponent('#catalog', 'Catalog'),
-      new NavItemComponent('#login', 'Log in'),
-      new NavItemComponent('#signup', 'Sign up'),
-      new NavItemComponent('#cart', 'Cart'),
+      new NavItemComponent(Router.pages.main, 'Home'),
+      new NavItemComponent(Router.pages.about, 'About'),
+      new NavItemComponent(Router.pages.catalog, 'Catalog'),
+      new NavItemComponent(Router.pages.login, 'Log in'),
+      new NavItemComponent(Router.pages.registration, 'Sign up'),
+      new NavItemComponent(Router.pages.cart, 'Cart'),
     ];
 
     menuItems.forEach((item) => {

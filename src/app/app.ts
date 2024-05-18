@@ -46,16 +46,16 @@ export default class App {
     this.router.register(Router.pages.notFound, () => this.renderErrorPage());
     this.router.register(Router.pages.login, () => {
       if (!isCustomerAuthorized()) {
-        renderLoginPage();
+        this.renderLogInPage();
       } else {
-        setLocationHash(Router.pages.main);
+        window.location.hash = Router.pages.main;
       }
     });
     this.router.register(Router.pages.registration, () => {
       if (!isCustomerAuthorized()) {
         this.renderRegistrationPage();
       } else {
-        setLocationHash(Router.pages.main);
+        window.location.hash = Router.pages.main;
       }
     });
     // Registration of other routes
@@ -74,6 +74,11 @@ export default class App {
   private renderRegistrationPage() {
     this.contentNode.innerHTML = '';
     this.contentNode.append(renderRegistration());
+  }
+
+  private renderLogInPage() {
+    this.contentNode.innerHTML = '';
+    this.contentNode.append(renderLoginPage());
   }
 
   render() {
