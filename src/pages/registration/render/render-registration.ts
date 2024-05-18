@@ -7,7 +7,7 @@ import handleSubmitRegistration from '../logic/handle-submit';
 import createAddressBlock from './create-address-block';
 import LabelComponent from '../../../components/label-component';
 
-export default function renderRegistrationForm(): HTMLElement {
+export default function renderRegistration(): HTMLElement {
   const form = new BaseComponent('form', CLASS_NAMES.registrationForm);
   form.node.classList.add('container');
 
