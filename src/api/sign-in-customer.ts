@@ -2,6 +2,7 @@ import { region } from './const';
 import getCustomerTokens from './get-customer-tokens';
 import setLocationHash from '../utils/set-location-hash';
 import Router from '../services/router';
+import { dispatchAuthorizationChangeEvent } from '../utils/authorization-event';
 
 export default async function signInCustomer(email: string, password: string): Promise<void> {
   const customerAccessToken: string | undefined = await getCustomerTokens(email, password);
@@ -24,6 +25,8 @@ export default async function signInCustomer(email: string, password: string): P
         if (res.status === 200) {
           setLocationHash(Router.pages.main);
           sessionStorage.setItem('isCustomerAuthorized', 'true');
+
+          dispatchAuthorizationChangeEvent(true);
         }
 
         return res.json();

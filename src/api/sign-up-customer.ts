@@ -4,6 +4,7 @@ import { Address, CustomerData } from '../types/index';
 import setLocationHash from '../utils/set-location-hash';
 import { region } from './const';
 import getAccessToken from './get-access-token';
+import { dispatchAuthorizationChangeEvent } from '../utils/authorization-event';
 
 export default async function signUpCustomer(
   email: string,
@@ -43,6 +44,8 @@ export default async function signUpCustomer(
           sessionStorage.setItem('isCustomerAuthorized', 'true');
           setLocationHash(Router.pages.main);
           showModal('Customer was successfully created', '', true);
+
+          dispatchAuthorizationChangeEvent(true);
         }
         if (res.status === 400) {
           showModal(
