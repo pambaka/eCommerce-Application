@@ -1,5 +1,4 @@
 import BaseComponent from '../../components/base-component';
-import BaseTextComponent from '../../components/base-text-component';
 import NavItemComponent from '../../components/navigation-component';
 import BaseImageComponent from '../../components/base-image-component';
 import BaseLinkComponent from '../../components/base-link-component';
@@ -7,6 +6,8 @@ import BurgerMenuButton from '../../components/burger-menu-component';
 import BurgerMenuIcon from '../../components/burger-menu-icon';
 import SideMenuComponent from '../../components/side-menu-component';
 import Router from '../../services/router';
+import SvgImage from '../../components/svg-image';
+import sprite from '../../assets/leaf-sprite.svg';
 
 export default class Header extends BaseComponent {
   private burgerMenuIcon: BurgerMenuButton | null = null;
@@ -28,11 +29,9 @@ export default class Header extends BaseComponent {
     const logoItem = new BaseComponent('li', 'nav_item');
     const logoLink = new BaseLinkComponent(Router.pages.main, 'header_logo', '');
 
-    const logoImage = new BaseImageComponent('logo_image', 'https://www.svgrepo.com/show/530291/leaves-2.svg', 'logo');
-    const logoText = new BaseTextComponent('h1', 'logo_text', 'KeepCalm');
+    const logo = new SvgImage(`${sprite}#leaf`, 'header-logo');
+    logoLink.node.appendChild(logo.node);
 
-    logoLink.node.appendChild(logoImage.node);
-    logoLink.node.appendChild(logoText.node);
     logoItem.node.appendChild(logoLink.node);
     ul.node.appendChild(logoItem.node);
 

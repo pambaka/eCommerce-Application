@@ -50,9 +50,11 @@
 
   @media (max-width: 768px) {
     .burger-menu-wrapper {
-      width: 90px;
+      width: 80px;
+      height: 60px;
       position: relative;
       z-index: 100;
+      background: none;
 
       &.hidden {
         display: inline-block;
@@ -63,7 +65,7 @@
         position: absolute;
         z-index: 10;
         right: 0;
-        top: 0;
+        top: 50%;
 
         span {
           width: 45px;
