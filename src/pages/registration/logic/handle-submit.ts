@@ -1,5 +1,5 @@
 import signUpCustomer from '../../../api/sign-up-customer';
-import { CLASS_NAMES } from '../../../const';
+import { CLASS_NAMES, ID_NAMES } from '../../../const';
 
 export default function handleSubmitRegistration(event: Event) {
   event.preventDefault();
@@ -12,6 +12,7 @@ export default function handleSubmitRegistration(event: Event) {
   const postalCode = document.querySelector(`.${CLASS_NAMES.postalCode}`);
   const street = document.querySelector(`.${CLASS_NAMES.street}`);
   const city = document.querySelector(`.${CLASS_NAMES.city}`);
+  const isDefaultShipping = document.getElementById(ID_NAMES.defaultShipping);
   if (
     email instanceof HTMLInputElement &&
     password instanceof HTMLInputElement &&
@@ -21,13 +22,22 @@ export default function handleSubmitRegistration(event: Event) {
     country instanceof HTMLSelectElement &&
     postalCode instanceof HTMLInputElement &&
     street instanceof HTMLInputElement &&
-    city instanceof HTMLInputElement
+    city instanceof HTMLInputElement &&
+    isDefaultShipping instanceof HTMLInputElement
   ) {
-    signUpCustomer(email.value, password.value, firstName.value, lastName.value, birthDate.value, {
-      country: country.value,
-      postalCode: postalCode.value,
-      streetName: street.value,
-      city: city.value,
-    });
+    signUpCustomer(
+      email.value,
+      password.value,
+      firstName.value,
+      lastName.value,
+      birthDate.value,
+      {
+        country: country.value,
+        postalCode: postalCode.value,
+        streetName: street.value,
+        city: city.value,
+      },
+      isDefaultShipping.checked,
+    );
   }
 }

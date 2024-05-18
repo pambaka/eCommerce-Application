@@ -8,3 +8,13 @@ export interface Address {
   streetName: string;
   city: string;
 }
+export interface CustomerData {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  addresses: Address[];
+  shippingAddresses: [0];
+  defaultShippingAddress?: number;
+}
