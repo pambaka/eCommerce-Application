@@ -42,7 +42,9 @@ const config = {
     new EslintPlugin({
       extensions: 'ts',
     }),
-    new DotenvPlugin(),
+    new DotenvPlugin({
+      systemvars: true,
+    }),
   ],
 };
 
