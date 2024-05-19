@@ -55,9 +55,9 @@ export default class UserNavigation extends BaseComponent {
 //     else this.node.append(this.logInButton.node, this.signUpButton.node);
 
     if (isCustomerAuthorized()) {
-      this.node.append(this.logoutButton.node);
+      this.node.append(this.logOutButton.node);
     } else {
-      this.node.append(this.loginButton.node, this.signUpButton.node);
+      this.node.append(this.logInButton.node, this.signUpButton.node);
     }
   }
 
