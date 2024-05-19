@@ -48,14 +48,14 @@ export default class App {
       if (!isCustomerAuthorized()) {
         renderLoginPage();
       } else {
-        setLocationHash(Router.pages.main);
+        window.location.hash = Router.pages.main;
       }
     });
     this.router.register(Router.pages.registration, () => {
       if (!isCustomerAuthorized()) {
         this.renderRegistrationPage();
       } else {
-        setLocationHash(Router.pages.main);
+        window.location.hash = Router.pages.main;
       }
     });
     // Registration of other routes

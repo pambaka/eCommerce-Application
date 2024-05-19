@@ -8,10 +8,10 @@ export default function handleSubmitRegistration(event: Event) {
   const firstName = document.querySelector(`.${CLASS_NAMES.firstName}`);
   const lastName = document.querySelector(`.${CLASS_NAMES.lastName}`);
   const birthDate = document.querySelector(`.${CLASS_NAMES.birthDate}`);
-  const country = document.querySelector(`.${CLASS_NAMES.country}`);
-  const postalCode = document.querySelector(`.${CLASS_NAMES.postalCode}`);
-  const street = document.querySelector(`.${CLASS_NAMES.street}`);
-  const city = document.querySelector(`.${CLASS_NAMES.city}`);
+  const countryShipping = document.querySelector(`.registration__address .${CLASS_NAMES.country}`);
+  const postalCodeShipping = document.querySelector(`.registration__address .${CLASS_NAMES.postalCode}`);
+  const streetShipping = document.querySelector(`.registration__address .${CLASS_NAMES.street}`);
+  const cityShipping = document.querySelector(`.registration__address .${CLASS_NAMES.city}`);
   const isDefaultShipping = document.getElementById(ID_NAMES.defaultShipping);
   if (
     email instanceof HTMLInputElement &&
@@ -19,10 +19,10 @@ export default function handleSubmitRegistration(event: Event) {
     firstName instanceof HTMLInputElement &&
     lastName instanceof HTMLInputElement &&
     birthDate instanceof HTMLInputElement &&
-    country instanceof HTMLSelectElement &&
-    postalCode instanceof HTMLInputElement &&
-    street instanceof HTMLInputElement &&
-    city instanceof HTMLInputElement &&
+    countryShipping instanceof HTMLSelectElement &&
+    postalCodeShipping instanceof HTMLInputElement &&
+    streetShipping instanceof HTMLInputElement &&
+    cityShipping instanceof HTMLInputElement &&
     isDefaultShipping instanceof HTMLInputElement
   ) {
     signUpCustomer(
@@ -32,10 +32,10 @@ export default function handleSubmitRegistration(event: Event) {
       lastName.value,
       birthDate.value,
       {
-        country: country.value,
-        postalCode: postalCode.value,
-        streetName: street.value,
-        city: city.value,
+        country: countryShipping.value,
+        postalCode: postalCodeShipping.value,
+        streetName: streetShipping.value,
+        city: cityShipping.value,
       },
       isDefaultShipping.checked,
     );
