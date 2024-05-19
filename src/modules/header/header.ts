@@ -40,7 +40,6 @@ export default class Header extends BaseComponent {
     ul.node.appendChild(logoItem.node);
 
     // Navigation items
-    ul.node.appendChild(new NavItemComponent(Router.pages.main, 'Home').node);
     ul.node.appendChild(new NavItemComponent(Router.pages.about, 'About').node);
     ul.node.appendChild(new NavItemComponent(Router.pages.catalog, 'Catalog').node);
     ul.node.appendChild(new NavItemComponent(Router.pages.login, 'Log in').node);

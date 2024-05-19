@@ -2,7 +2,6 @@
   height: 70px;
   padding: 3rem;
   display: flex;
-  flex-wrap: wrap;
   justify-content: flex-end;
 
   .main_navigation {
@@ -10,6 +9,7 @@
 
     .nav {
       display: flex;
+      flex-wrap: nowrap;
       justify-content: space-between;
       align-items: center;
 
@@ -35,6 +35,12 @@
 
       .nav_item {
         font-size: 1.5rem;
+
+        @media (max-width: 768px) {
+          &:first-child {
+            order: 1;
+          }
+        }
 
         &:not(:first-child) {
           @media (max-width: 768px) {
