@@ -54,6 +54,7 @@ export default class UserNavigation extends BaseComponent {
     this.renderButtons();
   }
 
+
   subscribeToAuthorizationChanges() {
     subscribeToAuthorizationChangeEvent(() => {
       this.updateButtons();

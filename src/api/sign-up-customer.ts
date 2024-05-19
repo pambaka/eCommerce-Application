@@ -14,6 +14,8 @@ export default async function signUpCustomer(
   dateOfBirth: string,
   shippingAddress: Address,
   isDefaultShipping: boolean,
+  billingAddress: Address,
+  isDefaultBilling: boolean,
 ): Promise<void> {
   const customerAccessToken: string | undefined = await getAccessToken();
 
@@ -23,11 +25,13 @@ export default async function signUpCustomer(
     firstName,
     lastName,
     dateOfBirth,
-    addresses: [shippingAddress],
+    addresses: [shippingAddress, billingAddress],
     shippingAddresses: [0],
+    billingAddresses: [1],
   };
 
   if (isDefaultShipping) customerData.defaultShippingAddress = 0;
+  if (isDefaultBilling) customerData.defaultBillingAddress = 1;
 
   if (customerAccessToken) {
     await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/customers`, {
