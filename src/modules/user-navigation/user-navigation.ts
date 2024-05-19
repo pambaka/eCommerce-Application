@@ -4,11 +4,7 @@ import ButtonComponent from '../../components/button-component';
 import Router from '../../services/router';
 import isCustomerAuthorized from '../../utils/is-customer-authorized';
 import setLocationHash from '../../utils/set-location-hash';
-import {
-  subscribeToAuthorizationChangeEvent,
-  AuthorizationChangeEventDetail,
-  dispatchAuthorizationChangeEvent,
-} from '../../utils/authorization-event';
+import { subscribeToAuthorizationChangeEvent, dispatchAuthorizationChangeEvent } from '../../utils/authorization-event';
 
 export default class UserNavigation extends BaseComponent {
   loginButton: ButtonComponent;
@@ -59,12 +55,7 @@ export default class UserNavigation extends BaseComponent {
   }
 
   subscribeToAuthorizationChanges() {
-    subscribeToAuthorizationChangeEvent((event: CustomEvent<AuthorizationChangeEventDetail>) => {
-      if (event.detail.authorized) {
-        console.log('Authorized');
-      } else {
-        console.log('Not authorized');
-      }
+    subscribeToAuthorizationChangeEvent(() => {
       this.updateButtons();
     });
   }

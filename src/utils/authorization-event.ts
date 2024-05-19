@@ -1,12 +1,12 @@
 export interface AuthorizationChangeEventDetail {
-  authorized: boolean;
+  isAuthorized: boolean;
 }
 
-const AUTHORIZATION_EVENT_NAME = 'authorizationChanged';
+const AUTHORIZATION_EVENT_NAME = 'authorizationChange';
 
-export function dispatchAuthorizationChangeEvent(authorized: boolean): void {
+export function dispatchAuthorizationChangeEvent(isAuthorized: boolean): void {
   const event = new CustomEvent<AuthorizationChangeEventDetail>(AUTHORIZATION_EVENT_NAME, {
-    detail: { authorized },
+    detail: { isAuthorized },
   });
   document.dispatchEvent(event);
 }
