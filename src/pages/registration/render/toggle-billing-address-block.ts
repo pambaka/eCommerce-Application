@@ -5,13 +5,13 @@ import renderBillingAddressBlock from './render-billing-address-block';
 export default function toggleBillingAddressBlock(event: Event) {
   const regSubmitButton = DOM.elements[CLASS_NAMES.registrationButton];
   if (event.target instanceof HTMLInputElement && event.target.checked) {
-    console.log('checked');
-    const billingAddressBlock = document.querySelector('.registration__shipping-address');
+    const billingAddressBlock = document.querySelector(`.${CLASS_NAMES.shippingAddress}`);
+
     if (billingAddressBlock) billingAddressBlock.remove();
     regSubmitButton.removeAttribute('disabled');
     const keyUpEvent = new KeyboardEvent('keyup');
-    const nameInput = assertNonNullable<HTMLInputElement>('.registration__first-name');
-    nameInput.dispatchEvent(keyUpEvent);
+    const emailInput = assertNonNullable<HTMLInputElement>(`.${CLASS_NAMES.emailInput}`);
+    emailInput.dispatchEvent(keyUpEvent);
   } else {
     renderBillingAddressBlock();
     regSubmitButton.setAttribute('disabled', 'true');
