@@ -6,42 +6,48 @@ import isCustomerAuthorized from '../../utils/is-customer-authorized';
 import setLocationHash from '../../utils/set-location-hash';
 
 export default class UserNavigation extends BaseComponent {
-  loginButton: ButtonComponent;
+  logInButton: ButtonComponent;
 
   signUpButton: ButtonComponent;
 
-  logoutButton: ButtonComponent;
+  logOutButton: ButtonComponent;
 
   constructor() {
     super('nav', 'user-nav');
 
-    this.loginButton = new ButtonComponent('login-button', () => setLocationHash(Router.pages.login), 'log in', false);
+    this.logInButton = new ButtonComponent('login-button', () => setLocationHash(Router.pages.login), '', false);
+    this.logInButton.node.ariaLabel = 'Log in';
+    this.logInButton.node.title = 'log IN';
 
     this.signUpButton = new ButtonComponent(
-      'register-button',
+      'signup-button',
       () => setLocationHash(Router.pages.registration),
-      'sign up',
+      '',
       false,
     );
+    this.signUpButton.node.ariaLabel = 'Sign in';
+    this.signUpButton.node.title = 'register';
 
-    this.logoutButton = new ButtonComponent(
+    this.logOutButton = new ButtonComponent(
       'logout-button',
       () => {
         sessionStorage.clear();
         this.updateButtons();
       },
-      'log out',
+      '',
       false,
     );
+    this.logOutButton.node.ariaLabel = 'Log out';
+    this.logOutButton.node.title = 'log OUT';
   }
 
   renderButtons() {
     const { hash } = window.location;
 
-    if (isCustomerAuthorized()) this.node.append(this.logoutButton.node);
+    if (isCustomerAuthorized()) this.node.append(this.logOutButton.node);
     else if (hash === Router.pages.login) this.node.append(this.signUpButton.node);
-    else if (hash === Router.pages.registration) this.node.append(this.loginButton.node);
-    else this.node.append(this.loginButton.node, this.signUpButton.node);
+    else if (hash === Router.pages.registration) this.node.append(this.logInButton.node);
+    else this.node.append(this.logInButton.node, this.signUpButton.node);
   }
 
   updateButtons() {

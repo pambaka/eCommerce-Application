@@ -2,4 +2,46 @@
   display: flex;
   align-items: center;
   gap: 5px;
+
+  .login-button,
+  .logout-button,
+  .signup-button {
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    // background-color: #e0dcdc;
+    border-radius: 4px;
+    transition: 0.2s;
+
+    &:hover {
+      transition: 0.2s;
+    }
+  }
+
+  .login-button {
+    background-image: url('../../assets/log-in.svg');
+
+    &:hover {
+      background-image: url('../../assets/log-in-hover.svg');
+    }
+  }
+
+  .logout-button {
+    background-image: url('../../assets/log-out.svg');
+
+    &:hover {
+      background-image: url('../../assets/log-out-hover.svg');
+    }
+  }
+
+  .signup-button {
+    background-image: url('../../assets/sign-up.svg');
+
+    &:hover {
+      background-image: url('../../assets/sign-up-hover.svg');
+    }
+  }
 }
