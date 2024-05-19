@@ -44,9 +44,8 @@ export default async function signUpCustomer(
           sessionStorage.setItem('isCustomerAuthorized', 'true');
           setLocationHash(Router.pages.main);
           showModal('Customer was successfully created', '', true);
-
-          dispatchAuthorizationChangeEvent(true);
         }
+
         if (res.status === 400) {
           showModal(
             'Account with the provided email address already exists.',
@@ -58,7 +57,13 @@ export default async function signUpCustomer(
         }
         return res.json();
       })
-      .then((data) => console.log(data))
+
+      .then((data) => {
+        console.log(data);
+        sessionStorage.setItem('userName', data.customer.firstName);
+        dispatchAuthorizationChangeEvent(true);
+      })
+
       .catch((error) => console.log(error));
   }
 }

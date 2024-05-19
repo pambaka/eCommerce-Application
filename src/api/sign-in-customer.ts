@@ -25,13 +25,15 @@ export default async function signInCustomer(email: string, password: string): P
         if (res.status === 200) {
           setLocationHash(Router.pages.main);
           sessionStorage.setItem('isCustomerAuthorized', 'true');
-
-          dispatchAuthorizationChangeEvent(true);
         }
 
         return res.json();
       })
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        sessionStorage.setItem('userName', data.customer.firstName);
+        dispatchAuthorizationChangeEvent(true);
+      })
       .catch((error) => console.log(error));
   }
 }

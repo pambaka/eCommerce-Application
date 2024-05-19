@@ -29,7 +29,8 @@ export default class MainSection extends BaseComponent {
     wrapper.node.appendChild(logoImg.node);
 
     if (isCustomerAuthorized()) {
-      const welcomeText = new BaseTextComponent('p', 'welcome_text', 'Hello, User!');
+      const userName = sessionStorage.getItem('userName') || 'User';
+      const welcomeText = new BaseTextComponent('p', 'welcome_text', `Hello, ${userName}! Have a nice shopping!`);
       wrapper.node.appendChild(welcomeText.node);
     } else {
       const signupLink = new BaseLinkComponent(
