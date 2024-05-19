@@ -2,6 +2,7 @@ import { region } from './const';
 import getCustomerTokens from './get-customer-tokens';
 import setLocationHash from '../utils/set-location-hash';
 import Router from '../services/router';
+import { dispatchAuthorizationChangeEvent } from '../utils/authorization-event';
 
 export default async function signInCustomer(email: string, password: string): Promise<void> {
   const customerAccessToken: string | undefined = await getCustomerTokens(email, password);
@@ -28,7 +29,11 @@ export default async function signInCustomer(email: string, password: string): P
 
         return res.json();
       })
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        sessionStorage.setItem('userName', data.customer.firstName);
+        dispatchAuthorizationChangeEvent(true);
+      })
       .catch((error) => console.log(error));
   }
 }
