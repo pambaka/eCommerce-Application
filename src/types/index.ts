@@ -16,5 +16,7 @@ export interface CustomerData {
   dateOfBirth: string;
   addresses: Address[];
   shippingAddresses: [0];
+  billingAddresses: [1];
   defaultShippingAddress?: number;
+  defaultBillingAddress?: number;
 }

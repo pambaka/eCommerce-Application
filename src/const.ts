@@ -14,10 +14,13 @@ export const CLASS_NAMES = {
   postalCode: 'registration__postal-code',
   country: 'registration__country',
   registrationButton: 'registration__submit',
+  shippingAddress: 'registration__shipping-address',
 } as const;
 
 export const ID_NAMES = {
   defaultShipping: 'default-shipping',
+  useForBilling: 'use-for-billing',
+  defaultBilling: 'default-billing',
 };
 
 class Dom<T extends HTMLElement> {
