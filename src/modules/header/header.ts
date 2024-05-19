@@ -5,6 +5,7 @@ import BaseLinkComponent from '../../components/base-link-component';
 import BurgerMenuButton from '../../components/burger-menu-component';
 import BurgerMenuIcon from '../../components/burger-menu-icon';
 import SideMenuComponent from '../../components/side-menu-component';
+import UserNavigation from '../user-navigation/user-navigation';
 import Router from '../../services/router';
 import SvgImage from '../../components/svg-image';
 import sprite from '../../assets/leaf-sprite.svg';
@@ -14,8 +15,11 @@ export default class Header extends BaseComponent {
 
   private sideMenu: SideMenuComponent;
 
+  private userNavigation: UserNavigation;
+
   constructor() {
     super('header', 'header');
+    this.userNavigation = new UserNavigation();
     this.sideMenu = new SideMenuComponent(this.toggleNavigation.bind(this));
     this.node.appendChild(this.sideMenu.node);
     this.renderHeader();
@@ -36,7 +40,6 @@ export default class Header extends BaseComponent {
     ul.node.appendChild(logoItem.node);
 
     // Navigation items
-    ul.node.appendChild(new NavItemComponent(Router.pages.main, 'Home').node);
     ul.node.appendChild(new NavItemComponent(Router.pages.about, 'About').node);
     ul.node.appendChild(new NavItemComponent(Router.pages.catalog, 'Catalog').node);
     ul.node.appendChild(new NavItemComponent(Router.pages.login, 'Log in').node);
@@ -61,6 +64,10 @@ export default class Header extends BaseComponent {
 
     nav.node.appendChild(ul.node);
     this.node.appendChild(nav.node);
+
+    // User menu
+    this.userNavigation.renderButtons();
+    this.node.appendChild(this.userNavigation.node);
   }
 
   toggleNavigation(event?: Event) {

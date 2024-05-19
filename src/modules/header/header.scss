@@ -1,12 +1,15 @@
 .header {
   height: 70px;
   padding: 3rem;
+  display: flex;
+  justify-content: flex-end;
 
   .main_navigation {
     width: 100%;
 
     .nav {
       display: flex;
+      flex-wrap: nowrap;
       justify-content: space-between;
       align-items: center;
 
@@ -32,6 +35,12 @@
 
       .nav_item {
         font-size: 1.5rem;
+
+        @media (max-width: 768px) {
+          &:first-child {
+            order: 1;
+          }
+        }
 
         &:not(:first-child) {
           @media (max-width: 768px) {
