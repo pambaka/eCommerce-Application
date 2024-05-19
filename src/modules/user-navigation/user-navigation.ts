@@ -4,44 +4,51 @@ import ButtonComponent from '../../components/button-component';
 import Router from '../../services/router';
 import isCustomerAuthorized from '../../utils/is-customer-authorized';
 import setLocationHash from '../../utils/set-location-hash';
+import ButtonWithSvgIcon from '../../components/button-with-svg-icon';
+import userNavIcons from '../../assets/user-nav-icons-sprite.svg';
 
 export default class UserNavigation extends BaseComponent {
-  loginButton: ButtonComponent;
+  logInButton: ButtonComponent;
 
   signUpButton: ButtonComponent;
 
-  logoutButton: ButtonComponent;
+  logOutButton: ButtonComponent;
 
   constructor() {
     super('nav', 'user-nav');
 
-    this.loginButton = new ButtonComponent('login-button', () => setLocationHash(Router.pages.login), 'log in', false);
-
-    this.signUpButton = new ButtonComponent(
-      'register-button',
-      () => setLocationHash(Router.pages.registration),
-      'sign up',
-      false,
+    this.logInButton = new ButtonWithSvgIcon(
+      'login-button',
+      () => setLocationHash(Router.pages.login),
+      'Log in button',
+      `${userNavIcons}#log-in`,
     );
 
-    this.logoutButton = new ButtonComponent(
+    this.signUpButton = new ButtonWithSvgIcon(
+      'signup-button',
+      () => setLocationHash(Router.pages.registration),
+      'Sign up button',
+      `${userNavIcons}#sign-up`,
+    );
+
+    this.logOutButton = new ButtonWithSvgIcon(
       'logout-button',
       () => {
         sessionStorage.clear();
         this.updateButtons();
       },
-      'log out',
-      false,
+      'Log out button',
+      `${userNavIcons}#log-out`,
     );
   }
 
   renderButtons() {
     const { hash } = window.location;
 
-    if (isCustomerAuthorized()) this.node.append(this.logoutButton.node);
+    if (isCustomerAuthorized()) this.node.append(this.logOutButton.node);
     else if (hash === Router.pages.login) this.node.append(this.signUpButton.node);
-    else if (hash === Router.pages.registration) this.node.append(this.loginButton.node);
-    else this.node.append(this.loginButton.node, this.signUpButton.node);
+    else if (hash === Router.pages.registration) this.node.append(this.logInButton.node);
+    else this.node.append(this.logInButton.node, this.signUpButton.node);
   }
 
   updateButtons() {
