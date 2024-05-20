@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .header {
   min-height: 80px;
   display: flex;
@@ -11,6 +13,11 @@
     color: #9b9b9b;
     cursor: pointer;
     transition: 0.5s;
+
+    @media screen and (max-width: $width-tablet-min) {
+      width: 50px;
+      height: 60px;
+    }
   }
 
   .header-logo:hover {
