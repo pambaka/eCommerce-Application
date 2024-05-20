@@ -125,7 +125,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background: linear-gradient(to right, #e0dcdc, #9b9b9b);
   transform: translateX(-100%);
@@ -142,7 +142,7 @@
     align-items: center;
     height: 100%;
     overflow-y: scroll;
-    padding: 100px;
+    padding-top: 100px;
 
     .side-menu-nav {
       display: inline-block;
