@@ -31,7 +31,8 @@
     .nav-list {
       display: flex;
       flex-wrap: nowrap;
-      justify-content: space-between;
+      justify-content: flex-start;
+      gap: 40px;
       align-items: center;
 
       .nav_item {
