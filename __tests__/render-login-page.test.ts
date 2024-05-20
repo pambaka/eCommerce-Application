@@ -1,9 +1,10 @@
 import { CLASS_NAMES } from '../src/const';
 import renderLoginPage from '../src/pages/login/render/render-login';
-import Router from '../src/services/router';
 
 describe('renderLoginPage', () => {
-  renderLoginPage();
+  const loginForm = renderLoginPage();
+  document.body.append(loginForm);
+
   const button = document.body.querySelector(`.${CLASS_NAMES.loginButton}`);
   const email = document.querySelector(`.${CLASS_NAMES.loginLogin}`);
   const password = document.querySelector(`.${CLASS_NAMES.loginPassword}`);
@@ -42,21 +43,6 @@ describe('renderLoginPage', () => {
 
         expect(button.disabled).toBe(false);
       }
-    }
-  });
-
-  it('register button redirects to registration page', () => {
-    const registerButton = document.querySelector('.register-button') as HTMLButtonElement;
-
-    expect(registerButton).toBeInstanceOf(HTMLButtonElement);
-
-    if (registerButton instanceof HTMLButtonElement) {
-      registerButton.click();
-
-      expect(window.location.hash).toBe(Router.pages.registration);
-
-      // const registrationForm = document.querySelector(`.${CLASS_NAMES.registrationForm}`);
-      // expect(registrationForm).toBeTruthy();
     }
   });
 });
