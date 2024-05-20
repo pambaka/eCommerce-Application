@@ -1,6 +1,5 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import url('./pages/main/main.scss');
-@import url('./modules/header/header.scss');
 @import url('./modules/footer/footer.scss');
 @import url('./pages/error/error-page.scss');
 
@@ -23,6 +22,16 @@ button {
 
 button:disabled {
   cursor: default;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+
+  main {
+    flex-grow: 1;
+    padding: 40px 0;
+  }
 }
 
 @mixin title {

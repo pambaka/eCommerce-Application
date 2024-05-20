@@ -20,14 +20,20 @@ export default class UserNavigation extends BaseComponent {
 
     this.logInButton = new ButtonWithSvgIcon(
       'login-button',
-      () => setLocationHash(Router.pages.login),
+      () => {
+        setLocationHash(Router.pages.login);
+        // this.updateButtons();
+      },
       'Log in button',
       `${userNavIcons}#log-in`,
     );
 
     this.signUpButton = new ButtonWithSvgIcon(
       'signup-button',
-      () => setLocationHash(Router.pages.registration),
+      () => {
+        setLocationHash(Router.pages.registration);
+        // this.updateButtons();
+      },
       'Sign up button',
       `${userNavIcons}#sign-up`,
     );
@@ -47,18 +53,12 @@ export default class UserNavigation extends BaseComponent {
   }
 
   renderButtons() {
-    this.node.innerHTML = '';
+    // const { hash } = window.location;
 
-//     if (isCustomerAuthorized()) this.node.append(this.logOutButton.node);
-//     else if (hash === Router.pages.login) this.node.append(this.signUpButton.node);
-//     else if (hash === Router.pages.registration) this.node.append(this.logInButton.node);
-//     else this.node.append(this.logInButton.node, this.signUpButton.node);
-
-    if (isCustomerAuthorized()) {
-      this.node.append(this.logOutButton.node);
-    } else {
-      this.node.append(this.logInButton.node, this.signUpButton.node);
-    }
+    if (isCustomerAuthorized()) this.node.append(this.logOutButton.node);
+    // else if (hash === Router.pages.login) this.node.append(this.signUpButton.node);
+    // else if (hash === Router.pages.registration) this.node.append(this.logInButton.node);
+    else this.node.append(this.logInButton.node, this.signUpButton.node);
   }
 
   updateButtons() {
