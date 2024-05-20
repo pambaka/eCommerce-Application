@@ -13,7 +13,6 @@ export default class SideMenuComponent extends BaseComponent {
   }
 
   renderMenuItems(toggleFunction: (event?: Event) => void) {
-    const menuContainer = new BaseComponent('div', 'side-menu-container');
     const ul = new BaseComponent('ul', 'side-menu-nav');
     ul.node.innerHTML = '';
 
@@ -22,35 +21,31 @@ export default class SideMenuComponent extends BaseComponent {
       new NavItemComponent(Router.pages.about, 'About'),
       new NavItemComponent(Router.pages.catalog, 'Catalog'),
       new NavItemComponent(Router.pages.cart, 'Cart'),
-      new NavItemComponent(Router.pages.login, 'Log in'),
-      new NavItemComponent(Router.pages.registration, 'Sign up'),
     ];
 
+    let logoutItem: NavItemComponent | null = null;
+
     if (isCustomerAuthorized()) {
-      const logoutItem = new NavItemComponent(Router.pages.main, 'Logout');
-      logoutItem.node.addEventListener('click', (event) => {
+      logoutItem = new NavItemComponent(Router.pages.main, 'Logout');
+      logoutItem.node.addEventListener('click', () => {
         sessionStorage.clear();
         dispatchAuthorizationChangeEvent(false);
-        toggleFunction(event);
+        toggleFunction();
       });
       menuItems.push(logoutItem);
     } else {
-      menuItems.forEach((item) => {
-        if (item.text === 'Log in' || item.text === 'Sign up') {
-          item.node.addEventListener('click', toggleFunction);
-        }
-      });
+      menuItems.push(new NavItemComponent(Router.pages.login, 'Log in'));
+      menuItems.push(new NavItemComponent(Router.pages.registration, 'Sign up'));
     }
 
     menuItems.forEach((item) => {
-      if (item.text !== 'Logout') {
+      if (logoutItem === null || item !== logoutItem) {
         item.node.addEventListener('click', toggleFunction);
       }
       ul.node.appendChild(item.node);
     });
 
-    menuContainer.node.appendChild(ul.node);
-    this.node.appendChild(menuContainer.node);
+    this.node.appendChild(ul.node);
   }
 
   subscribeToAuthorizationChanges(toggleFunction: (event?: Event) => void) {
