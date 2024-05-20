@@ -3,7 +3,7 @@ import BaseComponent from '../../components/base-component';
 import ButtonComponent from '../../components/button-component';
 import Router from '../../services/router';
 import isCustomerAuthorized from '../../utils/is-customer-authorized';
-import setLocationHash from '../../utils/set-location-hash';
+import replaceLocation from '../../utils/replace-location';
 import ButtonWithSvgIcon from '../../components/button-with-svg-icon';
 import userNavIcons from '../../assets/user-nav-icons-sprite.svg';
 import { subscribeToAuthorizationChangeEvent, dispatchAuthorizationChangeEvent } from '../../utils/authorization-event';
@@ -21,7 +21,7 @@ export default class UserNavigation extends BaseComponent {
     this.logInButton = new ButtonWithSvgIcon(
       'login-button',
       () => {
-        setLocationHash(Router.pages.login);
+        replaceLocation(Router.pages.login);
         // this.updateButtons();
       },
       'Log in button',
@@ -32,7 +32,7 @@ export default class UserNavigation extends BaseComponent {
     this.signUpButton = new ButtonWithSvgIcon(
       'signup-button',
       () => {
-        setLocationHash(Router.pages.registration);
+        replaceLocation(Router.pages.registration);
         // this.updateButtons();
       },
       'Sign up button',

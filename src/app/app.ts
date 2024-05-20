@@ -6,7 +6,7 @@ import Router from '../services/router';
 import renderLoginPage from '../pages/login/render/render-login';
 import renderRegistration from '../pages/registration/render/render-registration';
 import isCustomerAuthorized from '../utils/is-customer-authorized';
-import setLocationHash from '../utils/set-location-hash';
+import replaceLocation from '../utils/replace-location';
 
 export default class App {
   private header: Header;
@@ -49,14 +49,14 @@ export default class App {
       if (!isCustomerAuthorized()) {
         this.renderLogInPage();
       } else {
-        setLocationHash(Router.pages.main);
+        replaceLocation(Router.pages.main);
       }
     });
     this.router.register(Router.pages.registration, () => {
       if (!isCustomerAuthorized()) {
         this.renderRegistrationPage();
       } else {
-        setLocationHash(Router.pages.main);
+        replaceLocation(Router.pages.main);
       }
     });
     // Registration of other routes
