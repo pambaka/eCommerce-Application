@@ -1,3 +1,4 @@
+import './footer.scss';
 import BaseComponent from '../../components/base-component';
 import BaseTextComponent from '../../components/base-text-component';
 import BaseImageComponent from '../../components/base-image-component';
@@ -16,7 +17,7 @@ export default class Footer extends BaseComponent {
     const contactsList = new BaseComponent('ul', 'contacts_list');
 
     const emailContact = new ContactItem('Email', 'mailto:keep_calm@gmail.com', 'keep_calm@gmail.com').getNode();
-    const phoneContact = new ContactItem('Phone number', 'tel:+79995201234', '8-999-520-1234').getNode();
+    const phoneContact = new ContactItem('Phone number', 'tel:123456789', '123456789').getNode();
     const addressContact = new ContactItem('Address', '#', 'Lehendakarianen, 5, Bilbo').getNode();
 
     contactsList.node.append(emailContact, phoneContact, addressContact);
