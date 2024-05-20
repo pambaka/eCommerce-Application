@@ -1,6 +1,6 @@
+import './header.scss';
 import BaseComponent from '../../components/base-component';
 import NavItemComponent from '../../components/navigation-component';
-import BaseImageComponent from '../../components/base-image-component';
 import BaseLinkComponent from '../../components/base-link-component';
 import BurgerMenuButton from '../../components/burger-menu-component';
 import BurgerMenuIcon from '../../components/burger-menu-icon';
@@ -15,59 +15,40 @@ export default class Header extends BaseComponent {
 
   private sideMenu: SideMenuComponent;
 
-  private userNavigation: UserNavigation;
-
   constructor() {
     super('header', 'header');
-    this.userNavigation = new UserNavigation();
     this.sideMenu = new SideMenuComponent(this.toggleNavigation.bind(this));
-    this.node.appendChild(this.sideMenu.node);
+    this.node.append(this.sideMenu.node);
     this.renderHeader();
   }
 
-  renderHeader() {
-    const nav = new BaseComponent('nav', 'main_navigation');
-    const ul = new BaseComponent('ul', 'nav');
-    ul.node.classList.add('nav_header');
-
-    const logoItem = new BaseComponent('li', 'nav_item');
-    const logoLink = new BaseLinkComponent(Router.pages.main, 'header_logo', '');
-
+  private renderHeader() {
+    const logoLink = new BaseLinkComponent(Router.pages.main, '', '');
     const logo = new SvgImage(`${sprite}#leaf`, 'header-logo');
-    logoLink.node.appendChild(logo.node);
-
-    logoItem.node.appendChild(logoLink.node);
-    ul.node.appendChild(logoItem.node);
+    logoLink.node.append(logo.node);
 
     // Navigation items
-    ul.node.appendChild(new NavItemComponent(Router.pages.about, 'About').node);
-    ul.node.appendChild(new NavItemComponent(Router.pages.catalog, 'Catalog').node);
-    ul.node.appendChild(new NavItemComponent(Router.pages.login, 'Log in').node);
-    ul.node.appendChild(new NavItemComponent(Router.pages.registration, 'Sign up').node);
-
-    // Cart icon
-    const cartItem = new BaseComponent('li', 'nav_item');
-    cartItem.node.classList.add('nav_item_cart');
-    const cartLink = new BaseLinkComponent(Router.pages.cart, 'nav_link', '');
-    const cartIcon = new BaseImageComponent('cart_icon', 'https://www.svgrepo.com/show/529445/cart-3.svg', 'cart');
-    cartIcon.node.classList.add('cart');
-    cartLink.node.appendChild(cartIcon.node);
-    cartItem.node.appendChild(cartLink.node);
-    ul.node.appendChild(cartItem.node);
+    const nav = new BaseComponent('nav', 'main_navigation');
+    const ul = new BaseComponent('ul', 'nav-list');
+    ul.node.append(new NavItemComponent(Router.pages.about, 'About').node);
+    ul.node.append(new NavItemComponent(Router.pages.catalog, 'Catalog').node);
+    ul.node.append(new NavItemComponent(Router.pages.login, 'Log in').node);
+    ul.node.append(new NavItemComponent(Router.pages.registration, 'Sign up').node);
 
     // Burger icon
     const burgerMenuButton = new BurgerMenuButton('burger-menu-wrapper', this.toggleNavigation.bind(this));
     burgerMenuButton.node.classList.add('hidden');
     this.burgerMenuIcon = new BurgerMenuIcon('burger-menu');
-    burgerMenuButton.node.appendChild(this.burgerMenuIcon.node);
-    ul.node.appendChild(burgerMenuButton.node);
+    burgerMenuButton.node.append(this.burgerMenuIcon.node);
+    ul.node.append(burgerMenuButton.node);
 
-    nav.node.appendChild(ul.node);
-    this.node.appendChild(nav.node);
+    nav.node.append(ul.node);
 
     // User menu
-    this.userNavigation.renderButtons();
-    this.node.appendChild(this.userNavigation.node);
+    const userNavigation = new UserNavigation();
+    userNavigation.renderButtons();
+
+    this.node.append(logoLink.node, nav.node, userNavigation.node);
   }
 
   toggleNavigation(event?: Event) {

@@ -1,19 +1,12 @@
 @import './variables.scss';
 
-body {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  min-width: 300px;
-}
-
-.main-login {
+.form-wrapper {
   min-height: fit-content;
   flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 20px;
 }
 
 .login-form {

@@ -1,8 +1,11 @@
+import './footer.scss';
 import BaseComponent from '../../components/base-component';
 import BaseTextComponent from '../../components/base-text-component';
-import BaseImageComponent from '../../components/base-image-component';
-import BaseLinkComponent from '../../components/base-link-component';
 import ContactItem from '../../components/contact-component';
+import SvgImage from '../../components/svg-image';
+import logoImgSprite from '../../assets/leaf-sprite.svg';
+import LinkImage from '../../components/link-image';
+import footerIcon from '../../assets/footer-icons-sprite.svg';
 
 export default class Footer extends BaseComponent {
   constructor() {
@@ -11,52 +14,53 @@ export default class Footer extends BaseComponent {
   }
 
   private renderFooter(): void {
-    const contactsDiv = new BaseComponent('div', 'footer_contacts');
-    const contactsTitle = new BaseTextComponent('h2', 'footer_title', 'Contact Us');
-    const contactsList = new BaseComponent('ul', 'contacts_list');
+    this.renderContacts();
+    this.renderInfo();
+  }
 
-    const emailContact = new ContactItem('Email', 'mailto:keep_calm@gmail.com', 'keep_calm@gmail.com').getNode();
-    const phoneContact = new ContactItem('Phone number', 'tel:+79995201234', '8-999-520-1234').getNode();
-    const addressContact = new ContactItem('Address', '#', 'Lehendakarianen, 5, Bilbo').getNode();
+  private renderContacts() {
+    const contacts = new BaseComponent('div', 'footer_contacts');
 
-    contactsList.node.append(emailContact, phoneContact, addressContact);
+    const title = new BaseTextComponent('h2', 'footer_title', 'Contact Us');
 
-    contactsDiv.node.appendChild(contactsTitle.node);
-    contactsDiv.node.appendChild(contactsList.node);
+    const list = new BaseComponent('ul', 'contacts_list');
+    const email = new ContactItem('Email', 'mailto:keep_calm@gmail.com', 'keep_calm@gmail.com').getNode();
+    const phone = new ContactItem('Phone number', 'tel:123456789', '123456789').getNode();
+    const address = new ContactItem('Address', '#', 'Lehendakarianen, 5, Bilbo').getNode();
+    list.node.append(email, phone, address);
 
-    const infoDiv = new BaseComponent('div', 'footer_info');
-    const logoDiv = new BaseComponent('div', 'footer_logo');
-    const logoImg = new BaseImageComponent(
-      'footer_logo-img',
-      'https://www.svgrepo.com/show/530291/leaves-2.svg',
-      'logo',
-    );
+    contacts.node.append(title.node, list.node);
+
+    this.node.append(contacts.node);
+  }
+
+  private renderInfo() {
+    const info = new BaseComponent('div', 'footer_info');
+
+    const logo = new BaseComponent('div', 'footer_logo');
+    const logoImg = new SvgImage(`${logoImgSprite}#leaf`, 'footer_logo-img');
     const logoText = new BaseTextComponent('h1', 'logo_text', 'KeepCalm');
-    const footerText = new BaseTextComponent(
+    logo.node.append(logoImg.node, logoText.node);
+
+    const text = new BaseTextComponent(
       'p',
       'footer_text',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel augue at arcu fermentum blandit. In hac habitasse platea dictumst. Pellentesque aliquam dui urna, quis fermentum massa posuere eu.',
     );
-    footerText.node.classList.add('footer_description');
-    const infoList = new BaseComponent('ul', 'info_list');
 
-    const addSocialIcon = (href: string, src: string, alt: string) => {
+    const list = new BaseComponent('ul', 'info_list');
+    const names = ['pambaka', 'gunsnfnr', 'tmaltseva', 'rss'];
+    names.forEach((name) => {
       const item = new BaseComponent('li', 'info_item');
-      const link = new BaseLinkComponent(href, 'info_link', '');
-      const icon = new BaseImageComponent('info_icon', src, alt);
-      link.node.appendChild(icon.node);
-      item.node.appendChild(link.node);
-      infoList.node.appendChild(item.node);
-    };
+      let image: LinkImage;
+      if (name === 'rss') image = new LinkImage('https://rs.school/', `${footerIcon}#rss`);
+      else image = new LinkImage(`https://github.com/${name}`, `${footerIcon}#github`);
+      item.node.append(image.node);
+      list.node.append(item.node);
+    });
 
-    addSocialIcon('#', 'https://www.svgrepo.com/show/521711/instagram.svg', 'Instagram');
-    addSocialIcon('#', 'https://www.svgrepo.com/show/509923/facebook.svg', 'Facebook');
-    addSocialIcon('https://rs.school/', 'https://rs.school/assets/rs-logo-2XN05XgC.webp', 'RS School logo');
+    info.node.append(logo.node, text.node, list.node);
 
-    logoDiv.node.append(logoImg.node, logoText.node);
-    infoDiv.node.append(logoDiv.node, footerText.node, infoList.node);
-
-    this.node.appendChild(contactsDiv.node);
-    this.node.appendChild(infoDiv.node);
+    this.node.append(info.node);
   }
 }

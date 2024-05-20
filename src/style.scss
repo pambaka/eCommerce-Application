@@ -1,7 +1,5 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import url('./pages/main/main.scss');
-@import url('./modules/header/header.scss');
-@import url('./modules/footer/footer.scss');
 @import url('./pages/error/error-page.scss');
 
 $color-bg: #d3dfdf;
@@ -23,6 +21,25 @@ button {
 
 button:disabled {
   cursor: default;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+
+  header,
+  footer {
+    padding: 20px 40px;
+
+    @media screen and (max-width: 768px) {
+      padding: 10px 20px;
+    }
+  }
+
+  main {
+    flex-grow: 1;
+    padding: 40px 0;
+  }
 }
 
 @mixin title {
@@ -52,14 +69,12 @@ button:disabled {
 
 body,
 html {
+  min-width: 360px;
+  height: 100vh;
   font-family: 'Gill Sans', sans-serif;
   font-size: 16px;
-  min-width: 300px;
-  max-width: 1920px;
-  margin: auto;
   scroll-behavior: smooth;
   background: linear-gradient(to right, $color-bg2, $color-bg3);
-  height: 100vh;
 }
 
 h1 {

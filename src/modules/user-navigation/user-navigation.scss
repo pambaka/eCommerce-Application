@@ -1,7 +1,9 @@
+@import '../../styles/variables.scss';
+
 .user-nav {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
 
   .login-button,
   .logout-button,
@@ -25,5 +27,16 @@
     height: 30px;
     display: grid;
     place-content: center;
+  }
+
+  @media screen and (max-width: $width-tablet-min) {
+    button {
+      padding: 2px;
+    }
+
+    svg {
+      width: 26px;
+      height: 26px;
+    }
   }
 }

@@ -1,19 +1,18 @@
+$border-footer: 1px solid #1f1f3f;
+
 .footer {
   display: flex;
-  margin: auto;
-  padding: 20px 40px;
+  gap: 40px;
 
   .footer_contacts {
-    border-right: 1px solid #1f1f3f;
+    border-right: $border-footer;
     padding-right: 40px;
-    margin-right: 40px;
 
     @media (max-width: 768px) {
       border-right: none;
-      border-left: 1px solid #1f1f3f;
+      border-left: $border-footer;
       align-self: end;
-      width: 35%;
-      padding-left: 20px;
+      padding: 10px 0 10px 20px;
     }
 
     @media (max-width: 299px) {
@@ -23,7 +22,7 @@
 
   .footer_info {
     @media (max-width: 768px) {
-      border-right: 1px solid #1f1f3f;
+      border-right: $border-footer;
     }
   }
 
@@ -52,10 +51,6 @@
     margin-bottom: 10px;
     font-size: 1.8rem;
     white-space: nowrap;
-
-    @media (max-width: 768px) {
-      margin-top: 20px;
-    }
   }
 
   .footer_logo {
@@ -64,6 +59,7 @@
     .footer_logo-img {
       width: 50px;
       height: 50px;
+      color: #757575;
     }
 
     .logo_text {
@@ -81,14 +77,23 @@
     gap: 15px;
   }
 
-  .info_icon {
-    width: 30px;
-    height: 30px;
+  .info_item {
+    svg {
+      width: 32px;
+      height: 32px;
+      color: #757575;
+      transition: 0.2s;
+
+      &:hover {
+        color: #323232;
+        transition: 0.2s;
+      }
+    }
   }
 
   .footer_text {
     font-size: 16px;
-    white-space: nowrap;
+    white-space: wrap;
 
     @media (min-width: 400px) and (max-width: 768px) {
       font-size: 14px;
@@ -101,12 +106,8 @@
     }
   }
 
-  .footer_text.footer_description {
-    white-space: wrap;
-  }
-
   @media (max-width: 768px) {
     flex-direction: column-reverse;
-    gap: 40px;
+    gap: 20px;
   }
 }
