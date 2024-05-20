@@ -5,8 +5,7 @@ import Footer from '../modules/footer/footer';
 import Router from '../services/router';
 import renderLoginPage from '../pages/login/render/render-login';
 import renderRegistration from '../pages/registration/render/render-registration';
-import isCustomerAuthorized from '../utils/is-customer-authorized';
-import setLocationHash from '../utils/set-location-hash';
+import redirectIfAuthorized from '../utils/redirect-if-authorized';
 
 export default class App {
   private header: Header;
@@ -46,17 +45,13 @@ export default class App {
     this.router.register(Router.pages.main, () => this.renderMainPage());
     this.router.register(Router.pages.notFound, () => this.renderErrorPage());
     this.router.register(Router.pages.login, () => {
-      if (!isCustomerAuthorized()) {
+      if (!redirectIfAuthorized(Router.pages.login)) {
         this.renderLogInPage();
-      } else {
-        setLocationHash(Router.pages.main);
       }
     });
     this.router.register(Router.pages.registration, () => {
-      if (!isCustomerAuthorized()) {
+      if (!redirectIfAuthorized(Router.pages.registration)) {
         this.renderRegistrationPage();
-      } else {
-        setLocationHash(Router.pages.main);
       }
     });
     // Registration of other routes
