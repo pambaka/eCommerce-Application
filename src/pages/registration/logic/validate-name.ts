@@ -21,7 +21,7 @@ export default function validateName(name: string, inputName: string): string {
   if (name === '') {
     warning = `${fieldName} is required.`;
   } else if (name[0] === ' ' || name[name.length - 1] === ' ') {
-    warning = 'The first and last characters should not be spaces.';
+    warning = 'The first and the last characters should not be spaces.';
   } else if (!isValid) {
     warning = `${fieldName} should consist of English letters and spaces.`;
   }
