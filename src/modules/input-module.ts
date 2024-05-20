@@ -14,7 +14,7 @@ export default function inputModule(
 
   if (inputType === 'date') {
     input.node.removeEventListener('keyup', validateForm);
-    input.node.addEventListener('change', validateForm);
+    input.node.addEventListener('blur', validateForm);
   }
 
   div.node.append(label.node, input.node);

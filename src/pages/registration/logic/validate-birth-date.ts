@@ -1,6 +1,6 @@
 export default function validateBirthDate(bDate: string): string {
   let warning: string = '';
-
+  if (bDate === '') warning = 'Complete the field';
   const bDateTimeStamp: number = Date.parse(bDate);
   const nowTimeStamp: number = Date.now();
   const timeStampDifference = nowTimeStamp - bDateTimeStamp;
