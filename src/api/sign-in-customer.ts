@@ -20,8 +20,6 @@ export default async function signInCustomer(email: string, password: string): P
       }),
     })
       .then((res) => {
-        console.log('login:', res);
-
         if (res.status === 200) {
           replaceLocation(Router.pages.main);
           sessionStorage.setItem('isCustomerAuthorized', 'true');
@@ -30,10 +28,9 @@ export default async function signInCustomer(email: string, password: string): P
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         sessionStorage.setItem('userName', data.customer.firstName);
         dispatchAuthorizationChangeEvent(true);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => error);
   }
 }
