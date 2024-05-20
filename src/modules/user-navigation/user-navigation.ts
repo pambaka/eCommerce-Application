@@ -25,6 +25,7 @@ export default class UserNavigation extends BaseComponent {
         // this.updateButtons();
       },
       'Log in button',
+      'log in',
       `${userNavIcons}#log-in`,
     );
 
@@ -35,6 +36,7 @@ export default class UserNavigation extends BaseComponent {
         // this.updateButtons();
       },
       'Sign up button',
+      'register',
       `${userNavIcons}#sign-up`,
     );
 
@@ -46,6 +48,7 @@ export default class UserNavigation extends BaseComponent {
         this.updateButtons();
       },
       'Log out button',
+      'log out',
       `${userNavIcons}#log-out`,
     );
 

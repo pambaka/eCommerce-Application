@@ -7,6 +7,8 @@ export default class SvgImage {
     this.node = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     this.node.innerHTML = `<use xlink:href=${url}></use>`;
 
+    this.node.role = 'img';
+
     if (className) this.node.classList.add(className);
   }
 }
