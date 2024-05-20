@@ -14,15 +14,13 @@ export default async function getCustomerTokens(email: string, password: string)
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
-
       if (data.statusCode === 400) {
         handleErrorMessage(data.message);
       } else {
         accessToken = data.access_token;
       }
     })
-    .catch((error) => console.log(error));
+    .catch((error) => error);
 
   return accessToken;
 }

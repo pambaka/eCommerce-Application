@@ -43,7 +43,6 @@ export default async function signUpCustomer(
       body: JSON.stringify(customerData),
     })
       .then((res) => {
-        console.log('res:', res);
         if (res.status === 201) {
           sessionStorage.setItem('isCustomerAuthorized', 'true');
           replaceLocation(Router.pages.main);
@@ -63,11 +62,10 @@ export default async function signUpCustomer(
       })
 
       .then((data) => {
-        console.log(data);
         sessionStorage.setItem('userName', data.customer.firstName);
         dispatchAuthorizationChangeEvent(true);
       })
 
-      .catch((error) => console.log(error));
+      .catch((error) => error);
   }
 }
