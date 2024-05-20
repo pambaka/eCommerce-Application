@@ -1,7 +1,7 @@
 import './header.scss';
 import BaseComponent from '../../components/base-component';
 import ButtonComponent from '../../components/button-component';
-import setLocationHash from '../../utils/set-location-hash';
+import replaceLocation from '../../utils/replace-location';
 import Router from '../../services/router';
 import SvgImage from '../../components/svg-image';
 import BaseLinkComponent from '../../components/base-link-component';
@@ -32,13 +32,13 @@ export default class Header extends BaseComponent {
     buttonsNames.forEach((name) => {
       switch (name) {
         case 'login':
-          loginButton = new ButtonComponent('logIn-button', () => setLocationHash(Router.pages.login), 'log in', false);
+          loginButton = new ButtonComponent('logIn-button', () => replaceLocation(Router.pages.login), 'log in', false);
           buttons.push(loginButton);
           break;
         case 'register':
           signUpButton = new ButtonComponent(
             'register-button',
-            () => setLocationHash(Router.pages.registration),
+            () => replaceLocation(Router.pages.registration),
             'register',
             false,
           );
