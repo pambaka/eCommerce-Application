@@ -1,0 +1,42 @@
+@import '../../styles/variables.scss';
+
+.user-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .login-button,
+  .logout-button,
+  .signup-button {
+    box-sizing: content-box;
+    padding: 4px;
+    // background-color: transparent;
+    background-color: #e0dcdc;
+    color: #323232;
+    border-radius: 4px;
+    transition: 0.2s;
+
+    &:hover {
+      transition: 0.2s;
+      color: #5f8575;
+    }
+  }
+
+  svg {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-content: center;
+  }
+
+  @media screen and (max-width: $width-tablet-min) {
+    button {
+      padding: 2px;
+    }
+
+    svg {
+      width: 26px;
+      height: 26px;
+    }
+  }
+}

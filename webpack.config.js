@@ -34,6 +34,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html',
+      favicon: path.resolve(__dirname, './src/favicon.ico'),
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
@@ -41,7 +42,9 @@ const config = {
     new EslintPlugin({
       extensions: 'ts',
     }),
-    new DotenvPlugin(),
+    new DotenvPlugin({
+      systemvars: true,
+    }),
   ],
 };
 
