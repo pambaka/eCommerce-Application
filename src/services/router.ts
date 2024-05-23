@@ -19,7 +19,7 @@ export default class Router {
 
   init() {
     window.addEventListener('hashchange', this.onHashChange.bind(this));
-    window.addEventListener('load', this.onHashChange.bind(this));
+    // window.addEventListener('load', this.onHashChange.bind(this));
   }
 
   onHashChange() {

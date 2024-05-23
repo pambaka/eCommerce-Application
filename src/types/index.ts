@@ -20,3 +20,24 @@ export interface CustomerData {
   defaultShippingAddress?: number;
   defaultBillingAddress?: number;
 }
+
+export interface Token {
+  set: (token?: string) => Promise<void>;
+  get: () => string | null;
+}
+
+export interface Product {
+  masterData: {
+    current: {
+      name: {
+        'en-US': string;
+      };
+      description: {
+        'en-US': string;
+      };
+      masterVariant: {
+        images: { url: string }[];
+      };
+    };
+  };
+}

@@ -74,9 +74,9 @@ export default class App {
     this.contentNode.append(this.errorSection.node);
   }
 
-  private renderCatalog() {
+  private async renderCatalog() {
     this.contentNode.innerHTML = '';
-    this.contentNode.append(renderCatalog());
+    this.contentNode.append(await renderCatalog());
   }
 
   private renderRegistrationPage() {
