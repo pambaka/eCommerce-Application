@@ -1,6 +1,7 @@
 .product-card {
   width: 200px;
   height: 300px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -11,7 +12,7 @@
     font-size: 20px;
   }
 
-  div {
+  .card__image {
     width: 100%;
     height: 150px;
     background-color: #5f8575;
@@ -24,5 +25,14 @@
 
   .card__description {
     font-size: 16px;
+  }
+
+  .card__prices {
+    display: flex;
+    gap: 10px;
+
+    .price--old {
+      text-decoration: line-through;
+    }
   }
 }
