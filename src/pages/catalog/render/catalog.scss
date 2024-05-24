@@ -1,0 +1,17 @@
+@import '../../../styles/variables.scss';
+
+.catalog-wrapper {
+  padding: 20px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  @media screen and (max-width: $width-tablet-min) {
+    padding: 10px 20px;
+  }
+
+  .catalog--empty {
+    font-size: 20px;
+    color: gray;
+  }
+}

@@ -7,6 +7,7 @@ import renderLoginPage from '../pages/login/render/render-login';
 import renderRegistration from '../pages/registration/render/render-registration';
 import isCustomerAuthorized from '../utils/is-customer-authorized';
 import replaceLocation from '../utils/replace-location';
+import renderCatalog from '../pages/catalog/render/render-catalog';
 
 export default class App {
   private header: Header;
@@ -45,6 +46,7 @@ export default class App {
   registerRoutes() {
     this.router.register(Router.pages.main, () => this.renderMainPage());
     this.router.register(Router.pages.notFound, () => this.renderErrorPage());
+    this.router.register(Router.pages.catalog, () => this.renderCatalog());
     this.router.register(Router.pages.login, () => {
       if (!isCustomerAuthorized()) {
         this.renderLogInPage();
@@ -70,6 +72,11 @@ export default class App {
   private renderErrorPage() {
     this.contentNode.innerHTML = '';
     this.contentNode.append(this.errorSection.node);
+  }
+
+  private async renderCatalog() {
+    this.contentNode.innerHTML = '';
+    this.contentNode.append(await renderCatalog());
   }
 
   private renderRegistrationPage() {
