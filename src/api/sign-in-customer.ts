@@ -29,6 +29,8 @@ export default async function signInCustomer(email: string, password: string): P
       })
       .then((data) => {
         sessionStorage.setItem('userName', data.customer.firstName);
+        sessionStorage.setItem('customerID', data.customer.id);
+
         dispatchAuthorizationChangeEvent(true);
       })
       .catch((error) => error);

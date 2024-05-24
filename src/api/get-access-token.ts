@@ -13,6 +13,7 @@ export default async function getAccessToken(): Promise<string | undefined> {
     .then((resp: Response) => resp.json())
     .then((data) => {
       accessToken = data.access_token;
+      console.log('Access Token:', accessToken);
     })
     .catch((error) => error);
   return accessToken;

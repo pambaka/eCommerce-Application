@@ -30,8 +30,8 @@ export default async function signUpCustomer(
     billingAddresses: [1],
   };
 
-  if (isDefaultShipping) customerData.defaultShippingAddress = 0;
-  if (isDefaultBilling) customerData.defaultBillingAddress = 1;
+  if (isDefaultShipping) customerData.defaultShippingAddressId = shippingAddress.id;
+  if (isDefaultBilling) customerData.defaultBillingAddressId = billingAddress.id;
 
   if (customerAccessToken) {
     await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/customers`, {
@@ -63,6 +63,8 @@ export default async function signUpCustomer(
 
       .then((data) => {
         sessionStorage.setItem('userName', data.customer.firstName);
+        sessionStorage.setItem('customerID', data.customer.id);
+
         dispatchAuthorizationChangeEvent(true);
       })
 
