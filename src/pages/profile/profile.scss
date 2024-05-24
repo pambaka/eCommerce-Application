@@ -3,10 +3,10 @@
   justify-content: space-between;
   font-size: 1rem;
   max-width: 65%;
-  min-width: 30%;
+  min-width: 40%;
 
   @media (max-width: 600px) {
-    max-width: 90%;
+    max-width: 70%;
   }
 
   .profile_page__info_column,
@@ -16,7 +16,7 @@
   }
 
   .profile_page__info_column {
-    width: 30%;
+    width: 40%;
     text-align: left;
   }
 
@@ -31,6 +31,7 @@
       box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
       border-radius: 16px;
       margin-right: 20px;
+      width: 30rem;
 
       &.default-shipping {
         background-color: #f9f8f8;

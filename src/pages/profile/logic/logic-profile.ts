@@ -48,20 +48,27 @@ export default class ProfileSection extends BaseComponent {
     const infoColumn = new BaseComponent('div', 'profile_page__info_column');
     const addressColumn = new BaseComponent('div', 'profile_page__address_column');
 
-    // Read-only fields
-    const nameLabel = new LabelComponent('Name:');
-    const nameText = new BaseTextComponent('p', 'profile_page__info', this.userInfo.firstName);
-    infoColumn.node.append(nameLabel.node, nameText.node);
+    this.renderUserInfo(infoColumn);
+    this.renderUserAddresses(addressColumn);
 
-    const surnameLabel = new LabelComponent('Surname:');
-    const surnameText = new BaseTextComponent('p', 'profile_page__info', this.userInfo.lastName);
-    infoColumn.node.append(surnameLabel.node, surnameText.node);
+    contentWrapper.node.append(infoColumn.node, addressColumn.node);
+  }
 
-    const dobLabel = new LabelComponent('Date of Birth:');
-    const dobText = new BaseTextComponent('p', 'profile_page__info', this.userInfo.dateOfBirth);
-    infoColumn.node.append(dobLabel.node, dobText.node);
+  private renderUserInfo(parentNode: BaseComponent) {
+    const fields = [
+      { label: 'Name:', value: this.userInfo.firstName },
+      { label: 'Surname:', value: this.userInfo.lastName },
+      { label: 'Date of Birth:', value: this.userInfo.dateOfBirth },
+    ];
 
-    // Read-only addresses
+    fields.forEach((field) => {
+      const label = new LabelComponent(field.label);
+      const text = new BaseTextComponent('p', 'profile_page__info', field.value);
+      parentNode.node.append(label.node, text.node);
+    });
+  }
+
+  private renderUserAddresses(parentNode: BaseComponent) {
     const uniqueAddresses: { [key: string]: { address: Address; types: string[] } } = {};
 
     this.userAddresses.forEach((address) => {
@@ -70,48 +77,42 @@ export default class ProfileSection extends BaseComponent {
         uniqueAddresses[addressKey] = { address, types: [] };
       }
       if (this.userInfo.defaultShippingAddressId === address.id) {
-        uniqueAddresses[addressKey].types.push('Default Shipping Address');
+        uniqueAddresses[addressKey].types.push('default-shipping');
       }
       if (this.userInfo.defaultBillingAddressId === address.id) {
-        uniqueAddresses[addressKey].types.push('Default Billing Address');
+        uniqueAddresses[addressKey].types.push('default-billing');
       }
     });
 
     Object.values(uniqueAddresses).forEach(({ address, types }, index) => {
       const addressWrapper = new BaseComponent('div', 'profile_page__address_wrapper');
+      types.forEach((type) => addressWrapper.node.classList.add(type));
+
       const addressTitle = new BaseTextComponent('h3', 'profile_page__address_title', `Address ${index + 1}`);
       addressWrapper.node.appendChild(addressTitle.node);
 
       types.forEach((type) => {
-        const typeLabel = new BaseTextComponent('p', 'profile_page__default_label', type);
+        const typeLabel = new BaseTextComponent('p', 'profile_page__default_label', type.replace('-', ' '));
         addressWrapper.node.appendChild(typeLabel.node);
       });
 
-      const streetLabel = new LabelComponent('Street:');
-      const streetText = new BaseTextComponent('p', 'profile_page__address', address.streetName);
-      addressWrapper.node.append(streetLabel.node, streetText.node);
+      const addressFields = [
+        { label: 'Street:', value: address.streetName },
+        { label: 'City:', value: address.city },
+        { label: 'State:', value: address.state },
+        { label: 'Postal Code:', value: address.postalCode },
+        { label: 'Country:', value: address.country },
+      ];
 
-      const cityLabel = new LabelComponent('City:');
-      const cityText = new BaseTextComponent('p', 'profile_page__address', address.city);
-      addressWrapper.node.append(cityLabel.node, cityText.node);
+      addressFields.forEach((field) => {
+        if (field.value) {
+          const label = new LabelComponent(field.label);
+          const text = new BaseTextComponent('p', 'profile_page__address', field.value);
+          addressWrapper.node.append(label.node, text.node);
+        }
+      });
 
-      if (address.state) {
-        const stateLabel = new LabelComponent('State:');
-        const stateText = new BaseTextComponent('p', 'profile_page__address', address.state);
-        addressWrapper.node.append(stateLabel.node, stateText.node);
-      }
-
-      const postalCodeLabel = new LabelComponent('Postal Code:');
-      const postalCodeText = new BaseTextComponent('p', 'profile_page__address', address.postalCode);
-      addressWrapper.node.append(postalCodeLabel.node, postalCodeText.node);
-
-      const countryLabel = new LabelComponent('Country:');
-      const countryText = new BaseTextComponent('p', 'profile_page__address', address.country);
-      addressWrapper.node.append(countryLabel.node, countryText.node);
-
-      addressColumn.node.appendChild(addressWrapper.node);
+      parentNode.node.appendChild(addressWrapper.node);
     });
-
-    contentWrapper.node.append(infoColumn.node, addressColumn.node);
   }
 }
