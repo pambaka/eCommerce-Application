@@ -15,6 +15,8 @@ export default class UserNavigation extends BaseComponent {
 
   logOutButton: ButtonComponent;
 
+  userProfileButton: ButtonComponent;
+
   constructor() {
     super('nav', 'user-nav');
 
@@ -43,6 +45,7 @@ export default class UserNavigation extends BaseComponent {
     this.logOutButton = new ButtonWithSvgIcon(
       'logout-button',
       () => {
+        replaceLocation(Router.pages.main);
         sessionStorage.clear();
         dispatchAuthorizationChangeEvent(false);
         this.updateButtons();
@@ -52,13 +55,25 @@ export default class UserNavigation extends BaseComponent {
       `${userNavIcons}#log-out`,
     );
 
+    this.userProfileButton = new ButtonWithSvgIcon(
+      'user-profile',
+      () => {
+        replaceLocation(Router.pages.profile);
+        dispatchAuthorizationChangeEvent(false);
+        this.updateButtons();
+      },
+      'User profile button',
+      'user profile',
+      `${userNavIcons}#user-profile`,
+    );
+
     this.subscribeToAuthorizationChanges();
   }
 
   renderButtons() {
     // const { hash } = window.location;
 
-    if (isCustomerAuthorized()) this.node.append(this.logOutButton.node);
+    if (isCustomerAuthorized()) this.node.append(this.userProfileButton.node, this.logOutButton.node);
     // else if (hash === Router.pages.login) this.node.append(this.signUpButton.node);
     // else if (hash === Router.pages.registration) this.node.append(this.logInButton.node);
     else this.node.append(this.logInButton.node, this.signUpButton.node);
