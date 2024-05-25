@@ -52,3 +52,31 @@ export interface CardPrice {
   regular: number | undefined;
   discounted: number | undefined;
 }
+
+export interface CustomerIncomeData {
+  id: string;
+  version: number;
+  createdAt: string;
+  lastModifiedAt: string;
+  lastModifiedBy: {
+    clientId: string;
+    isPlatformClient: boolean;
+  };
+  createdBy: {
+    clientId: string;
+    isPlatformClient: boolean;
+  };
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  addresses: Address[];
+  shippingAddressIds: string[];
+  billingAddressIds: string[];
+  isEmailVerified: boolean;
+  stores: string[];
+  authenticationMode: string;
+  dateOfBirth: string;
+  defaultShippingAddressId?: string;
+  defaultBillingAddressId?: string;
+}
