@@ -20,5 +20,5 @@ export default async function getAccessTokenForUserInfo(email: string, password:
   }
 
   const accessToken = data.access_token;
-  localStorage.setItem(TOKEN_STORAGE_KEY, accessToken);
+  sessionStorage.setItem(TOKEN_STORAGE_KEY, accessToken);
 }
