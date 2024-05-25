@@ -5,6 +5,7 @@ import Footer from '../modules/footer/footer';
 import Router from '../services/router';
 import renderLoginPage from '../pages/login/render/render-login';
 import renderRegistration from '../pages/registration/render/render-registration';
+import renderProfilePage from '../pages/profile/render/render-profile';
 import isCustomerAuthorized from '../utils/is-customer-authorized';
 import replaceLocation from '../utils/replace-location';
 import renderCatalog from '../pages/catalog/render/render-catalog';
@@ -61,6 +62,13 @@ export default class App {
         replaceLocation(Router.pages.main);
       }
     });
+    this.router.register(Router.pages.profile, () => {
+      if (isCustomerAuthorized()) {
+        this.renderProfilePage();
+      } else {
+        replaceLocation(Router.pages.login);
+      }
+    });
     // Registration of other routes
   }
 
@@ -87,6 +95,11 @@ export default class App {
   private renderLogInPage() {
     this.contentNode.innerHTML = '';
     this.contentNode.append(renderLoginPage());
+  }
+
+  private renderProfilePage() {
+    this.contentNode.innerHTML = '';
+    this.contentNode.append(renderProfilePage());
   }
 
   render() {
