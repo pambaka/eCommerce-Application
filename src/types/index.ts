@@ -53,6 +53,15 @@ export interface CardPrice {
   discounted: number | undefined;
 }
 
+export interface CustomerIncomeAddress {
+  id?: string;
+  streetName: string;
+  postalCode: string;
+  city: string;
+  country: string;
+  state?: string;
+}
+
 export interface CustomerIncomeData {
   id: string;
   version: number;
@@ -70,7 +79,7 @@ export interface CustomerIncomeData {
   firstName: string;
   lastName: string;
   password: string;
-  addresses: Address[];
+  addresses: CustomerIncomeAddress[];
   shippingAddressIds: string[];
   billingAddressIds: string[];
   isEmailVerified: boolean;
