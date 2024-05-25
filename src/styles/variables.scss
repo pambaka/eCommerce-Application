@@ -1,5 +1,21 @@
+:root {
+  --outer-margin: 40px;
+
+  @media screen and (max-width: 768px) {
+    --outer-margin: 20px;
+  }
+}
+
+$width-tablet-min: 768px;
+
+$outer-margin: 40px;
+
 $color-bg: #d3dfdf;
+$color-bg-light: #e0dcdc;
+$color-bg-dark: #9b9b9b;
 $color-warning: rgb(219, 46, 46);
 $font-size-warning: 14px;
 
-$width-tablet-min: 768px;
+$catalog-card-width: 220px;
+$catalog-gap: 20px;
+$catalog-card-color-accent: #4f6e61;

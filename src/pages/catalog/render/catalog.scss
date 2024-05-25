@@ -1,16 +1,19 @@
 @import '../../../styles/variables.scss';
 
 .catalog-wrapper {
-  padding: 20px 40px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  max-width: 1360px;
+  width: calc(100% - 2 * var(--outer-margin));
+  display: grid;
+  gap: $catalog-gap;
+  margin: 0 auto;
 
-  @media screen and (max-width: $width-tablet-min) {
-    padding: 10px 20px;
+  @for $i from 2 through 6 {
+    @media screen and (min-width: calc($catalog-card-width * $i + $catalog-gap * ($i - 1) + $outer-margin * 2)) {
+      grid-template-columns: repeat($i, 1fr);
+    }
   }
 
-  .catalog--empty {
+  .catalog-error {
     font-size: 20px;
     color: gray;
   }
