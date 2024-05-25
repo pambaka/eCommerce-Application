@@ -35,7 +35,7 @@ export default async function renderCatalog(): Promise<HTMLElement> {
         wrapper.node.append(card.node);
       }
     } else {
-      const p = new BaseTextComponent('p', 'catalog--empty', 'Catalog is empty. There are no products here yet.');
+      const p = new BaseTextComponent('p', 'catalog-error', 'Catalog is empty. There are no products here yet.');
       wrapper.node.append(p.node);
     }
   }
