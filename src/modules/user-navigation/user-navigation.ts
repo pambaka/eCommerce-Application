@@ -47,6 +47,7 @@ export default class UserNavigation extends BaseComponent {
       () => {
         replaceLocation(Router.pages.main);
         sessionStorage.clear();
+        localStorage.clear();
         dispatchAuthorizationChangeEvent(false);
         this.updateButtons();
       },

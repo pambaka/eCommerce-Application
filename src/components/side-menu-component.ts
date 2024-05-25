@@ -32,6 +32,7 @@ export default class SideMenuComponent extends BaseComponent {
       const logoutItem = new NavItemComponent(Router.pages.main, 'Logout');
       logoutItem.node.addEventListener('click', (event) => {
         sessionStorage.clear();
+        localStorage.clear();
         replaceLocation(Router.pages.main);
         dispatchAuthorizationChangeEvent(false);
         toggleFunction(event);
