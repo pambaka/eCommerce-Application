@@ -32,19 +32,26 @@
       border-radius: 16px;
       margin-right: 20px;
       width: 30rem;
+      transition: transform 0.5s ease;
 
-      &.default-shipping {
-        background-color: #f9f8f8;
+      &:hover {
+        transform: scale(1.1);
       }
 
-      &.default-billing {
+      &.default-billing,
+      &.default-shipping {
         background-color: #feba3d;
+        position: relative;
+        z-index: 1;
+      }
+
+      p {
+        cursor: pointer;
       }
 
       .profile_page__address_title {
         white-space: nowrap;
-        position: relative;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
 
         @media (max-width: 600px) {
           font-size: 1rem;
@@ -70,4 +77,14 @@
   height: 1px;
   background-color: #182541;
   margin-top: 10px;
+}
+
+.profile_page__default_label {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30rem;
+  text-align: center;
+  font-style: italic;
 }
