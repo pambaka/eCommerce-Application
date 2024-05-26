@@ -43,6 +43,8 @@
 
       .profile_page__address_title {
         white-space: nowrap;
+        position: relative;
+        margin-bottom: 20px;
 
         @media (max-width: 600px) {
           font-size: 1rem;
@@ -61,12 +63,7 @@
   margin-bottom: 20px;
 }
 
-.profile_page__default_label {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.profile_page__default_label::after {
+.profile_page__address_title::after {
   content: '';
   display: block;
   width: 100%;

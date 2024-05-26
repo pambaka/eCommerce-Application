@@ -2,7 +2,7 @@ import showModal from '../pages/show-modal';
 import Router from '../services/router';
 import { Address, CustomerData } from '../types/index';
 import replaceLocation from '../utils/replace-location';
-import { region, TOKEN_STORAGE_KEY } from './const';
+import { region } from './const';
 import getAccessToken from './get-access-token';
 import { dispatchAuthorizationChangeEvent } from '../utils/authorization-event';
 
@@ -63,7 +63,7 @@ export default async function signUpCustomer(
 
       .then((data) => {
         sessionStorage.setItem('userName', data.customer.firstName);
-        sessionStorage.setItem(TOKEN_STORAGE_KEY, customerAccessToken);
+
         dispatchAuthorizationChangeEvent(true);
       })
 
