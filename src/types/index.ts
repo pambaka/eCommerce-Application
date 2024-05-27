@@ -3,11 +3,14 @@ import { FORM_TYPE } from '../pages/const';
 export type FormType = typeof FORM_TYPE.login | typeof FORM_TYPE.registration;
 
 export interface Address {
+  id?: string;
+  state?: string;
   country: string;
   postalCode: string;
   streetName: string;
   city: string;
 }
+
 export interface CustomerData {
   email: string;
   password: string;
@@ -53,25 +56,18 @@ export interface CardPrice {
   discounted: number | undefined;
 }
 
-export interface CustomerIncomeAddress {
-  id?: string;
-  streetName: string;
-  postalCode: string;
-  city: string;
-  country: string;
-  state?: string;
-}
-
 export interface CustomerIncomeData {
   id: string;
   version: number;
   createdAt: string;
   lastModifiedAt: string;
   lastModifiedBy: {
+    anonymousId: string;
     clientId: string;
     isPlatformClient: boolean;
   };
   createdBy: {
+    anonymousId: string;
     clientId: string;
     isPlatformClient: boolean;
   };
@@ -79,7 +75,7 @@ export interface CustomerIncomeData {
   firstName: string;
   lastName: string;
   password: string;
-  addresses: CustomerIncomeAddress[];
+  addresses: Address[];
   shippingAddressIds: string[];
   billingAddressIds: string[];
   isEmailVerified: boolean;
