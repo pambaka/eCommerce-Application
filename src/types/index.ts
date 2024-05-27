@@ -32,6 +32,7 @@ export interface ProductPrice {
 }
 
 export interface Product {
+  key: string;
   masterData: {
     current: {
       name: {
