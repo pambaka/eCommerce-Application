@@ -1,4 +1,4 @@
-import { region, TOKEN_STORAGE_KEY } from './const';
+import { region } from './const';
 import getCustomerTokens from './get-customer-tokens';
 import replaceLocation from '../utils/replace-location';
 import Router from '../services/router';
@@ -29,7 +29,6 @@ export default async function signInCustomer(email: string, password: string): P
       })
       .then((data) => {
         sessionStorage.setItem('userName', data.customer.firstName);
-        localStorage.setItem(TOKEN_STORAGE_KEY, customerAccessToken);
         dispatchAuthorizationChangeEvent(true);
       })
       .catch((error) => error);

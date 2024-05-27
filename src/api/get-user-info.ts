@@ -1,8 +1,8 @@
 import { CustomerIncomeData } from '../types/index';
-import { TOKEN_STORAGE_KEY, region } from './const';
+import { CUSTOMER_ACCESS_TOKEN, region } from './const';
 
 export default function getUserInfo(): Promise<CustomerIncomeData> {
-  const accessToken = localStorage.getItem(TOKEN_STORAGE_KEY);
+  const accessToken = localStorage.getItem(CUSTOMER_ACCESS_TOKEN);
 
   if (!accessToken) {
     return Promise.reject(new Error('No access token available'));
