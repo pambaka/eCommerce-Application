@@ -1,7 +1,7 @@
 import './product-card.scss';
 import BaseComponent from '../../components/base-component';
 import BaseTextComponent from '../../components/base-text-component';
-import { CardPrice } from '../../types/index';
+import { CardPrice } from '../../types/products';
 
 export default class ProductCard extends BaseComponent {
   constructor(title: string, imageUrl: string, description: string, price: CardPrice) {

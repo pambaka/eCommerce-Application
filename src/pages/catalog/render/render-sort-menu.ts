@@ -1,5 +1,6 @@
 import BaseComponent from '../../../components/base-component';
 import BaseTextComponent from '../../../components/base-text-component';
+import SORTING_OPTION from '../const';
 import showSortedProducts from '../logic/show-sorted-products';
 
 export default function renderSortMenu(parentElement: HTMLElement): void {
@@ -12,7 +13,7 @@ export default function renderSortMenu(parentElement: HTMLElement): void {
   const dropdownText = new BaseTextComponent('p', 'dropdown-text', '');
 
   const dropdownContent = new BaseComponent('div', 'dropdown-content');
-  const options = ['price 0 -> 1', 'price 1 -> 0', 'name A -> Z', 'name Z -> A'];
+  const options = [SORTING_OPTION.priceAsc, SORTING_OPTION.priceDesc, SORTING_OPTION.nameAsc, SORTING_OPTION.nameDesc];
   options.forEach((option) => {
     const element = new BaseTextComponent('p', '', option);
     element.node.addEventListener('click', showSortedProducts);

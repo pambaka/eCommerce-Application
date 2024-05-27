@@ -25,31 +25,3 @@ export interface Token {
   set: (token?: string) => Promise<void>;
   get: () => string | null;
 }
-
-export interface ProductPrice {
-  centAmount: number;
-  currencyCode: string;
-}
-
-export interface Product {
-  key: string;
-  masterData: {
-    current: {
-      name: {
-        'en-US': string;
-      };
-      description: {
-        'en-US': string;
-      };
-      masterVariant: {
-        images: { url: string }[];
-        prices: { value: ProductPrice; discounted?: { value: ProductPrice } }[];
-      };
-    };
-  };
-}
-
-export interface CardPrice {
-  regular: number | undefined;
-  discounted: number | undefined;
-}
