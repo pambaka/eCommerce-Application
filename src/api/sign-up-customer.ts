@@ -65,7 +65,6 @@ export default async function signUpCustomer(
       })
       .then(async (data) => {
         sessionStorage.setItem('userName', data.customer.firstName);
-        dispatchAuthorizationChangeEvent(true);
 
         // Fetch password token and login customer
         const status = await useToken.customer.fetchPasswordToken(email, password);
