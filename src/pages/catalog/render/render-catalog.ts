@@ -5,10 +5,15 @@ import { CardPrice, Product } from '../../../types/index';
 import getProducts from '../../../api/get-products';
 import ProductCard from '../../../modules/product-card/product-card';
 import BaseTextComponent from '../../../components/base-text-component';
+import renderTopSection from './render-top-section';
 import showProduct from '../logic/show-product';
 
 export default async function renderCatalog(): Promise<HTMLElement> {
-  const wrapper = new BaseComponent('div', 'catalog-wrapper');
+  const catalog = new BaseComponent('div', 'catalog');
+
+  renderTopSection(catalog.node);
+
+  const wrapper = new BaseComponent('section', 'products-wrapper');
 
   const token: string | null = useToken.anonymous.access.get();
 
@@ -43,5 +48,7 @@ export default async function renderCatalog(): Promise<HTMLElement> {
     }
   }
 
-  return wrapper.node;
+  catalog.node.append(wrapper.node);
+
+  return catalog.node;
 }
