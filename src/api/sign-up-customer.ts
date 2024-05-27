@@ -5,7 +5,7 @@ import replaceLocation from '../utils/replace-location';
 import { region } from './const';
 import getAccessToken from './get-access-token';
 import { dispatchAuthorizationChangeEvent } from '../utils/authorization-event';
-import useToken from '../services/use-token';
+import getCustomerTokens from './get-customer-tokens';
 import signInCustomer from './sign-in-customer';
 
 export default async function signUpCustomer(
@@ -66,8 +66,8 @@ export default async function signUpCustomer(
         sessionStorage.setItem('userName', data.customer.firstName);
 
         // Fetch password token and login customer
-        const status = await useToken.customer.fetchPasswordToken(email, password);
-        if (status === 200) {
+        const accessToken = await getCustomerTokens(email, password);
+        if (accessToken) {
           dispatchAuthorizationChangeEvent(true);
           signInCustomer(email, password);
         }

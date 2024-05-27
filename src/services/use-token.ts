@@ -1,6 +1,5 @@
 import getAccessToken from '../api/get-access-token';
 import { Token } from '../types/index';
-import fetchPasswordToken from '../api/auth-api';
 import { ANONYMOUS_ACCESS_TOKEN, CUSTOMER_ACCESS_TOKEN, CUSTOMER_REFRESH_TOKEN } from '../api/const';
 
 export default class useToken {
@@ -23,7 +22,6 @@ export default class useToken {
   static customer: {
     access: Token;
     refresh: Token;
-    fetchPasswordToken: (email: string, password: string) => Promise<number>;
   } = {
     access: {
       set: async (token?: string) => {
@@ -45,8 +43,8 @@ export default class useToken {
       },
       get: () => localStorage.getItem(CUSTOMER_REFRESH_TOKEN),
     },
-    fetchPasswordToken,
   };
+
   // static customer: {
   //   access: Token;
   //   refresh: Token;
