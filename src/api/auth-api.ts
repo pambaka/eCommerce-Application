@@ -1,13 +1,13 @@
-import apiDataAdmin from './apiData';
 import useToken from '../services/use-token';
+import { region, oauth } from './const';
 
 export default async function fetchPasswordToken(email: string, password: string): Promise<number> {
-  const url = `${apiDataAdmin.AUTH_URL}/oauth/${apiDataAdmin.PROJECT_KEY}/customers/token?grant_type=password&username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+  const url = `https://auth.${region}.${oauth}/keep-calm-and-code/customers/token?grant_type=password&username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
   try {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        Authorization: `Basic ${btoa(`${apiDataAdmin.CLIENT_ID}:${apiDataAdmin.CLIENT_SECRET}`)}`,
+        Authorization: `Basic ${btoa(`${process.env.client_id}:${process.env.secret}`)}`,
       },
     });
 

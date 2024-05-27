@@ -1,6 +1,5 @@
 import { CustomerIncomeData } from '../types/index';
-import apiDataAdmin from './apiData';
-import { TOKEN_STORAGE_KEY } from './const';
+import { TOKEN_STORAGE_KEY, region } from './const';
 
 export default function getUserInfo(): Promise<CustomerIncomeData> {
   const accessToken = localStorage.getItem(TOKEN_STORAGE_KEY);
@@ -9,7 +8,7 @@ export default function getUserInfo(): Promise<CustomerIncomeData> {
     return Promise.reject(new Error('No access token available'));
   }
 
-  const url = `${apiDataAdmin.API_URL}/${apiDataAdmin.PROJECT_KEY}/me`;
+  const url = `https://api.${region}.commercetools.com/${process.env.project_key}/me`;
 
   return fetch(url, {
     method: 'GET',

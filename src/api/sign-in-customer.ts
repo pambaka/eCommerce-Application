@@ -3,13 +3,12 @@ import getCustomerTokens from './get-customer-tokens';
 import replaceLocation from '../utils/replace-location';
 import Router from '../services/router';
 import { dispatchAuthorizationChangeEvent } from '../utils/authorization-event';
-import apiDataAdmin from './apiData';
 
 export default async function signInCustomer(email: string, password: string): Promise<void> {
   const customerAccessToken: string | undefined = await getCustomerTokens(email, password);
 
   if (customerAccessToken) {
-    await fetch(`https://api.${region}.commercetools.com/${apiDataAdmin.PROJECT_KEY}/login`, {
+    await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/login`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${customerAccessToken}`,

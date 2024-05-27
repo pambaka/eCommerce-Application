@@ -5,7 +5,6 @@ import replaceLocation from '../utils/replace-location';
 import { region } from './const';
 import getAccessToken from './get-access-token';
 import { dispatchAuthorizationChangeEvent } from '../utils/authorization-event';
-import apiDataAdmin from './apiData';
 import useToken from '../services/use-token';
 import signInCustomer from './sign-in-customer';
 
@@ -37,7 +36,7 @@ export default async function signUpCustomer(
   if (isDefaultBilling) customerData.defaultBillingAddress = 1;
 
   if (customerAccessToken) {
-    await fetch(`https://api.${region}.commercetools.com/${apiDataAdmin.PROJECT_KEY}/customers`, {
+    await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/customers`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${customerAccessToken}`,
