@@ -4,8 +4,6 @@ import { Address, CustomerData } from '../types/index';
 import replaceLocation from '../utils/replace-location';
 import { region } from './const';
 import getAccessToken from './get-access-token';
-import { dispatchAuthorizationChangeEvent } from '../utils/authorization-event';
-import getCustomerTokens from './get-customer-tokens';
 import signInCustomer from './sign-in-customer';
 
 export default async function signUpCustomer(
@@ -64,13 +62,7 @@ export default async function signUpCustomer(
       })
       .then(async (data) => {
         sessionStorage.setItem('userName', data.customer.firstName);
-
-        // Fetch password token and login customer
-        const accessToken = await getCustomerTokens(email, password);
-        if (accessToken) {
-          dispatchAuthorizationChangeEvent(true);
-          signInCustomer(email, password);
-        }
+        signInCustomer(email, password);
       })
       .catch((error) => error);
   }
