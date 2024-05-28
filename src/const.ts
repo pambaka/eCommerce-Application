@@ -15,6 +15,7 @@ export const CLASS_NAMES = {
   country: 'registration__country',
   registrationButton: 'registration__submit',
   shippingAddress: 'registration__shipping-address',
+  productsWrapper: 'products-wrapper',
 } as const;
 
 export const ID_NAMES = {

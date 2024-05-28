@@ -1,4 +1,4 @@
-import { Product } from '../types/index';
+import { Product } from '../types/products';
 import { region } from './const';
 
 export default async function getProductByKey(key: string, accessToken: string): Promise<Product | undefined> {

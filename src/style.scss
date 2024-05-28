@@ -148,17 +148,3 @@ a {
 .hidden {
   display: none;
 }
-
-@media (max-width: 768px) {
-  html,
-  body {
-    font-size: 0.7rem;
-  }
-}
-
-@media (max-width: 450px) {
-  html,
-  body {
-    font-size: 0.5rem;
-  }
-}
