@@ -154,5 +154,10 @@
   position: absolute;
 }
 
+.edit-button,
+.save-button {
+  background-color: transparent;
+}
+
 $color-warning: rgb(219, 46, 46);
 $font-size-warning: 14px;
