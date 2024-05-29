@@ -1,9 +1,6 @@
 import getAccessToken from '../api/get-access-token';
 import { Token } from '../types/index';
-
-const ANONYMOUS_ACCESS_TOKEN = 'anonymousAccessToken' as const;
-// const CUSTOMER_ACCESS_TOKEN = 'customerAccessToken' as const;
-// const CUSTOMER_REFRESH_TOKEN = 'customerRefreshToken' as const;
+import { ANONYMOUS_ACCESS_TOKEN, CUSTOMER_ACCESS_TOKEN, CUSTOMER_REFRESH_TOKEN } from '../api/const';
 
 export default class useToken {
   static anonymous: {
@@ -11,28 +8,52 @@ export default class useToken {
   } = {
     access: {
       set: async () => {
-        const token = await getAccessToken();
-        if (token) localStorage.setItem(ANONYMOUS_ACCESS_TOKEN, token);
+        try {
+          const token = await getAccessToken();
+          if (token) localStorage.setItem(ANONYMOUS_ACCESS_TOKEN, token);
+        } catch (error) {
+          console.error('Error setting anonymous access token:', error);
+        }
       },
       get: () => localStorage.getItem(ANONYMOUS_ACCESS_TOKEN),
     },
   };
 
-  // static customer: {
-  //   access: Token;
-  //   refresh: Token;
-  // } = {
-  //   access: {
-  //     set: async (accessToken) => {
-  //       if (accessToken) localStorage.setItem(CUSTOMER_ACCESS_TOKEN, accessToken);
-  //     },
-  //     get: () => localStorage.getItem(CUSTOMER_ACCESS_TOKEN),
-  //   },
-  //   refresh: {
-  //     set: async (accessToken) => {
-  //       if (accessToken) localStorage.setItem(CUSTOMER_REFRESH_TOKEN, accessToken);
-  //     },
-  //     get: () => localStorage.getItem(CUSTOMER_REFRESH_TOKEN),
-  //   },
-  // };
+  static customer: {
+    access: Token;
+    refresh: Token;
+  } = {
+    access: {
+      set: async (token?: string) => {
+        try {
+          if (token) localStorage.setItem(CUSTOMER_ACCESS_TOKEN, token);
+        } catch (error) {
+          console.error('Error setting customer access token:', error);
+        }
+      },
+      get: () => {
+        const token = localStorage.getItem(CUSTOMER_ACCESS_TOKEN);
+        if (!token) {
+          console.error('Customer access token is missing or invalid.');
+        }
+        return token;
+      },
+    },
+    refresh: {
+      set: async (token?: string) => {
+        try {
+          if (token) localStorage.setItem(CUSTOMER_REFRESH_TOKEN, token);
+        } catch (error) {
+          console.error('Error setting customer refresh token:', error);
+        }
+      },
+      get: () => {
+        const token = localStorage.getItem(CUSTOMER_REFRESH_TOKEN);
+        if (!token) {
+          console.error('Customer refresh token is missing or invalid.');
+        }
+        return token;
+      },
+    },
+  };
 }

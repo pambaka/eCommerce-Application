@@ -4,7 +4,7 @@ import { Address, CustomerData } from '../types/index';
 import replaceLocation from '../utils/replace-location';
 import { region } from './const';
 import getAccessToken from './get-access-token';
-import { dispatchAuthorizationChangeEvent } from '../utils/authorization-event';
+import signInCustomer from './sign-in-customer';
 
 export default async function signUpCustomer(
   email: string,
@@ -60,12 +60,10 @@ export default async function signUpCustomer(
         }
         return res.json();
       })
-
-      .then((data) => {
+      .then(async (data) => {
         sessionStorage.setItem('userName', data.customer.firstName);
-        dispatchAuthorizationChangeEvent(true);
+        signInCustomer(email, password);
       })
-
       .catch((error) => error);
   }
 }
