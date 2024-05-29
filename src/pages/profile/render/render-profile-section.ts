@@ -1,5 +1,5 @@
 import BaseComponent from '../../../components/base-component';
-import createAddressProfileSection from '../../../modules/adress-profile-section.ts/create-adress-profile-section';
+import createAddressProfileSection from '../../../modules/address-profile-section/create-adress-profile-section';
 import { CustomerIncomeData } from '../../../types/index';
 import createEditableField from '../../../modules/editable-field/create-editable-field';
 import makeFieldEditable from '../../../modules/editable-field/make-editable-field';
@@ -103,7 +103,7 @@ export default function renderProfileSectionContent(userInfo: CustomerIncomeData
   );
 
   userInfo.addresses.forEach((address, index) => {
-    addressColumn.node.appendChild(createAddressProfileSection(address, index, userInfo));
+    addressColumn.node.appendChild(createAddressProfileSection(address, index, updatedUserInfo));
   });
 
   const addNewAddressButton = new ButtonComponent(
