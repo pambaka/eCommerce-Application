@@ -1,81 +1,121 @@
 import BaseComponent from '../../../components/base-component';
-import BaseTextComponent from '../../../components/base-text-component';
-import LabelComponent from '../../../components/label-component';
+import createAddressProfileSection from '../../../modules/adress-profile-section.ts/create-adress-profile-section';
 import { CustomerIncomeData } from '../../../types/index';
+import createEditableField from '../../../modules/editable-field/create-editable-field';
+import makeFieldEditable from '../../../modules/editable-field/make-editable-field';
+import ButtonComponent from '../../../components/button-component';
+import { CLASS_NAMES, ID_NAMES } from '../../../const';
 
 export default function renderProfileSectionContent(userInfo: CustomerIncomeData, parentNode: HTMLElement) {
-  const contentWrapper = new BaseComponent('div', 'profile_page__content_wrapper');
+  const contentWrapper = new BaseComponent('div', CLASS_NAMES.profileContentWrapper);
   parentNode.appendChild(contentWrapper.node);
 
-  const infoColumn = new BaseComponent('div', 'profile_page__info_column');
-  const addressColumn = new BaseComponent('div', 'profile_page__address_column');
+  const infoColumn = new BaseComponent('div', CLASS_NAMES.profileInfoColumn);
+  const addressColumn = new BaseComponent('div', CLASS_NAMES.profileAddressColumn);
 
-  // Read-only fields
-  const nameLabel = new LabelComponent('Name:');
-  const nameText = new BaseTextComponent('p', 'profile_page__info', userInfo.firstName);
-  infoColumn.node.append(nameLabel.node, nameText.node);
+  const updatedUserInfo = { ...userInfo };
 
-  const surnameLabel = new LabelComponent('Surname:');
-  const surnameText = new BaseTextComponent('p', 'profile_page__info', userInfo.lastName);
-  infoColumn.node.append(surnameLabel.node, surnameText.node);
+  infoColumn.node.append(
+    createEditableField(
+      'First name:',
+      userInfo.firstName,
+      ID_NAMES.customerName,
+      (event) => {
+        const target = event.currentTarget as HTMLElement;
+        makeFieldEditable(
+          target.parentNode as HTMLElement,
+          'First name:',
+          userInfo.firstName,
+          ID_NAMES.customerName,
+          (newValue) => {
+            updatedUserInfo.firstName = newValue;
+          },
+          CLASS_NAMES.profileEditableField,
+          CLASS_NAMES.profileInput,
+        );
+      },
+      CLASS_NAMES.profileEditableField,
+      CLASS_NAMES.profileInput,
+    ),
+    createEditableField(
+      'Last name:',
+      userInfo.lastName,
+      ID_NAMES.customerSurname,
+      (event) => {
+        const target = event.currentTarget as HTMLElement;
+        makeFieldEditable(
+          target.parentNode as HTMLElement,
+          'Last name:',
+          userInfo.lastName,
+          ID_NAMES.customerSurname,
+          (newValue) => {
+            updatedUserInfo.lastName = newValue;
+          },
+          CLASS_NAMES.profileEditableField,
+          CLASS_NAMES.profileInput,
+        );
+      },
+      CLASS_NAMES.profileEditableField,
+      CLASS_NAMES.profileInput,
+    ),
+    createEditableField(
+      'Date of Birth:',
+      userInfo.dateOfBirth,
+      ID_NAMES.customerDob,
+      (event) => {
+        const target = event.currentTarget as HTMLElement;
+        makeFieldEditable(
+          target.parentNode as HTMLElement,
+          'Date of Birth:',
+          userInfo.dateOfBirth,
+          ID_NAMES.customerDob,
+          (newValue) => {
+            updatedUserInfo.dateOfBirth = newValue;
+          },
+          CLASS_NAMES.profileEditableField,
+          CLASS_NAMES.profileInput,
+        );
+      },
+      CLASS_NAMES.profileEditableField,
+      CLASS_NAMES.profileInput,
+    ),
+    createEditableField(
+      'Email:',
+      userInfo.email,
+      ID_NAMES.customerEmail,
+      (event) => {
+        const target = event.currentTarget as HTMLElement;
+        makeFieldEditable(
+          target.parentNode as HTMLElement,
+          'Email:',
+          userInfo.email,
+          ID_NAMES.customerEmail,
+          (newValue) => {
+            updatedUserInfo.email = newValue;
+          },
+          CLASS_NAMES.profileEditableField,
+          CLASS_NAMES.profileInput,
+        );
+      },
+      CLASS_NAMES.profileEditableField,
+      CLASS_NAMES.profileInput,
+    ),
+  );
 
-  const dobLabel = new LabelComponent('Date of Birth:');
-  const dobText = new BaseTextComponent('p', 'profile_page__info', userInfo.dateOfBirth);
-  infoColumn.node.append(dobLabel.node, dobText.node);
-
-  const emailLabel = new LabelComponent('Email:');
-  const emailText = new BaseTextComponent('p', 'profile_page__info', userInfo.email);
-  infoColumn.node.append(emailLabel.node, emailText.node);
-
-  // Read-only addresses
   userInfo.addresses.forEach((address, index) => {
-    const addressWrapper = new BaseComponent('div', 'profile_page__address_wrapper');
-    let addressTitleText = `Address ${index + 1}`;
-
-    if (userInfo?.shippingAddressIds.includes(address?.id ?? '')) {
-      addressTitleText = 'Shipping Address';
-    } else if (userInfo?.billingAddressIds.includes(address?.id ?? '')) {
-      addressTitleText = 'Billing Address';
-    }
-
-    const addressTitle = new BaseTextComponent('h3', 'profile_page__address_title', addressTitleText);
-    addressWrapper.node.appendChild(addressTitle.node);
-
-    if (userInfo?.defaultShippingAddressId === address.id) {
-      addressWrapper.node.classList.add('default-shipping');
-      const defaultShippingLabel = new BaseTextComponent('p', 'profile_page__default_label', 'Default');
-      addressWrapper.node.appendChild(defaultShippingLabel.node);
-    }
-    if (userInfo?.defaultBillingAddressId === address.id) {
-      addressWrapper.node.classList.add('default-billing');
-      const defaultBillingLabel = new BaseTextComponent('p', 'profile_page__default_label', 'Default');
-      addressWrapper.node.appendChild(defaultBillingLabel.node);
-    }
-
-    const streetLabel = new LabelComponent('Street:');
-    const streetText = new BaseTextComponent('p', 'profile_page__address', address.streetName);
-    addressWrapper.node.append(streetLabel.node, streetText.node);
-
-    const cityLabel = new LabelComponent('City:');
-    const cityText = new BaseTextComponent('p', 'profile_page__address', address.city);
-    addressWrapper.node.append(cityLabel.node, cityText.node);
-
-    if (address.state) {
-      const stateLabel = new LabelComponent('State:');
-      const stateText = new BaseTextComponent('p', 'profile_page__address', address.state);
-      addressWrapper.node.append(stateLabel.node, stateText.node);
-    }
-
-    const postalCodeLabel = new LabelComponent('Postal Code:');
-    const postalCodeText = new BaseTextComponent('p', 'profile_page__address', address.postalCode);
-    addressWrapper.node.append(postalCodeLabel.node, postalCodeText.node);
-
-    const countryLabel = new LabelComponent('Country:');
-    const countryText = new BaseTextComponent('p', 'profile_page__address', address.country);
-    addressWrapper.node.append(countryLabel.node, countryText.node);
-
-    addressColumn.node.appendChild(addressWrapper.node);
+    addressColumn.node.appendChild(createAddressProfileSection(address, index, userInfo));
   });
 
-  contentWrapper.node.append(infoColumn.node, addressColumn.node);
+  const addNewAddressButton = new ButtonComponent(
+    'button',
+    (event) => {
+      event.stopPropagation();
+    },
+    'Add new address',
+    false,
+  );
+
+  addNewAddressButton.node.classList.add(CLASS_NAMES.profileAddAddressButton);
+
+  contentWrapper.node.append(infoColumn.node, addressColumn.node, addNewAddressButton.node);
 }

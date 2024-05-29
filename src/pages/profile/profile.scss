@@ -1,12 +1,9 @@
 .profile_page__content_wrapper {
-  display: flex;
-  justify-content: space-between;
   font-size: 1rem;
-  max-width: 65%;
-  min-width: 40%;
+  padding: 0 20px;
 
-  @media (max-width: 600px) {
-    max-width: 70%;
+  .profile_page__add_address_button {
+    margin: 0 auto;
   }
 
   .profile_page__info_column,
@@ -16,14 +13,22 @@
   }
 
   .profile_page__info_column {
-    width: 40%;
+    display: flex;
+    gap: 20px;
     text-align: left;
+    flex-wrap: nowrap;
+    margin-bottom: 40px;
+
+    @media (max-width: 960px) {
+      display: block;
+    }
   }
 
   .profile_page__address_column {
-    max-width: 60%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 
     .profile_page__address_wrapper {
       padding: 10px;
@@ -31,8 +36,12 @@
       box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
       border-radius: 16px;
       margin-right: 20px;
-      width: 30rem;
       transition: transform 0.5s ease;
+      background-color: #f9f8f8;
+
+      .profile_page__address {
+        display: block;
+      }
 
       &:hover {
         transform: scale(1.1);
@@ -45,7 +54,7 @@
         z-index: 1;
       }
 
-      p {
+      span {
         cursor: pointer;
       }
 
@@ -66,10 +75,6 @@
   font-weight: bold;
 }
 
-.profile_page__info {
-  margin-bottom: 20px;
-}
-
 .profile_page__address_title::after {
   content: '';
   display: block;
@@ -88,3 +93,66 @@
   text-align: center;
   font-style: italic;
 }
+
+.edit-button,
+.save-button {
+  box-sizing: content-box;
+  padding: 4px;
+  background-color: #e0dcdc;
+  color: #323232;
+  border-radius: 4px;
+  transition: 0.2s;
+
+  svg {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-content: center;
+  }
+}
+
+.profile_page__editable_field {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+
+  @media (max-width: 960px) {
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 960px) {
+  .profile_page__editable_field label,
+  .profile_page__editable_field .profile_page__input,
+  .profile_page__editable_field input {
+    margin-right: 10px;
+  }
+
+  .profile_page__editable_field .edit-button {
+    margin-left: auto;
+  }
+
+  .profile_page__editable_field input {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.profile_page__editable_field[data-warning]::after {
+  content: attr(data-warning);
+  display: block;
+  color: rgb(219, 46, 46);
+  font-style: italic;
+  font-size: 14px;
+  line-height: calc(14px + 2px);
+  height: calc((14px + 2px) * 2);
+  margin-top: 5px;
+  bottom: -30px;
+  left: 0;
+  position: absolute;
+}
+
+$color-warning: rgb(219, 46, 46);
+$font-size-warning: 14px;

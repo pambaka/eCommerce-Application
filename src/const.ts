@@ -16,12 +16,22 @@ export const CLASS_NAMES = {
   registrationButton: 'registration__submit',
   shippingAddress: 'registration__shipping-address',
   productsWrapper: 'products-wrapper',
+  profileContentWrapper: 'profile_page__content_wrapper',
+  profileInfoColumn: 'profile_page__info_column',
+  profileAddressColumn: 'profile_page__address_column',
+  profileEditableField: 'profile_page__editable_field',
+  profileInput: 'profile_page__input',
+  profileAddAddressButton: 'profile_page__add_address_button',
 } as const;
 
 export const ID_NAMES = {
   defaultShipping: 'default-shipping',
   useForBilling: 'use-for-billing',
   defaultBilling: 'default-billing',
+  customerName: 'customer-name',
+  customerSurname: 'customer-surname',
+  customerDob: 'customer-dob',
+  customerEmail: 'customer-email',
 };
 
 class Dom<T extends HTMLElement> {

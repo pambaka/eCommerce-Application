@@ -140,10 +140,6 @@ a {
     filter: saturate(75%);
     background-color: $color-bg3;
   }
-
-  &:hover {
-    pointer-events: none;
-  }
 }
 
 .hidden {
