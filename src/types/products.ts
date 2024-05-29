@@ -1,3 +1,5 @@
+import LANGUAGE from './const';
+
 export interface ProductPrice {
   centAmount: number;
   currencyCode: string;
@@ -10,10 +12,10 @@ export interface MasterVariant {
 
 export interface ProductData {
   name: {
-    'en-US': string;
+    [LANGUAGE]: string;
   };
   description: {
-    'en-US': string;
+    [LANGUAGE]: string;
   };
   masterVariant: MasterVariant;
 }
