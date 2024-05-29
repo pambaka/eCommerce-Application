@@ -1,7 +1,7 @@
 import './product-card.scss';
 import BaseComponent from '../../components/base-component';
 import BaseTextComponent from '../../components/base-text-component';
-import { CardPrice } from '../../types/index';
+import { CardPrice } from '../../types/products';
 
 export default class ProductCard extends BaseComponent {
   constructor(title: string, imageUrl: string, description: string, price: CardPrice) {
@@ -34,13 +34,13 @@ export default class ProductCard extends BaseComponent {
 
   private addPrices(price: CardPrice) {
     const prices = new BaseComponent('div', 'card__prices');
-    const priceWrapper = new BaseTextComponent('p', 'price--regular', `€ ${String(price.regular)}`);
+    const priceWrapper = new BaseTextComponent('p', 'price', `€ ${price.regular}`);
     prices.node.append(priceWrapper.node);
 
     if (price.discounted) {
       priceWrapper.node.classList.add('price--old');
 
-      const discountedPriceWrapper = new BaseTextComponent('p', 'price--discount', `€ ${String(price.discounted)}`);
+      const discountedPriceWrapper = new BaseTextComponent('p', 'price', `€ ${price.discounted}`);
       prices.node.append(discountedPriceWrapper.node);
     }
 

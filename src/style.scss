@@ -37,6 +37,10 @@ body {
     }
   }
 
+  header {
+    z-index: 1;
+  }
+
   main {
     flex-grow: 1;
     padding: 40px 0;
@@ -144,18 +148,4 @@ a {
 
 .hidden {
   display: none;
-}
-
-@media (max-width: 768px) {
-  html,
-  body {
-    font-size: 0.7rem;
-  }
-}
-
-@media (max-width: 450px) {
-  html,
-  body {
-    font-size: 0.5rem;
-  }
 }
