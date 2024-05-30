@@ -9,6 +9,7 @@ import renderProfilePage from '../pages/profile/render/render-profile';
 import isCustomerAuthorized from '../utils/is-customer-authorized';
 import replaceLocation from '../utils/replace-location';
 import renderCatalog from '../pages/catalog/render/render-catalog';
+import renderProduct from '../pages/product/render/render-product';
 
 export default class App {
   private header: Header;
@@ -34,8 +35,9 @@ export default class App {
   }
 
   init() {
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       this.setupInitialLayout();
+      await this.registerProductRoutes();
       this.render();
     });
   }
@@ -70,6 +72,17 @@ export default class App {
       }
     });
     // Registration of other routes
+  }
+
+  private async registerProductRoutes() {
+    await Router.addProductPages();
+
+    Object.keys(Router.productPages).forEach((key) => {
+      this.router.register(Router.productPages[key], () => {
+        this.contentNode.innerHTML = '';
+        renderProduct(key);
+      });
+    });
   }
 
   private renderMainPage() {
