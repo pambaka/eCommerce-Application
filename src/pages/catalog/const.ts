@@ -13,3 +13,9 @@ export const SORTING_ORDER = {
   [SORTING_OPTION.priceAsc]: 'price asc',
   [SORTING_OPTION.priceDesc]: 'price desc',
 };
+
+export const PRODUCT_COLORS = ['blue', 'green'];
+
+export const CATEGORIES: { [key: string]: string } = {
+  elephants: 'df56876c-9e34-4964-9d57-b1d0ebaea778',
+};

@@ -18,6 +18,8 @@ export const CLASS_NAMES = {
   dropdownText: 'dropdown-text',
   productsWrapper: 'products-wrapper',
   searchInput: 'search-input',
+  filterCategory: 'filter-category',
+  filterColor: 'filter-color',
 } as const;
 
 export const ID_NAMES = {
