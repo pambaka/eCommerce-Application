@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 50px;
+  gap: 7%;
   margin: 0 var(--outer-margin);
   padding: 20px;
   box-shadow: 0px 0px 5px #9b9b9b;
@@ -26,6 +26,7 @@
   height: 600px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .image-row {
@@ -36,14 +37,18 @@
   .small-image-wrapper {
     margin: 3px;
     width: 125px;
+    height: 125px;
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: #ffffff;
     border: 1px solid #9f9f9f;
 
     .product__small-image {
       max-width: 100%;
       height: auto;
+      max-height: 100%;
+      object-fit: contain;
     }
   }
 }
@@ -52,6 +57,9 @@
   max-width: 100%;
   height: auto;
   min-width: 500px;
+
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .product-info {
@@ -59,14 +67,35 @@
   flex-direction: column;
   gap: 40px;
   max-width: 50%;
-  min-width: 25%;
+  min-width: 30%;
+  border-radius: 10px;
+  border: 1px solid #c7c6c7;
+  padding: 15px;
+
+  .product__description {
+    flex-grow: 1;
+  }
+
+  .price-wrapper {
+    text-align: right;
+  }
+
+  .old-price {
+    text-decoration: line-through;
+    font-weight: 400;
+    color: #7e7e7e;
+    margin-right: 10px;
+    font-size: 22px;
+  }
+
+  .price {
+    font-weight: 700;
+    color: #4f6e61;
+    font-size: 22px;
+  }
 }
 
 @media screen and (max-width: 1200px) {
-  .product-wrapper {
-    justify-content: space-between;
-  }
-
   .images-wrapper {
     min-width: 500px;
   }
@@ -78,9 +107,9 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .product-wrapper {
-    gap: 30px;
-  }
+  // .product-wrapper {
+  //   gap: 30px;
+  // }
 
   .images-wrapper {
     min-width: 400px;
@@ -118,6 +147,7 @@
     .small-image-wrapper {
       margin: 3px;
       width: 100px;
+      height: 100px;
     }
   }
 }
@@ -130,11 +160,10 @@
 
   .images-wrapper {
     margin: 0 auto;
-    min-width: 90%;
+    min-width: 100%;
   }
 
   .main-image-wrapper {
-    width: 350px;
     margin: 0 auto;
   }
 
@@ -145,13 +174,14 @@
   }
 
   .product-info {
-    max-width: 95%;
+    max-width: 100%;
   }
 }
 
 @media screen and (max-width: 535px) {
   .main-image-wrapper {
     width: 250px;
+    height: 250px;
   }
 
   .product__image {
