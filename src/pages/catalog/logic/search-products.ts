@@ -8,8 +8,8 @@ import { Product, ProductProjection } from '../../../types/products';
 import { SORTING_ORDER } from '../const';
 import createCard from '../render/create-card';
 
-export default async function searchProducts(event: Event) {
-  event.preventDefault();
+export default async function searchProducts(event?: Event) {
+  event?.preventDefault();
 
   const input = DOM.elements[CLASS_NAMES.searchInput] as HTMLInputElement;
 
