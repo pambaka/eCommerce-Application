@@ -1,5 +1,5 @@
 import { CLASS_NAMES, DOM } from '../../../const';
-import { CATEGORIES } from '../const';
+import { CATEGORIES, QUERY_BASE } from '../const';
 
 export default function getCategoryFilterQuery(): string | undefined {
   const categoryWrapper = DOM.elements[CLASS_NAMES.filterCategory];
@@ -14,7 +14,7 @@ export default function getCategoryFilterQuery(): string | undefined {
       if (categories[i].value) array.push(`"${CATEGORIES[categories[i].value]}"`);
     }
 
-    queryCategory = `filter.query=categories.id:${array.join(',')}`;
+    queryCategory = `${QUERY_BASE.category}:${array.join(',')}`;
   }
 
   return queryCategory;

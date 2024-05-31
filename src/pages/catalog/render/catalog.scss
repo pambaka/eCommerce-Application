@@ -48,14 +48,37 @@
       .filter-color,
       .filter-category {
         width: 100%;
-        font-size: 20px;
-      }
-
-      .filter-color,
-      .filter-category {
         display: flex;
         flex-direction: column;
         gap: 5px;
+        font-size: 20px;
+      }
+
+      .filter-price {
+        span {
+          font-size: 16px;
+          color: gray;
+        }
+
+        div {
+          position: relative;
+          display: flex;
+          gap: 5px;
+
+          label {
+            position: absolute;
+            left: 5px;
+            color: gray;
+            width: 60px;
+          }
+        }
+
+        input {
+          width: 100%;
+          padding-left: 60px;
+          padding-right: 5px;
+          background-color: #e9e6e6;
+        }
       }
     }
 

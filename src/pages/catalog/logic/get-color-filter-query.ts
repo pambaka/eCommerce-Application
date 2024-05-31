@@ -1,4 +1,5 @@
 import { CLASS_NAMES, DOM } from '../../../const';
+import { QUERY_BASE } from '../const';
 
 export default function getColorFilterQuery(): string | undefined {
   const colorFilter = DOM.elements[CLASS_NAMES.filterColor];
@@ -13,7 +14,7 @@ export default function getColorFilterQuery(): string | undefined {
       if (colors[i].value) array.push(`"${colors[i].value}"`);
     }
 
-    queryColor = `filter.query=variants.attributes.color.key:${array.join(',')}`;
+    queryColor = `${QUERY_BASE.color}:${array.join(',')}`;
   }
 
   return queryColor;
