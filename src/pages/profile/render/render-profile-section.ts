@@ -1,8 +1,8 @@
 import BaseComponent from '../../../components/base-component';
-import createAddressProfileSection from '../../../modules/address-profile-section/create-adress-profile-section';
-import { CustomerIncomeData } from '../../../types/index';
-import createEditableField from '../../../modules/editable-field/create-editable-field';
-import makeFieldEditable from '../../../modules/editable-field/make-editable-field';
+import AddressSectionComponent from '../../../modules/address-module';
+import { CustomerIncomeData, Address } from '../../../types/index';
+import createEditableField from './editable-field/create-editable-field';
+import makeFieldEditable from './editable-field/make-editable-field';
 import ButtonComponent from '../../../components/button-component';
 import { CLASS_NAMES, ID_NAMES } from '../../../const';
 
@@ -103,13 +103,30 @@ export default function renderProfileSectionContent(userInfo: CustomerIncomeData
   );
 
   userInfo.addresses.forEach((address, index) => {
-    addressColumn.node.appendChild(createAddressProfileSection(address, index, updatedUserInfo));
+    const addressSection = new AddressSectionComponent(address, index, updatedUserInfo);
+    addressColumn.node.appendChild(addressSection.node);
   });
 
   const addNewAddressButton = new ButtonComponent(
     'button',
     (event) => {
       event.stopPropagation();
+      const newAddress: Address = {
+        id: `new-${Date.now()}`,
+        streetName: '',
+        city: '',
+        state: '',
+        postalCode: '',
+        country: '',
+      };
+      updatedUserInfo.addresses.push(newAddress);
+      const newAddressSection = new AddressSectionComponent(
+        newAddress,
+        updatedUserInfo.addresses.length - 1,
+        updatedUserInfo,
+        true,
+      );
+      addressColumn.node.appendChild(newAddressSection.node);
     },
     'Add new address',
     false,

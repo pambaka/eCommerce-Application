@@ -1,8 +1,8 @@
-import BaseComponent from '../../components/base-component';
-import BaseTextComponent from '../../components/base-text-component';
-import LabelComponent from '../../components/label-component';
-import ButtonWithSvgIcon from '../../components/button-with-svg-icon';
-import editIcon from '../../assets/edit-icons-sprite.svg';
+import BaseComponent from '../../../../components/base-component';
+import BaseTextComponent from '../../../../components/base-text-component';
+import LabelComponent from '../../../../components/label-component';
+import ButtonWithSvgIcon from '../../../../components/button-with-svg-icon';
+import editIcon from '../../../../assets/edit-icons-sprite.svg';
 
 export default function createEditableField(
   labelText: string,
