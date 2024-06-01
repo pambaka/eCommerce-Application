@@ -1,81 +1,109 @@
 import BaseComponent from '../../../components/base-component';
-import BaseTextComponent from '../../../components/base-text-component';
-import LabelComponent from '../../../components/label-component';
-import { CustomerIncomeData } from '../../../types/index';
+import AddressSectionComponent from '../../../modules/address-module';
+import { CustomerIncomeData, Address } from '../../../types/index';
+import createEditableFieldWithHandler from './editable-field/create-editable-field-with-handler';
+import ButtonComponent from '../../../components/button-component';
+import { CLASS_NAMES, ID_NAMES } from '../../../const';
+import updateAddNewAddressButtonState from './editable-field/update-new-address-button';
 
 export default function renderProfileSectionContent(userInfo: CustomerIncomeData, parentNode: HTMLElement) {
-  const contentWrapper = new BaseComponent('div', 'profile_page__content_wrapper');
+  const contentWrapper = new BaseComponent('div', CLASS_NAMES.profileContentWrapper);
   parentNode.appendChild(contentWrapper.node);
 
-  const infoColumn = new BaseComponent('div', 'profile_page__info_column');
-  const addressColumn = new BaseComponent('div', 'profile_page__address_column');
+  const infoColumn = new BaseComponent('div', CLASS_NAMES.profileInfoColumn);
+  const addressColumn = new BaseComponent('div', CLASS_NAMES.profileAddressColumn);
 
-  // Read-only fields
-  const nameLabel = new LabelComponent('Name:');
-  const nameText = new BaseTextComponent('p', 'profile_page__info', userInfo.firstName);
-  infoColumn.node.append(nameLabel.node, nameText.node);
+  const updatedUserInfo = { ...userInfo };
 
-  const surnameLabel = new LabelComponent('Surname:');
-  const surnameText = new BaseTextComponent('p', 'profile_page__info', userInfo.lastName);
-  infoColumn.node.append(surnameLabel.node, surnameText.node);
+  const firstNameField = createEditableFieldWithHandler(
+    'First name:',
+    userInfo.firstName,
+    ID_NAMES.customerName,
+    (newValue) => {
+      updatedUserInfo.firstName = newValue;
+    },
+    CLASS_NAMES.profileEditableField,
+    CLASS_NAMES.profileInput,
+  );
 
-  const dobLabel = new LabelComponent('Date of Birth:');
-  const dobText = new BaseTextComponent('p', 'profile_page__info', userInfo.dateOfBirth);
-  infoColumn.node.append(dobLabel.node, dobText.node);
+  const lastNameField = createEditableFieldWithHandler(
+    'Last name:',
+    userInfo.lastName,
+    ID_NAMES.customerSurname,
+    (newValue) => {
+      updatedUserInfo.lastName = newValue;
+    },
+    CLASS_NAMES.profileEditableField,
+    CLASS_NAMES.profileInput,
+  );
 
-  const emailLabel = new LabelComponent('Email:');
-  const emailText = new BaseTextComponent('p', 'profile_page__info', userInfo.email);
-  infoColumn.node.append(emailLabel.node, emailText.node);
+  const dobField = createEditableFieldWithHandler(
+    'Date of Birth:',
+    userInfo.dateOfBirth,
+    ID_NAMES.customerDob,
+    (newValue) => {
+      updatedUserInfo.dateOfBirth = newValue;
+    },
+    CLASS_NAMES.profileEditableField,
+    CLASS_NAMES.profileInput,
+  );
 
-  // Read-only addresses
+  const emailField = createEditableFieldWithHandler(
+    'Email:',
+    userInfo.email,
+    ID_NAMES.customerEmail,
+    (newValue) => {
+      updatedUserInfo.email = newValue;
+    },
+    CLASS_NAMES.profileEditableField,
+    CLASS_NAMES.profileInput,
+  );
+
+  infoColumn.node.append(firstNameField, lastNameField, dobField, emailField);
+
+  const addressSections: AddressSectionComponent[] = [];
+
   userInfo.addresses.forEach((address, index) => {
-    const addressWrapper = new BaseComponent('div', 'profile_page__address_wrapper');
-    let addressTitleText = `Address ${index + 1}`;
-
-    if (userInfo?.shippingAddressIds.includes(address?.id ?? '')) {
-      addressTitleText = 'Shipping Address';
-    } else if (userInfo?.billingAddressIds.includes(address?.id ?? '')) {
-      addressTitleText = 'Billing Address';
-    }
-
-    const addressTitle = new BaseTextComponent('h3', 'profile_page__address_title', addressTitleText);
-    addressWrapper.node.appendChild(addressTitle.node);
-
-    if (userInfo?.defaultShippingAddressId === address.id) {
-      addressWrapper.node.classList.add('default-shipping');
-      const defaultShippingLabel = new BaseTextComponent('p', 'profile_page__default_label', 'Default');
-      addressWrapper.node.appendChild(defaultShippingLabel.node);
-    }
-    if (userInfo?.defaultBillingAddressId === address.id) {
-      addressWrapper.node.classList.add('default-billing');
-      const defaultBillingLabel = new BaseTextComponent('p', 'profile_page__default_label', 'Default');
-      addressWrapper.node.appendChild(defaultBillingLabel.node);
-    }
-
-    const streetLabel = new LabelComponent('Street:');
-    const streetText = new BaseTextComponent('p', 'profile_page__address', address.streetName);
-    addressWrapper.node.append(streetLabel.node, streetText.node);
-
-    const cityLabel = new LabelComponent('City:');
-    const cityText = new BaseTextComponent('p', 'profile_page__address', address.city);
-    addressWrapper.node.append(cityLabel.node, cityText.node);
-
-    if (address.state) {
-      const stateLabel = new LabelComponent('State:');
-      const stateText = new BaseTextComponent('p', 'profile_page__address', address.state);
-      addressWrapper.node.append(stateLabel.node, stateText.node);
-    }
-
-    const postalCodeLabel = new LabelComponent('Postal Code:');
-    const postalCodeText = new BaseTextComponent('p', 'profile_page__address', address.postalCode);
-    addressWrapper.node.append(postalCodeLabel.node, postalCodeText.node);
-
-    const countryLabel = new LabelComponent('Country:');
-    const countryText = new BaseTextComponent('p', 'profile_page__address', address.country);
-    addressWrapper.node.append(countryLabel.node, countryText.node);
-
-    addressColumn.node.appendChild(addressWrapper.node);
+    const addressSection = new AddressSectionComponent(address, index, updatedUserInfo);
+    addressSections.push(addressSection);
+    addressColumn.node.appendChild(addressSection.node);
   });
 
-  contentWrapper.node.append(infoColumn.node, addressColumn.node);
+  const addNewAddressButton = new ButtonComponent(
+    'button',
+    (event) => {
+      event.stopPropagation();
+      const newAddress: Address = {
+        id: `new-${Date.now()}`,
+        streetName: '',
+        city: '',
+        state: '',
+        postalCode: '',
+        country: '',
+      };
+      updatedUserInfo.addresses.push(newAddress);
+      const newAddressSection = new AddressSectionComponent(
+        newAddress,
+        updatedUserInfo.addresses.length - 1,
+        updatedUserInfo,
+        true,
+      );
+      addressSections.push(newAddressSection);
+      addressColumn.node.appendChild(newAddressSection.node);
+      updateAddNewAddressButtonState(addressSections, addNewAddressButton);
+    },
+    'Add new address',
+    false,
+  );
+
+  addNewAddressButton.node.classList.add(CLASS_NAMES.profileAddAddressButton);
+
+  addressSections.forEach((section) => {
+    const addressSection = section;
+    addressSection.onFieldChange = () => updateAddNewAddressButtonState(addressSections, addNewAddressButton);
+    addressSection.onSaveButtonClick = () => updateAddNewAddressButtonState(addressSections, addNewAddressButton);
+  });
+
+  contentWrapper.node.append(infoColumn.node, addressColumn.node, addNewAddressButton.node);
+  updateAddNewAddressButtonState(addressSections, addNewAddressButton);
 }
