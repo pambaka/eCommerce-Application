@@ -4,6 +4,47 @@
   display: flex;
   gap: $catalog-gap;
   padding: 0px var(--outer-margin);
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+
+    .catalog-left {
+      width: 100%;
+      font-size: 18px;
+
+      .filter-block__header {
+        width: 100%;
+
+        .filter-bar {
+          width: 100%;
+        }
+      }
+
+      .filter-block .filters {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
+        column-gap: 40px;
+        row-gap: 20px;
+
+        .filter-price,
+        .filter-category {
+          grid-column-start: 1;
+        }
+
+        .filter-color {
+          grid-column-start: 2;
+          grid-row-start: 1;
+          grid-row-end: 3;
+        }
+
+        .filter-price span {
+          display: inline-block;
+          font-size: 14px;
+        }
+      }
+    }
+  }
 }
 
 .catalog-left {
@@ -12,6 +53,21 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  font-size: 20px;
+
+  button {
+    display: grid;
+    place-content: center;
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px $color-bg-dark;
+    background-color: $color-bg-light;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: #e9e6e6;
+      transition: 0.5s;
+    }
+  }
 
   .filter-block__header {
     height: 40px;
@@ -30,23 +86,10 @@
       box-shadow: 0px 0px 5px $color-bg-dark;
 
       button {
-        width: 24px;
+        width: fit-content;
         height: 24px;
-        display: grid;
-        place-content: center;
-        background-color: transparent;
-
-        svg {
-          width: 100%;
-          height: 100%;
-          color: #757575;
-          transition: 0.5s;
-        }
-
-        &:hover svg {
-          color: $catalog-card-color-accent;
-          transition: 0.5s;
-        }
+        font-size: 14px;
+        padding: 2px 4px;
       }
     }
   }
@@ -63,7 +106,7 @@
     .filters {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
 
       .filter-price,
       .filter-color,
@@ -72,7 +115,6 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
-        font-size: 20px;
       }
 
       .filter-price {
@@ -96,8 +138,8 @@
 
         input {
           width: 100%;
+          max-width: $catalog-card-width;
           padding-left: 60px;
-          padding-right: 5px;
           background-color: #e9e6e6;
         }
       }
@@ -106,24 +148,12 @@
     button {
       width: 100%;
       padding: 5px;
-      background-color: $color-bg-light;
-      border-radius: 4px;
-      box-shadow: 0px 0px 5px $color-bg-dark;
-      display: grid;
-      place-content: center;
-      transition: 0.5s;
-
-      &:hover {
-        background-color: #e9e6e6;
-        transition: 0.5s;
-      }
     }
   }
 }
 
 .catalog-right {
   width: 100%;
-  min-height: 400px;
   display: flex;
   flex-direction: column;
   gap: 20px;

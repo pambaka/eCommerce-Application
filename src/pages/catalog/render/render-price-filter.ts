@@ -5,7 +5,7 @@ export default function renderPriceFilter(parentElement: HTMLElement): void {
   const priceFilter = new BaseComponent('div', 'filter-price');
 
   const title = new BaseComponent('p');
-  title.node.innerHTML = 'Price <span>(up to 1000, €)</span>: ';
+  title.node.innerHTML = 'Price: <span>(up to 1000, €)</span>';
 
   priceFilter.node.append(title.node);
 

@@ -18,7 +18,7 @@ export const PRODUCT_COLORS = ['blue', 'green', 'red', 'yellow'];
 
 export const CATEGORIES: { [key: string]: string } = {
   elephants: 'df56876c-9e34-4964-9d57-b1d0ebaea778',
-  'test products': '',
+  'test products': 'fe63ba23-a21f-4022-a536-395088c1fe14',
 };
 
 export const QUERY_BASE = {
