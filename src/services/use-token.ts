@@ -1,10 +1,11 @@
 import getAccessToken from '../api/get-access-token';
-import { Token } from '../types/index';
+import { AnonymousToken, Token } from '../types/index';
 import { ANONYMOUS_ACCESS_TOKEN, CUSTOMER_ACCESS_TOKEN, CUSTOMER_REFRESH_TOKEN } from '../api/const';
+import Customer from '../utils/customer';
 
 export default class useToken {
   static anonymous: {
-    access: Token;
+    access: AnonymousToken;
   } = {
     access: {
       set: async () => {
@@ -15,7 +16,16 @@ export default class useToken {
           console.error('Error setting anonymous access token:', error);
         }
       },
-      get: () => localStorage.getItem(ANONYMOUS_ACCESS_TOKEN),
+      get: async () => {
+        let token = localStorage.getItem(ANONYMOUS_ACCESS_TOKEN);
+
+        if (!token) {
+          await this.anonymous.access.set();
+          token = localStorage.getItem(ANONYMOUS_ACCESS_TOKEN);
+        }
+
+        return token;
+      },
     },
   };
 
@@ -24,28 +34,22 @@ export default class useToken {
     refresh: Token;
   } = {
     access: {
-      set: async (token?: string) => {
-        try {
-          if (token) localStorage.setItem(CUSTOMER_ACCESS_TOKEN, token);
-        } catch (error) {
-          console.error('Error setting customer access token:', error);
-        }
+      set: (token: string) => {
+        localStorage.setItem(CUSTOMER_ACCESS_TOKEN, token);
       },
       get: () => {
         const token = localStorage.getItem(CUSTOMER_ACCESS_TOKEN);
+
         if (!token) {
-          console.error('Customer access token is missing or invalid.');
+          Customer.logOut();
         }
+
         return token;
       },
     },
     refresh: {
-      set: async (token?: string) => {
-        try {
-          if (token) localStorage.setItem(CUSTOMER_REFRESH_TOKEN, token);
-        } catch (error) {
-          console.error('Error setting customer refresh token:', error);
-        }
+      set: (token: string) => {
+        localStorage.setItem(CUSTOMER_REFRESH_TOKEN, token);
       },
       get: () => {
         const token = localStorage.getItem(CUSTOMER_REFRESH_TOKEN);
