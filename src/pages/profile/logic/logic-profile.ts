@@ -5,7 +5,7 @@ import { CustomerIncomeData } from '../../../types/index';
 import renderProfileSectionContent from '../render/render-profile-section';
 
 export default class ProfileSection extends BaseComponent {
-  private userInfo: CustomerIncomeData | null = null;
+  private userInfo: CustomerIncomeData | undefined;
 
   constructor() {
     super('div', 'profile_page__wrapper');

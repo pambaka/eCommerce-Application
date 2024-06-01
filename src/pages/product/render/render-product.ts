@@ -9,7 +9,7 @@ import createPrices from './create-prices';
 import './product.scss';
 
 export default async function renderProduct(productKey: string) {
-  const token = useToken.anonymous.access.get();
+  const token = await useToken.anonymous.access.get();
 
   if (token) {
     const product: Product | undefined = await getProductByKey(productKey, token);

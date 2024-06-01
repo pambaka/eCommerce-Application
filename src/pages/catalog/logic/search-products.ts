@@ -18,7 +18,7 @@ export default async function searchProducts(event: Event) {
   let sortQuery: string | undefined;
   if (dropdownText.textContent) sortQuery = SORTING_ORDER[dropdownText.textContent];
 
-  const token: string | null = useToken.anonymous.access.get();
+  const token: string | null = await useToken.anonymous.access.get();
 
   if (token) {
     let products: ProductProjection[] | Product[] | undefined;
