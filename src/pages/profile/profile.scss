@@ -1,6 +1,5 @@
 .profile_page__content_wrapper {
   font-size: 1rem;
-  padding: 0 20px;
   width: 85%;
 
   .profile_page__add_address_button {
@@ -8,22 +7,14 @@
     margin-bottom: 40px;
   }
 
-  .profile_page__info_column,
   .profile_page__address_column {
     text-align: center;
     margin: 0 10px;
   }
 
   .profile_page__info_column {
-    display: flex;
-    gap: 20px;
-    text-align: left;
-    flex-wrap: nowrap;
-    margin-bottom: 40px;
-
-    @media (max-width: 960px) {
-      display: block;
-    }
+    text-align: center;
+    margin: 0 20px;
   }
 
   .profile_page__address_column {
@@ -61,10 +52,6 @@
 
       .profile_page__address {
         display: block;
-      }
-
-      &:hover {
-        transform: scale(1.1);
       }
 
       span {
