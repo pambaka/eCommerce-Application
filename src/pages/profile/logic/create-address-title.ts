@@ -1,8 +1,8 @@
 import BaseComponent from '../../../components/base-component';
 import BaseTextComponent from '../../../components/base-text-component';
 import createEditableField from '../render/editable-field/create-editable-field';
-import makeFieldEditableWithSelect from '../render/editable-field/make-field-editable-with-select';
 import { CLASS_NAMES } from '../../../const';
+import handleEditableField from '../render/editable-field/handle-editable.field';
 
 export default function createAddressTitle(
   addressTitleText: string,
@@ -18,14 +18,13 @@ export default function createAddressTitle(
   addressTitle.node.appendChild(defaultLabel.node);
 
   const addressTitleWrapper = createEditableField(
-    'Address Type:',
+    'Type:',
     localAddressTitleText,
     `address-title-${index}`,
-    (event) => {
-      const target = event.currentTarget as HTMLElement;
-      makeFieldEditableWithSelect(
-        target.parentNode as HTMLElement,
-        'Address Type:',
+    (event) =>
+      handleEditableField(
+        event,
+        'Type:',
         localAddressTitleText,
         `address-title-${index}`,
         addressTitleOptions,
@@ -36,8 +35,7 @@ export default function createAddressTitle(
         },
         CLASS_NAMES.profileEditableField,
         CLASS_NAMES.profileInput,
-      );
-    },
+      ),
     CLASS_NAMES.profileEditableField,
     CLASS_NAMES.profileInput,
   );

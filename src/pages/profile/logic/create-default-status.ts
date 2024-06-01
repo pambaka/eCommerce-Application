@@ -11,14 +11,14 @@ export default function createDefaultStatus(
 ): HTMLElement {
   const defaultLabel = new BaseTextComponent('span', 'profile_page__default_label', '');
   const defaultStatusWrapper = createEditableField(
-    'Default Status:',
+    'Status:',
     defaultStatus,
     `default-status-${index}`,
     (event) => {
       const target = event.currentTarget as HTMLElement;
       makeFieldEditableWithSelect(
         target.parentNode as HTMLElement,
-        'Default Status:',
+        'Status:',
         defaultStatus,
         `default-status-${index}`,
         defaultOptions,

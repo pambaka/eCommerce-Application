@@ -5,10 +5,10 @@ import validateStreet from '../pages/registration/logic/validate-street';
 import validatePostalCode from '../pages/registration/logic/validate-postal-code';
 import createSaveButton from '../pages/profile/logic/create-save-button';
 import createDeleteButton from '../pages/profile/logic/create-delete-button';
-import createAddressTitle from '../pages/profile/logic/create-address-title';
 import createDefaultStatus from '../pages/profile/logic/create-default-status';
 import createEditableField from '../pages/profile/render/editable-field/create-editable-field';
 import makeFieldEditable from '../pages/profile/render/editable-field/make-editable-field';
+import createAddressTitle from '../pages/profile/logic/create-address-title';
 import { CLASS_NAMES } from '../const';
 
 export default class AddressSectionComponent extends BaseComponent {
@@ -28,6 +28,10 @@ export default class AddressSectionComponent extends BaseComponent {
 
   private fieldsValid: { [key: string]: boolean } = {};
 
+  public onFieldChange: () => void;
+
+  public onSaveButtonClick: () => void;
+
   constructor(address: Address, index: number, userInfo: CustomerIncomeData, isNew: boolean = false) {
     super('div', 'profile_page__address_wrapper');
     this.address = address;
@@ -36,10 +40,16 @@ export default class AddressSectionComponent extends BaseComponent {
     this.isNew = isNew;
     this.updatedAddress = { ...this.address };
 
+    this.onFieldChange = () => {};
+    this.onSaveButtonClick = () => {};
+
     this.saveButton = createSaveButton(() => {
-      Object.assign(this.address, this.updatedAddress);
-      this.saveButton.node.classList.add('hidden');
-      this.deleteButton.node.classList.remove('hidden');
+      if (this.areAllFieldsValid()) {
+        Object.assign(this.address, this.updatedAddress);
+        this.saveButton.node.classList.add('hidden');
+        this.deleteButton.node.classList.remove('hidden');
+        this.onSaveButtonClick();
+      }
     });
 
     this.deleteButton = createDeleteButton(() => {
@@ -55,8 +65,16 @@ export default class AddressSectionComponent extends BaseComponent {
   }
 
   private validateFields() {
-    const allValid = Object.values(this.fieldsValid).every(Boolean);
+    const allValid = this.areAllFieldsValid();
     this.saveButton.node.disabled = !allValid;
+  }
+
+  public areAllFieldsValid(): boolean {
+    return Object.values(this.fieldsValid).every(Boolean);
+  }
+
+  public isSaveButtonHidden(): boolean {
+    return this.saveButton.node.classList.contains('hidden');
   }
 
   private render() {
@@ -78,6 +96,7 @@ export default class AddressSectionComponent extends BaseComponent {
       (newValue) => {
         addressTitleText = newValue;
         this.showSaveButton();
+        this.onFieldChange();
       },
     );
 
@@ -96,6 +115,7 @@ export default class AddressSectionComponent extends BaseComponent {
       ],
       () => {
         this.showSaveButton();
+        this.onFieldChange();
       },
     );
 
@@ -112,7 +132,10 @@ export default class AddressSectionComponent extends BaseComponent {
         label: 'City:',
         value: this.address.city,
         id: `address-city-${this.index}`,
-        validator: (value: string) => (value ? '' : 'City is required'),
+        validator: (value: string) => {
+          const trimmedValue = value.trim();
+          return trimmedValue ? '' : 'City is required';
+        },
       },
       {
         label: 'Postal Code:',
@@ -129,33 +152,36 @@ export default class AddressSectionComponent extends BaseComponent {
     ];
 
     fields.forEach((field) => {
-      const editableField = createEditableField(
-        field.label,
-        field.value!,
-        field.id,
-        (event) => {
-          const target = event.currentTarget as HTMLElement;
-          makeFieldEditable(
-            target.parentNode as HTMLElement,
-            field.label,
-            field.value!,
-            field.id,
-            (newValue) => {
-              const key = field.id.split('-')[1] as keyof Address;
-              this.updatedAddress[key] = newValue;
-              this.fieldsValid[field.id] = !field.validator(newValue);
-              this.validateFields();
-              this.showSaveButton();
-            },
-            CLASS_NAMES.profileEditableField,
-            CLASS_NAMES.profileInput,
-          );
-        },
-        CLASS_NAMES.profileEditableField,
-        CLASS_NAMES.profileInput,
-      );
-      this.fieldsValid[field.id] = !field.validator(field.value!);
-      this.node.appendChild(editableField);
+      if (field.value !== undefined && field.value !== null) {
+        const editableField = createEditableField(
+          field.label,
+          field.value,
+          field.id,
+          (event) => {
+            const target = event.currentTarget as HTMLElement;
+            makeFieldEditable(
+              target.parentNode as HTMLElement,
+              field.label,
+              field.value,
+              field.id,
+              (newValue) => {
+                const key = field.id.split('-')[1] as keyof Address;
+                this.updatedAddress[key] = newValue;
+                this.fieldsValid[field.id] = !field.validator(newValue);
+                this.validateFields();
+                this.showSaveButton();
+                this.onFieldChange();
+              },
+              CLASS_NAMES.profileEditableField,
+              CLASS_NAMES.profileInput,
+            );
+          },
+          CLASS_NAMES.profileEditableField,
+          CLASS_NAMES.profileInput,
+        );
+        this.fieldsValid[field.id] = !field.validator(field.value);
+        this.node.appendChild(editableField);
+      }
     });
 
     this.node.appendChild(this.saveButton.node);

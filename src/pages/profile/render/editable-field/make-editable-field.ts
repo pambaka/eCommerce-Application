@@ -8,6 +8,7 @@ import { ID_NAMES } from '../../../../const';
 import validatePostalCode from '../../../registration/logic/validate-postal-code';
 import validateStreet from '../../../registration/logic/validate-street';
 import renderSelectCountriesInProfile from '../render-select-countries';
+import updateSaveChangesButtonState from './update-save-changes-state';
 
 export default function makeFieldEditable(
   wrapper: HTMLElement,
@@ -50,6 +51,8 @@ export default function makeFieldEditable(
         warning = validatePostalCode(input.value);
       } else if (id.startsWith('address-streetName')) {
         warning = validateStreet(input.value);
+      } else if (id.startsWith('address-city')) {
+        warning = validateName(input.value, 'city');
       }
 
       const parentElement = input.parentNode as HTMLElement;
@@ -82,6 +85,7 @@ export default function makeFieldEditable(
         textClass,
       );
       wrapper.replaceWith(newField);
+      updateSaveChangesButtonState();
     },
     'Save',
     'Save',
@@ -97,4 +101,5 @@ export default function makeFieldEditable(
 
   wrapper.querySelector('span')?.replaceWith(input);
   wrapper.querySelector('.edit-button')?.replaceWith(saveButton.node);
+  updateSaveChangesButtonState();
 }
