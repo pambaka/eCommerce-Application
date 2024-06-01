@@ -24,6 +24,8 @@ export const CLASS_NAMES = {
   profileInput: 'profile_page__input',
   profileAddAddressButton: 'profile_page__add_address_button',
   searchInput: 'search-input',
+  filterCategory: 'filter-category',
+  filterColor: 'filter-color',
 } as const;
 
 export const ID_NAMES = {
