@@ -8,11 +8,6 @@ export default function slide(direction: 'left' | 'right', imagesArray: ImageURL
 
   const arrOfDivsWithImg = document.querySelectorAll('.small-image-wrapper');
 
-  // const mainImage = assertNonNullable<HTMLImageElement>('.product__image');
-  // const stylesOfMainImageInnerRow: CSSStyleDeclaration = window.getComputedStyle(mainImage);
-  // const mainImageWidth = stylesOfMainImageInnerRow.getPropertyValue('width');
-  // console.log('mainImageWidth: ', mainImageWidth);
-
   if (arrOfDivsWithImg) {
     let currentPosition = getCurrentPosition();
     console.log(getCurrentPosition());
