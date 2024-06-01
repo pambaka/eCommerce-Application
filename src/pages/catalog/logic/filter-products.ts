@@ -19,7 +19,7 @@ export default async function filterProducts(event: Event): Promise<void> {
   const queryCategory: string | undefined = getCategoryFilterQuery();
   if (queryCategory) queries.push(queryCategory);
 
-  const token: string | null = useToken.anonymous.access.get();
+  const token: string | null = await useToken.anonymous.access.get();
 
   if (token) {
     const products = await getSearchedProducts(token, queries.join('&'));
