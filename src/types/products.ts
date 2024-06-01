@@ -35,3 +35,7 @@ export interface CardPrice {
   regular: number | undefined;
   discounted: number | undefined;
 }
+
+export interface ImageURL {
+  url: string;
+}
