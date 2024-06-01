@@ -135,6 +135,7 @@
 .edit-button,
 .save-button {
   margin-left: auto;
+  background-color: transparent;
 }
 
 @media (max-width: 960px) {
@@ -169,9 +170,18 @@
   position: absolute;
 }
 
-.edit-button,
-.save-button {
-  background-color: transparent;
+.profile_page__address_column {
+  .edit-button,
+  .save-button {
+    margin-left: auto;
+  }
+}
+
+.profile_page__info_column {
+  .edit-button,
+  .save-button {
+    margin-left: 20px;
+  }
 }
 
 .save_changes__btn,
