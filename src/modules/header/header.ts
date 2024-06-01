@@ -32,8 +32,8 @@ export default class Header extends BaseComponent {
     const ul = new BaseComponent('ul', 'nav-list');
     ul.node.append(new NavItemComponent(Router.pages.about, 'About').node);
     ul.node.append(new NavItemComponent(Router.pages.catalog, 'Catalog').node);
-    ul.node.append(new NavItemComponent(Router.pages.login, 'Log in').node);
-    ul.node.append(new NavItemComponent(Router.pages.registration, 'Sign up').node);
+    ul.node.append(new NavItemComponent(Router.pages.login, 'Log\xa0in').node);
+    ul.node.append(new NavItemComponent(Router.pages.registration, 'Sign\xa0up').node);
 
     // Burger icon
     const burgerMenuButton = new BurgerMenuButton('burger-menu-wrapper', this.toggleNavigation.bind(this));

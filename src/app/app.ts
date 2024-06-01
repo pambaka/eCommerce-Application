@@ -9,6 +9,7 @@ import renderProfilePage from '../pages/profile/render/render-profile';
 import isCustomerAuthorized from '../utils/is-customer-authorized';
 import replaceLocation from '../utils/replace-location';
 import renderCatalog from '../pages/catalog/render/render-catalog';
+import renderProduct from '../pages/product/render/render-product';
 
 export default class App {
   private header: Header;
@@ -34,8 +35,9 @@ export default class App {
   }
 
   init() {
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       this.setupInitialLayout();
+      await this.registerProductRoutes();
       this.render();
     });
   }
@@ -72,37 +74,78 @@ export default class App {
     // Registration of other routes
   }
 
+  private async registerProductRoutes() {
+    await Router.addProductPages();
+
+    Object.keys(Router.productPages).forEach((key) => {
+      this.router.register(Router.productPages[key], () => {
+        this.prepare();
+        renderProduct(key);
+      });
+    });
+  }
+
   private renderMainPage() {
-    this.contentNode.innerHTML = '';
+    this.prepare();
     this.contentNode.append(this.mainSection.node);
   }
 
   private renderErrorPage() {
-    this.contentNode.innerHTML = '';
+    this.prepare();
     this.contentNode.append(this.errorSection.node);
   }
 
   private async renderCatalog() {
-    this.contentNode.innerHTML = '';
+    this.prepare();
     this.contentNode.append(await renderCatalog());
   }
 
   private renderRegistrationPage() {
-    this.contentNode.innerHTML = '';
+    this.prepare();
     this.contentNode.append(renderRegistration());
   }
 
   private renderLogInPage() {
-    this.contentNode.innerHTML = '';
+    this.prepare();
     this.contentNode.append(renderLoginPage());
   }
 
   private renderProfilePage() {
-    this.contentNode.innerHTML = '';
+    this.prepare();
     this.contentNode.append(renderProfilePage());
   }
 
   render() {
     this.router.onHashChange();
+  }
+
+  private prepare() {
+    this.updateCurrentPageLink();
+    this.contentNode.innerHTML = '';
+  }
+
+  private updateCurrentPageLink() {
+    const { hash } = window.location;
+
+    const logo: HTMLElement | null = this.header.node.querySelector('.header-logo');
+    const links: NodeListOf<HTMLAnchorElement> = this.header.node.querySelectorAll('.nav_link');
+
+    if (logo && hash === Router.pages.main) {
+      logo.classList.add('header-logo--active');
+
+      links.forEach((link) => {
+        link.classList.remove('nav-link--active');
+      });
+    } else {
+      links.forEach((link) => {
+        const startIndex: number = link.href.indexOf('#');
+        const linkHash: string = link.href.slice(startIndex);
+
+        if (linkHash === hash) link.classList.add('nav-link--active');
+        else link.classList.remove('nav-link--active');
+      });
+
+      if (logo) logo.classList.remove('header-logo--active');
+    }
   }
 }
