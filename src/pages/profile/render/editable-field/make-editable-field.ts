@@ -9,6 +9,7 @@ import validatePostalCode from '../../../registration/logic/validate-postal-code
 import validateStreet from '../../../registration/logic/validate-street';
 import renderSelectCountriesInProfile from '../render-select-countries';
 import updateSaveChangesButtonState from './update-save-changes-state';
+import updateCustomerInfo from '../../logic/update-customer-info-in-ui';
 
 export default function makeFieldEditable(
   wrapper: HTMLElement,
@@ -37,7 +38,7 @@ export default function makeFieldEditable(
 
   const saveButton = new ButtonWithSvgIcon(
     'save-button',
-    () => {
+    async () => {
       let warning = '';
       if (id === ID_NAMES.customerEmail) {
         warning = validateEmail(input.value);
@@ -65,6 +66,13 @@ export default function makeFieldEditable(
       }
 
       saveCallback(input.value, true);
+
+      try {
+        await updateCustomerInfo(id, input.value);
+      } catch (error) {
+        console.error('Error updating customer data:', error);
+      }
+
       const newField = createEditableField(
         labelText,
         input.value,
