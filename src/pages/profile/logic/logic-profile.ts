@@ -3,6 +3,9 @@ import BaseTextComponent from '../../../components/base-text-component';
 import getUserInfo from '../../../api/get-user-info';
 import { CustomerIncomeData } from '../../../types/index';
 import renderProfileSectionContent from '../render/render-profile-section';
+import Customer from '../../../utils/customer';
+import replaceLocation from '../../../utils/replace-location';
+import Router from '../../../services/router';
 
 export default class ProfileSection extends BaseComponent {
   private userInfo: CustomerIncomeData | null = null;
@@ -27,7 +30,10 @@ export default class ProfileSection extends BaseComponent {
       console.log('User Info:', this.userInfo);
     } catch (error) {
       console.error('Error loading user data:', error);
-      ProfileSection.renderError(this.node, 'Failed to load user data');
+
+      Customer.logOut();
+      replaceLocation(Router.pages.main);
+
       return;
     }
 

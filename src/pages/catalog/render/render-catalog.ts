@@ -16,7 +16,7 @@ export default async function renderCatalog(): Promise<HTMLElement> {
   const wrapper = new BaseComponent('section', CLASS_NAMES.productsWrapper);
   DOM.add(CLASS_NAMES.productsWrapper, wrapper.node);
 
-  const token: string | null = useToken.anonymous.access.get();
+  const token: string | null = await useToken.anonymous.access.get();
 
   if (token) {
     const products: Product[] | undefined = await getProducts(token);
