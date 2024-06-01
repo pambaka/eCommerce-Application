@@ -32,6 +32,8 @@ export default class AddressSectionComponent extends BaseComponent {
 
   public onSaveButtonClick: () => void;
 
+  public onDeleteButtonClick: () => void;
+
   constructor(address: Address, index: number, userInfo: CustomerIncomeData, isNew: boolean = false) {
     super('div', 'profile_page__address_wrapper');
     this.address = address;
@@ -42,6 +44,7 @@ export default class AddressSectionComponent extends BaseComponent {
 
     this.onFieldChange = () => {};
     this.onSaveButtonClick = () => {};
+    this.onDeleteButtonClick = () => {};
 
     this.saveButton = createSaveButton(() => {
       if (this.areAllFieldsValid()) {
@@ -49,11 +52,13 @@ export default class AddressSectionComponent extends BaseComponent {
         this.saveButton.node.classList.add('hidden');
         this.deleteButton.node.classList.remove('hidden');
         this.onSaveButtonClick();
+        this.onDeleteButtonClick();
       }
     });
 
     this.deleteButton = createDeleteButton(() => {
       this.node.remove();
+      this.onDeleteButtonClick();
     });
 
     this.render();
@@ -78,7 +83,7 @@ export default class AddressSectionComponent extends BaseComponent {
   }
 
   private render() {
-    let addressTitleText = this.isNew ? 'New Address' : `Address ${this.index + 1}`;
+    let addressTitleText = this.isNew ? 'Shipping Address' : `Billing Address`;
 
     if (this.userInfo?.shippingAddressIds.includes(this.address?.id ?? '')) {
       addressTitleText = 'Shipping Address';
@@ -96,6 +101,7 @@ export default class AddressSectionComponent extends BaseComponent {
       (newValue) => {
         addressTitleText = newValue;
         this.showSaveButton();
+        this.validateFields();
         this.onFieldChange();
       },
     );
@@ -115,6 +121,7 @@ export default class AddressSectionComponent extends BaseComponent {
       ],
       () => {
         this.showSaveButton();
+        this.validateFields();
         this.onFieldChange();
       },
     );

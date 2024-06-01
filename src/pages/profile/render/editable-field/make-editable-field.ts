@@ -10,6 +10,7 @@ import validateStreet from '../../../registration/logic/validate-street';
 import renderSelectCountriesInProfile from '../render-select-countries';
 import updateSaveChangesButtonState from './update-save-changes-state';
 import updateCustomerInfo from '../../logic/update-customer-info-in-ui';
+import getUserInfo from '../../../../api/get-user-info';
 
 export default function makeFieldEditable(
   wrapper: HTMLElement,
@@ -65,35 +66,56 @@ export default function makeFieldEditable(
         return;
       }
 
-      saveCallback(input.value, true);
-
       try {
-        await updateCustomerInfo(id, input.value);
+        const success = await updateCustomerInfo(id, input.value);
+        if (
+          !success &&
+          [ID_NAMES.customerEmail, ID_NAMES.customerName, ID_NAMES.customerSurname, ID_NAMES.customerDob].includes(id)
+        ) {
+          const userInfo = await getUserInfo();
+          let currentValue = value;
+          if (id === ID_NAMES.customerEmail) {
+            currentValue = userInfo.email;
+          } else if (id === ID_NAMES.customerName) {
+            currentValue = userInfo.firstName;
+          } else if (id === ID_NAMES.customerSurname) {
+            currentValue = userInfo.lastName;
+          } else if (id === ID_NAMES.customerDob) {
+            currentValue = userInfo.dateOfBirth;
+          }
+          input.value = currentValue;
+          parentElement.setAttribute('data-warning', 'Failed to update data on server');
+          saveCallback(currentValue, false);
+          return;
+        }
+        saveCallback(input.value, true);
+
+        const newField = createEditableField(
+          labelText,
+          input.value,
+          id,
+          (event) => {
+            const target = event.currentTarget as HTMLElement;
+            makeFieldEditable(
+              target.parentNode as HTMLElement,
+              labelText,
+              input.value,
+              id,
+              saveCallback,
+              wrapperClass,
+              textClass,
+            );
+          },
+          wrapperClass,
+          textClass,
+        );
+        wrapper.replaceWith(newField);
+        updateSaveChangesButtonState();
       } catch (error) {
         console.error('Error updating customer data:', error);
+        parentElement.setAttribute('data-warning', 'Failed to update data on server');
+        saveCallback(input.value, false);
       }
-
-      const newField = createEditableField(
-        labelText,
-        input.value,
-        id,
-        (event) => {
-          const target = event.currentTarget as HTMLElement;
-          makeFieldEditable(
-            target.parentNode as HTMLElement,
-            labelText,
-            input.value,
-            id,
-            saveCallback,
-            wrapperClass,
-            textClass,
-          );
-        },
-        wrapperClass,
-        textClass,
-      );
-      wrapper.replaceWith(newField);
-      updateSaveChangesButtonState();
     },
     'Save',
     'Save',

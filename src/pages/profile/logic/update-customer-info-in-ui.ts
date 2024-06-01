@@ -4,20 +4,23 @@ import updateCustomerBirthday from '../../../api/update-customer-birthday';
 import updateCustomerEmail from '../../../api/update-customer-email';
 import { ID_NAMES } from '../../../const';
 
-export default async function updateCustomerInfo(id: string, value: string): Promise<void> {
+export default async function updateCustomerInfo(id: string, value: string): Promise<boolean> {
   try {
     if (id === ID_NAMES.customerName) {
-      await updateCustomerFirstName(value);
-    } else if (id === ID_NAMES.customerSurname) {
-      await updateCustomerLastName(value);
-    } else if (id === ID_NAMES.customerEmail) {
-      await updateCustomerEmail(value);
-    } else if (id === ID_NAMES.customerDob) {
-      await updateCustomerBirthday(value);
-    } else {
-      throw new Error('Invalid ID');
+      return await updateCustomerFirstName(value);
     }
+    if (id === ID_NAMES.customerSurname) {
+      return await updateCustomerLastName(value);
+    }
+    if (id === ID_NAMES.customerEmail) {
+      return await updateCustomerEmail(value);
+    }
+    if (id === ID_NAMES.customerDob) {
+      return await updateCustomerBirthday(value);
+    }
+    throw new Error('Invalid ID');
   } catch (error) {
     console.error('Error updating customer data:', error);
+    return false;
   }
 }

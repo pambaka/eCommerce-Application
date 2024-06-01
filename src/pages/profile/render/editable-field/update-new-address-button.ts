@@ -9,4 +9,11 @@ export default function updateAddNewAddressButtonState(
   const allSaveButtonsHidden = addressSections.every((section) => section.isSaveButtonHidden());
   const addressButton = addNewAddressButton;
   addressButton.node.disabled = !(allFieldsValid && allSaveButtonsHidden);
+
+  const lastSection = addressSections[addressSections.length - 1];
+  if (lastSection) {
+    lastSection.onDeleteButtonClick = () => {
+      addressButton.node.disabled = false;
+    };
+  }
 }

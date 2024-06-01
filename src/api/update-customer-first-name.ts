@@ -3,12 +3,12 @@ import useToken from '../services/use-token';
 import getUserInfo from './get-user-info';
 import showModal from '../pages/show-modal';
 
-export default async function updateCustomerFirstName(firstName: string): Promise<void> {
+export default async function updateCustomerFirstName(firstName: string): Promise<boolean> {
   const accessToken = useToken.customer.access.get();
 
   if (!accessToken) {
     showModal('No access token available', '', false);
-    return;
+    return false;
   }
 
   const url = `https://api.${region}.commercetools.com/${process.env.project_key}/me`;
@@ -41,12 +41,14 @@ export default async function updateCustomerFirstName(firstName: string): Promis
     }
 
     showModal('First name was successfully updated', '', true);
+    return true;
   } catch (error) {
     if (error instanceof Error) {
-      showModal(`Failed to update first name!`, '', false);
-      console.log(error.message);
+      showModal(`Failed to update first name!`, error.message, false);
+      console.error(error.message);
     } else {
       showModal('Failed to update first name: Unknown error', '', false);
     }
+    return false;
   }
 }
