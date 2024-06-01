@@ -127,7 +127,7 @@ export default class App {
   private updateCurrentPageLink() {
     const { hash } = window.location;
 
-    const logo = this.header.node.querySelector('.header-logo');
+    const logo: HTMLElement | null = this.header.node.querySelector('.header-logo');
     const links: NodeListOf<HTMLAnchorElement> = this.header.node.querySelectorAll('.nav_link');
 
     if (logo && hash === Router.pages.main) {
@@ -138,8 +138,8 @@ export default class App {
       });
     } else {
       links.forEach((link) => {
-        const startIndex = link.href.indexOf('#');
-        const linkHash = link.href.slice(startIndex);
+        const startIndex: number = link.href.indexOf('#');
+        const linkHash: string = link.href.slice(startIndex);
 
         if (linkHash === hash) link.classList.add('nav-link--active');
         else link.classList.remove('nav-link--active');
