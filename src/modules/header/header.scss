@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
 .header {
-  min-height: 80px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,18 +10,22 @@
   .header-logo {
     width: 70px;
     height: 70px;
-    color: #757575;
     cursor: pointer;
+    color: #757575;
     transition: 0.5s;
 
     @media screen and (max-width: $width-tablet-min) {
       width: 50px;
       height: 60px;
     }
+
+    &.header-logo--active {
+      color: $color-accent;
+    }
   }
 
   .header-logo:hover {
-    color: #5f8575;
+    color: $color-accent;
     transition: 0.5s;
   }
 
@@ -42,6 +46,10 @@
           display: none;
         }
       }
+    }
+
+    .nav-link--active {
+      color: $color-accent;
     }
   }
 

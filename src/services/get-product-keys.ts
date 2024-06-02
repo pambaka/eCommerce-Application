@@ -5,7 +5,7 @@ import useToken from './use-token';
 export default async function getProductKeys(): Promise<string[]> {
   const keys: string[] = [];
 
-  const token: string | null = useToken.anonymous.access.get();
+  const token: string | null = await useToken.anonymous.access.get();
   console.log('token', token);
 
   if (token) {

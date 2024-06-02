@@ -6,10 +6,10 @@ import useToken from '../../../services/use-token';
 import LANGUAGE from '../../../types/const';
 import { Product, ProductProjection } from '../../../types/products';
 import { SORTING_ORDER } from '../const';
-import createCard from '../render/create-card';
+import renderProducts from '../render/render-products';
 
-export default async function searchProducts(event: Event) {
-  event.preventDefault();
+export default async function searchProducts(event?: Event) {
+  event?.preventDefault();
 
   const input = DOM.elements[CLASS_NAMES.searchInput] as HTMLInputElement;
 
@@ -18,7 +18,7 @@ export default async function searchProducts(event: Event) {
   let sortQuery: string | undefined;
   if (dropdownText.textContent) sortQuery = SORTING_ORDER[dropdownText.textContent];
 
-  const token: string | null = useToken.anonymous.access.get();
+  const token: string | null = await useToken.anonymous.access.get();
 
   if (token) {
     let products: ProductProjection[] | Product[] | undefined;
@@ -36,28 +36,7 @@ export default async function searchProducts(event: Event) {
     }
 
     if (products) {
-      const wrapper: HTMLElement = DOM.elements[CLASS_NAMES.productsWrapper];
-
-      if (products.length === 0) {
-        wrapper.innerHTML = 'Nothing was found';
-        return;
-      }
-
-      wrapper.innerHTML = '';
-
-      for (let i = 0; i < products.length; i += 1) {
-        let card: HTMLElement | undefined;
-
-        const product = products[i];
-
-        if ('masterData' in product) {
-          card = createCard(product.key, product.masterData.current);
-        } else {
-          card = createCard(product.key, product);
-        }
-
-        wrapper.append(card);
-      }
+      renderProducts(products);
     }
   }
 }

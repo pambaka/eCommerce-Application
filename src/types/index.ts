@@ -25,8 +25,13 @@ export interface CustomerData {
 }
 
 export interface Token {
-  set: (token?: string) => Promise<void>;
+  set: (token: string) => void;
   get: () => string | null;
+}
+
+export interface AnonymousToken {
+  set: () => Promise<void>;
+  get: () => Promise<string | null>;
 }
 
 export interface CustomerIncomeData {

@@ -2,7 +2,7 @@ import { region } from './const';
 import getCustomerTokens from './get-customer-tokens';
 import replaceLocation from '../utils/replace-location';
 import Router from '../services/router';
-import { dispatchAuthorizationChangeEvent } from '../utils/authorization-event';
+import Customer from '../utils/customer';
 
 export default async function signInCustomer(email: string, password: string): Promise<void> {
   const customerAccessToken: string | undefined = await getCustomerTokens(email, password);
@@ -22,14 +22,12 @@ export default async function signInCustomer(email: string, password: string): P
       .then((res) => {
         if (res.status === 200) {
           replaceLocation(Router.pages.main);
-          sessionStorage.setItem('isCustomerAuthorized', 'true');
         }
 
         return res.json();
       })
       .then((data) => {
-        sessionStorage.setItem('userName', data.customer.firstName);
-        dispatchAuthorizationChangeEvent(true);
+        Customer.logIn(data.customer.firstName);
       })
       .catch((error) => error);
   }

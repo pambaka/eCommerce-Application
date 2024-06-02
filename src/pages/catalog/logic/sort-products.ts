@@ -18,7 +18,7 @@ export default async function sortProducts(this: HTMLElement): Promise<void> {
 
     const searchInput = DOM.elements[CLASS_NAMES.searchInput] as HTMLInputElement;
 
-    const token: string | null = useToken.anonymous.access.get();
+    const token: string | null = await useToken.anonymous.access.get();
 
     if (token && sortingOrder) {
       let products: ProductProjection[] | undefined;

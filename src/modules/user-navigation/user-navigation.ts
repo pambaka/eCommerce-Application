@@ -6,7 +6,8 @@ import isCustomerAuthorized from '../../utils/is-customer-authorized';
 import replaceLocation from '../../utils/replace-location';
 import ButtonWithSvgIcon from '../../components/button-with-svg-icon';
 import userNavIcons from '../../assets/user-nav-icons-sprite.svg';
-import { subscribeToAuthorizationChangeEvent, dispatchAuthorizationChangeEvent } from '../../utils/authorization-event';
+import { subscribeToAuthorizationChangeEvent } from '../../utils/authorization-event';
+import Customer from '../../utils/customer';
 
 export default class UserNavigation extends BaseComponent {
   logInButton: ButtonComponent;
@@ -46,8 +47,7 @@ export default class UserNavigation extends BaseComponent {
       'logout-button',
       () => {
         replaceLocation(Router.pages.main);
-        sessionStorage.clear();
-        dispatchAuthorizationChangeEvent(false);
+        Customer.logOut();
         this.updateButtons();
       },
       'Log out button',
@@ -59,7 +59,6 @@ export default class UserNavigation extends BaseComponent {
       'user-profile',
       () => {
         replaceLocation(Router.pages.profile);
-        dispatchAuthorizationChangeEvent(false);
         this.updateButtons();
       },
       'User profile button',
