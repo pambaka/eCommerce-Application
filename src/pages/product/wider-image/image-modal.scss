@@ -48,3 +48,10 @@
     opacity: 1;
   }
 }
+
+@media screen and (max-width: 900px) {
+  .close-button {
+    top: -35px;
+    right: -3px;
+  }
+}
