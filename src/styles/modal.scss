@@ -23,10 +23,10 @@
   justify-content: space-evenly;
   align-items: center;
   text-align: center;
-  background-color: $color-bg;
+  background-color: $color-bg-light;
   border-radius: 5px;
   border: 1px solid #afc3c0;
-  box-shadow: rgb(45 35 66 / 60%) 0 5px 10px;
+  box-shadow: rgba(36, 36, 36, 0.6) 0 5px 10px;
   z-index: 2;
 
   p:first-child {

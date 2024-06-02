@@ -6,6 +6,7 @@ import arrows from '../../../assets/arrows-sprite.svg';
 import slide from '../slider/slide';
 import LANGUAGE from '../../../types/const';
 import placeholderImage from '../../../assets/no_image.png';
+import showWiderImage from '../wider-image/show-wider-image';
 
 export default function createImages(parentElement: HTMLElement, product: Product): void {
   const imagesArray = product.masterData.current.masterVariant.images;
@@ -19,6 +20,9 @@ export default function createImages(parentElement: HTMLElement, product: Produc
       imageItem.url,
       `${product.masterData.current.name[LANGUAGE]}`,
     );
+    mainImage.node.addEventListener('click', () => {
+      showWiderImage(imageItem.url, product.masterData.current.name[LANGUAGE]);
+    });
     mainImageWrapper.node.append(mainImage.node);
   });
   if (imagesArray.length === 0) {
