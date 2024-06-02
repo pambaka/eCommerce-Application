@@ -8,6 +8,7 @@ export default function showWiderImage(imageUrl: string, productName: string) {
   const modal = new BaseComponent('div', 'modal-wider-image');
 
   const biggerPicture = new BaseImageComponent('modal__image', imageUrl, productName);
+  biggerPicture.node.setAttribute('title', productName);
 
   const closeButton = new ButtonComponent(
     'close-button',
@@ -19,6 +20,9 @@ export default function showWiderImage(imageUrl: string, productName: string) {
     '',
     false,
   );
+  closeButton.node.ariaLabel = 'Close';
+
+  closeButton.node.setAttribute('title', 'Close');
   modal.node.append(biggerPicture.node, closeButton.node);
 
   document.body.append(backdrop.node, modal.node);
