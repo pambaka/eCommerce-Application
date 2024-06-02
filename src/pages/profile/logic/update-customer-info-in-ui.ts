@@ -5,20 +5,27 @@ export default async function updateCustomerInfo(id: string, value: string): Pro
   const customerUpdater = new CustomerUpdater();
 
   try {
+    let action: string;
+
     switch (id) {
       case ID_NAMES.customerName:
-        return await customerUpdater.updateCustomerFirstName(value);
+        action = 'setFirstName';
+        break;
       case ID_NAMES.customerSurname:
-        return await customerUpdater.updateCustomerLastName(value);
+        action = 'setLastName';
+        break;
       case ID_NAMES.customerEmail:
-        return await customerUpdater.updateCustomerEmail(value);
+        action = 'changeEmail';
+        break;
       case ID_NAMES.customerDob:
-        return await customerUpdater.updateCustomerBirthday(value);
+        action = 'setDateOfBirth';
+        break;
       default:
         throw new Error('Invalid ID');
     }
+
+    return await customerUpdater.updateCustomerData(action, value);
   } catch (error) {
-    console.error('Error updating customer data:', error);
     return false;
   }
 }

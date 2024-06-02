@@ -35,34 +35,44 @@ export default class CustomerUpdater {
 
       return true;
     } catch (error) {
-      if (error instanceof Error) {
-        showModal('Failed to update customer data!', error.message, false);
-      } else {
-        showModal('Failed to update customer data: Unknown error', '', false);
-      }
+      CustomerUpdater.handleError(error);
       return false;
     }
   }
 
   public async updateCustomerData(action: string, value: string): Promise<boolean> {
-    const customerData = await getUserInfo();
-    const requestBody = {
-      version: customerData.version,
-      actions: [
-        {
-          action,
-          [CustomerUpdater.getActionField(action)]: value,
-        },
-      ],
-    };
+    try {
+      const field = CustomerUpdater.getActionField(action);
+      const customerData = await getUserInfo();
+      const requestBody = {
+        version: customerData.version,
+        actions: [
+          {
+            action,
+            [field]: value,
+          },
+        ],
+      };
 
-    const success = await this.fetchUpdate(requestBody);
+      const success = await this.fetchUpdate(requestBody);
 
-    if (success) {
-      showModal(`Successfully updated to ${value}! `, '', true);
+      if (success) {
+        showModal(`Successfully updated to ${value}!`, '', true);
+      }
+
+      return success;
+    } catch (error) {
+      CustomerUpdater.handleError(error);
+      return false;
     }
+  }
 
-    return success;
+  private static handleError(error: unknown): void {
+    if (error instanceof Error) {
+      showModal('Failed to update customer data!', error.message, false);
+    } else {
+      showModal('Failed to update customer data: Unknown error', '', false);
+    }
   }
 
   private static getActionField(action: string): string {
@@ -78,21 +88,5 @@ export default class CustomerUpdater {
       default:
         throw new Error(`Unknown action: ${action}`);
     }
-  }
-
-  public async updateCustomerFirstName(firstName: string): Promise<boolean> {
-    return this.updateCustomerData('setFirstName', firstName);
-  }
-
-  public async updateCustomerLastName(lastName: string): Promise<boolean> {
-    return this.updateCustomerData('setLastName', lastName);
-  }
-
-  public async updateCustomerEmail(email: string): Promise<boolean> {
-    return this.updateCustomerData('changeEmail', email);
-  }
-
-  public async updateCustomerBirthday(dateOfBirth: string): Promise<boolean> {
-    return this.updateCustomerData('setDateOfBirth', dateOfBirth);
   }
 }
