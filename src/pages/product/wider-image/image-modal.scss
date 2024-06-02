@@ -1,0 +1,56 @@
+.modal-wider-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: rgba(36, 36, 36, 0.6) 0 5px 10px;
+  z-index: 2;
+  animation: appearance 1s ease-in;
+}
+.modal__image {
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.close-button {
+  position: absolute;
+  top: 0px;
+  right: -40px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #333333;
+  background-image: url('../../../assets/dark-cross.svg');
+  animation: slowAppearance 1s ease-in;
+}
+@keyframes appearance {
+  0% {
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slowAppearance {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .close-button {
+    top: -35px;
+    right: -3px;
+  }
+}
