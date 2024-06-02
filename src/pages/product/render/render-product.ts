@@ -2,6 +2,7 @@ import getProductByKey from '../../../api/get-product-by-key';
 import BaseComponent from '../../../components/base-component';
 import BaseTextComponent from '../../../components/base-text-component';
 import useToken from '../../../services/use-token';
+import LANGUAGE from '../../../types/const';
 import { Product } from '../../../types/products';
 import assertNonNullable from '../../../utils/assert-non-nullable';
 import createImages from './create-images';
@@ -26,11 +27,11 @@ export default async function renderProduct(productKey: string) {
       const productInfo = new BaseComponent('div', 'product-info');
       productWrapper.node.append(imagesWrapper.node, productInfo.node);
 
-      const productName = new BaseTextComponent('h2', 'product__name', product.masterData.current.name['en-US']);
+      const productName = new BaseTextComponent('h2', 'product__name', product.masterData.current.name[LANGUAGE]);
       const productDescription = new BaseTextComponent(
         'p',
         'product__description',
-        product.masterData.current.description['en-US'],
+        product.masterData.current.description[LANGUAGE],
       );
 
       const pricesWrapper = new BaseComponent('div', 'price-wrapper');
