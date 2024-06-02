@@ -40,9 +40,9 @@ export default class CustomerUpdater {
     }
   }
 
-  public async updateCustomerData(action: string, value: string): Promise<boolean> {
+  public async updateCustomerData(field: string, value: string): Promise<boolean> {
     try {
-      const field = CustomerUpdater.getActionField(action);
+      const action = field === 'email' ? 'changeEmail' : `set${field.charAt(0).toUpperCase() + field.slice(1)}`;
       const customerData = await getUserInfo();
       const requestBody = {
         version: customerData.version,
@@ -72,21 +72,6 @@ export default class CustomerUpdater {
       showModal('Failed to update customer data!', error.message, false);
     } else {
       showModal('Failed to update customer data: Unknown error', '', false);
-    }
-  }
-
-  private static getActionField(action: string): string {
-    switch (action) {
-      case 'changeEmail':
-        return 'email';
-      case 'setDateOfBirth':
-        return 'dateOfBirth';
-      case 'setFirstName':
-        return 'firstName';
-      case 'setLastName':
-        return 'lastName';
-      default:
-        throw new Error(`Unknown action: ${action}`);
     }
   }
 }

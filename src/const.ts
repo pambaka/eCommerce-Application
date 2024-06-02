@@ -30,10 +30,10 @@ export const ID_NAMES = {
   defaultShipping: 'default-shipping',
   useForBilling: 'use-for-billing',
   defaultBilling: 'default-billing',
-  customerName: 'customer-name',
-  customerSurname: 'customer-surname',
-  customerDob: 'customer-dob',
-  customerEmail: 'customer-email',
+  customerName: 'firstName',
+  customerSurname: 'lastName',
+  customerDob: 'dateOfBirth',
+  customerEmail: 'email',
 };
 
 class Dom<T extends HTMLElement> {

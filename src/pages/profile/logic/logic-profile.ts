@@ -24,9 +24,9 @@ export default class ProfileSection extends BaseComponent {
 
     try {
       this.userInfo = await getUserInfo();
-      console.log('User Info:', this.userInfo);
+      // console.log('User Info:', this.userInfo);
     } catch (error) {
-      console.error('Error loading user data:', error);
+      // console.error('Error loading user data:', error);
       ProfileSection.renderError(this.node, 'Failed to load user data');
       return;
     }
