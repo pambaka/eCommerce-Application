@@ -3,14 +3,11 @@ import changeMainImage from './change-main-image';
 import getCurrentPosition from './get-current-position';
 
 export default function slide(direction: 'left' | 'right', imagesArray: ImageURL[]) {
-  console.log('imagesArray: ', imagesArray);
-  console.log('direction: ', direction);
-
   const arrOfDivsWithImg = document.querySelectorAll('.small-image-wrapper');
 
-  if (arrOfDivsWithImg) {
+  if (arrOfDivsWithImg.length !== 0) {
     let currentPosition = getCurrentPosition();
-    console.log(getCurrentPosition());
+
     if (direction === 'left' && currentPosition > 0) {
       arrOfDivsWithImg.forEach((item) => {
         item.classList.remove('current');
@@ -26,7 +23,6 @@ export default function slide(direction: 'left' | 'right', imagesArray: ImageURL
       arrOfDivsWithImg[currentPosition].classList.add('current');
       changeMainImage(imagesArray, currentPosition);
     }
-    console.log('currentPosition: ', currentPosition);
 
     const leftArrow = document.querySelector('.left-arrow');
     const rightArrow = document.querySelector('.right-arrow');

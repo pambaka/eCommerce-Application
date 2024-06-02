@@ -28,7 +28,7 @@
     .left-arrow,
     .right-arrow {
       width: 30px;
-      height: 70px;
+      height: 45px;
       cursor: pointer;
       color: #6b6b6b;
     }
@@ -57,8 +57,8 @@
 }
 
 .main-image-wrapper {
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 500px;
   align-self: center;
   display: flex;
   align-items: center;
@@ -90,7 +90,7 @@
     }
   }
   .current {
-    border: 1px solid #333333;
+    border: 2px solid #626262;
   }
 }
 
@@ -100,6 +100,11 @@
   min-width: 500px;
   max-height: 100%;
   object-fit: contain;
+  &.no_image {
+    min-width: 180px;
+    max-width: 200px;
+    border-radius: 15px;
+  }
 }
 
 .product-info {

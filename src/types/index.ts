@@ -29,33 +29,6 @@ export interface Token {
   get: () => string | null;
 }
 
-export interface ProductPrice {
-  centAmount: number;
-  currencyCode: string;
-}
-
-export interface Product {
-  masterData: {
-    current: {
-      name: {
-        'en-US': string;
-      };
-      description: {
-        'en-US': string;
-      };
-      masterVariant: {
-        images: { url: string }[];
-        prices: { value: ProductPrice; discounted?: { value: ProductPrice } }[];
-      };
-    };
-  };
-}
-
-export interface CardPrice {
-  regular: number | undefined;
-  discounted: number | undefined;
-}
-
 export interface CustomerIncomeData {
   id: string;
   version: number;
