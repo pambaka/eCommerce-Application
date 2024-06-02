@@ -1,8 +1,8 @@
 export default function updateSaveChangesButtonState() {
   const addressWrapper = document.querySelector('.profile_page__address_wrapper');
-  const saveChangesButton = document.querySelector('.save_changes__btn') as HTMLButtonElement;
+  const saveChangesButton = document.querySelector('.save_changes__btn');
 
-  if (addressWrapper && saveChangesButton) {
+  if (addressWrapper && saveChangesButton instanceof HTMLButtonElement) {
     const visibleSaveButtons = addressWrapper.querySelectorAll('.save-button:not(.hidden)');
     const spans = addressWrapper.querySelectorAll('span.profile_page__input');
 
