@@ -18,7 +18,7 @@ export default async function getSortedProducts(
     },
   )
     .then((res) => {
-      console.log(res);
+      // console.log(res);
 
       if (res.status !== 200) {
         showModal('Something went wrong', 'Please keep calm and try reloading the page');
@@ -27,10 +27,10 @@ export default async function getSortedProducts(
       return res.json();
     })
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       products = data.results;
     })
-    .catch((error) => console.log(error));
+    .catch((error) => error);
 
   return products;
 }

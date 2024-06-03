@@ -12,7 +12,7 @@ export default async function getProducts(accessToken: string): Promise<Product[
     },
   })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
 
       if (res.status !== 200) {
         showModal('Something went wrong', 'Please keep calm and try reloading the page');
@@ -21,10 +21,10 @@ export default async function getProducts(accessToken: string): Promise<Product[
       return res.json();
     })
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       products = data.results;
     })
-    .catch((error) => console.log(error));
+    .catch((error) => error);
 
   return products;
 }

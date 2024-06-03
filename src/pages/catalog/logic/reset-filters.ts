@@ -1,4 +1,5 @@
 import { CLASS_NAMES, DOM } from '../../../const';
+import Filters from './filters';
 import searchProducts from './search-products';
 
 export default async function resetFilters(): Promise<void> {
@@ -35,5 +36,9 @@ export default async function resetFilters(): Promise<void> {
     });
   });
 
-  if (isReseted) await searchProducts();
+  if (isReseted) {
+    await searchProducts();
+
+    Filters.resetMarks();
+  }
 }

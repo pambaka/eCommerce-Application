@@ -11,7 +11,7 @@ export default async function getCategories(accessToken: string): Promise<Catego
     },
   })
     .then((res) => {
-      console.log(res);
+      //   console.log(res);
 
       if (res.status !== 200) {
         return undefined;
@@ -20,11 +20,11 @@ export default async function getCategories(accessToken: string): Promise<Catego
       return res.json();
     })
     .then((data) => {
-      console.log(data);
+      //   console.log(data);
 
       if (data) categories = data.results;
     })
-    .catch((error) => console.log(error));
+    .catch((error) => error);
 
   return categories;
 }

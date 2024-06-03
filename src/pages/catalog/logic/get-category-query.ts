@@ -8,7 +8,7 @@ export default function getCategoryQuery(): string | undefined {
   const { hash } = window.location;
   const category = hash.replace(`${Router.pages.catalog}`, '').replace('/', '');
 
-  if (category) query = `&${QUERY_BASE.category}:"${Catalog.categories[category]}"`;
+  if (category) query = `${QUERY_BASE.category}:"${Catalog.categories[category]}"`;
 
   return query;
 }
