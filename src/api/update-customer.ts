@@ -44,23 +44,27 @@ export default class CustomerUpdater {
     try {
       const action = field === 'email' ? 'changeEmail' : `set${field.charAt(0).toUpperCase() + field.slice(1)}`;
       const customerData = await getUserInfo();
-      const requestBody = {
-        version: customerData.version,
-        actions: [
-          {
-            action,
-            [field]: value,
-          },
-        ],
-      };
 
-      const success = await this.fetchUpdate(requestBody);
+      if (customerData) {
+        const requestBody = {
+          version: customerData.version,
+          actions: [
+            {
+              action,
+              [field]: value,
+            },
+          ],
+        };
 
-      if (success) {
-        showModal(`Successfully updated to ${value}!`, '', true);
+        const success = await this.fetchUpdate(requestBody);
+
+        if (success) {
+          showModal(`Successfully updated to ${value}!`, '', true);
+        }
+
+        return success;
       }
-
-      return success;
+      return false;
     } catch (error) {
       CustomerUpdater.handleError(error);
       return false;
