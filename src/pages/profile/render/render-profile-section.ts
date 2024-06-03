@@ -59,6 +59,23 @@ export default function renderProfileSectionContent(userInfo: CustomerIncomeData
     CLASS_NAMES.profileInput,
   );
 
+  // const passwordField = createEditableFieldWithHandler(
+  //   'Edit password',
+  //   '',
+  //   ID_NAMES.customerPassword,
+  //   () => {
+  //     showPasswordModal(async (currentPassword, newPassword) => {
+  //       try {
+  //         await updateCustomerPassword(currentPassword, newPassword);
+  //       } catch (error) {
+  //         console.error('Error updating password:', error);
+  //       }
+  //     });
+  //   },
+  //   CLASS_NAMES.profileEditableField,
+  //   CLASS_NAMES.profileInput,
+  // ),
+
   infoColumn.node.append(firstNameField, lastNameField, dobField, emailField);
 
   const addressSections: AddressSectionComponent[] = [];
