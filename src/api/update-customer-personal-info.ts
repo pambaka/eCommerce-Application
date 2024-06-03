@@ -74,7 +74,7 @@ export default class CustomerUpdater {
 
   private static handleError(error: unknown): void {
     if (error instanceof Error) {
-      showModal('Failed to update customer data!', error.message, false);
+      showModal('Failed to update customer data!', '', false);
     }
   }
 }

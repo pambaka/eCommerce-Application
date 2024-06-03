@@ -3,6 +3,7 @@ import getUserInfo from './get-user-info';
 import showModal from '../pages/show-modal';
 import showPasswordModal from '../pages/profile/render/show-password-modal';
 import { region } from './const';
+import getCustomerTokens from './get-customer-tokens';
 
 export default async function updateCustomerPassword(currentPassword: string, newPassword: string): Promise<void> {
   const accessToken = useToken.customer.access.get();
@@ -16,8 +17,10 @@ export default async function updateCustomerPassword(currentPassword: string, ne
 
   try {
     const customerData = await getUserInfo();
+
     if (!customerData) {
-      throw new Error('Failed to retrieve customer data');
+      showModal('Failed to retrieve customer data', '', false);
+      return;
     }
 
     const requestBody = {
@@ -42,33 +45,19 @@ export default async function updateCustomerPassword(currentPassword: string, ne
       throw new Error(errorMessage);
     }
 
-    const newAccessToken = await useToken.customer.access.get();
+    const newAccessToken = await getCustomerTokens(customerData.email, newPassword);
     if (newAccessToken) {
       await useToken.customer.access.set(newAccessToken);
     } else {
-      throw new Error('Failed to obtain new access token after password update');
+      showModal('Failed to obtain new access token after password update', '', false);
     }
 
     showModal('Password was successfully updated', '', true);
   } catch (error) {
     if (error instanceof Error) {
-      showModal('Failed to update password!', error.message, false, () => {
+      showModal('Failed to update password!', '', false, () => {
         showPasswordModal(async (currentPwd, newPwd) => {
-          try {
-            await updateCustomerPassword(currentPwd, newPwd);
-          } catch (err) {
-            console.error('Error updating password:', err);
-          }
-        });
-      });
-    } else {
-      showModal('Failed to update password: Unknown error', '', false, () => {
-        showPasswordModal(async (currentPwd, newPwd) => {
-          try {
-            await updateCustomerPassword(currentPwd, newPwd);
-          } catch (err) {
-            console.error('Error updating password:', err);
-          }
+          await updateCustomerPassword(currentPwd, newPwd);
         });
       });
     }
