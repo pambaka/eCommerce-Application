@@ -2,6 +2,12 @@
   padding: 0 var(--outer-margin);
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: $width-tablet-min) {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 .breadcrumbs {
