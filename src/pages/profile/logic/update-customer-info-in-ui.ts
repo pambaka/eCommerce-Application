@@ -1,5 +1,5 @@
 import updateCustomerPassword from '../../../api/update-customer-password';
-import CustomerUpdater from '../../../api/update-customer-personal-info';
+import CustomerUpdater from '../../../api/update-customer';
 
 export default async function updateCustomerInfo(
   id: string,

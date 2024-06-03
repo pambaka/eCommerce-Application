@@ -30,6 +30,16 @@
     .profile_page__editable_field {
       position: relative;
       text-overflow: ellipsis;
+
+      &:last-child {
+        button {
+          grid-column: 2;
+        }
+
+        .profile_page__input {
+          display: none;
+        }
+      }
     }
 
     .profile_page__editable_field label {
@@ -226,7 +236,7 @@
   width: 100%;
 }
 
-modal-window.change-pass-modal {
+.modal-window.change-pass-modal {
   width: 400px;
   height: 300px;
 

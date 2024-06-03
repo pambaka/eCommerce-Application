@@ -55,7 +55,9 @@ export default async function updateCustomerPassword(currentPassword: string, ne
     showModal('Password was successfully updated', '', true);
   } catch (error) {
     if (error instanceof Error) {
-      showModal('Failed to update password!', '', false, () => {
+      const userErrorMessage =
+        error.message === 'The given current password does not match.' ? error.message : 'Unknown error';
+      showModal('Failed to update password!', userErrorMessage, false, () => {
         showPasswordModal(async (currentPwd, newPwd) => {
           await updateCustomerPassword(currentPwd, newPwd);
         });
