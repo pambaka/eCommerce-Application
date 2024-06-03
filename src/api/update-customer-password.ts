@@ -49,7 +49,7 @@ export default async function updateCustomerPassword(currentPassword: string, ne
     if (newAccessToken) {
       await useToken.customer.access.set(newAccessToken);
     } else {
-      showModal('Failed to obtain new access token after password update', '', false);
+      showModal('Failed to update password!', '', false);
     }
 
     showModal('Password was successfully updated', '', true);
