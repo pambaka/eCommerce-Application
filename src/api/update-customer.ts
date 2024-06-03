@@ -44,12 +44,9 @@ export default class CustomerUpdater {
     try {
       const action = field === 'email' ? 'changeEmail' : `set${field.charAt(0).toUpperCase() + field.slice(1)}`;
       const customerData = await getUserInfo();
-      if (!customerData) {
-        throw new Error('Failed to retrieve customer data');
-      }
 
       const requestBody = {
-        version: customerData.version,
+        version: customerData?.version,
         actions: [
           {
             action,
