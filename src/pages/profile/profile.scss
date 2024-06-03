@@ -15,10 +15,37 @@
   .profile_page__info_column {
     margin: 0 20px 40px 20px;
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr 1fr auto;
     gap: 10px;
     align-items: center;
-    max-width: 30%;
+
+    @media (min-width: 700px) {
+      max-width: 50%;
+    }
+
+    @media (max-width: 699px) {
+      min-width: 50%;
+    }
+
+    .profile_page__editable_field {
+      position: relative;
+      text-overflow: ellipsis;
+    }
+
+    .profile_page__editable_field label {
+      grid-column: 1;
+      white-space: nowrap;
+      max-width: 100px;
+      text-overflow: ellipsis;
+    }
+
+    .profile_page__editable_field span {
+      grid-column: 2;
+      white-space: nowrap;
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   .profile_page__address_column {
@@ -60,11 +87,6 @@
       .button {
         grid-column: span 3;
         justify-self: start;
-      }
-
-      .relative-wrapper {
-        position: relative;
-        width: 100%;
       }
 
       .profile_page__editable_field {
@@ -193,6 +215,11 @@
   margin: 0 auto;
   width: 50%;
   height: 10%;
+}
+
+.relative-wrapper {
+  position: relative;
+  width: 100%;
 }
 
 $color-warning: rgb(219, 46, 46);
