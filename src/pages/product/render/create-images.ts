@@ -1,7 +1,7 @@
 import BaseComponent from '../../../components/base-component';
 import BaseImageComponent from '../../../components/base-image-component';
 import SvgImage from '../../../components/svg-image';
-import { Product } from '../../../types/products';
+import { ImageURL, Product } from '../../../types/products';
 import arrows from '../../../assets/arrows-sprite.svg';
 import slide from '../slider/slide';
 import LANGUAGE from '../../../types/const';
@@ -20,8 +20,18 @@ export default function createImages(parentElement: HTMLElement, product: Produc
       imageItem.url,
       `${product.masterData.current.name[LANGUAGE]}`,
     );
-    mainImage.node.addEventListener('click', () => {
-      showWiderImage(imageItem.url, product.masterData.current.name[LANGUAGE]);
+    mainImage.node.addEventListener('click', (e) => {
+      const clickedImage: EventTarget | null = e.currentTarget;
+      if (clickedImage instanceof HTMLImageElement) {
+        const urlOfImage: string = clickedImage.src;
+        let indexOfImage: number | null = null;
+        imagesArray.forEach((item: ImageURL, index: number) => {
+          if (item.url === urlOfImage) indexOfImage = index;
+        });
+        if (typeof indexOfImage === 'number') {
+          showWiderImage(imagesArray, indexOfImage, product);
+        }
+      }
     });
     mainImageWrapper.node.append(mainImage.node);
   });
