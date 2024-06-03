@@ -5,7 +5,8 @@ import createEditableFieldWithHandler from './editable-field/create-editable-fie
 import ButtonComponent from '../../../components/button-component';
 import { CLASS_NAMES, ID_NAMES } from '../../../const';
 import updateAddNewAddressButtonState from './editable-field/update-new-address-button';
-
+import showPasswordModal from './show-password-modal';
+import updateCustomerPassword from '../../../api/update-customer-password';
 // export default function renderProfileSectionContent(userInfo: CustomerIncomeData, parentNode: HTMLElement) {
 //   const contentWrapper = new BaseComponent('div', CLASS_NAMES.profileContentWrapper);
 //   parentNode.appendChild(contentWrapper.node);

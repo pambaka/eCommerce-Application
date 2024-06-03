@@ -77,6 +77,10 @@ export default function makeFieldEditable(
           [ID_NAMES.customerEmail, ID_NAMES.customerName, ID_NAMES.customerSurname, ID_NAMES.customerDob].includes(id)
         ) {
           const userInfo = await getUserInfo();
+          if (!userInfo) {
+            throw new Error('Failed to retrieve user info');
+          }
+
           let currentValue = value;
           if (id === ID_NAMES.customerEmail) {
             currentValue = userInfo.email;

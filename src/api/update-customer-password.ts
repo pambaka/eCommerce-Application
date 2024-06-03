@@ -2,7 +2,7 @@ import useToken from '../services/use-token';
 import getUserInfo from './get-user-info';
 import showModal from '../pages/show-modal';
 import showPasswordModal from '../pages/profile/render/show-password-modal';
-import getCustomerTokens from './get-customer-tokens';
+import { region } from './const';
 
 export default async function updateCustomerPassword(currentPassword: string, newPassword: string): Promise<void> {
   const accessToken = useToken.customer.access.get();
@@ -16,6 +16,10 @@ export default async function updateCustomerPassword(currentPassword: string, ne
 
   try {
     const customerData = await getUserInfo();
+    if (!customerData) {
+      throw new Error('Failed to retrieve customer data');
+    }
+
     const requestBody = {
       id: customerData.id,
       version: customerData.version,
@@ -38,7 +42,7 @@ export default async function updateCustomerPassword(currentPassword: string, ne
       throw new Error(errorMessage);
     }
 
-    const newAccessToken = await getCustomerTokens(customerData.email, newPassword);
+    const newAccessToken = await useToken.customer.access.get();
     if (newAccessToken) {
       await useToken.customer.access.set(newAccessToken);
     } else {

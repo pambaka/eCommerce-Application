@@ -12,6 +12,7 @@ export default class CustomerUpdater {
 
   private async fetchUpdate(requestBody: object): Promise<boolean> {
     if (!this.accessToken) {
+      showModal('No access token available', '', false);
       return false;
     }
 
@@ -42,8 +43,12 @@ export default class CustomerUpdater {
 
   public async updateCustomerData(field: string, value: string): Promise<boolean> {
     try {
-      const action = field === 'email' ? 'changeEmail' : `set${field.charAt(0).toUpperCase() + field.slice(1)}`;
       const customerData = await getUserInfo();
+      if (!customerData) {
+        throw new Error('Failed to retrieve customer data');
+      }
+
+      const action = field === 'email' ? 'changeEmail' : `set${field.charAt(0).toUpperCase() + field.slice(1)}`;
       const requestBody = {
         version: customerData.version,
         actions: [
@@ -69,7 +74,7 @@ export default class CustomerUpdater {
 
   private static handleError(error: unknown): void {
     if (error instanceof Error) {
-      showModal('Failed to update customer data!', '', false);
+      showModal('Failed to update customer data!', error.message, false);
     }
   }
 }
