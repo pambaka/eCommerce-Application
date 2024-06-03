@@ -14,7 +14,7 @@ export default async function renderProduct(productKey: string) {
 
   if (token) {
     const product: Product | undefined = await getProductByKey(productKey, token);
-    console.log('product', product);
+
     if (product) {
       const main = assertNonNullable<HTMLElement>('main');
       main.innerHTML = '';
