@@ -1,5 +1,6 @@
 import getCategories from '../api/get-categories';
 import { Category } from '../types/products';
+import Catalog from './catalog';
 import useToken from './use-token';
 
 export default async function getCategoryKeys(): Promise<string[]> {
@@ -12,7 +13,10 @@ export default async function getCategoryKeys(): Promise<string[]> {
 
     if (categories) {
       categories.forEach((cat) => {
-        if (cat.key) keys.push(cat.key);
+        if (cat.key) {
+          keys.push(cat.key);
+          Catalog.addCategory(cat.key, cat.id);
+        }
       });
     }
   }

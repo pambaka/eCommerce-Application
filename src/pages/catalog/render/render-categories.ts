@@ -1,26 +1,20 @@
 import BaseComponent from '../../../components/base-component';
+import Catalog from '../../../services/catalog';
+import getCategoryNameByKey from '../../../utils/get-category-key-by-name';
 import BaseTextComponent from '../../../components/base-text-component';
-import getCategoryKeys from '../../../services/get-category-keys';
-import useToken from '../../../services/use-token';
-import { BREADCRUMBS_NAMES } from '../const';
 import updateCategoryHash from '../logic/update-category-hash';
 
-export default async function renderCategories(parentElement: HTMLElement) {
+export default function renderCategories(parentElement: HTMLElement): void {
   const categories = new BaseComponent('div', 'categories');
 
-  const token = await useToken.anonymous.access.get();
+  Object.keys(Catalog.categories).forEach((key) => {
+    const name = getCategoryNameByKey(key);
+    const p = new BaseTextComponent('p', '', `${name}`);
+    p.node.setAttribute('value', key);
+    p.node.addEventListener('click', updateCategoryHash);
 
-  if (token) {
-    const categoryKeys = await getCategoryKeys();
-
-    for (let i = 0; i < categoryKeys.length; i += 1) {
-      const p = new BaseTextComponent('p', '', `${BREADCRUMBS_NAMES[categoryKeys[i]]}`);
-      p.node.setAttribute('value', categoryKeys[i]);
-      p.node.addEventListener('click', updateCategoryHash);
-
-      categories.node.append(p.node);
-    }
-  }
+    categories.node.append(p.node);
+  });
 
   parentElement.append(categories.node);
 }

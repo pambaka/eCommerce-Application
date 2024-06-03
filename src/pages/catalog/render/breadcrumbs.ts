@@ -1,7 +1,7 @@
 import BaseComponent from '../../../components/base-component';
 import BaseLinkComponent from '../../../components/base-link-component';
 import Router from '../../../services/router';
-import { BREADCRUMBS_NAMES } from '../const';
+import getCategoryNameByKey from '../../../utils/get-category-key-by-name';
 
 export default class Breadcrumbs {
   static node = new BaseComponent('div', 'breadcrumbs').node;
@@ -28,7 +28,7 @@ export default class Breadcrumbs {
   }
 
   private static add(hash: string, key: string) {
-    const newLink = new BaseLinkComponent(hash, '', BREADCRUMBS_NAMES[key]);
+    const newLink = new BaseLinkComponent(hash, '', getCategoryNameByKey(key));
     this.links.push(newLink.node);
 
     this.renderLinks();

@@ -16,16 +16,6 @@ export const SORTING_ORDER = {
 
 export const PRODUCT_COLORS = ['blue', 'green', 'red', 'yellow'];
 
-export const CATEGORIES: { [key: string]: string } = {
-  elephants: 'df56876c-9e34-4964-9d57-b1d0ebaea778',
-  'test products': 'fe63ba23-a21f-4022-a536-395088c1fe14',
-};
-
-export const BREADCRUMBS_NAMES: { [key: string]: string } = {
-  elephants: 'Elephants',
-  'test-products': 'Test products',
-};
-
 export const QUERY_BASE = {
   category: 'filter.query=categories.id',
   color: 'filter.query=variants.attributes.color.key',
