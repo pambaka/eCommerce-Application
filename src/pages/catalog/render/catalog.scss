@@ -122,8 +122,10 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
+        accent-color: $color-accent;
 
         label {
+          max-width: $catalog-card-width;
           padding: 2px;
           font-size: 16px;
           cursor: pointer;
@@ -313,4 +315,9 @@
     font-size: 20px;
     color: gray;
   }
+}
+
+.is-filtered {
+  color: $color-accent;
+  background-color: $color-bg-light;
 }

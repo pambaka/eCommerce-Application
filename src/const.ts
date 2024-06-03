@@ -15,8 +15,6 @@ export const CLASS_NAMES = {
   country: 'registration__country',
   registrationButton: 'registration__submit',
   shippingAddress: 'registration__shipping-address',
-  dropdownText: 'dropdown-text',
-  productsWrapper: 'products-wrapper',
   profileContentWrapper: 'profile_page__content_wrapper',
   profileInfoColumn: 'profile_page__info_column',
   profileAddressColumn: 'profile_page__address_column',
@@ -24,6 +22,9 @@ export const CLASS_NAMES = {
   profileInput: 'profile_page__input',
   profileAddAddressButton: 'profile_page__add_address_button',
   searchInput: 'search-input',
+  dropdownText: 'dropdown-text',
+  productsWrapper: 'products-wrapper',
+  filters: 'filter-block',
   filterCategory: 'filter-category',
   filterColor: 'filter-color',
 } as const;

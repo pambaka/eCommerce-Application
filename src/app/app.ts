@@ -8,11 +8,12 @@ import renderRegistration from '../pages/registration/render/render-registration
 import renderProfilePage from '../pages/profile/render/render-profile';
 import isCustomerAuthorized from '../utils/is-customer-authorized';
 import replaceLocation from '../utils/replace-location';
-import renderCatalog from '../pages/catalog/render/render-catalog';
 import renderProduct from '../pages/product/render/render-product';
 import renderCatetoryProducts from '../pages/catalog/render/render-category-products';
 import Breadcrumbs from '../pages/catalog/render/breadcrumbs';
-import { CLASS_NAMES, DOM } from '../const';
+import { CLASS_NAMES } from '../const';
+import renderEmptyCatalog from '../pages/catalog/render/render-empty-catalog';
+import renderAllProducts from '../pages/catalog/render/render-all-products';
 
 export default class App {
   private header: Header;
@@ -94,12 +95,16 @@ export default class App {
 
     Object.keys(Router.categoryPages).forEach((key) => {
       this.router.register(Router.categoryPages[key], async () => {
-        const wrapper = DOM.elements[CLASS_NAMES.productsWrapper];
-        if (!wrapper) await this.renderCatalog();
-        else {
-          const categories = document.querySelector('.categories');
-          if (categories) categories.remove();
+        const wrapper = document.querySelector(`.${CLASS_NAMES.productsWrapper}`);
+
+        if (!wrapper) {
+          this.prepare();
+          this.contentNode.append(renderEmptyCatalog());
         }
+
+        const categories = document.querySelector('.categories');
+        if (categories) categories.remove();
+
         await renderCatetoryProducts(key);
         Breadcrumbs.update();
       });
@@ -118,7 +123,8 @@ export default class App {
 
   private async renderCatalog() {
     this.prepare();
-    this.contentNode.append(await renderCatalog());
+    this.contentNode.append(renderEmptyCatalog());
+    await renderAllProducts();
   }
 
   private renderRegistrationPage() {

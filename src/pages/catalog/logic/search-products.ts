@@ -27,14 +27,19 @@ export default async function searchProducts(event?: Event) {
     let products: ProductProjection[] | Product[] | undefined;
 
     if (input.value) {
-      let query = `text.${LANGUAGE}="${input.value}"`;
+      let query = `text.${LANGUAGE}="${input.value}"&fuzzy=true`;
 
       if (sortQuery) query += `&sort=${sortQuery}`;
-      if (categoryQuery) query += categoryQuery;
+      if (categoryQuery) query += `&${categoryQuery}`;
 
       products = await getSearchedProducts(token, query);
     } else if (sortQuery) {
-      products = await getSortedProducts(token, sortQuery);
+      let query = sortQuery;
+      if (categoryQuery) query += `&${categoryQuery}`;
+
+      products = await getSortedProducts(token, query);
+    } else if (categoryQuery) {
+      products = await getSearchedProducts(token, categoryQuery);
     } else {
       products = await getProducts(token);
     }

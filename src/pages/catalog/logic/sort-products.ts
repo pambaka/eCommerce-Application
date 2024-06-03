@@ -27,7 +27,7 @@ export default async function sortProducts(this: HTMLElement): Promise<void> {
       let query: string = sortingOrder;
 
       if (searchInput.value) query += `&text.${LANGUAGE}=${searchInput.value}`;
-      if (categoryQuery) query += categoryQuery;
+      if (categoryQuery) query += `&${categoryQuery}`;
 
       const products: ProductProjection[] | undefined = await getSortedProducts(token, query);
 
