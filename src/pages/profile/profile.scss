@@ -38,12 +38,11 @@
     .profile_page__address_wrapper {
       width: 100%;
       width: 350px;
-      height: 400px;
+      height: auto;
       display: grid;
       grid-template-columns: auto 1fr auto;
       align-items: center;
       gap: 10px;
-      position: relative;
       background-color: #f9f8f8;
       padding: 30px 10px;
       margin-bottom: 40px;
@@ -63,19 +62,31 @@
         justify-self: start;
       }
 
+      .relative-wrapper {
+        position: relative;
+        width: 100%;
+      }
+
       .profile_page__editable_field {
         display: contents;
         white-space: nowrap;
+        position: relative;
       }
 
       .profile_page__editable_field label {
         grid-column: 1;
         white-space: nowrap;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .profile_page__editable_field span {
         grid-column: 2;
         white-space: nowrap;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .profile_page__input {
@@ -160,18 +171,14 @@
   background-color: transparent;
 }
 
-.profile_page__editable_field[data-warning]::after {
-  content: attr(data-warning);
-  display: block;
+.warning-text {
   color: rgb(219, 46, 46);
   font-style: italic;
   font-size: 14px;
   line-height: calc(14px + 2px);
-  height: calc((14px + 2px) * 2);
-  margin-top: 5px;
-  bottom: -25px;
-  left: 0;
+  margin-top: 0.5em;
   position: absolute;
+  top: -20px;
 }
 
 .profile_page__address_column {

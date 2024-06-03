@@ -12,6 +12,7 @@ export default function createEditableField(
   editCallback: (event: Event) => void,
   wrapperClass: string,
   textClass: string,
+  warning: string | null = null,
 ) {
   const wrapper = new BaseComponent('div', wrapperClass);
 
@@ -29,6 +30,13 @@ export default function createEditableField(
     `${editIcon}#edit`,
   );
 
-  wrapper.node.append(label.node, text.node, editButton.node);
+  const relativeWrapper = new BaseComponent('div', 'relative-wrapper');
+  if (warning) {
+    const warningElement = new BaseComponent('p', 'warning-text');
+    warningElement.node.textContent = warning;
+    relativeWrapper.node.appendChild(warningElement.node);
+  }
+
+  wrapper.node.append(label.node, text.node, editButton.node, relativeWrapper.node);
   return wrapper.node;
 }

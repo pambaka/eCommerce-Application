@@ -58,10 +58,14 @@ export default function makeFieldEditable(
       }
 
       const parentElement = input.parentNode as HTMLElement;
-      parentElement.removeAttribute('data-warning');
+      const relativeWrapper = parentElement.querySelector('.relative-wrapper') as HTMLElement;
+      relativeWrapper.innerHTML = '';
 
       if (warning) {
-        parentElement.setAttribute('data-warning', warning);
+        const warningElement = document.createElement('p');
+        warningElement.className = 'warning-text';
+        warningElement.textContent = warning;
+        relativeWrapper.appendChild(warningElement);
         saveCallback(input.value, false);
         return;
       }
@@ -84,7 +88,10 @@ export default function makeFieldEditable(
             currentValue = userInfo.dateOfBirth;
           }
           input.value = currentValue;
-          parentElement.setAttribute('data-warning', 'Failed to update data on server');
+          const warningElement = document.createElement('p');
+          warningElement.className = 'warning-text';
+          warningElement.textContent = 'Failed to update data on server';
+          relativeWrapper.appendChild(warningElement);
           saveCallback(currentValue, false);
           return;
         }
@@ -113,7 +120,10 @@ export default function makeFieldEditable(
         updateSaveChangesButtonState();
       } catch (error) {
         console.error('Error updating customer data:', error);
-        parentElement.setAttribute('data-warning', 'Failed to update data on server');
+        const warningElement = document.createElement('p');
+        warningElement.className = 'warning-text';
+        warningElement.textContent = 'Failed to update data on server';
+        relativeWrapper.appendChild(warningElement);
         saveCallback(input.value, false);
       }
     },
