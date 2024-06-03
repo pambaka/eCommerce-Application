@@ -78,7 +78,11 @@
       margin: 0 auto;
       text-align: start;
 
-      @media (max-width: 450px) {
+      @media (max-width: 880px) {
+        width: 400px;
+      }
+
+      @media (max-width: 500px) {
         min-width: 330px;
         max-width: 90%;
         box-sizing: content-box;
