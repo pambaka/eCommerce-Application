@@ -31,7 +31,7 @@
   a::after {
     content: url('../../../assets/breadcrumbs-arrow.svg');
     display: inline-block;
-    height: 20px;
+    height: 16px;
     width: 10px;
   }
 }
@@ -43,7 +43,7 @@
 
   p {
     cursor: pointer;
-    padding: 0 5px;
+    padding: 2px 5px;
     font-size: 14px;
     color: #757575;
     border-radius: 4px;
