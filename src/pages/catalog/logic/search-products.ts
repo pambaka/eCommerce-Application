@@ -7,6 +7,7 @@ import LANGUAGE from '../../../types/const';
 import { Product, ProductProjection } from '../../../types/products';
 import { SORTING_ORDER } from '../const';
 import renderProducts from '../render/render-products';
+import getCategoryQuery from './get-category-query';
 
 export default async function searchProducts(event?: Event) {
   event?.preventDefault();
@@ -18,6 +19,8 @@ export default async function searchProducts(event?: Event) {
   let sortQuery: string | undefined;
   if (dropdownText.textContent) sortQuery = SORTING_ORDER[dropdownText.textContent];
 
+  const categoryQuery: string | undefined = getCategoryQuery();
+
   const token: string | null = await useToken.anonymous.access.get();
 
   if (token) {
@@ -27,6 +30,7 @@ export default async function searchProducts(event?: Event) {
       let query = `text.${LANGUAGE}="${input.value}"`;
 
       if (sortQuery) query += `&sort=${sortQuery}`;
+      if (categoryQuery) query += categoryQuery;
 
       products = await getSearchedProducts(token, query);
     } else if (sortQuery) {
