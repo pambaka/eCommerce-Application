@@ -10,6 +10,9 @@ import isCustomerAuthorized from '../utils/is-customer-authorized';
 import replaceLocation from '../utils/replace-location';
 import renderCatalog from '../pages/catalog/render/render-catalog';
 import renderProduct from '../pages/product/render/render-product';
+import renderCatetoryProducts from '../pages/catalog/render/render-category-products';
+import Breadcrumbs from '../pages/catalog/render/breadcrumbs';
+import { CLASS_NAMES, DOM } from '../const';
 
 export default class App {
   private header: Header;
@@ -38,6 +41,7 @@ export default class App {
     document.addEventListener('DOMContentLoaded', async () => {
       this.setupInitialLayout();
       await this.registerProductRoutes();
+      await this.registerCategoryRoutes();
       this.render();
     });
   }
@@ -81,6 +85,23 @@ export default class App {
       this.router.register(Router.productPages[key], () => {
         this.prepare();
         renderProduct(key);
+      });
+    });
+  }
+
+  private async registerCategoryRoutes() {
+    await Router.addCategoryPages();
+
+    Object.keys(Router.categoryPages).forEach((key) => {
+      this.router.register(Router.categoryPages[key], async () => {
+        const wrapper = DOM.elements[CLASS_NAMES.productsWrapper];
+        if (!wrapper) await this.renderCatalog();
+        else {
+          const categories = document.querySelector('.categories');
+          if (categories) categories.remove();
+        }
+        await renderCatetoryProducts(key);
+        Breadcrumbs.update();
       });
     });
   }

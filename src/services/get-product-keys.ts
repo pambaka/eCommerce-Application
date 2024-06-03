@@ -6,7 +6,6 @@ export default async function getProductKeys(): Promise<string[]> {
   const keys: string[] = [];
 
   const token: string | null = await useToken.anonymous.access.get();
-  console.log('token', token);
 
   if (token) {
     const products: Product[] | undefined = await getProducts(token);
