@@ -257,6 +257,8 @@
     position: relative;
     width: 140px;
     height: 24px;
+    display: flex;
+    align-items: center;
     background-color: #e9e6e6;
     box-shadow: 0px 0px 4px inset gray;
     cursor: pointer;
