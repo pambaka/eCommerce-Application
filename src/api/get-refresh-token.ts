@@ -18,8 +18,5 @@ export default function getRefreshToken(refreshToken: string): Promise<string | 
       return response.json();
     })
     .then((data) => data.access_token)
-    .catch((error) => {
-      console.error('Error refreshing token:', error);
-      return undefined;
-    });
+    .catch(() => undefined);
 }

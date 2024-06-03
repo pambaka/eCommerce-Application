@@ -9,6 +9,8 @@ import validatePostalCode from '../../../registration/logic/validate-postal-code
 import validateStreet from '../../../registration/logic/validate-street';
 import renderSelectCountriesInProfile from '../render-select-countries';
 import updateSaveChangesButtonState from './update-save-changes-state';
+import updateCustomerInfo from '../../logic/update-customer-info-in-ui';
+import getUserInfo from '../../../../api/get-user-info';
 
 export default function makeFieldEditable(
   wrapper: HTMLElement,
@@ -37,7 +39,7 @@ export default function makeFieldEditable(
 
   const saveButton = new ButtonWithSvgIcon(
     'save-button',
-    () => {
+    async () => {
       let warning = '';
       if (id === ID_NAMES.customerEmail) {
         warning = validateEmail(input.value);
@@ -56,36 +58,74 @@ export default function makeFieldEditable(
       }
 
       const parentElement = input.parentNode as HTMLElement;
-      parentElement.removeAttribute('data-warning');
+      const relativeWrapper = parentElement.querySelector('.relative-wrapper') as HTMLElement;
+      relativeWrapper.innerHTML = '';
 
       if (warning) {
-        parentElement.setAttribute('data-warning', warning);
+        const warningElement = document.createElement('p');
+        warningElement.className = 'warning-text';
+        warningElement.textContent = warning;
+        relativeWrapper.appendChild(warningElement);
         saveCallback(input.value, false);
         return;
       }
 
-      saveCallback(input.value, true);
-      const newField = createEditableField(
-        labelText,
-        input.value,
-        id,
-        (event) => {
-          const target = event.currentTarget as HTMLElement;
-          makeFieldEditable(
-            target.parentNode as HTMLElement,
-            labelText,
-            input.value,
-            id,
-            saveCallback,
-            wrapperClass,
-            textClass,
-          );
-        },
-        wrapperClass,
-        textClass,
-      );
-      wrapper.replaceWith(newField);
-      updateSaveChangesButtonState();
+      try {
+        const success = await updateCustomerInfo(id, input.value);
+        if (
+          !success &&
+          [ID_NAMES.customerEmail, ID_NAMES.customerName, ID_NAMES.customerSurname, ID_NAMES.customerDob].includes(id)
+        ) {
+          const userInfo = await getUserInfo();
+          let currentValue = value;
+          if (id === ID_NAMES.customerEmail) {
+            currentValue = userInfo.email;
+          } else if (id === ID_NAMES.customerName) {
+            currentValue = userInfo.firstName;
+          } else if (id === ID_NAMES.customerSurname) {
+            currentValue = userInfo.lastName;
+          } else if (id === ID_NAMES.customerDob) {
+            currentValue = userInfo.dateOfBirth;
+          }
+          input.value = currentValue;
+          const warningElement = document.createElement('p');
+          warningElement.className = 'warning-text';
+          warningElement.textContent = 'Failed to update data on server';
+          relativeWrapper.appendChild(warningElement);
+          saveCallback(currentValue, false);
+          return;
+        }
+        saveCallback(input.value, true);
+
+        const newField = createEditableField(
+          labelText,
+          input.value,
+          id,
+          (event) => {
+            const target = event.currentTarget as HTMLElement;
+            makeFieldEditable(
+              target.parentNode as HTMLElement,
+              labelText,
+              input.value,
+              id,
+              saveCallback,
+              wrapperClass,
+              textClass,
+            );
+          },
+          wrapperClass,
+          textClass,
+        );
+        wrapper.replaceWith(newField);
+        updateSaveChangesButtonState();
+      } catch (error) {
+        console.error('Error updating customer data:', error);
+        const warningElement = document.createElement('p');
+        warningElement.className = 'warning-text';
+        warningElement.textContent = 'Failed to update data on server';
+        relativeWrapper.appendChild(warningElement);
+        saveCallback(input.value, false);
+      }
     },
     'Save',
     'Save',
