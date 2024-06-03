@@ -28,9 +28,8 @@ export default class CustomerUpdater {
       });
 
       if (!response.ok) {
-        const errorResponse = await response.json();
-        const errorMessage = errorResponse.message || 'Unknown error';
-        throw new Error(errorMessage);
+        showModal('Something went wrong', '');
+        return false;
       }
 
       return true;
@@ -73,7 +72,7 @@ export default class CustomerUpdater {
 
   private static handleError(error: unknown): void {
     if (error instanceof Error) {
-      showModal('Failed to update customer data!', '', false);
+      showModal('Failed to update customer data!', 'Something went wrong...', false);
     }
   }
 }

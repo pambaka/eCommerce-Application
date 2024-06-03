@@ -121,12 +121,11 @@ export default function makeFieldEditable(
         wrapper.replaceWith(newField);
         updateSaveChangesButtonState();
       } catch (error) {
-        console.error('Error updating customer data:', error);
         const warningElement = document.createElement('p');
         warningElement.className = 'warning-text';
         warningElement.textContent = 'Failed to update data on server';
         relativeWrapper.appendChild(warningElement);
-        saveCallback(input.value, false);
+        saveCallback(value, false); // Use the old value in case of error
       }
     },
     'Save',
