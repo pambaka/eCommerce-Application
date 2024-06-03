@@ -16,25 +16,24 @@ export default class Breadcrumbs {
     const catalog = new BaseLinkComponent(Router.pages.catalog, '', 'Catalog');
 
     this.links.push(home.node, catalog.node);
-
-    this.renderLinks();
   }
 
   static update() {
+    Breadcrumbs.init();
+
     const { hash } = window.location;
     const nestingLevels = hash.split('/');
+    Breadcrumbs.add(hash, nestingLevels[nestingLevels.length - 1]);
 
-    if (nestingLevels.length === this.links.length) Breadcrumbs.add(hash, nestingLevels[nestingLevels.length - 1]);
+    Breadcrumbs.renderLinks();
   }
 
   private static add(hash: string, key: string) {
     const newLink = new BaseLinkComponent(hash, '', getCategoryNameByKey(key));
     this.links.push(newLink.node);
-
-    this.renderLinks();
   }
 
-  private static renderLinks() {
+  static renderLinks() {
     this.links.forEach((link) => {
       this.node.append(link);
     });

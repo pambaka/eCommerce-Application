@@ -19,6 +19,7 @@ export default async function renderCatalog(): Promise<HTMLElement> {
   const breadcrumbsWrapper = new BaseComponent('div', 'breadcrumbs-wrapper');
   breadcrumbsWrapper.node.append(Breadcrumbs.node);
   Breadcrumbs.init();
+  Breadcrumbs.renderLinks();
 
   if (window.location.hash === Router.pages.catalog) renderCategories(breadcrumbsWrapper.node);
 
