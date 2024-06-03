@@ -39,3 +39,11 @@ export interface CardPrice {
 export interface ImageURL {
   url: string;
 }
+
+export interface Category {
+  id: string;
+  key: string;
+  name: {
+    [LANGUAGE]: string;
+  };
+}

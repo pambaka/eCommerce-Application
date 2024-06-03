@@ -1,6 +1,13 @@
 @import '../../../styles/variables.scss';
+@import './breadcrumbs.scss';
 
 .catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.catalog-content {
   display: flex;
   gap: $catalog-gap;
   padding: 0px var(--outer-margin);
@@ -118,6 +125,12 @@
 
         label {
           cursor: pointer;
+          transition: 0.5s;
+
+          &:hover {
+            color: $color-accent;
+            transition: 0.5s;
+          }
         }
       }
 

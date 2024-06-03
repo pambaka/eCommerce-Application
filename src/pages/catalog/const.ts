@@ -21,6 +21,11 @@ export const CATEGORIES: { [key: string]: string } = {
   'test products': 'fe63ba23-a21f-4022-a536-395088c1fe14',
 };
 
+export const BREADCRUMBS_NAMES: { [key: string]: string } = {
+  elephants: 'Elephants',
+  'test-products': 'Test products',
+};
+
 export const QUERY_BASE = {
   category: 'filter.query=categories.id',
   color: 'filter.query=variants.attributes.color.key',
