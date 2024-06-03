@@ -30,6 +30,16 @@
     .profile_page__editable_field {
       position: relative;
       text-overflow: ellipsis;
+
+      &:last-child {
+        button {
+          grid-column: 2;
+        }
+
+        .profile_page__input {
+          display: none;
+        }
+      }
     }
 
     .profile_page__editable_field label {
@@ -42,7 +52,7 @@
     .profile_page__editable_field span {
       grid-column: 2;
       white-space: nowrap;
-      max-width: 150px;
+      max-width: 200px;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -226,5 +236,20 @@
   width: 100%;
 }
 
-$color-warning: rgb(219, 46, 46);
-$font-size-warning: 14px;
+.modal-window.change-pass-modal {
+  width: 400px;
+  height: 300px;
+
+  .button:first-of-type {
+    position: static;
+    width: 160px;
+    margin-top: 10px;
+    background-image: none;
+    background-color: #f9f8f8;
+  }
+
+  p {
+    color: rgb(219, 46, 46);
+    padding: 10px 10px 0 10px;
+  }
+}

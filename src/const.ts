@@ -36,6 +36,7 @@ export const ID_NAMES = {
   customerSurname: 'lastName',
   customerDob: 'dateOfBirth',
   customerEmail: 'email',
+  customerPassword: 'customer-password',
 };
 
 class Dom<T extends HTMLElement> {

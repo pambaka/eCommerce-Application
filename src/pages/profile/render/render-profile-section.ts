@@ -59,7 +59,16 @@ export default function renderProfileSectionContent(userInfo: CustomerIncomeData
     CLASS_NAMES.profileInput,
   );
 
-  infoColumn.node.append(firstNameField, lastNameField, dobField, emailField);
+  const passwordField = createEditableFieldWithHandler(
+    'Edit password',
+    '',
+    ID_NAMES.customerPassword,
+    () => {},
+    CLASS_NAMES.profileEditableField,
+    CLASS_NAMES.profileInput,
+  );
+
+  infoColumn.node.append(firstNameField, lastNameField, dobField, emailField, passwordField);
 
   const addressSections: AddressSectionComponent[] = [];
 

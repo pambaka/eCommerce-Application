@@ -77,23 +77,25 @@ export default function makeFieldEditable(
           [ID_NAMES.customerEmail, ID_NAMES.customerName, ID_NAMES.customerSurname, ID_NAMES.customerDob].includes(id)
         ) {
           const userInfo = await getUserInfo();
-          let currentValue = value;
-          if (id === ID_NAMES.customerEmail) {
-            currentValue = userInfo.email;
-          } else if (id === ID_NAMES.customerName) {
-            currentValue = userInfo.firstName;
-          } else if (id === ID_NAMES.customerSurname) {
-            currentValue = userInfo.lastName;
-          } else if (id === ID_NAMES.customerDob) {
-            currentValue = userInfo.dateOfBirth;
+          if (userInfo) {
+            let currentValue = value;
+            if (id === ID_NAMES.customerEmail) {
+              currentValue = userInfo.email;
+            } else if (id === ID_NAMES.customerName) {
+              currentValue = userInfo.firstName;
+            } else if (id === ID_NAMES.customerSurname) {
+              currentValue = userInfo.lastName;
+            } else if (id === ID_NAMES.customerDob) {
+              currentValue = userInfo.dateOfBirth;
+            }
+            input.value = currentValue;
+            const warningElement = document.createElement('p');
+            warningElement.className = 'warning-text';
+            warningElement.textContent = 'Failed to update data on server';
+            relativeWrapper.appendChild(warningElement);
+            saveCallback(currentValue, false);
+            return;
           }
-          input.value = currentValue;
-          const warningElement = document.createElement('p');
-          warningElement.className = 'warning-text';
-          warningElement.textContent = 'Failed to update data on server';
-          relativeWrapper.appendChild(warningElement);
-          saveCallback(currentValue, false);
-          return;
         }
         saveCallback(input.value, true);
 
@@ -119,12 +121,11 @@ export default function makeFieldEditable(
         wrapper.replaceWith(newField);
         updateSaveChangesButtonState();
       } catch (error) {
-        console.error('Error updating customer data:', error);
         const warningElement = document.createElement('p');
         warningElement.className = 'warning-text';
         warningElement.textContent = 'Failed to update data on server';
         relativeWrapper.appendChild(warningElement);
-        saveCallback(input.value, false);
+        saveCallback(value, false); // Use the old value in case of error
       }
     },
     'Save',

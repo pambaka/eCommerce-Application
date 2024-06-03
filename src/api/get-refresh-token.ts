@@ -9,14 +9,7 @@ export default function getRefreshToken(refreshToken: string): Promise<string | 
       Authorization: `Basic ${btoa(`${process.env.client_id}:${process.env.secret}`)}`,
     },
   })
-    .then((response) => {
-      if (!response.ok) {
-        return response.text().then((text) => {
-          throw new Error(`Failed to refresh token: ${response.status} - ${text}`);
-        });
-      }
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => data.access_token)
     .catch(() => undefined);
 }
