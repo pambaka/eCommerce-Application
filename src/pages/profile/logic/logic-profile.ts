@@ -22,15 +22,13 @@ export default class ProfileSection extends BaseComponent {
     const title = new BaseTextComponent('h1', 'profile_page__title', 'User Profile');
     this.node.appendChild(title.node);
 
-    try {
-      this.userInfo = await getUserInfo();
-    } catch (error) {
+    this.userInfo = await getUserInfo();
+
+    if (!this.userInfo) {
       ProfileSection.renderError(this.node, 'Failed to load user data');
       return;
     }
 
-    if (this.userInfo) {
-      renderProfileSectionContent(this.userInfo, this.node);
-    }
+    renderProfileSectionContent(this.userInfo, this.node);
   }
 }

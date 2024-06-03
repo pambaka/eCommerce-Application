@@ -4,6 +4,7 @@ import useToken from '../services/use-token';
 import replaceLocation from '../utils/replace-location';
 import Router from '../services/router';
 import Customer from '../utils/customer';
+import showModal from '../pages/show-modal';
 
 export default function getUserInfo(): Promise<CustomerIncomeData | undefined> {
   const accessToken = useToken.customer.access.get();
@@ -29,9 +30,8 @@ export default function getUserInfo(): Promise<CustomerIncomeData | undefined> {
       }
 
       if (!response.ok) {
-        return response.text().then((text) => {
-          throw new Error(`Failed to fetch user info: ${response.status} - ${text}`);
-        });
+        showModal('Something went wrong!', '');
+        return undefined;
       }
 
       return response.json();
