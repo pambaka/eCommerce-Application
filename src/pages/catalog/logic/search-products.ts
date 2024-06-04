@@ -7,6 +7,7 @@ import LANGUAGE from '../../../types/const';
 import { Product, ProductProjection } from '../../../types/products';
 import { SORTING_ORDER } from '../const';
 import renderProducts from '../render/render-products';
+import getCategoryQuery from './get-category-query';
 
 export default async function searchProducts(event?: Event) {
   event?.preventDefault();
@@ -18,19 +19,27 @@ export default async function searchProducts(event?: Event) {
   let sortQuery: string | undefined;
   if (dropdownText.textContent) sortQuery = SORTING_ORDER[dropdownText.textContent];
 
+  const categoryQuery: string | undefined = getCategoryQuery();
+
   const token: string | null = await useToken.anonymous.access.get();
 
   if (token) {
     let products: ProductProjection[] | Product[] | undefined;
 
     if (input.value) {
-      let query = `text.${LANGUAGE}="${input.value}"`;
+      let query = `text.${LANGUAGE}="${input.value}"&fuzzy=true`;
 
       if (sortQuery) query += `&sort=${sortQuery}`;
+      if (categoryQuery) query += `&${categoryQuery}`;
 
       products = await getSearchedProducts(token, query);
     } else if (sortQuery) {
-      products = await getSortedProducts(token, sortQuery);
+      let query = sortQuery;
+      if (categoryQuery) query += `&${categoryQuery}`;
+
+      products = await getSortedProducts(token, query);
+    } else if (categoryQuery) {
+      products = await getSearchedProducts(token, categoryQuery);
     } else {
       products = await getProducts(token);
     }

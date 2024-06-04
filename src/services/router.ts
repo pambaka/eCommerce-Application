@@ -1,4 +1,5 @@
 import getProductKeys from './get-product-keys';
+import getCategoryKeys from './get-category-keys';
 
 export default class Router {
   private routes: Record<string, () => void>;
@@ -15,6 +16,8 @@ export default class Router {
   };
 
   public static productPages: { [key: string]: string } = {};
+
+  public static categoryPages: { [key: string]: string } = {};
 
   constructor() {
     this.routes = {};
@@ -41,6 +44,14 @@ export default class Router {
 
     keys.forEach((key) => {
       Router.productPages[key] = `#product/${key}`;
+    });
+  }
+
+  static async addCategoryPages() {
+    const keys = await getCategoryKeys();
+
+    keys.forEach((key) => {
+      Router.categoryPages[key] = `${Router.pages.catalog}/${key}`;
     });
   }
 }

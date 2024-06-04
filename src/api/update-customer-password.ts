@@ -45,7 +45,7 @@ export default async function updateCustomerPassword(currentPassword: string, ne
         errorResponse.message === 'The given current password does not match.'
           ? errorResponse.message
           : 'Unknown error';
-      showModal('Failed to update password!', userErrorMessage, false);
+      showModal('Failed to update password', userErrorMessage, false);
       return;
     }
 
@@ -54,19 +54,19 @@ export default async function updateCustomerPassword(currentPassword: string, ne
       await useToken.customer.access.set(newAccessToken);
       showModal('Password was successfully updated', '', true);
     } else {
-      showModal('Failed to update password!', '', false);
+      showModal('Failed to update password', '', false);
     }
   } catch (error) {
     if (error instanceof Error) {
       if (error.message === 'Failed to fetch') {
-        showModal('Failed to update customer data!', 'Network error, please check your internet connection.', false);
+        showModal('Failed to update data', 'Network error, please check your internet connection.', false);
       } else {
         const userErrorMessage =
           error.message === 'The given current password does not match.' ? error.message : 'Unknown error';
         showModal('Failed to update customer data!', userErrorMessage, false);
       }
     } else {
-      showModal('Failed to update customer data!', 'Something went wrong...', false);
+      showModal('Failed to update data', 'Something went wrong...', false);
     }
 
     // showPasswordModal(async (currentPwd, newPwd) => {

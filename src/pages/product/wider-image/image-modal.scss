@@ -5,29 +5,73 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 5px;
-  box-shadow: rgba(36, 36, 36, 0.6) 0 5px 10px;
   z-index: 2;
   animation: appearance 1s ease-in;
+  overflow: hidden;
+}
+
+.modal-wrapper {
+  max-width: 85%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.enlarged-line {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  transition: all ease 1s;
+}
+
+.wide-image-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 .modal__image {
-  max-width: 90vw;
-  max-height: 90vh;
+  object-fit: contain;
+  max-height: 87vh;
 }
 
 .close-button {
-  position: absolute;
-  top: 0px;
-  right: -40px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
   width: 32px;
   height: 32px;
   border: 1px solid #333333;
+  z-index: 3;
   background-image: url('../../../assets/dark-cross.svg');
   animation: slowAppearance 1s ease-in;
 }
+.left-arrow-wide,
+.right-arrow-wide {
+  color: #6b6b6b;
+  z-index: 3;
+  position: fixed;
+  width: 50px;
+  top: 50%;
+  cursor: pointer;
+  transform: translateY(-50%);
+  animation: appearance 1s ease-in;
+}
+.left-arrow-wide {
+  left: 1%;
+}
+.right-arrow-wide {
+  right: 1%;
+}
+.wide-faded {
+  cursor: default;
+  color: #c0c0c0;
+}
 @keyframes appearance {
   0% {
-    opacity: 0.3;
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.1;
   }
   40% {
     opacity: 0.6;
@@ -50,7 +94,6 @@
 
 @media screen and (max-width: 800px) {
   .close-button {
-    top: -35px;
-    right: -3px;
+    scale: 0.7;
   }
 }

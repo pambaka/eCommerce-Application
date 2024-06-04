@@ -18,7 +18,7 @@ export default async function getSearchedProducts(
     },
   )
     .then((res) => {
-      console.log(res);
+      // console.log(res);
 
       if (res.status !== 200) {
         showModal('Something went wrong', '');
@@ -27,13 +27,13 @@ export default async function getSearchedProducts(
       return res.json();
     })
     .then((data) => {
-      console.log(data);
+      // console.log(data);
 
       if (data) {
         products = data.results;
       }
     })
-    .catch((error) => console.log(error));
+    .catch((error) => error);
 
   return products;
 }

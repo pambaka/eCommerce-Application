@@ -1,0 +1,59 @@
+.breadcrumbs-wrapper {
+  padding: 0 var(--outer-margin);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: $width-tablet-min) {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.breadcrumbs {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #5a5a5a;
+    transition: 0.5s;
+
+    &:hover {
+      color: $color-accent;
+      transition: 0.5s;
+    }
+  }
+  a::after {
+    content: url('../../../assets/breadcrumbs-arrow.svg');
+    display: inline-block;
+    height: 16px;
+    width: 10px;
+  }
+}
+
+.categories {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  p {
+    cursor: pointer;
+    padding: 2px 5px;
+    font-size: 14px;
+    color: #757575;
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px $color-bg-dark;
+    background-color: $color-bg-light;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: #e9e6e6;
+      transition: 0.5s;
+    }
+  }
+}
