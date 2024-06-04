@@ -2,7 +2,7 @@ import { region } from './const';
 import useToken from '../services/use-token';
 import getUserInfo from './get-user-info';
 import showModal from '../pages/show-modal';
-import {} from '../types/index';
+import { AddressAction, BaseAddress } from '../types/addresses';
 
 export default class CustomerUpdater {
   private accessToken: string | null;
