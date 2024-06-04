@@ -1,7 +1,7 @@
 import useToken from '../services/use-token';
 import getUserInfo from './get-user-info';
 import showModal from '../pages/show-modal';
-import showPasswordModal from '../pages/profile/render/show-password-modal';
+// import showPasswordModal from '../pages/profile/render/show-password-modal';
 import { region } from './const';
 import getCustomerTokens from './get-customer-tokens';
 
@@ -40,28 +40,37 @@ export default async function updateCustomerPassword(currentPassword: string, ne
     });
 
     if (!response.ok) {
-      // const errorResponse = await response.json();
-      // const errorMessage = errorResponse.message || 'Unknown error';
-      showModal('Failed to update password!', '', false);
+      const errorResponse = await response.json();
+      const userErrorMessage =
+        errorResponse.message === 'The given current password does not match.'
+          ? errorResponse.message
+          : 'Unknown error';
+      showModal('Failed to update password', userErrorMessage, false);
+      return;
     }
 
     const newAccessToken = await getCustomerTokens(customerData.email, newPassword);
     if (newAccessToken) {
       await useToken.customer.access.set(newAccessToken);
+      showModal('Password was successfully updated', '', true);
     } else {
-      showModal('Failed to update password!', '', false);
+      showModal('Failed to update password', '', false);
     }
-
-    showModal('Password was successfully updated', '', true);
   } catch (error) {
     if (error instanceof Error) {
-      const userErrorMessage =
-        error.message === 'The given current password does not match.' ? error.message : 'Unknown error';
-      showModal('Failed to update password!', userErrorMessage, false, () => {
-        showPasswordModal(async (currentPwd, newPwd) => {
-          await updateCustomerPassword(currentPwd, newPwd);
-        });
-      });
+      if (error.message === 'Failed to fetch') {
+        showModal('Failed to update data', 'Network error, please check your internet connection.', false);
+      } else {
+        const userErrorMessage =
+          error.message === 'The given current password does not match.' ? error.message : 'Unknown error';
+        showModal('Failed to update customer data!', userErrorMessage, false);
+      }
+    } else {
+      showModal('Failed to update data', 'Something went wrong...', false);
     }
+
+    // showPasswordModal(async (currentPwd, newPwd) => {
+    //   await updateCustomerPassword(currentPwd, newPwd);
+    // });
   }
 }

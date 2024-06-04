@@ -28,7 +28,9 @@ export default class CustomerUpdater {
       });
 
       if (!response.ok) {
-        showModal('Something went wrong', '');
+        const errorResponse = await response.json();
+        const errorMessage = errorResponse.message || 'Unknown error';
+        showModal('Failed to update customer data!', errorMessage, false);
         return false;
       }
 
@@ -43,27 +45,23 @@ export default class CustomerUpdater {
     try {
       const action = field === 'email' ? 'changeEmail' : `set${field.charAt(0).toUpperCase() + field.slice(1)}`;
       const customerData = await getUserInfo();
+      const requestBody = {
+        version: customerData?.version,
+        actions: [
+          {
+            action,
+            [field]: value,
+          },
+        ],
+      };
 
-      if (customerData) {
-        const requestBody = {
-          version: customerData.version,
-          actions: [
-            {
-              action,
-              [field]: value,
-            },
-          ],
-        };
+      const success = await this.fetchUpdate(requestBody);
 
-        const success = await this.fetchUpdate(requestBody);
-
-        if (success) {
-          showModal(`Successfully updated to ${value}!`, '', true);
-        }
-
-        return success;
+      if (success) {
+        showModal(`Successfully updated to ${value}!`, '', true);
       }
-      return false;
+
+      return success;
     } catch (error) {
       CustomerUpdater.handleError(error);
       return false;

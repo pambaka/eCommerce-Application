@@ -71,7 +71,11 @@ export default function makeFieldEditable(
       }
 
       try {
-        const success = await updateCustomerInfo(id, input.value);
+        let success = true;
+        if (!id.startsWith('address-')) {
+          success = await updateCustomerInfo(id, input.value);
+        }
+
         if (
           !success &&
           [ID_NAMES.customerEmail, ID_NAMES.customerName, ID_NAMES.customerSurname, ID_NAMES.customerDob].includes(id)
@@ -125,7 +129,7 @@ export default function makeFieldEditable(
         warningElement.className = 'warning-text';
         warningElement.textContent = 'Failed to update data on server';
         relativeWrapper.appendChild(warningElement);
-        saveCallback(value, false); // Use the old value in case of error
+        saveCallback(value, false);
       }
     },
     'Save',
