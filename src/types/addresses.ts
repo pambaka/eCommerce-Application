@@ -1,4 +1,7 @@
-export interface BaseAddress {
+import { Address } from './index';
+
+export default interface BaseAddress {
+  id?: string;
   key: string;
   title: string;
   salutation: string;
@@ -26,3 +29,21 @@ export interface BaseAddress {
 }
 
 export type AddressAction = 'addAddress' | 'changeAddress' | 'removeAddress';
+
+export interface CustomerData {
+  id: string;
+  version: number;
+  addresses: Address[];
+}
+
+export interface FetchUpdateResponse {
+  statusCode: number;
+  message: string;
+  addresses?: Address[];
+  errors?: Array<{
+    code: string;
+    message: string;
+    action: object;
+    actionIndex: number;
+  }>;
+}

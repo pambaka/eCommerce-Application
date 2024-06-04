@@ -4,6 +4,7 @@ export type FormType = typeof FORM_TYPE.login | typeof FORM_TYPE.registration;
 
 export interface Address {
   id?: string;
+  key?: string;
   state?: string;
   country: string;
   postalCode: string;
