@@ -2,6 +2,7 @@ import { region } from './const';
 import useToken from '../services/use-token';
 import getUserInfo from './get-user-info';
 import showModal from '../pages/show-modal';
+import {} from '../types/index';
 
 export default class CustomerUpdater {
   private accessToken: string | null;
@@ -62,6 +63,36 @@ export default class CustomerUpdater {
       }
 
       return success;
+    } catch (error) {
+      CustomerUpdater.handleError(error);
+      return false;
+    }
+  }
+
+  public async updateAddress(action: AddressAction, addressIdOrKey: string, address?: BaseAddress): Promise<boolean> {
+    try {
+      const customerData = await getUserInfo();
+      if (customerData) {
+        const requestBody: { version: number; actions: object[] } = {
+          version: customerData.version,
+          actions: [
+            {
+              action,
+              ...(addressIdOrKey.includes('Id') ? { addressId: addressIdOrKey } : { addressKey: addressIdOrKey }),
+              ...(address ? { address } : {}),
+            },
+          ],
+        };
+
+        const success = await this.fetchUpdate(requestBody);
+
+        if (success) {
+          showModal(`Successfully performed action: ${action}!`, '', true);
+        }
+
+        return success;
+      }
+      return false;
     } catch (error) {
       CustomerUpdater.handleError(error);
       return false;
