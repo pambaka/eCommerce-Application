@@ -40,9 +40,9 @@ export default async function updateCustomerPassword(currentPassword: string, ne
     });
 
     if (!response.ok) {
-      // const errorResponse = await response.json();
-      // const errorMessage = errorResponse.message || 'Unknown error';
-      showModal('Failed to update password!', '', false);
+      const errorResponse = await response.json();
+      const errorMessage = errorResponse.message || 'Unknown error';
+      throw new Error(errorMessage);
     }
 
     const newAccessToken = await getCustomerTokens(customerData.email, newPassword);

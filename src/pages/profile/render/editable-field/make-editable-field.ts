@@ -125,7 +125,7 @@ export default function makeFieldEditable(
         warningElement.className = 'warning-text';
         warningElement.textContent = 'Failed to update data on server';
         relativeWrapper.appendChild(warningElement);
-        saveCallback(value, false); // Use the old value in case of error
+        saveCallback(value, false);
       }
     },
     'Save',
