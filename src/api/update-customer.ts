@@ -19,6 +19,8 @@ export default class CustomerUpdater {
     const url = `https://api.${region}.commercetools.com/${process.env.project_key}/me`;
 
     try {
+      console.log('Request Body:', JSON.stringify(requestBody, null, 2));
+
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -27,6 +29,10 @@ export default class CustomerUpdater {
         },
         body: JSON.stringify(requestBody),
       });
+
+      const responseBody = await response.json();
+      console.log('Response Status:', response.status);
+      console.log('Response Body:', JSON.stringify(responseBody, null, 2));
 
       if (!response.ok) {
         const errorResponse = await response.json();
