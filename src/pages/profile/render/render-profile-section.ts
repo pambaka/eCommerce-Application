@@ -4,7 +4,7 @@ import { CustomerIncomeData, Address } from '../../../types/index';
 import createEditableFieldWithHandler from './editable-field/create-editable-field-with-handler';
 import ButtonComponent from '../../../components/button-component';
 import { CLASS_NAMES, ID_NAMES } from '../../../const';
-import updateAddNewAddressButtonState from './editable-field/update-new-address-button';
+// import updateAddNewAddressButtonState from './editable-field/update-new-address-button';
 
 export default function renderProfileSectionContent(userInfo: CustomerIncomeData, parentNode: HTMLElement) {
   const contentWrapper = new BaseComponent('div', CLASS_NAMES.profileContentWrapper);
@@ -99,7 +99,7 @@ export default function renderProfileSectionContent(userInfo: CustomerIncomeData
       );
       addressSections.push(newAddressSection);
       addressColumn.node.appendChild(newAddressSection.node);
-      updateAddNewAddressButtonState(addressSections, addNewAddressButton);
+      // updateAddNewAddressButtonState(addressSections, addNewAddressButton);
     },
     'Add new address',
     false,
@@ -107,12 +107,12 @@ export default function renderProfileSectionContent(userInfo: CustomerIncomeData
 
   addNewAddressButton.node.classList.add(CLASS_NAMES.profileAddAddressButton);
 
-  addressSections.forEach((section) => {
-    const addressSection = section;
-    addressSection.onFieldChange = () => updateAddNewAddressButtonState(addressSections, addNewAddressButton);
-    addressSection.onSaveButtonClick = () => updateAddNewAddressButtonState(addressSections, addNewAddressButton);
-  });
+  // addressSections.forEach((section) => {
+  //   const addressSection = section;
+  //   addressSection.onFieldChange = () => updateAddNewAddressButtonState(addressSections, addNewAddressButton);
+  //   addressSection.onSaveButtonClick = () => updateAddNewAddressButtonState(addressSections, addNewAddressButton);
+  // });
 
   contentWrapper.node.append(infoColumn.node, addressColumn.node, addNewAddressButton.node);
-  updateAddNewAddressButtonState(addressSections, addNewAddressButton);
+  // updateAddNewAddressButtonState(addressSections, addNewAddressButton);
 }
