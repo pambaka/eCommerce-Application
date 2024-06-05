@@ -5,6 +5,7 @@ import showModal from '../pages/show-modal';
 import { AddressAction, FetchUpdateResponse } from '../types/addresses';
 import { Address, CustomerIncomeData } from '../types/index';
 // import AddressSectionComponent from '../modules/address-module';
+
 export default class CustomerUpdater {
   private accessToken: string | null;
 
@@ -15,6 +16,11 @@ export default class CustomerUpdater {
   public async fetchCustomerData(): Promise<CustomerIncomeData | null> {
     if (!this.accessToken) {
       return null;
+    }
+
+    const savedCustomerData = localStorage.getItem('customerData');
+    if (savedCustomerData) {
+      return JSON.parse(savedCustomerData);
     }
 
     const url = `https://api.${region}.commercetools.com/${process.env.project_key}/me`;
@@ -33,6 +39,7 @@ export default class CustomerUpdater {
       }
 
       const customerData: CustomerIncomeData = await response.json();
+      localStorage.setItem('customerData', JSON.stringify(customerData));
       return customerData;
     } catch (error) {
       CustomerUpdater.handleError(error);
@@ -129,7 +136,7 @@ export default class CustomerUpdater {
                 addedAddress!.key = newAddress.key;
                 console.log('addAddress', addedAddress, addedAddress!.id);
                 console.log('Response Body:', JSON.stringify(response, null, 2));
-                // Сохраняем новый addressId в localStorage
+
                 localStorage.setItem('newAddressId', newAddress.id!);
               }
             }

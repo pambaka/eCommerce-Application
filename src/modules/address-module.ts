@@ -210,6 +210,7 @@ import showModal from '../pages/show-modal';
 //     this.validateFields();
 //   }
 // }
+
 export default class AddressSectionComponent extends BaseComponent {
   private address: Address;
 
@@ -247,41 +248,51 @@ export default class AddressSectionComponent extends BaseComponent {
 
     this.saveButton = createSaveButton(async () => {
       if (this.areAllFieldsValid()) {
-        Object.assign(this.address, this.updatedAddress);
         const customerUpdater = new CustomerUpdater();
-        const action = this.isNew ? 'addAddress' : 'changeAddress';
-        const addressIdOrKey = this.address.id || this.address.key || '';
-        if (addressIdOrKey) {
-          const success = this.isNew
-            ? await customerUpdater.updateAddress(action, addressIdOrKey, this.address)
-            : await customerUpdater.changeAddress(this.address);
-          if (success) {
-            this.onSaveButtonClick();
-            this.isNew = false;
-            showModal('Address updated successfully', '', true);
+        const customerData = await customerUpdater.fetchCustomerData();
+        if (customerData) {
+          const customerAddress = customerData.addresses[this.index];
+          if (customerAddress && customerAddress.id) {
+            const addressId: string = customerAddress.id;
+            Object.assign(this.address, this.updatedAddress);
+            const action = this.isNew ? 'addAddress' : 'changeAddress';
+            const success = await customerUpdater.updateAddress(action, addressId, this.address);
+            if (success) {
+              this.onSaveButtonClick();
+              this.isNew = false;
+              showModal('Address updated successfully', '', true);
+            } else {
+              this.saveButton.node.disabled = false;
+              showModal('Failed to update address', '', false);
+            }
           } else {
-            this.saveButton.node.disabled = false;
-            showModal('Failed to update address', '', false);
+            showModal('Address ID not found', '', false);
           }
         } else {
-          showModal('Something went wrong...', '', false);
+          showModal('Failed to fetch customer data', '', false);
         }
       }
     });
 
     this.deleteButton = createDeleteButton(async () => {
       const customerUpdater = new CustomerUpdater();
-      const addressIdOrKey = this.address.id || this.address.key || '';
-      if (addressIdOrKey) {
-        const success = await customerUpdater.updateAddress('removeAddress', addressIdOrKey);
-        if (success) {
-          this.node.remove();
-          this.onDeleteButtonClick();
+      const customerData = await customerUpdater.fetchCustomerData();
+      if (customerData) {
+        const customerAddress = customerData.addresses[this.index];
+        if (customerAddress && customerAddress.id) {
+          const addressId: string = customerAddress.id;
+          const success = await customerUpdater.updateAddress('removeAddress', addressId);
+          if (success) {
+            this.node.remove();
+            this.onDeleteButtonClick();
+          } else {
+            showModal('Failed to delete address', '', false);
+          }
         } else {
-          showModal('Failed to delete address', '', false);
+          showModal('Address ID not found', '', false);
         }
       } else {
-        showModal('Something went wrong...', '', false);
+        showModal('Failed to fetch customer data', '', false);
       }
     });
 
