@@ -88,6 +88,15 @@
       margin: 0 auto;
       text-align: start;
 
+      .address-button-container {
+        display: flex;
+        margin: 0 auto;
+
+        button {
+          width: 40%;
+        }
+      }
+
       @media (max-width: 880px) {
         width: 400px;
       }

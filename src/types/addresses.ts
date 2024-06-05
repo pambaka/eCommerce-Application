@@ -2,7 +2,7 @@ import { Address } from './index';
 
 export default interface BaseAddress {
   id?: string;
-  key: string;
+  key?: string;
   title: string;
   salutation: string;
   firstName: string;
@@ -28,7 +28,16 @@ export default interface BaseAddress {
   externalId?: string;
 }
 
-export type AddressAction = 'addAddress' | 'changeAddress' | 'removeAddress';
+export type AddressAction =
+  | 'addAddress'
+  | 'changeAddress'
+  | 'removeAddress'
+  | 'setDefaultShippingAddress'
+  | 'setDefaultBillingAddress'
+  | 'addShippingAddressId'
+  | 'removeShippingAddressId'
+  | 'addBillingAddressId'
+  | 'removeBillingAddressId';
 
 export interface CustomerData {
   id: string;

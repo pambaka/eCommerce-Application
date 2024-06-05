@@ -10,6 +10,8 @@ export interface Address {
   postalCode: string;
   streetName: string;
   city: string;
+  // defaultShipping?: boolean;
+  // defaultBilling?: boolean;
 }
 
 export interface CustomerData {
