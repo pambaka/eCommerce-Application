@@ -6,14 +6,20 @@ export default function updateAddNewAddressButtonState(
   addNewAddressButton: ButtonComponent,
 ) {
   const allFieldsValid = addressSections.every((section) => section.areAllFieldsValid());
-  const allSaveButtonsHidden = addressSections.every((section) => section.isSaveButtonHidden());
   const addressButton = addNewAddressButton;
-  addressButton.node.disabled = !(allFieldsValid && allSaveButtonsHidden);
+  addressButton.node.disabled = !allFieldsValid;
 
   const lastSection = addressSections[addressSections.length - 1];
   if (lastSection) {
     lastSection.onDeleteButtonClick = () => {
       addressButton.node.disabled = false;
+      if (addressSections.length === 0) {
+        addressButton.node.disabled = false;
+      }
     };
+  }
+
+  if (addressSections.length === 0) {
+    addressButton.node.disabled = false;
   }
 }

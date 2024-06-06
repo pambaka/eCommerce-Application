@@ -4,11 +4,14 @@ export type FormType = typeof FORM_TYPE.login | typeof FORM_TYPE.registration;
 
 export interface Address {
   id?: string;
+  key?: string;
   state?: string;
   country: string;
   postalCode: string;
   streetName: string;
   city: string;
+  defaultShipping?: boolean;
+  defaultBilling?: boolean;
 }
 
 export interface CustomerData {
@@ -60,6 +63,6 @@ export interface CustomerIncomeData {
   stores: string[];
   authenticationMode: string;
   dateOfBirth: string;
-  defaultShippingAddressId?: string;
-  defaultBillingAddressId?: string;
+  defaultShippingAddressId?: string | null;
+  defaultBillingAddressId?: string | null;
 }

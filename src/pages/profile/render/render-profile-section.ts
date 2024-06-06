@@ -12,7 +12,6 @@ export default function renderProfileSectionContent(userInfo: CustomerIncomeData
 
   const infoColumn = new BaseComponent('div', CLASS_NAMES.profileInfoColumn);
   const addressColumn = new BaseComponent('div', CLASS_NAMES.profileAddressColumn);
-
   const updatedUserInfo = { ...userInfo };
 
   const firstNameField = createEditableFieldWithHandler(
@@ -72,12 +71,6 @@ export default function renderProfileSectionContent(userInfo: CustomerIncomeData
 
   const addressSections: AddressSectionComponent[] = [];
 
-  userInfo.addresses.forEach((address, index) => {
-    const addressSection = new AddressSectionComponent(address, index, updatedUserInfo);
-    addressSections.push(addressSection);
-    addressColumn.node.appendChild(addressSection.node);
-  });
-
   const addNewAddressButton = new ButtonComponent(
     'button',
     (event) => {
@@ -95,6 +88,7 @@ export default function renderProfileSectionContent(userInfo: CustomerIncomeData
         newAddress,
         updatedUserInfo.addresses.length - 1,
         updatedUserInfo,
+        updateAddNewAddressButtonState.bind(null, addressSections, addNewAddressButton),
         true,
       );
       addressSections.push(newAddressSection);
@@ -106,6 +100,17 @@ export default function renderProfileSectionContent(userInfo: CustomerIncomeData
   );
 
   addNewAddressButton.node.classList.add(CLASS_NAMES.profileAddAddressButton);
+
+  userInfo.addresses.forEach((address, index) => {
+    const addressSection = new AddressSectionComponent(
+      address,
+      index,
+      updatedUserInfo,
+      updateAddNewAddressButtonState.bind(null, addressSections, addNewAddressButton),
+    );
+    addressSections.push(addressSection);
+    addressColumn.node.appendChild(addressSection.node);
+  });
 
   addressSections.forEach((section) => {
     const addressSection = section;
