@@ -39,6 +39,17 @@ export type AddressAction =
   | 'addBillingAddressId'
   | 'removeBillingAddressId';
 
+export type ActionPayload =
+  | { action: 'addAddress'; address: Address }
+  | { action: 'changeAddress'; addressId: string; address: Address }
+  | { action: 'removeAddress'; addressId: string }
+  | { action: 'setDefaultShippingAddress'; addressId: string | null }
+  | { action: 'setDefaultBillingAddress'; addressId: string | null }
+  | { action: 'addShippingAddressId'; addressId: string }
+  | { action: 'removeShippingAddressId'; addressId: string }
+  | { action: 'addBillingAddressId'; addressId: string }
+  | { action: 'removeBillingAddressId'; addressId: string };
+
 export interface CustomerData {
   id: string;
   version: number;

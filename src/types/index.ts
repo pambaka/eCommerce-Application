@@ -10,8 +10,8 @@ export interface Address {
   postalCode: string;
   streetName: string;
   city: string;
-  // defaultShipping?: boolean;
-  // defaultBilling?: boolean;
+  defaultShipping?: boolean;
+  defaultBilling?: boolean;
 }
 
 export interface CustomerData {
@@ -63,6 +63,6 @@ export interface CustomerIncomeData {
   stores: string[];
   authenticationMode: string;
   dateOfBirth: string;
-  defaultShippingAddressId?: string;
-  defaultBillingAddressId?: string;
+  defaultShippingAddressId?: string | null;
+  defaultBillingAddressId?: string | null;
 }

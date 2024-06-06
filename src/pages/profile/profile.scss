@@ -73,6 +73,7 @@
     }
 
     .profile_page__address_wrapper {
+      font-size: 0.8rem;
       width: 100%;
       width: 350px;
       height: auto;
@@ -81,19 +82,72 @@
       align-items: center;
       gap: 10px;
       background-color: #f9f8f8;
-      padding: 30px 10px;
+      padding: 30px 10px 250px;
       margin-bottom: 40px;
       box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
       border-radius: 16px;
       margin: 0 auto;
       text-align: start;
+      position: relative;
+
+      .profile_page__address_title_wrapper,
+      .profile_page__default_status_wrapper {
+        display: flex;
+        gap: 15px;
+      }
+
+      .profile_page__default_status_label_wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 10px;
+
+        span {
+          display: none;
+        }
+      }
+
+      .profile_page__address_label input {
+        margin-left: 5px;
+      }
 
       .address-button-container {
         display: flex;
         margin: 0 auto;
+        position: absolute;
+        bottom: 7%;
+        width: 100%;
 
         button {
           width: 40%;
+          height: 50px;
+        }
+      }
+
+      .address-checkbox-container {
+        display: flex;
+        margin: 0 auto;
+        align-items: center;
+        position: absolute;
+        top: 60%;
+        justify-content: center;
+
+        .profile_page__address_title_wrapper {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+
+          input {
+            cursor: pointer;
+          }
+
+          &:nth-child(3),
+          &:nth-child(4) {
+            color: darkgreen;
+          }
+
+          .label-disabled {
+            color: gray;
+          }
         }
       }
 

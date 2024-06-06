@@ -4,7 +4,6 @@ import getUserInfo from './get-user-info';
 import showModal from '../pages/show-modal';
 import { AddressAction, FetchUpdateResponse } from '../types/addresses';
 import { Address, CustomerIncomeData } from '../types/index';
-// import AddressSectionComponent from '../modules/address-module';
 
 export default class CustomerUpdater {
   private accessToken: string | null;
@@ -55,8 +54,6 @@ export default class CustomerUpdater {
     const url = `https://api.${region}.commercetools.com/${process.env.project_key}/me`;
 
     try {
-      console.log('Request Body:', JSON.stringify(requestBody, null, 2));
-
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -67,12 +64,13 @@ export default class CustomerUpdater {
       });
 
       const responseBody: FetchUpdateResponse = await response.json();
-      console.log('Response Status:', response.status);
-      console.log('Response Body:', JSON.stringify(responseBody, null, 2));
 
       if (!response.ok) {
+        showModal('Failed to update customer data', 'Unknown error', false);
         return null;
       }
+
+      localStorage.setItem('customerData', JSON.stringify(responseBody));
 
       return responseBody;
     } catch (error) {
@@ -108,10 +106,19 @@ export default class CustomerUpdater {
     }
   }
 
-  public async updateAddress(action: AddressAction, addressIdOrKey: string, address?: Address): Promise<boolean> {
+  public async updateAddress(
+    action: AddressAction,
+    addressIdOrKey: string | undefined,
+    address?: Address,
+    index?: number,
+  ): Promise<boolean> {
     try {
       const customerData = await getUserInfo();
       if (customerData) {
+        // if (action === 'changeAddress') {
+        //   console.log('Current Customer Data:', JSON.stringify(customerData, null, 2));
+        // }
+
         const requestBody: { version: number; actions: object[] } = {
           version: customerData.version,
           actions: [
@@ -127,54 +134,26 @@ export default class CustomerUpdater {
 
         if (response) {
           if (action === 'addAddress' && response.addresses) {
-            const savedParentIndex = localStorage.getItem('parentIndex');
-            if (savedParentIndex) {
-              const newAddress = response.addresses[parseInt(savedParentIndex, 10)];
-              if (newAddress) {
-                const addedAddress = address;
-                addedAddress!.id = newAddress.id;
-                addedAddress!.key = newAddress.key;
-                console.log('addAddress', addedAddress, addedAddress!.id);
-                console.log('Response Body:', JSON.stringify(response, null, 2));
+            const newAddress = response.addresses[response.addresses.length - 1];
+            if (newAddress) {
+              const addedAddress = address;
+              addedAddress!.id = newAddress.id;
+              addedAddress!.key = newAddress.key;
+              // console.log('addAddress', addedAddress, addedAddress!.id);
+              // console.log('Response Body:', JSON.stringify(response, null, 2));
 
-                localStorage.setItem('newAddressId', newAddress.id!);
+              localStorage.setItem(`newAddressId-${index}`, newAddress.id!);
+            }
+          } else if (action === 'changeAddress') {
+            if (addressIdOrKey) {
+              const existingAddress = customerData.addresses.find((addr) => addr.id === addressIdOrKey);
+              if (existingAddress && existingAddress.id) {
+                localStorage.setItem(`newAddressId-${index}`, existingAddress.id);
               }
             }
+          } else if (action === 'removeAddress') {
+            localStorage.removeItem(`newAddressId-${index}`);
           }
-          return true;
-        }
-        return false;
-      }
-      return false;
-    } catch (error) {
-      CustomerUpdater.handleError(error);
-      return false;
-    }
-  }
-
-  public async changeAddress(address: Address): Promise<boolean> {
-    try {
-      const newAddressId = localStorage.getItem('newAddressId');
-      if (!newAddressId) {
-        throw new Error('New address ID not found in localStorage');
-      }
-
-      const customerData = await getUserInfo();
-      if (customerData) {
-        const requestBody: { version: number; actions: object[] } = {
-          version: customerData.version,
-          actions: [
-            {
-              action: 'changeAddress',
-              addressId: newAddressId,
-              address,
-            },
-          ],
-        };
-
-        const response = await this.fetchUpdate(requestBody);
-
-        if (response) {
           return true;
         }
         return false;

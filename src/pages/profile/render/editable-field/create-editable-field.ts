@@ -13,12 +13,18 @@ export default function createEditableField(
   wrapperClass: string,
   textClass: string,
   warning: string | null = null,
+  placeholder: string | null = null, // Добавлен аргумент placeholder
 ) {
   const wrapper = new BaseComponent('div', wrapperClass);
 
   const label = new LabelComponent(labelText, id);
   const text = new BaseTextComponent('span', textClass, value);
   text.node.id = id;
+
+  if (placeholder) {
+    text.node.setAttribute('placeholder', placeholder);
+  }
+
   const editButton = new ButtonWithSvgIcon(
     'edit-button',
     (event) => {
