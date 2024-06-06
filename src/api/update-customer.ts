@@ -115,10 +115,6 @@ export default class CustomerUpdater {
     try {
       const customerData = await getUserInfo();
       if (customerData) {
-        // if (action === 'changeAddress') {
-        //   console.log('Current Customer Data:', JSON.stringify(customerData, null, 2));
-        // }
-
         const requestBody: { version: number; actions: object[] } = {
           version: customerData.version,
           actions: [
@@ -139,8 +135,6 @@ export default class CustomerUpdater {
               const addedAddress = address;
               addedAddress!.id = newAddress.id;
               addedAddress!.key = newAddress.key;
-              // console.log('addAddress', addedAddress, addedAddress!.id);
-              // console.log('Response Body:', JSON.stringify(response, null, 2));
 
               localStorage.setItem(`newAddressId-${index}`, newAddress.id!);
             }
