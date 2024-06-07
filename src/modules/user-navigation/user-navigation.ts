@@ -18,6 +18,8 @@ export default class UserNavigation extends BaseComponent {
 
   userProfileButton: ButtonComponent;
 
+  cartButton: ButtonComponent;
+
   constructor() {
     super('nav', 'user-nav');
 
@@ -66,16 +68,27 @@ export default class UserNavigation extends BaseComponent {
       `${userNavIcons}#user-profile`,
     );
 
+    this.cartButton = new ButtonWithSvgIcon(
+      'cart-button',
+      () => {
+        replaceLocation(Router.pages.cart);
+      },
+      'Shopping cart button',
+      'shopping cart',
+      `${userNavIcons}#cart`,
+    );
+
     this.subscribeToAuthorizationChanges();
   }
 
   renderButtons() {
     // const { hash } = window.location;
 
-    if (isCustomerAuthorized()) this.node.append(this.userProfileButton.node, this.logOutButton.node);
+    if (isCustomerAuthorized())
+      this.node.append(this.userProfileButton.node, this.logOutButton.node, this.cartButton.node);
     // else if (hash === Router.pages.login) this.node.append(this.signUpButton.node);
     // else if (hash === Router.pages.registration) this.node.append(this.logInButton.node);
-    else this.node.append(this.logInButton.node, this.signUpButton.node);
+    else this.node.append(this.logInButton.node, this.signUpButton.node, this.cartButton.node);
   }
 
   updateButtons() {
