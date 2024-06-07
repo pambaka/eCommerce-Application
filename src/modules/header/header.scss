@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
 .header {
-  min-height: 80px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,18 +10,22 @@
   .header-logo {
     width: 70px;
     height: 70px;
-    color: #757575;
     cursor: pointer;
+    color: #757575;
     transition: 0.5s;
 
     @media screen and (max-width: $width-tablet-min) {
       width: 50px;
       height: 60px;
     }
+
+    &.header-logo--active {
+      color: $color-accent;
+    }
   }
 
   .header-logo:hover {
-    color: #5f8575;
+    color: $color-accent;
     transition: 0.5s;
   }
 
@@ -43,6 +47,10 @@
         }
       }
     }
+
+    .nav-link--active {
+      color: $color-accent;
+    }
   }
 
   @media (max-width: 768px) {
@@ -50,7 +58,7 @@
       width: 80px;
       height: 60px;
       position: relative;
-      z-index: 100;
+      z-index: 1000;
       background: none;
 
       &.hidden {
@@ -124,6 +132,7 @@
 
 .side-menu {
   position: fixed;
+  z-index: 100;
   top: 0;
   left: 0;
   width: 100vw;
@@ -136,6 +145,10 @@
   font-size: 3rem;
   text-align: center;
   overflow: hidden;
+
+  @media (min-width: 769px) {
+    display: none;
+  }
 
   .side-menu-container {
     display: flex;

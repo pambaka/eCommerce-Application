@@ -1,3 +1,6 @@
+import getProductKeys from './get-product-keys';
+import getCategoryKeys from './get-category-keys';
+
 export default class Router {
   private routes: Record<string, () => void>;
 
@@ -12,6 +15,10 @@ export default class Router {
     cart: '#cart',
   };
 
+  public static productPages: { [key: string]: string } = {};
+
+  public static categoryPages: { [key: string]: string } = {};
+
   constructor() {
     this.routes = {};
     this.init();
@@ -19,7 +26,7 @@ export default class Router {
 
   init() {
     window.addEventListener('hashchange', this.onHashChange.bind(this));
-    window.addEventListener('load', this.onHashChange.bind(this));
+    // window.addEventListener('load', this.onHashChange.bind(this));
   }
 
   onHashChange() {
@@ -30,5 +37,21 @@ export default class Router {
 
   register(hash: string, page: () => void) {
     this.routes[hash] = page;
+  }
+
+  static async addProductPages() {
+    const keys = await getProductKeys();
+
+    keys.forEach((key) => {
+      Router.productPages[key] = `#product/${key}`;
+    });
+  }
+
+  static async addCategoryPages() {
+    const keys = await getCategoryKeys();
+
+    keys.forEach((key) => {
+      Router.categoryPages[key] = `${Router.pages.catalog}/${key}`;
+    });
   }
 }

@@ -7,10 +7,12 @@ $light-text: #f9f8f8;
 
 .main_page__title {
   color: $light-text;
+  text-align: center;
 }
 
 .main_page__wrapper,
-.error_page__wrapper {
+.error_page__wrapper,
+.profile_page__wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,6 +36,7 @@ $light-text: #f9f8f8;
 
   .welcome_text {
     font-size: 1.5rem;
+    text-align: center;
   }
 }
 

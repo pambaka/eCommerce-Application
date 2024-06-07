@@ -1,6 +1,7 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import url('./pages/main/main.scss');
 @import url('./pages/error/error-page.scss');
+@import url('./pages/profile/profile.scss');
 
 $color-bg: #d3dfdf;
 $color-head: #182541;
@@ -34,6 +35,10 @@ body {
     @media screen and (max-width: 768px) {
       padding: 10px 20px;
     }
+  }
+
+  header {
+    z-index: 1;
   }
 
   main {
@@ -113,7 +118,6 @@ a {
 
   &:hover {
     color: $color-accent;
-    transform: scale(1.1);
   }
 }
 
@@ -121,6 +125,7 @@ a {
   @include accent-text;
   display: flex;
   align-items: center;
+  justify-content: center;
   box-sizing: border-box;
   padding: 1.75rem 2.5rem;
   line-height: 1.25rem;
@@ -135,26 +140,8 @@ a {
     filter: saturate(75%);
     background-color: $color-bg3;
   }
-
-  &:hover {
-    pointer-events: none;
-  }
 }
 
 .hidden {
   display: none;
-}
-
-@media (max-width: 768px) {
-  html,
-  body {
-    font-size: 0.7rem;
-  }
-}
-
-@media (max-width: 450px) {
-  html,
-  body {
-    font-size: 0.5rem;
-  }
 }

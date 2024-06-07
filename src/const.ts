@@ -15,12 +15,29 @@ export const CLASS_NAMES = {
   country: 'registration__country',
   registrationButton: 'registration__submit',
   shippingAddress: 'registration__shipping-address',
+  profileContentWrapper: 'profile_page__content_wrapper',
+  profileInfoColumn: 'profile_page__info_column',
+  profileAddressColumn: 'profile_page__address_column',
+  profileEditableField: 'profile_page__editable_field',
+  profileInput: 'profile_page__input',
+  profileAddAddressButton: 'profile_page__add_address_button',
+  searchInput: 'search-input',
+  dropdownText: 'dropdown-text',
+  productsWrapper: 'products-wrapper',
+  filters: 'filter-block',
+  filterCategory: 'filter-category',
+  filterColor: 'filter-color',
 } as const;
 
 export const ID_NAMES = {
   defaultShipping: 'default-shipping',
   useForBilling: 'use-for-billing',
   defaultBilling: 'default-billing',
+  customerName: 'firstName',
+  customerSurname: 'lastName',
+  customerDob: 'dateOfBirth',
+  customerEmail: 'email',
+  customerPassword: 'customer-password',
 };
 
 class Dom<T extends HTMLElement> {

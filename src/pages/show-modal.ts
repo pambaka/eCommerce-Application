@@ -3,7 +3,12 @@ import BaseTextComponent from '../components/base-text-component';
 import ButtonComponent from '../components/button-component';
 import '../styles/modal.scss';
 
-export default function showModal(titleText: string, descriptionText: string, success?: boolean): void {
+export default function showModal(
+  titleText: string,
+  descriptionText: string,
+  success?: boolean,
+  onClose?: () => void,
+): void {
   const backdrop = new BaseComponent('div', 'backdrop');
 
   const modal = new BaseComponent('div', 'modal-window');
@@ -16,6 +21,7 @@ export default function showModal(titleText: string, descriptionText: string, su
     () => {
       backdrop.node.remove();
       modal.node.remove();
+      if (onClose) onClose();
     },
     '',
     false,
