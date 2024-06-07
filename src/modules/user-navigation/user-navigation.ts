@@ -71,7 +71,7 @@ export default class UserNavigation extends BaseComponent {
     this.cartButton = new ButtonWithSvgIcon(
       'cart-button',
       () => {
-        replaceLocation(Router.pages.cart);
+        window.location.hash = Router.pages.cart;
       },
       'Shopping cart button',
       'shopping cart',
