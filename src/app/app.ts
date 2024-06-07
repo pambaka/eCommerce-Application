@@ -14,6 +14,7 @@ import Breadcrumbs from '../pages/catalog/render/breadcrumbs';
 import { CLASS_NAMES } from '../const';
 import renderEmptyCatalog from '../pages/catalog/render/render-empty-catalog';
 import renderAllProducts from '../pages/catalog/render/render-all-products';
+import renderCart from '../pages/cart/render/render-cart';
 
 export default class App {
   private header: Header;
@@ -55,6 +56,7 @@ export default class App {
     this.router.register(Router.pages.main, () => this.renderMainPage());
     this.router.register(Router.pages.notFound, () => this.renderErrorPage());
     this.router.register(Router.pages.catalog, () => this.renderCatalog());
+    this.router.register(Router.pages.cart, () => this.renderCartPage());
     this.router.register(Router.pages.login, () => {
       if (!isCustomerAuthorized()) {
         this.renderLogInPage();
@@ -140,6 +142,11 @@ export default class App {
   private renderProfilePage() {
     this.prepare();
     this.contentNode.append(renderProfilePage());
+  }
+
+  private renderCartPage() {
+    this.prepare();
+    this.contentNode.append(renderCart());
   }
 
   render() {
