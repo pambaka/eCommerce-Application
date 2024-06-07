@@ -8,7 +8,8 @@
   .login-button,
   .logout-button,
   .signup-button,
-  .user-profile {
+  .user-profile,
+  .cart-button {
     box-sizing: content-box;
     padding: 4px;
     // background-color: transparent;
@@ -21,6 +22,10 @@
       transition: 0.2s;
       color: #5f8575;
     }
+  }
+
+  .cart-button {
+    margin-left: 10px;
   }
 
   svg {
