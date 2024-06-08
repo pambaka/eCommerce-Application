@@ -41,8 +41,9 @@
   .card__description {
     flex-grow: 1;
     width: calc($catalog-card-width - 20px);
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
     overflow: hidden;
   }
 
