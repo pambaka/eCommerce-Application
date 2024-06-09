@@ -15,6 +15,7 @@ import { CLASS_NAMES } from '../const';
 import renderEmptyCatalog from '../pages/catalog/render/render-empty-catalog';
 import renderAllProducts from '../pages/catalog/render/render-all-products';
 import renderCart from '../pages/cart/render/render-cart';
+import AboutSection from '../pages/about/render/about-render-page';
 
 export default class App {
   private header: Header;
@@ -22,6 +23,8 @@ export default class App {
   private mainSection: MainSection;
 
   private errorSection: ErrorSection;
+
+  private aboutSection: AboutSection;
 
   private footer: Footer;
 
@@ -33,6 +36,7 @@ export default class App {
     this.header = new Header();
     this.mainSection = new MainSection();
     this.errorSection = new ErrorSection();
+    this.aboutSection = new AboutSection();
     this.footer = new Footer();
     this.contentNode = document.createElement('main');
     this.router = new Router();
@@ -55,6 +59,7 @@ export default class App {
   registerRoutes() {
     this.router.register(Router.pages.main, () => this.renderMainPage());
     this.router.register(Router.pages.notFound, () => this.renderErrorPage());
+    this.router.register(Router.pages.about, () => this.renderAboutPage());
     this.router.register(Router.pages.catalog, () => this.renderCatalog());
     this.router.register(Router.pages.cart, () => this.renderCartPage());
     this.router.register(Router.pages.login, () => {
@@ -121,6 +126,11 @@ export default class App {
   private renderErrorPage() {
     this.prepare();
     this.contentNode.append(this.errorSection.node);
+  }
+
+  private renderAboutPage() {
+    this.prepare();
+    this.contentNode.append(this.aboutSection.node);
   }
 
   private async renderCatalog() {
