@@ -21,6 +21,7 @@ export interface ProductData {
 }
 
 export interface Product {
+  id: string;
   key: string;
   masterData: {
     current: ProductData;
