@@ -5,4 +5,4 @@ import useToken from './services/use-token';
 const app = new App();
 app.init();
 
-useToken.anonymous.access.set();
+useToken.client.access.set();
