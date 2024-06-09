@@ -145,10 +145,19 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1300px) {
+  .images-wrapper {
+    min-width: 450px;
+    max-width: 450px;
+  }
+
   .main-image-wrapper {
-    width: 500px;
-    height: 500px;
+    width: 450px;
+    height: 450px;
+  }
+
+  .product__image {
+    min-width: 450px;
   }
 }
 
