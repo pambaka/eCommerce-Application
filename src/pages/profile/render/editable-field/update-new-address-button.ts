@@ -1,6 +1,5 @@
 import AddressSectionComponent from '../../../../modules/address-module';
 import ButtonComponent from '../../../../components/button-component';
-import showAddressModal from '../show-address-modal';
 
 export default function updateAddNewAddressButtonState(
   addressSections: AddressSectionComponent[],
@@ -23,24 +22,4 @@ export default function updateAddNewAddressButtonState(
   if (addressSections.length === 0) {
     addressButton.node.disabled = false;
   }
-
-  addressButton.node.addEventListener('click', () => {
-    const newAddress = {
-      streetName: '',
-      city: '',
-      postalCode: '',
-      country: '',
-    };
-    const newIndex = addressSections.length;
-    const userInfo = {};
-    showAddressModal(
-      newAddress,
-      newIndex,
-      userInfo,
-      () => {
-        updateAddNewAddressButtonState(addressSections, addNewAddressButton);
-      },
-      true,
-    );
-  });
 }
