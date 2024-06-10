@@ -9,6 +9,10 @@
     @media (max-width: 768px) {
       font-size: 2rem;
     }
+
+    @media (max-width: 450px) {
+      font-size: 1.6rem;
+    }
   }
 
   .about-image {
@@ -67,6 +71,10 @@
     max-width: 80vw;
     height: 750px;
     position: relative;
+
+    @media (max-width: 768px) {
+      max-width: 90vw;
+    }
   }
 
   .info {
