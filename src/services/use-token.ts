@@ -8,22 +8,25 @@ import {
 import Customer from '../utils/customer';
 import getAnonymousToken from '../api/get-anonymous-tokens';
 import getAccessToken from '../api/get-access-token';
+import isTokenActive from '../api/is-token-active';
 
 export default class useToken {
   static anonymous: { access: AnonymousToken } = {
     access: {
       set: async () => {
-        try {
-          const token = await getAnonymousToken();
-          if (token) localStorage.setItem(ANONYMOUS_ACCESS_TOKEN, token);
-        } catch (error) {
-          console.error('Error setting anonymous access token:', error);
-        }
+        const token = await getAnonymousToken();
+        if (token) localStorage.setItem(ANONYMOUS_ACCESS_TOKEN, token);
       },
       get: async () => {
         let token = localStorage.getItem(ANONYMOUS_ACCESS_TOKEN);
+        let isActive = false;
 
-        if (!token) {
+        if (token) {
+          isActive = await isTokenActive(token);
+          console.log('is anonymous token active', isActive);
+        }
+
+        if (!token || !isActive) {
           await this.anonymous.access.set();
           token = localStorage.getItem(ANONYMOUS_ACCESS_TOKEN);
         }
