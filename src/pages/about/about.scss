@@ -5,6 +5,7 @@
     margin-top: 30px;
     margin-bottom: 20px;
     font-size: 2.2rem;
+    position: relative;
 
     @media (max-width: 768px) {
       font-size: 2rem;
@@ -172,4 +173,17 @@
       }
     }
   }
+}
+
+.about_page__title::after {
+  content: '';
+  display: block;
+  width: 30%;
+  height: 1px;
+  background-color: #182541;
+  margin: 0 auto;
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  right: 0;
 }
