@@ -8,7 +8,7 @@ import createCard from './create-card';
 export default async function renderAllProducts() {
   const wrapper = DOM.elements[CLASS_NAMES.productsWrapper];
 
-  const token: string | null = await useToken.anonymous.access.get();
+  const token: string | null = await useToken.client.access.get();
 
   if (token && wrapper) {
     const products: Product[] | undefined = await getProducts(token);

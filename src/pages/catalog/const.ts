@@ -21,9 +21,3 @@ export const QUERY_BASE = {
   color: 'filter.query=variants.attributes.color.key',
   price: 'filter.query=variants.price.centAmount',
 };
-
-export const CARD_BUTTON_TEXT = {
-  addToCart: 'add to cart'.toUpperCase(),
-  processing: '...processing...'.toUpperCase(),
-  inTheCart: 'in the cart'.toUpperCase(),
-};

@@ -1,3 +1,5 @@
+import showModal from '../pages/show-modal';
+import useToken from '../services/use-token';
 import { Cart } from '../types/cart';
 import { region } from './const';
 
@@ -13,6 +15,11 @@ export default async function getActiveCart(token: string): Promise<Cart | undef
     .then((res) => {
       console.log(res);
 
+      if (res.status === 401 || res.status === 403) {
+        console.log(token);
+        useToken.anonymous.access.set();
+        showModal('Something went wrong', 'Please try adding the product to the cart again');
+      }
       if (res.status !== 200) return undefined;
       return res.json();
     })
