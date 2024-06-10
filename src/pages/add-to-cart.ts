@@ -1,11 +1,11 @@
-import createCart from '../../../api/create-cart';
-import getActiveCart from '../../../api/get-active-cart';
-import getProductByKey from '../../../api/get-product-by-key';
-import updateCart from '../../../api/update-cart';
-import useToken from '../../../services/use-token';
-import { Cart } from '../../../types/cart';
-import { Product } from '../../../types/products';
-import { CARD_BUTTON_TEXT } from '../const';
+import createCart from '../api/create-cart';
+import getActiveCart from '../api/get-active-cart';
+import getProductByKey from '../api/get-product-by-key';
+import updateCart from '../api/update-cart';
+import useToken from '../services/use-token';
+import { Cart } from '../types/cart';
+import { Product } from '../types/products';
+import { CARD_BUTTON_TEXT } from './const';
 
 export default async function addToCart(event: Event): Promise<void> {
   event.stopPropagation();
@@ -30,8 +30,12 @@ export default async function addToCart(event: Event): Promise<void> {
     const card = button.parentElement?.parentElement;
     if (!card) return;
 
-    const key = card.getAttribute('key');
-    if (!key) return;
+    let key = card.getAttribute('key');
+    if (!key) {
+      const words = window.location.hash.split('/');
+      if (words[0] === `#product`) [, key] = words;
+      else return;
+    }
 
     const product: Product | undefined = await getProductByKey(key, token);
 

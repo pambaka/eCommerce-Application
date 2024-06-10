@@ -8,9 +8,10 @@ import assertNonNullable from '../../../utils/assert-non-nullable';
 import createImages from './create-images';
 import createPrices from './create-prices';
 import './product.scss';
+import renderButtons from './render-buttons';
 
 export default async function renderProduct(productKey: string) {
-  const token = await useToken.anonymous.access.get();
+  const token = await useToken.client.access.get();
 
   if (token) {
     const product: Product | undefined = await getProductByKey(productKey, token);
@@ -38,6 +39,7 @@ export default async function renderProduct(productKey: string) {
       createPrices(pricesWrapper.node, product);
 
       productInfo.node.append(productName.node, productDescription.node, pricesWrapper.node);
+      renderButtons(productInfo.node, product.id);
     }
   }
 }

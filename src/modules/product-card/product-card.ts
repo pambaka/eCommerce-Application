@@ -3,7 +3,7 @@ import BaseComponent from '../../components/base-component';
 import BaseTextComponent from '../../components/base-text-component';
 import { CardPrice } from '../../types/products';
 import ButtonComponent from '../../components/button-component';
-import addToCart from '../../pages/catalog/logic/add-to-cart';
+import addToCart from '../../pages/add-to-cart';
 
 export default class ProductCard extends BaseComponent {
   constructor(title: string, imageUrl: string, description: string, price: CardPrice) {

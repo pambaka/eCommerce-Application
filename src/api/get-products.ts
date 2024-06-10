@@ -1,4 +1,5 @@
 import showModal from '../pages/show-modal';
+import useToken from '../services/use-token';
 import { Product } from '../types/products';
 import { region } from './const';
 
@@ -12,8 +13,13 @@ export default async function getProducts(accessToken: string): Promise<Product[
     },
   })
     .then((res) => {
-      // console.log(res);
+      console.log(res);
 
+      if (res.status === 401) {
+        console.log(accessToken);
+        useToken.client.access.set();
+        showModal('Something went wrong', 'Please keep calm and try reloading the page');
+      }
       if (res.status !== 200) {
         showModal('Something went wrong', 'Please keep calm and try reloading the page');
       }
@@ -21,7 +27,7 @@ export default async function getProducts(accessToken: string): Promise<Product[
       return res.json();
     })
     .then((data) => {
-      // console.log(data);
+      console.log(data);
       products = data.results;
     })
     .catch((error) => error);
