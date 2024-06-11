@@ -1,7 +1,14 @@
-import { Cart } from '../types/cart';
+import { MESSAGES } from '../pages/const';
+import showModal from '../pages/show-modal';
+import { Cart, UpdateCartData } from '../types/cart';
 import { region } from './const';
 
-export default async function updateCart(cart: Cart, productId: string, token: string): Promise<boolean> {
+export default async function updateCart(
+  cart: Cart,
+  productId: string,
+  updateCartData: UpdateCartData,
+  token: string,
+): Promise<boolean> {
   let isUpdateSuccessfull = false;
 
   await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/me/carts/${cart.id}`, {
@@ -14,10 +21,11 @@ export default async function updateCart(cart: Cart, productId: string, token: s
       version: cart.version,
       actions: [
         {
-          action: 'addLineItem',
+          action: updateCartData.action,
           productId,
           variantId: 1,
-          quantity: 1,
+          quantity: updateCartData.quantity,
+          lineItemId: updateCartData.lineItemId,
         },
       ],
     }),
@@ -25,6 +33,7 @@ export default async function updateCart(cart: Cart, productId: string, token: s
     .then((res) => {
       console.log(res, res.status);
       if (res.status === 200) isUpdateSuccessfull = true;
+      else showModal(MESSAGES.error.updateCart, MESSAGES.suggestion.reloadAndTryAgain);
 
       return res.json();
     })
