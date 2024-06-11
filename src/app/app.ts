@@ -144,9 +144,9 @@ export default class App {
     this.contentNode.append(renderProfilePage());
   }
 
-  private renderCartPage() {
+  private async renderCartPage() {
     this.prepare();
-    this.contentNode.append(renderCart());
+    this.contentNode.append(await renderCart());
   }
 
   render() {
