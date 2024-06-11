@@ -33,6 +33,5 @@ export default async function renderCart(): Promise<HTMLElement> {
     cartWrapper.node.append(total.node);
   }
 
-  if (!token) renderEmptyCart(cartWrapper.node);
   return cartWrapper.node;
 }
