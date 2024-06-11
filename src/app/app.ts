@@ -15,6 +15,7 @@ import { CLASS_NAMES } from '../const';
 import renderEmptyCatalog from '../pages/catalog/render/render-empty-catalog';
 import renderAllProducts from '../pages/catalog/render/render-all-products';
 import renderCart from '../pages/cart/render/render-cart';
+// import isCartEmpty from '../pages/cart/logic/is-cart-empty';
 
 export default class App {
   private header: Header;
@@ -144,9 +145,10 @@ export default class App {
     this.contentNode.append(renderProfilePage());
   }
 
-  private renderCartPage() {
+  private async renderCartPage() {
     this.prepare();
-    this.contentNode.append(renderCart());
+    // isCartEmpty();
+    this.contentNode.append(await renderCart());
   }
 
   render() {
