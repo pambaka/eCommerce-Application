@@ -4,7 +4,7 @@ import BaseTextComponent from '../../../components/base-text-component';
 import { Cart } from '../../../types/cart';
 import LANGUAGE from '../../../types/const';
 
-export default function renderProdutInCart(activeCart: Cart, parentElement: HTMLElement) {
+export default function renderProductsInCart(activeCart: Cart, parentElement: HTMLElement) {
   activeCart.lineItems.forEach((cartItem) => {
     const productWrapper = new BaseComponent('div', 'cart__product');
     const productImage = new BaseImageComponent(
@@ -37,8 +37,8 @@ export default function renderProdutInCart(activeCart: Cart, parentElement: HTML
 
     const sum = (cartItem.quantity * productPriceValue) / 100;
 
-    const productSubTotal = new BaseTextComponent('span', 'sub-total', `${sum}`);
-    productPriceTotal.node.append(productSubTotal.node);
+    const productPriceSubTotal = new BaseTextComponent('span', 'sub-total', `${sum}`);
+    productPriceTotal.node.append(productPriceSubTotal.node);
 
     productPriceWraper.node.append(productPriceTotal.node);
 
