@@ -4,7 +4,7 @@ import useToken from '../../../services/use-token';
 import { Cart, CartProduct, UpdateCartData } from '../../../types/cart';
 import updatePrices from './update-prices';
 
-export default async function handleQuantity(event: Event, cartItem: CartProduct) {
+export default async function handleQuantityChange(event: Event, cartItem: CartProduct) {
   const inputField = event.currentTarget;
   const token = await useToken.access.get();
   if (inputField instanceof HTMLInputElement && token) {

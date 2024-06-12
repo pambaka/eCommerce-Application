@@ -3,7 +3,7 @@ import BaseImageComponent from '../../../components/base-image-component';
 import BaseTextComponent from '../../../components/base-text-component';
 import { Cart } from '../../../types/cart';
 import LANGUAGE from '../../../types/const';
-import handleQuantity from '../logic/handle-quantity';
+import handleQuantityChange from '../logic/handle-quantity-change';
 import limitInputValue from '../logic/limit-input-value';
 
 export default function renderProductsInCart(activeCart: Cart, parentElement: HTMLElement) {
@@ -35,13 +35,26 @@ export default function renderProductsInCart(activeCart: Cart, parentElement: HT
     productQuantityInput.node.type = 'number';
     productQuantityInput.node.setAttribute('min', '1');
     productQuantityInput.node.setAttribute('max', '99');
-    productQuantityInput.node.addEventListener('keyup', limitInputValue);
     productQuantityInput.node.addEventListener('blur', (event) => {
-      handleQuantity(event, cartItem);
+      handleQuantityChange(event, cartItem);
     });
     productQuantityInput.node.addEventListener('keyup', (event) => {
+      limitInputValue(event);
       if (event.keyCode === 13 && event.target instanceof HTMLInputElement) {
         event.target.blur();
+      }
+    });
+    productQuantityInput.node.addEventListener('keydown', (event) => {
+      // restrict input dot, plus, minus
+      if (
+        event.keyCode === 190 ||
+        event.keyCode === 191 ||
+        event.keyCode === 107 ||
+        event.keyCode === 187 ||
+        event.keyCode === 109 ||
+        event.keyCode === 189
+      ) {
+        event.preventDefault();
       }
     });
     productQuantityInput.node.value = String(cartItem.quantity);
