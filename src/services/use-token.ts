@@ -4,11 +4,14 @@ import {
   CLIENT_ACCESS_TOKEN,
   CUSTOMER_ACCESS_TOKEN,
   CUSTOMER_REFRESH_TOKEN,
+  region,
+  oauth,
 } from '../api/const';
 import Customer from '../utils/customer';
 import getAnonymousToken from '../api/get-anonymous-tokens';
 import getAccessToken from '../api/get-access-token';
 import isTokenActive from '../api/is-token-active';
+import showModal from '../pages/show-modal';
 
 export default class useToken {
   static anonymous: { access: AnonymousToken } = {
@@ -97,4 +100,23 @@ export default class useToken {
       },
     },
   };
+
+  static async fetchRefreshToken(refreshToken: string): Promise<void> {
+    const url = `https://auth.${region}.${oauth}/token?grant_type=refresh_token&refresh_token=${refreshToken}`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${btoa(`${process.env.client_id}:${process.env.secret}`)}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+    const data = await response.json();
+    const accessToken = data.access_token;
+    if (accessToken) {
+      this.customer.access.set(accessToken);
+    } else {
+      showModal('Something went wrong', 'Please log in again');
+      // Customer.logOut();
+    }
+  }
 }

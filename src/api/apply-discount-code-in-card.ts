@@ -3,14 +3,28 @@ import useToken from '../services/use-token';
 import showModal from '../pages/show-modal';
 import getActiveCart from './get-active-cart';
 import createCart from './create-cart';
+import isTokenActive from './is-token-active';
 
 export default class CartDiscount {
   private static async getAccessToken(): Promise<string | undefined> {
-    const token = useToken.customer.access.get();
+    let token = useToken.customer.access.get() ?? undefined;
     if (!token) {
       showModal('Something went wrong', 'Please try again');
       return undefined;
     }
+
+    const isActive = await isTokenActive(token);
+    if (!isActive) {
+      const refreshToken = useToken.customer.refresh.get() ?? undefined;
+      if (refreshToken) {
+        await useToken.fetchRefreshToken(refreshToken);
+        token = useToken.customer.access.get() ?? undefined;
+      } else {
+        showModal('Session expired', 'Please log in again');
+        return undefined;
+      }
+    }
+
     return token;
   }
 
