@@ -41,7 +41,9 @@ export default async function addToCart(event: Event): Promise<void> {
     const product: Product | undefined = await getProductByKey(key, token);
 
     if (activeCart && product) {
-      isUpdateSuccessfull = await updateCart(activeCart, product.id, { action: 'addLineItem', quantity: 1 }, token);
+      isUpdateSuccessfull = Boolean(
+        await updateCart(activeCart, product.id, { action: 'addLineItem', quantity: 1 }, token),
+      );
     }
   } finally {
     if (isUpdateSuccessfull) {

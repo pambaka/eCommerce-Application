@@ -24,11 +24,13 @@ export default async function removeFromCart(this: string) {
       if (activeCart) {
         const lineItem = activeCart.lineItems.find((item) => item.productId === this);
         if (lineItem) {
-          isRemovalSuccessfull = await updateCart(
-            activeCart,
-            this,
-            { action: 'changeLineItemQuantity', quantity: 0, lineItemId: lineItem.id },
-            token,
+          isRemovalSuccessfull = Boolean(
+            await updateCart(
+              activeCart,
+              this,
+              { action: 'changeLineItemQuantity', quantity: 0, lineItemId: lineItem.id },
+              token,
+            ),
           );
         } else isRemovalSuccessfull = true;
       } else showModal(MESSAGES.error.updateCart, MESSAGES.suggestion.reloadAndTryAgain);

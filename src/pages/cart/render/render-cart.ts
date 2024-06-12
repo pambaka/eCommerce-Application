@@ -6,7 +6,6 @@ import { Cart } from '../../../types/cart';
 import getActiveCart from '../../../api/get-active-cart';
 import BaseTextComponent from '../../../components/base-text-component';
 import renderProductsInCart from './render-products-in-cart';
-import calculateSumInCart from '../logic/calculate-sum-in-cart';
 
 export default async function renderCart(): Promise<HTMLElement> {
   const token = await useToken.access.get();
@@ -21,15 +20,12 @@ export default async function renderCart(): Promise<HTMLElement> {
   if (!activeCart || activeCart.lineItems.length === 0) {
     renderEmptyCart(cartWrapper.node);
   } else {
-    console.log('activeCart.lineItems: ', activeCart.lineItems);
     const cartTitle = new BaseTextComponent('h2', 'cart-title', 'Shopping Cart');
     cartWrapper.node.append(cartTitle.node);
 
     renderProductsInCart(activeCart, cartWrapper.node);
 
-    const totalSum = calculateSumInCart(activeCart);
-
-    const total = new BaseTextComponent('h3', 'total', `Total:\xa0€\xa0${totalSum}`);
+    const total = new BaseTextComponent('p', 'total', `Total:\xa0€\xa0${activeCart.totalPrice.centAmount / 100}`);
     cartWrapper.node.append(total.node);
   }
 

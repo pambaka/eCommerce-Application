@@ -8,8 +8,8 @@ export default async function updateCart(
   productId: string,
   updateCartData: UpdateCartData,
   token: string,
-): Promise<boolean> {
-  let isUpdateSuccessfull = false;
+): Promise<Cart | undefined> {
+  let updatedCart: Cart | undefined;
 
   await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/me/carts/${cart.id}`, {
     method: 'POST',
@@ -32,17 +32,19 @@ export default async function updateCart(
   })
     .then((res) => {
       console.log(res, res.status);
-      if (res.status === 200) isUpdateSuccessfull = true;
-      else showModal(MESSAGES.error.updateCart, MESSAGES.suggestion.reloadAndTryAgain);
-
+      if (res.status !== 200) {
+        showModal(MESSAGES.error.updateCart, MESSAGES.suggestion.reloadAndTryAgain);
+        return undefined;
+      }
       return res.json();
     })
     .then((data) => {
+      if (data) updatedCart = data;
       console.log(data);
     })
     .catch((error) => {
       console.log(error);
     });
 
-  return isUpdateSuccessfull;
+  return updatedCart;
 }

@@ -15,6 +15,9 @@ export interface Cart {
   id: string;
   version: string;
   lineItems: CartProduct[];
+  totalPrice: {
+    centAmount: number;
+  };
 }
 
 export interface UpdateCartData {

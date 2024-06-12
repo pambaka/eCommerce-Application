@@ -3,6 +3,8 @@ import BaseImageComponent from '../../../components/base-image-component';
 import BaseTextComponent from '../../../components/base-text-component';
 import { Cart } from '../../../types/cart';
 import LANGUAGE from '../../../types/const';
+import handleQuantity from '../logic/handle-quantity';
+import limitInputValue from '../logic/limit-input-value';
 
 export default function renderProductsInCart(activeCart: Cart, parentElement: HTMLElement) {
   activeCart.lineItems.forEach((cartItem) => {
@@ -26,9 +28,24 @@ export default function renderProductsInCart(activeCart: Cart, parentElement: HT
     const priceInEuro = productPriceValue / 100;
 
     const productPrice = new BaseTextComponent('p', 'cart__product-price', `Price: €\xa0${priceInEuro}`);
-    const productQuantityContainer = new BaseTextComponent('p', 'quantity-container', 'Qty:\xa0');
-    const productQuantity = new BaseTextComponent('div', 'quantity', `${cartItem.quantity}`);
-    productQuantityContainer.node.append(productQuantity.node);
+    const productQuantityContainer = new BaseComponent('p', 'quantity-container');
+    const productQuantity = new BaseTextComponent('span', 'quantity-title', 'Qty:\xa0');
+
+    const productQuantityInput = new BaseComponent<HTMLInputElement>('input', 'quantity-input');
+    productQuantityInput.node.type = 'number';
+    productQuantityInput.node.setAttribute('min', '1');
+    productQuantityInput.node.setAttribute('max', '99');
+    productQuantityInput.node.addEventListener('keyup', limitInputValue);
+    productQuantityInput.node.addEventListener('blur', (event) => {
+      handleQuantity(event, cartItem);
+    });
+    productQuantityInput.node.addEventListener('keyup', (event) => {
+      if (event.keyCode === 13 && event.target instanceof HTMLInputElement) {
+        event.target.blur();
+      }
+    });
+    productQuantityInput.node.value = String(cartItem.quantity);
+    productQuantityContainer.node.append(productQuantity.node, productQuantityInput.node);
 
     productInfoWrapper.node.append(productTitle.node, productPrice.node, productQuantityContainer.node);
 
