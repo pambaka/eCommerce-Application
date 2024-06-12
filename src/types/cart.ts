@@ -2,6 +2,7 @@ import LANGUAGE from './const';
 import { MasterVariant } from './products';
 
 export interface CartProduct {
+  id: string;
   productId: string;
   name: {
     [LANGUAGE]: string;
@@ -14,4 +15,10 @@ export interface Cart {
   id: string;
   version: string;
   lineItems: CartProduct[];
+}
+
+export interface UpdateCartData {
+  action: 'addLineItem' | 'changeLineItemQuantity';
+  quantity: number;
+  lineItemId?: string;
 }

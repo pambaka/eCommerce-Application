@@ -2,8 +2,9 @@ import './product-card.scss';
 import BaseComponent from '../../components/base-component';
 import BaseTextComponent from '../../components/base-text-component';
 import { CardPrice } from '../../types/products';
-import ButtonComponent from '../../components/button-component';
+import CardCartButton from '../card-cart-button/card-cart-button';
 import addToCart from '../../pages/add-to-cart';
+import { CLASS_NAMES } from '../../const';
 
 export default class ProductCard extends BaseComponent {
   constructor(title: string, imageUrl: string, description: string, price: CardPrice) {
@@ -58,7 +59,7 @@ export default class ProductCard extends BaseComponent {
   }
 
   private static button(): HTMLElement {
-    const button = new ButtonComponent('add-to-cart-button', addToCart, 'add to cart', false);
+    const button = new CardCartButton(CLASS_NAMES.addToCartButton, addToCart, 'add to cart', false);
 
     return button.node;
   }

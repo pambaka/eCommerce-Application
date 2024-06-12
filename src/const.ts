@@ -27,6 +27,8 @@ export const CLASS_NAMES = {
   filters: 'filter-block',
   filterCategory: 'filter-category',
   filterColor: 'filter-color',
+  addToCartButton: 'add-to-cart-button',
+  removeFromCartButton: 'remove-from-cart-button',
 } as const;
 
 export const ID_NAMES = {

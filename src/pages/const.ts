@@ -20,4 +20,14 @@ export const CARD_BUTTON_TEXT = {
   addToCart: 'add to cart'.toUpperCase(),
   processing: '...processing...'.toUpperCase(),
   inTheCart: 'in the cart'.toUpperCase(),
+  removeFromCart: 'remove from cart'.toUpperCase(),
+};
+
+export const MESSAGES = {
+  error: {
+    updateCart: 'Something went wrong when updating the cart :(',
+  },
+  suggestion: {
+    reloadAndTryAgain: 'Please reload the page and try again',
+  },
 };

@@ -121,13 +121,14 @@
   border-radius: 10px;
   border: 1px solid #c7c6c7;
   padding: 15px;
+  container-type: inline-size;
 
   .product__description {
     flex-grow: 1;
   }
 
   .price-wrapper {
-    text-align: right;
+    text-align: left;
   }
 
   .old-price {
@@ -142,6 +143,17 @@
     font-weight: 700;
     color: #4f6e61;
     font-size: 22px;
+  }
+
+  .add-remove-buttons {
+    display: flex;
+    gap: 20px;
+  }
+
+  @container (width < 400px) {
+    .add-remove-buttons {
+      flex-direction: column;
+    }
   }
 }
 
@@ -161,7 +173,7 @@
   }
 }
 
-@media (min-width: 801px) and (max-width: 1000px) {
+@media (max-width: 1000px) {
   .images-wrapper {
     min-width: 400px;
     max-width: 400px;
@@ -177,35 +189,21 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 870px) {
   .product-wrapper {
+    flex-direction: column-reverse;
+    justify-content: end;
     gap: 20px;
   }
 
-  .main-image-wrapper {
-    width: 350px;
-    height: 350px;
-  }
-
-  .product__image {
-    min-width: 350px;
-  }
-
-  .image-row {
-    .small-image-wrapper {
-      margin: 3px;
-      width: 70px;
-      height: 70px;
-    }
+  .product-info {
+    max-width: 100%;
   }
 
   .images-wrapper {
-    min-width: 350px;
-    max-width: 350px;
+    align-self: center;
 
     .image-row-wrapper {
-      align-self: center;
-
       .left-arrow {
         margin-right: 5px;
       }
@@ -216,21 +214,16 @@
     }
   }
 }
-@media screen and (max-width: 675px) {
-  .product-wrapper {
-    flex-direction: column-reverse;
-    justify-content: end;
-  }
 
+@media screen and (max-width: 675px) {
   .images-wrapper {
-    margin: 0 auto;
-    min-width: 100%;
     min-width: 350px;
     max-width: 350px;
   }
 
   .main-image-wrapper {
-    margin: 0 auto;
+    width: 350px;
+    height: 350px;
   }
 
   .product__image {
@@ -239,8 +232,12 @@
     max-width: 100%;
   }
 
-  .product-info {
-    max-width: 100%;
+  .image-row {
+    .small-image-wrapper {
+      margin: 3px;
+      width: 70px;
+      height: 70px;
+    }
   }
 }
 
@@ -249,6 +246,7 @@
     min-width: 250px;
     max-width: 250px;
   }
+
   .main-image-wrapper {
     width: 250px;
     height: 250px;
@@ -257,6 +255,7 @@
   .product__image {
     min-width: 250px;
   }
+
   .image-row {
     .small-image-wrapper {
       margin: 2px;
@@ -265,6 +264,7 @@
     }
   }
 }
+
 @media screen and (max-width: 450px) {
   .image-row {
     max-width: 230px;
