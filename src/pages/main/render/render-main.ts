@@ -24,7 +24,7 @@ export default class MainSection extends BaseComponent {
     wrapper.node.appendChild(title.node);
 
     const promoCodeComponent = new PromoCodeModule({
-      images: ['../../../assets/images/1.jpg', '../../../assets/images/2.jpg', '../../../assets/images/3.jpg'],
+      images: ['../../src/assets/images/1.jpg', '../../src/assets/images/2.jpg', '../../src/assets/images/3.jpg'],
       promoText: 'Use code <span class="highlight">CALM20</span> for 20% off!',
     });
     wrapper.node.appendChild(promoCodeComponent.node);
