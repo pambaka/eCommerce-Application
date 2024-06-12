@@ -115,8 +115,8 @@ export default class useToken {
     if (accessToken) {
       this.customer.access.set(accessToken);
     } else {
-      showModal('Something went wrong', 'Please log in again');
-      // Customer.logOut();
+      showModal('Something went wrong', 'Please try again');
+      Customer.logOut();
     }
   }
 }

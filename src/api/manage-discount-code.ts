@@ -6,7 +6,7 @@ import createCart from './create-cart';
 import isTokenActive from './is-token-active';
 
 export default class CartDiscount {
-  private static async getAccessToken(): Promise<string | undefined> {
+  public static async getAccessToken(): Promise<string | undefined> {
     let token = useToken.customer.access.get() ?? undefined;
     if (!token) {
       showModal('Something went wrong', 'Please try again');
@@ -20,7 +20,7 @@ export default class CartDiscount {
         await useToken.fetchRefreshToken(refreshToken);
         token = useToken.customer.access.get() ?? undefined;
       } else {
-        showModal('Session expired', 'Please log in again');
+        showModal('Something went wrong', 'Please try again');
         return undefined;
       }
     }
