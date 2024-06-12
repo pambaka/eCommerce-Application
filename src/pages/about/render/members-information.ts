@@ -5,7 +5,7 @@ const teamMembers = [
     imgAlt: 'Tanya Telegina',
     name: 'Tanya Telegina',
     role: 'Lead Developer',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br><br><b>Contribution to the project:</b><br> - GitHub repository administration<br> - Sign In page<br> - Routing settings<br> - Product page layout<br> - Catalog sort and filter algorithms implementation<br> - User interaction with cart from catalog page',
+    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br><br><b>Contribution to the project:</b><br> - GitHub repository administration<br> - Sign In page<br> - Routing settings<br> - Catalog page<br> - Catalog sort and filter algorithms implementation<br> - User interaction with cart from catalog page',
     github: 'https://github.com/pambaka',
   },
   {
@@ -14,7 +14,7 @@ const teamMembers = [
     imgAlt: 'Artyom Pavlushov',
     name: 'Artyom Pavlushov',
     role: 'Developer',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br><br><b>Contribution to the project:</b><br> - API Client Setup<br> - CommerceTools administration<br> - Development environment configurement<br> - Sign Up page layout<br> - Cart page layout<br> - Display, modify and remove products in cart',
+    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br><br><b>Contribution to the project:</b><br> - CommerceTools administration<br> - Product page and sliders<br> - Sign Up page<br> - Cart page',
     github: 'https://github.com/gunsnfnr',
   },
   {
@@ -23,7 +23,7 @@ const teamMembers = [
     imgAlt: 'Tamara Maltseva',
     name: 'Tamara Maltseva',
     role: 'Developer',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br><br><b>Contribution to the project:</b><br> - About Us page layout<br> - Main page layout<br> - 404 page layout<br> - Profile page layout and edit mode<br> - Routing implementation<br> - General design & responsive layout',
+    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br><br><b>Contribution to the project:</b><br> - About Us page<br> - Main page<br> - 404 page<br> - Profile page<br> - Routing implementation',
     github: 'https://github.com/TMaltseva',
   },
 ];
