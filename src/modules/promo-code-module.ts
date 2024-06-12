@@ -14,7 +14,7 @@ export default class PromoCodeComponent extends BaseComponent {
   constructor() {
     super('div', 'promo_code_container');
     this.currentImageIndex = 0;
-    this.images = ['../src/assets/images/1.jpg', '../src/assets/images/2.jpg', '../src/assets/images/3.jpg'];
+    this.images = ['src/assets/images/1.jpg', 'src/assets/images/2.jpg', 'src/assets/images/3.jpg'];
     this.renderPromoCode();
     this.startImageRotation();
   }
