@@ -7,39 +7,6 @@ import Customer from '../utils/customer';
 import showModal from '../pages/show-modal';
 import isTokenActive from './is-token-active';
 
-// export default function getUserInfo(): Promise<CustomerIncomeData | undefined> {
-//   const accessToken = useToken.customer.access.get();
-
-//   if (!accessToken) {
-//     replaceLocation(Router.pages.main);
-//     return Promise.resolve(undefined);
-//   }
-
-//   const url = `https://api.${region}.commercetools.com/${process.env.project_key}/me`;
-
-//   return fetch(url, {
-//     method: 'GET',
-//     headers: {
-//       Authorization: `Bearer ${accessToken}`,
-//     },
-//   })
-//     .then((response) => {
-//       if (response.status === 401) {
-//         replaceLocation(Router.pages.main);
-//         Customer.logOut();
-//         return undefined;
-//       }
-
-//       if (!response.ok) {
-//         showModal('Something went wrong!', '');
-//         return undefined;
-//       }
-
-//       return response.json();
-//     })
-//     .catch((error) => error);
-// }
-
 export default async function getUserInfo(): Promise<CustomerIncomeData | undefined> {
   let accessToken = useToken.customer.access.get();
 
