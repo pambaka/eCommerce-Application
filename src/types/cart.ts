@@ -1,5 +1,5 @@
 import LANGUAGE from './const';
-import { MasterVariant } from './products';
+import { MasterVariant, ProductPrice } from './products';
 
 export interface CartProduct {
   id: string;
@@ -15,6 +15,7 @@ export interface Cart {
   id: string;
   version: string;
   lineItems: CartProduct[];
+  totalPrice: ProductPrice;
 }
 
 export interface UpdateCartData {

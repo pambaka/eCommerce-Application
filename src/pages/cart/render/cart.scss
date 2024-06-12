@@ -59,13 +59,19 @@
 
 .quantity-container {
   display: flex;
+}
 
-  .quantity {
-    background-color: $color-bg-light;
-    padding: 0 5px;
-    border-radius: 3px;
-    border: 1px solid $color-bg-dark;
-  }
+.quantity,
+.quantity-input {
+  background-color: $color-bg-light;
+  padding: 0 5px;
+  border-radius: 3px;
+  border: 1px solid $color-bg-dark;
+}
+
+.quantity-input {
+  width: 50px;
+  padding-right: 0px;
 }
 
 .cart__product {
@@ -100,4 +106,6 @@
   text-align: right;
   border-bottom: 1px solid $color-border-dark;
   padding-bottom: 25px;
+  font-size: 24px;
+  font-weight: bold;
 }
