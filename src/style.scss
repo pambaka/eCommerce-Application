@@ -2,7 +2,6 @@
 @import url('./pages/main/main.scss');
 @import url('./pages/error/error-page.scss');
 @import url('./pages/profile/profile.scss');
-@import url('./styles/fonts/stylesheet.scss');
 
 $color-bg: #d3dfdf;
 $color-head: #182541;
@@ -77,10 +76,17 @@ body,
 html {
   min-width: 360px;
   height: 100vh;
-  font-family: 'Gill Sans', sans-serif;
+  font-family: 'Love Ya Like A Sister', cursive;
+  font-weight: 400;
+  font-style: normal;
   font-size: 16px;
   scroll-behavior: smooth;
   background: linear-gradient(to right, $color-bg2, $color-bg3);
+}
+
+p,
+span {
+  @include regular-text;
 }
 
 h1 {

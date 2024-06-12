@@ -20,7 +20,7 @@ export default class MainSection extends BaseComponent {
     const wrapper = new BaseComponent('div', 'main_page__wrapper');
     this.node.appendChild(wrapper.node);
 
-    const title = new BaseTextComponent('h1', 'main_page__title', 'The best science and education toys');
+    const title = new BaseTextComponent('h1', 'main_page__title', 'Explore the world with our toys');
     wrapper.node.appendChild(title.node);
 
     const promoCodeComponent = new PromoCodeModule();
