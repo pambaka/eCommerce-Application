@@ -20,6 +20,7 @@ module.exports = {
   },
   testMatch: ['**/__tests__/**/*.test.(ts|tsx|js)'],
   collectCoverageFrom: ['src/**/*.(ts|tsx)'],
+  setupFiles: ['/jest.setup.ts'],
 };
 
-export {};
+export default {};
