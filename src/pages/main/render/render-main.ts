@@ -23,7 +23,14 @@ export default class MainSection extends BaseComponent {
     const title = new BaseTextComponent('h1', 'main_page__title', 'Explore the world with our toys');
     wrapper.node.appendChild(title.node);
 
-    const promoCodeComponent = new PromoCodeModule();
+    const promoCodeComponent = new PromoCodeModule({
+      images: [
+        '../../../src/assets/images/1.jpg',
+        '../../../src/assets/images/2.jpg',
+        '../../../src/assets/images/3.jpg',
+      ],
+      promoText: 'Use code <span class="highlight">CALM20</span> for 20% off!',
+    });
     wrapper.node.appendChild(promoCodeComponent.node);
 
     if (isCustomerAuthorized()) {

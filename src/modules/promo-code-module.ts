@@ -1,8 +1,9 @@
 import BaseTextComponent from '../components/base-text-component';
 import BaseComponent from '../components/base-component';
 import BaseImageComponent from '../components/base-image-component';
+import PromoCodeComponentProps from '../types/promocode';
 
-export default class PromoCodeComponent extends BaseComponent {
+export default class PromoCodeModule extends BaseComponent {
   private imageContainer!: BaseComponent;
 
   private textContainer!: BaseComponent;
@@ -11,10 +12,13 @@ export default class PromoCodeComponent extends BaseComponent {
 
   private images: string[];
 
-  constructor() {
+  private promoText: string;
+
+  constructor({ images, promoText }: PromoCodeComponentProps) {
     super('div', 'promo_code_container');
     this.currentImageIndex = 0;
-    this.images = ['src/assets/images/1.jpg', 'src/assets/images/2.jpg', 'src/assets/images/3.jpg'];
+    this.images = images;
+    this.promoText = promoText;
     this.renderPromoCode();
     this.startImageRotation();
   }
@@ -23,9 +27,9 @@ export default class PromoCodeComponent extends BaseComponent {
     this.textContainer = new BaseComponent('div', 'text_container');
     this.node.appendChild(this.textContainer.node);
 
-    const promoText = new BaseTextComponent('p', 'promo_code_text', '');
-    promoText.node.innerHTML = 'Use code <span class="highlight">CALM20</span> for 20% off!';
-    this.textContainer.node.appendChild(promoText.node);
+    const promoTextComponent = new BaseTextComponent('p', 'promo_code_text', '');
+    promoTextComponent.node.innerHTML = this.promoText;
+    this.textContainer.node.appendChild(promoTextComponent.node);
 
     this.imageContainer = new BaseComponent('div', 'image_container');
     this.node.appendChild(this.imageContainer.node);
