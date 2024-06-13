@@ -9,6 +9,7 @@ import Customer from '../utils/customer';
 import getAnonymousToken from '../api/get-anonymous-tokens';
 import getAccessToken from '../api/get-access-token';
 import isTokenActive from '../api/is-token-active';
+import fetchRefreshToken from '../api/get-refresh-token';
 
 export default class useToken {
   static anonymous: { access: AnonymousToken } = {
@@ -97,4 +98,29 @@ export default class useToken {
       },
     },
   };
+
+  static async getValidToken(): Promise<string | undefined> {
+    let token = this.customer.access.get() ?? undefined;
+    if (token) {
+      const isActive = await isTokenActive(token);
+      if (!isActive) {
+        const refreshToken = this.customer.refresh.get() ?? undefined;
+        if (refreshToken) {
+          token = await fetchRefreshToken(refreshToken);
+          if (token) {
+            this.customer.access.set(token);
+          } else {
+            Customer.logOut();
+            return undefined;
+          }
+        } else {
+          Customer.logOut();
+          return undefined;
+        }
+      }
+    } else {
+      token = (await this.anonymous.access.get()) ?? undefined;
+    }
+    return token;
+  }
 }
