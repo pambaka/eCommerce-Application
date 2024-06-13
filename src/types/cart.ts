@@ -19,7 +19,7 @@ export interface Cart {
 }
 
 export interface UpdateCartData {
-  action: 'addLineItem' | 'changeLineItemQuantity';
+  action: 'addLineItem' | 'changeLineItemQuantity' | 'removeLineItem';
   quantity: number;
   lineItemId?: string;
 }
