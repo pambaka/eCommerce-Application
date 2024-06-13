@@ -3,6 +3,6 @@ export default interface TeamMember {
   imgAlt: string;
   name: string;
   role: string;
-  bio: string;
+  bio: string[];
   github: string;
 }

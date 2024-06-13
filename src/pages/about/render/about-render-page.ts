@@ -19,7 +19,7 @@ export default class AboutSection extends BaseComponent {
     const subtitle = new BaseTextComponent(
       'p',
       'subtitle',
-      'Our development team strives to be the best specialists in their field. Keep your peace of mind with us!',
+      'Our development team strives to be the best specialists in their field. We consider the strengths of our team to be: a caring attitude to the matter, the desire to get to the point, a human approach and high-quality feedback. We were able to effectively distribute and complete the tasks of each sprint using tools such as discord chat and the task board git project tables. Keep your peace of mind with us!',
     );
 
     wrapper.node.append(title.node, subtitle.node);
@@ -41,7 +41,13 @@ export default class AboutSection extends BaseComponent {
       );
       roleContainer.node.append(aboutImg.node, role.node);
       const bio = new BaseComponent('p', 'bio');
-      bio.node.innerHTML = member.bio;
+
+      member.bio.forEach((line) => {
+        const bioLine = document.createElement('span');
+        bioLine.innerHTML = line;
+        bio.node.appendChild(bioLine);
+        bio.node.appendChild(document.createElement('br'));
+      });
 
       const githubLink = new BaseComponent('a', 'gh-link');
       githubLink.node.setAttribute('href', member.github);
