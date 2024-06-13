@@ -7,6 +7,9 @@ import Router from '../../../services/router';
 import isCustomerAuthorized from '../../../utils/is-customer-authorized';
 import { subscribeToAuthorizationChangeEvent } from '../../../utils/authorization-event';
 import PromoCodeModule from '../../../modules/promo-code-module';
+import image1 from '../../../assets/images/1.jpg';
+import image2 from '../../../assets/images/2.jpg';
+import image3 from '../../../assets/images/3.jpg';
 
 export default class MainSection extends BaseComponent {
   constructor() {
@@ -24,7 +27,7 @@ export default class MainSection extends BaseComponent {
     wrapper.node.appendChild(title.node);
 
     const promoCodeComponent = new PromoCodeModule({
-      images: ['../../src/assets/images/1.jpg', '../../src/assets/images/2.jpg', '../../src/assets/images/3.jpg'],
+      images: [image1, image2, image3],
       promoText: 'Use code <span class="highlight">CALM20</span> for 20% off!',
     });
     wrapper.node.appendChild(promoCodeComponent.node);
