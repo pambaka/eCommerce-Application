@@ -6,7 +6,14 @@ module.exports = {
   noInlineConfig: true,
   plugins: ['@typescript-eslint'],
   extends: ['eslint:recommended', 'airbnb-base', 'plugin:@typescript-eslint/recommended', 'prettier'],
-  overrides: [],
+  overrides: [
+    {
+      files: ['**/__tests__/**', '**/*.test.js', '**/*.test.ts'],
+      rules: {
+        'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+      },
+    },
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -15,6 +22,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-explicit-any': 2,
     'import/extensions': [2, {}],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     // 'no-console': 'off' for more convenient testing:
     'no-console': 0,
   },
