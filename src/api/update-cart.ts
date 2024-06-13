@@ -1,5 +1,6 @@
 import { MESSAGES } from '../pages/const';
 import showModal from '../pages/show-modal';
+import Counter from '../services/counter';
 import { Cart, UpdateCartData } from '../types/cart';
 import { region } from './const';
 
@@ -39,7 +40,10 @@ export default async function updateCart(
       return res.json();
     })
     .then((data) => {
-      if (data) updatedCart = data;
+      if (data) {
+        updatedCart = data;
+        Counter.update(false, data);
+      }
       console.log(data);
     })
     .catch((error) => {
