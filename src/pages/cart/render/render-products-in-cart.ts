@@ -9,6 +9,7 @@ import limitInputValue from '../logic/limit-input-value';
 import removeProductFromCart from '../logic/remove-product-from-cart';
 import placeholderImage from '../../../assets/no_image.png';
 import restrictKeys from '../logic/restrict-keys';
+import getActualPrice from '../logic/get-actual-price';
 
 export default function renderProductsInCart(activeCart: Cart, parentElement: HTMLElement) {
   activeCart.lineItems.forEach((cartItem) => {
@@ -19,12 +20,7 @@ export default function renderProductsInCart(activeCart: Cart, parentElement: HT
     const productInfoWrapper = new BaseComponent('div', 'cart__product-info-wrapper');
     const productTitle = new BaseTextComponent('p', 'cart__product-name', cartItem.name[LANGUAGE]);
 
-    let productPriceValue;
-    if (cartItem.variant.prices[0].discounted) {
-      productPriceValue = cartItem.variant.prices[0].discounted.value.centAmount;
-    } else {
-      productPriceValue = cartItem.variant.prices[0].value.centAmount;
-    }
+    const productPriceValue = getActualPrice(cartItem);
 
     const priceInEuro = productPriceValue / 100;
 
