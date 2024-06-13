@@ -90,7 +90,7 @@ export default class useToken {
 
         if (!token) {
           await this.client.access.set();
-          token = localStorage.getItem(ANONYMOUS_ACCESS_TOKEN);
+          token = localStorage.getItem(CLIENT_ACCESS_TOKEN);
         }
 
         return token;
