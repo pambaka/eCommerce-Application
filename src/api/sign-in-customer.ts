@@ -40,7 +40,7 @@ export default async function signInCustomer(email: string, password: string): P
 
         if (data.cart) Counter.update(false, data.cart);
         else {
-          Counter.hide();
+          Counter.reset();
         }
       })
       .catch((error) => error);

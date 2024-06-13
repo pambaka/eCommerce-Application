@@ -21,25 +21,17 @@ export default class Counter {
       const value = getQuantity(currentCart.lineItems);
 
       if (value) {
-        Counter.show();
         Counter.setValue(value);
 
         return;
       }
     }
 
-    Counter.hide();
+    Counter.reset();
   }
 
-  static hide() {
-    const counter = this.getCounter();
-    counter.textContent = '0';
-    counter.classList.add(`${CLASS_NAMES.counter}--hidden`);
-  }
-
-  static show() {
-    const counter = this.getCounter();
-    counter.classList.remove(`${CLASS_NAMES.counter}--hidden`);
+  static reset() {
+    Counter.setValue(0);
   }
 
   private static getCounter(): HTMLElement {
