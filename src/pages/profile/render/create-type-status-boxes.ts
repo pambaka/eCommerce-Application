@@ -11,7 +11,7 @@ export function createShippingCheckbox(
   shippingCheckbox.node.checked = isShippingChecked;
 
   const shippingLabel = new BaseComponent('label', 'profile_page__address_label');
-  shippingLabel.node.textContent = 'Shipping Address : ';
+  shippingLabel.node.textContent = 'Shipping Address: ';
   shippingLabel.node.setAttribute('for', `shipping-checkbox-${index}`);
 
   shippingCheckbox.node.addEventListener('change', () => {
