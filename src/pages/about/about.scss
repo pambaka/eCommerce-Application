@@ -76,6 +76,23 @@
     @media (max-width: 768px) {
       max-width: 90vw;
     }
+
+    @media (min-width: 600px) and (max-width: 768px) {
+      flex-direction: row;
+      height: auto;
+
+      .teammate-image {
+        height: 100%;
+      }
+
+      .gh-link {
+        top: 5%;
+      }
+
+      .info {
+        padding-left: 0;
+      }
+    }
   }
 
   .info {
@@ -85,6 +102,10 @@
     gap: 10px;
     padding: 30px;
     font-size: 0.9rem;
+
+    @media (max-width: 600px) {
+      margin: 0 auto;
+    }
 
     .gh-link {
       position: absolute;
