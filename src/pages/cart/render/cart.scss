@@ -40,12 +40,12 @@
 }
 
 .cart__product-name,
-.cart__product-price-total {
+.cart__product-price-subtotal {
   font-weight: 600;
 }
 
 .cart__product-name,
-.cart__product-price-total {
+.cart__product-price-subtotal {
   font-size: 20px;
 
   @media screen and (max-width: 550px) {
@@ -53,7 +53,7 @@
   }
 }
 
-.cart__product-price-total {
+.cart__product-price-subtotal {
   align-self: end;
 }
 

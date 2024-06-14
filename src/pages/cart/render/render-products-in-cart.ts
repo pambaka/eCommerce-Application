@@ -59,7 +59,7 @@ export default function renderProductsInCart(activeCart: Cart, parentElement: HT
     productInfoWrapper.node.append(productTitle.node, productPrice.node, productQuantityContainer.node, removeBtn.node);
 
     const productPriceWraper = new BaseComponent('div', 'cart__product-price-wrapper');
-    const productPriceTotal = new BaseTextComponent('p', 'cart__product-price-total', '€\xa0');
+    const productPriceTotal = new BaseTextComponent('p', 'cart__product-price-subtotal', '€\xa0');
 
     const sum = (cartItem.quantity * productPriceValue) / 100;
 
