@@ -59,7 +59,7 @@ body {
 }
 
 @mixin regular-text {
-  font-family: ApercuProRegular, Tahoma, Helvetica, Arial;
+  font-family: 'Inter', regular;
   color: $dark-text;
   font-weight: 400;
   line-height: 150%;
