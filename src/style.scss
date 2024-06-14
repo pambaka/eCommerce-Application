@@ -59,7 +59,7 @@ body {
 }
 
 @mixin regular-text {
-  font-family: 'Inter', regular;
+  font-family: 'Inter', sans-serif;
   color: $dark-text;
   font-weight: 400;
   line-height: 150%;
@@ -96,6 +96,10 @@ button {
 h1 {
   @include title;
   font-size: 3rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 }
 
 h2 {
