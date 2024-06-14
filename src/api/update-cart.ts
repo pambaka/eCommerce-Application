@@ -34,9 +34,16 @@ export default async function updateCart(
     .then((res) => {
       console.log(res, res.status);
       if (res.status !== 200) {
-        showModal(MESSAGES.error.updateCart, MESSAGES.suggestion.reloadAndTryAgain);
+        let suggestion: string = MESSAGES.suggestion.reloadAndTryAgain;
+        if (res.status === 409) {
+          suggestion = MESSAGES.suggestion.wait;
+        }
+
+        showModal(MESSAGES.error.updateCart, suggestion);
+
         return undefined;
       }
+
       return res.json();
     })
     .then((data) => {
