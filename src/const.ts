@@ -29,6 +29,7 @@ export const CLASS_NAMES = {
   filterColor: 'filter-color',
   addToCartButton: 'add-to-cart-button',
   removeFromCartButton: 'remove-from-cart-button',
+  counter: 'cart-counter',
 } as const;
 
 export const ID_NAMES = {

@@ -8,6 +8,8 @@ import ButtonWithSvgIcon from '../../components/button-with-svg-icon';
 import userNavIcons from '../../assets/user-nav-icons-sprite.svg';
 import { subscribeToAuthorizationChangeEvent } from '../../utils/authorization-event';
 import Customer from '../../utils/customer';
+import { CLASS_NAMES, DOM } from '../../const';
+import Counter from '../../services/counter';
 
 export default class UserNavigation extends BaseComponent {
   logInButton: ButtonComponent;
@@ -77,6 +79,7 @@ export default class UserNavigation extends BaseComponent {
       'shopping cart',
       `${userNavIcons}#cart`,
     );
+    this.renderCounter();
 
     this.subscribeToAuthorizationChanges();
   }
@@ -94,6 +97,15 @@ export default class UserNavigation extends BaseComponent {
   updateButtons() {
     this.node.innerHTML = '';
     this.renderButtons();
+  }
+
+  private async renderCounter() {
+    const counter = new BaseComponent('div', 'cart-counter');
+    DOM.add(CLASS_NAMES.counter, counter.node);
+
+    await Counter.update(false);
+
+    this.cartButton.node.append(counter.node);
   }
 
   subscribeToAuthorizationChanges() {
