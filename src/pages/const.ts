@@ -25,9 +25,10 @@ export const CARD_BUTTON_TEXT = {
 
 export const MESSAGES = {
   error: {
-    updateCart: 'Something went wrong when updating the cart :(',
+    updateCart: 'Something went wrong when updating the cart :\xa0(',
   },
   suggestion: {
     reloadAndTryAgain: 'Please reload the page and try again',
+    wait: 'Please wait until the previous operation with the cart is completed before proceeding to the next one',
   },
 };
