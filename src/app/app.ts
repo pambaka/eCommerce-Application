@@ -13,7 +13,7 @@ import renderCatetoryProducts from '../pages/catalog/render/render-category-prod
 import Breadcrumbs from '../pages/catalog/render/breadcrumbs';
 import { CLASS_NAMES } from '../const';
 import renderEmptyCatalog from '../pages/catalog/render/render-empty-catalog';
-import renderAllProducts from '../pages/catalog/render/render-all-products';
+import renderCatalogContent from '../pages/catalog/render/render-catalog-content';
 import renderCart from '../pages/cart/render/render-cart';
 
 export default class App {
@@ -126,7 +126,7 @@ export default class App {
   private async renderCatalog() {
     this.prepare();
     this.contentNode.append(renderEmptyCatalog());
-    await renderAllProducts();
+    await renderCatalogContent();
   }
 
   private renderRegistrationPage() {

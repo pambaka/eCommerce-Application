@@ -321,3 +321,46 @@
   color: $color-accent;
   background-color: $color-bg-light;
 }
+
+.pagination {
+  align-self: flex-end;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.page-number {
+  font-size: 20px;
+  width: 30px;
+  text-align: center;
+  color: #e0dcdc;
+  text-shadow: 0 1px 5px #323232;
+  // color: #323232;
+  // text-shadow: 0px 1px 5px $color-bg-light;
+}
+
+.prev-button,
+.next-button {
+  padding: 4px;
+  display: grid;
+  place-content: center;
+  background-color: $color-bg-light;
+  border-radius: 4px;
+  color: #323232;
+  transition: 0.2s;
+
+  &:hover:not(:disabled) {
+    color: $color-accent;
+    transition: 0.2s;
+  }
+
+  &:disabled {
+    background-color: #d7d2d2;
+    color: #9b9b9b;
+  }
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+}

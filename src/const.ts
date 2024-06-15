@@ -30,6 +30,9 @@ export const CLASS_NAMES = {
   addToCartButton: 'add-to-cart-button',
   removeFromCartButton: 'remove-from-cart-button',
   counter: 'cart-counter',
+  prevButton: 'prev-button',
+  nextButton: 'next-button',
+  pageNumber: 'page-number',
 } as const;
 
 export const ID_NAMES = {
