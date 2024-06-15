@@ -1,4 +1,4 @@
-import { MESSAGES } from '../pages/const';
+// import { MESSAGES } from '../pages/const';
 import showModal from '../pages/show-modal';
 import Counter from '../services/counter';
 import { Cart, AddPromoCode } from '../types/cart';
@@ -29,16 +29,14 @@ export default async function addPromo(
   })
     .then((res) => {
       console.log(res, res.status);
-      if (res.status !== 200) {
-        showModal(MESSAGES.error.updateCart, MESSAGES.suggestion.reloadAndTryAgain);
-        return undefined;
-      }
       return res.json();
     })
     .then((data) => {
-      if (data) {
+      if (data.statusCode === 200) {
         updatedCart = data;
         Counter.update(false, data);
+      } else if (data.statusCode === 400) {
+        showModal(data.message, '');
       }
       console.log(data);
     })
