@@ -9,6 +9,11 @@ export interface CartProduct {
   };
   variant: MasterVariant;
   quantity: number;
+  totalPrice: ProductPrice;
+}
+
+export interface DiscountCode {
+  id: string;
 }
 
 export interface Cart {
@@ -16,10 +21,16 @@ export interface Cart {
   version: string;
   lineItems: CartProduct[];
   totalPrice: ProductPrice;
+  discountCodes: DiscountCode[];
 }
 
 export interface UpdateCartData {
   action: 'addLineItem' | 'changeLineItemQuantity' | 'removeLineItem';
   quantity: number;
   lineItemId?: string;
+}
+
+export interface AddPromoCode {
+  action: 'addDiscountCode';
+  code: string;
 }
