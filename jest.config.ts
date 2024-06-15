@@ -22,4 +22,4 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.(ts|tsx)'],
 };
 
-export {};
+export default {};
