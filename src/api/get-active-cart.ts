@@ -16,7 +16,7 @@ export default async function getActiveCart(token: string): Promise<Cart | undef
 
       if (res.status === 401 || res.status === 403) {
         console.log(token);
-        showModal('Something went wrong', 'Please try adding the product to the cart again');
+        showModal('Something went wrong', 'Please reload page');
       }
       if (res.status !== 200) return undefined;
       return res.json();

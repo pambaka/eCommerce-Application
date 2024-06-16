@@ -1,6 +1,18 @@
 import LANGUAGE from './const';
 import { MasterVariant, ProductPrice } from './products';
 
+export interface IncludedDiscounts {
+  discount: {
+    id: 'string';
+  };
+}
+
+export interface DiscountedPrice {
+  discountedPrice: {
+    includedDiscounts: IncludedDiscounts[];
+  };
+}
+
 export interface CartProduct {
   id: string;
   productId: string;
@@ -10,10 +22,16 @@ export interface CartProduct {
   variant: MasterVariant;
   quantity: number;
   totalPrice: ProductPrice;
+  discountedPricePerQuantity: DiscountedPrice[];
+  // discountedPrice?: {
+  //   includedDiscounts: IncludedDiscounts[];
+  // };
 }
 
 export interface DiscountCode {
-  id: string;
+  discountCode: {
+    id: string;
+  };
 }
 
 export interface Cart {
@@ -33,4 +51,10 @@ export interface UpdateCartData {
 export interface AddPromoCode {
   action: 'addDiscountCode';
   code: string;
+}
+
+export interface Promocode {
+  name: {
+    [LANGUAGE]: 'string';
+  };
 }

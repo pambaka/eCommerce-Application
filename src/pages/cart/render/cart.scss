@@ -167,6 +167,22 @@
   }
 }
 
+.applied-promocodes {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 30px;
+  width: 100%;
+  align-self: self-start;
+  margin-left: 5%;
+  font-size: 18px;
+
+  .promo-text {
+    color: #4d73a1;
+    font-weight: 700;
+  }
+}
+
 .promo-title {
   font-size: 19px;
 
