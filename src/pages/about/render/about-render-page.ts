@@ -5,6 +5,7 @@ import aboutIcon from '../../../assets/footer-icons-sprite.svg';
 import LinkImage from '../../../components/link-image';
 import TeamMember from '../../../types/members';
 import teamMembers from './members-information';
+import calm from '../../../assets/calm.svg';
 
 export default class AboutSection extends BaseComponent {
   constructor() {
@@ -34,11 +35,7 @@ export default class AboutSection extends BaseComponent {
       const name = new BaseTextComponent('p', 'teammate_title', member.name);
       const roleContainer = new BaseComponent('div', 'role-container');
       const role = new BaseTextComponent('div', 'subtitle-small', member.role);
-      const aboutImg = new BaseImageComponent(
-        'about-image',
-        'https://www.svgrepo.com/show/515395/calm.svg',
-        'about-image',
-      );
+      const aboutImg = new BaseImageComponent('about-image', calm, 'about-image');
       roleContainer.node.append(aboutImg.node, role.node);
       const bio = new BaseComponent('p', 'bio');
 
