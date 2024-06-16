@@ -23,9 +23,6 @@ export interface CartProduct {
   quantity: number;
   totalPrice: ProductPrice;
   discountedPricePerQuantity: DiscountedPrice[];
-  // discountedPrice?: {
-  //   includedDiscounts: IncludedDiscounts[];
-  // };
 }
 
 export interface DiscountCode {

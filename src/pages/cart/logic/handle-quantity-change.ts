@@ -23,7 +23,6 @@ export default async function handleQuantityChange(event: Event, cartItem: CartP
     const cartProductNode = inputField.closest('.cart__product');
     if (updatedCart && cartProductNode instanceof HTMLElement) {
       updateSubtotalPrice(cartProductNode, cartItem, Number(inputField.value), updatedCart);
-      // updateTotalPrice(updatedCart.totalPrice.centAmount);
       updateTotalPrice(updatedCart);
     }
   }

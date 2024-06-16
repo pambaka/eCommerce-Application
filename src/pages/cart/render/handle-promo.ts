@@ -1,15 +1,10 @@
 import addPromo from '../../../api/add-promocode';
 import getActiveCart from '../../../api/get-active-cart';
-// import getPromocodeById from '../../../api/get-promocode-by-id';
 import useToken from '../../../services/use-token';
 import { AddPromoCode, Cart } from '../../../types/cart';
 import showAppliedPromocodes from '../logic/show-applied-promocodes';
-// import LANGUAGE from '../../../types/const';
-// import lookForAppliedPromocodes from '../logic/look-for-applied-promocodes';
 import updateSubtotalPrice from '../logic/update-subtotal-price';
 import updateTotalPrice from '../logic/update-total-price';
-// import renderAppliedPromocode from './render-applied-promocode';
-// import renderWrapperForAppliedPromo from './render-wrapper-for-applied-promo';
 
 export default async function handlePromo() {
   const promoInput = document.querySelector('.promo-input');

@@ -1,4 +1,3 @@
-// import { MESSAGES } from '../pages/const';
 import showModal from '../pages/show-modal';
 import { Cart, AddPromoCode } from '../types/cart';
 import { region } from './const';
