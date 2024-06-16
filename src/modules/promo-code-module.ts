@@ -14,13 +14,17 @@ export default class PromoCodeModule extends BaseComponent {
 
   private promoText: string;
 
+  private rotationInterval: number | undefined;
+
   constructor({ images, promoText }: PromoCodeComponentProps) {
     super('div', 'promo_code_container');
     this.currentImageIndex = 0;
     this.images = images;
     this.promoText = promoText;
     this.renderPromoCode();
-    this.startImageRotation();
+    if (this.images.length > 1) {
+      this.startImageRotation();
+    }
   }
 
   renderPromoCode() {
@@ -55,9 +59,15 @@ export default class PromoCodeModule extends BaseComponent {
   }
 
   startImageRotation() {
-    setInterval(() => {
+    this.rotationInterval = window.setInterval(() => {
       this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
       this.updateImage();
     }, 3000);
+  }
+
+  stopImageRotation() {
+    if (this.rotationInterval) {
+      clearInterval(this.rotationInterval);
+    }
   }
 }
