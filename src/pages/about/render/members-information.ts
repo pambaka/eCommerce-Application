@@ -41,7 +41,7 @@ const teamMembers = [
     name: 'Tamara Maltseva',
     role: 'Developer',
     bio: [
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      'I worked as a trade marketing manager for several years. I am learning java-script, and in the future I am interested in mastering a game engine or library for creating game mechanics',
       '',
       '<b>Contribution to the project:</b>',
       ' - About Us page',
