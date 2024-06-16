@@ -1,3 +1,5 @@
+import { CLASS_NAMES, DOM } from '../const';
+
 const CATALOG_GAP = 20;
 const OUTER_MARGIN = 40;
 const CATALOG_CARD_WIDTH = 220;
@@ -41,15 +43,24 @@ export default class Pages {
 
   static increment() {
     this.currentPage += 1;
+    this.updatePageNumber();
     console.log('page:', this.currentPage);
   }
 
   static decrement() {
     this.currentPage -= 1;
+    this.updatePageNumber();
     console.log('page:', this.currentPage);
   }
 
   static reset() {
+    console.log('reseting page');
     this.currentPage = 1;
+    this.updatePageNumber();
+  }
+
+  private static updatePageNumber() {
+    const pageNumber = DOM.elements[CLASS_NAMES.pageNumber];
+    if (pageNumber) pageNumber.textContent = `${Pages.currentPage}`;
   }
 }

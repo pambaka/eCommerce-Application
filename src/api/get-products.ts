@@ -6,14 +6,22 @@ import Pages from '../services/pages';
 
 export default async function getProducts(
   accessToken: string,
-  options?: { limit: number; offset: number },
+  options?: {
+    limit: number;
+    offset: number;
+    query?: string;
+  },
 ): Promise<Product[] | undefined> {
   let products: Product[] | undefined;
 
   let pagination = '';
-  if (options) pagination = `?limit=${options.limit}&offset=${options.offset}`;
+  if (options) {
+    if (options.query) pagination = `/search?${options.query}&limit=${options.limit}&offset=${options.offset}`;
+    else pagination = `?limit=${options.limit}&offset=${options.offset}`;
+  }
 
-  await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/products/${pagination}`, {
+  // await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/products${pagination}`, {
+  await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/product-projections${pagination}`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${accessToken}`,

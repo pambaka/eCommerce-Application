@@ -2,15 +2,20 @@ import getProducts from '../../../api/get-products';
 import getSearchedProducts from '../../../api/get-searched-products';
 import getSortedProducts from '../../../api/get-sorted-products';
 import { CLASS_NAMES, DOM } from '../../../const';
+import Pages from '../../../services/pages';
 import useToken from '../../../services/use-token';
 import LANGUAGE from '../../../types/const';
 import { Product, ProductProjection } from '../../../types/products';
 import { SORTING_ORDER } from '../const';
 import renderProducts from '../render/render-products';
 import getCategoryQuery from './get-category-query';
+import resetFilters from './reset-filters';
+import resetPagination from './reset-pagination';
 
 export default async function searchProducts(event?: Event) {
   event?.preventDefault();
+
+  resetFilters();
 
   const input = DOM.elements[CLASS_NAMES.searchInput] as HTMLInputElement;
 
@@ -32,20 +37,22 @@ export default async function searchProducts(event?: Event) {
       if (sortQuery) query += `&sort=${sortQuery}`;
       if (categoryQuery) query += `&${categoryQuery}`;
 
-      products = await getSearchedProducts(token, query);
+      products = await getSearchedProducts(token, { limit: Pages.cardsPerPage.value, offset: 0, query });
     } else if (sortQuery) {
       let query = sortQuery;
       if (categoryQuery) query += `&${categoryQuery}`;
 
       products = await getSortedProducts(token, query);
     } else if (categoryQuery) {
-      products = await getSearchedProducts(token, categoryQuery);
+      products = await getSearchedProducts(token, { limit: Pages.cardsPerPage.value, offset: 0, query: categoryQuery });
     } else {
       products = await getProducts(token);
     }
 
     if (products) {
       renderProducts(products);
+
+      resetPagination();
     }
   }
 }

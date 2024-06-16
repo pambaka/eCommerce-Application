@@ -6,8 +6,11 @@ import { ProductProjection } from '../../../types/products';
 import { SORTING_ORDER } from '../const';
 import createCard from '../render/create-card';
 import getCategoryQuery from './get-category-query';
+import resetFilters from './reset-filters';
 
 export default async function sortProducts(this: HTMLElement): Promise<void> {
+  resetFilters();
+
   const dropdown: HTMLElement | null = document.querySelector('.dropdown-text');
 
   if (dropdown && this.textContent) {

@@ -1,4 +1,5 @@
 import getSearchedProducts from '../../../api/get-searched-products';
+import Pages from '../../../services/pages';
 import useToken from '../../../services/use-token';
 import renderProducts from '../render/render-products';
 import Filters from './filters';
@@ -6,6 +7,7 @@ import getCategoryFilterQuery from './get-category-filter-query';
 import getCategoryQuery from './get-category-query';
 import getColorFilterQuery from './get-color-filter-query';
 import getPriceFilterQuery from './get-price-filter-query';
+import resetPagination from './reset-pagination';
 
 export default async function filterProducts(event: Event): Promise<void> {
   event.preventDefault();
@@ -29,10 +31,16 @@ export default async function filterProducts(event: Event): Promise<void> {
   const token: string | null = await useToken.anonymous.access.get();
 
   if (token) {
-    const products = await getSearchedProducts(token, queries.join('&'));
+    const products = await getSearchedProducts(token, {
+      limit: Pages.cardsPerPage.value,
+      offset: 0,
+      query: queries.join('&'),
+    });
 
     if (products) {
       renderProducts(products);
+
+      resetPagination();
     }
 
     Filters.markFiltered();
