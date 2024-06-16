@@ -11,7 +11,7 @@ export default class ProductCard extends BaseComponent {
     super('article', 'product-card');
 
     this.addTitle(title);
-    this.addImage(imageUrl);
+    this.addImage(imageUrl, title);
     this.addDescription(description);
     this.addCardBottom(price);
   }
@@ -22,9 +22,11 @@ export default class ProductCard extends BaseComponent {
     this.node.append(cardTitle.node);
   }
 
-  private addImage(imageUrl: string) {
+  private addImage(imageUrl: string, title: string) {
     const image = new BaseComponent('div', 'card__image');
     image.node.style.backgroundImage = `url(${imageUrl})`;
+
+    if (title.startsWith('Elephant')) image.node.classList.add('elephant');
 
     this.node.append(image.node);
   }
