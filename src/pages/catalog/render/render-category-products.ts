@@ -1,4 +1,4 @@
-import getSearchedProducts from '../../../api/get-searched-products';
+import getProducts from '../../../api/get-products';
 import Catalog from '../../../services/catalog';
 import Pages from '../../../services/pages';
 import useToken from '../../../services/use-token';
@@ -18,7 +18,7 @@ export default async function renderCatetoryProducts(key: string): Promise<void>
   if (token) {
     const query = `${QUERY_BASE.category}:"${Catalog.categories[key]}"`;
 
-    const products = await getSearchedProducts(token, { limit: Pages.cardsPerPage.value, offset: 0, query });
+    const products = await getProducts(token, { limit: Pages.cardsPerPage.value, offset: 0, query });
 
     if (products) {
       renderProducts(products);

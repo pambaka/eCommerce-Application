@@ -3,6 +3,7 @@ import useToken from '../services/use-token';
 import { Product } from '../types/products';
 import { region } from './const';
 import Pages from '../services/pages';
+import handleNextButtonState from '../pages/catalog/logic/handle-next-button-state';
 
 export default async function getProducts(
   accessToken: string,
@@ -49,6 +50,7 @@ export default async function getProducts(
       products = data.results;
 
       Pages.setLastPage(data.total);
+      handleNextButtonState();
     })
     .catch((error) => error);
 
