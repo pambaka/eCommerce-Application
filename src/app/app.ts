@@ -13,8 +13,9 @@ import renderCatetoryProducts from '../pages/catalog/render/render-category-prod
 import Breadcrumbs from '../pages/catalog/render/breadcrumbs';
 import { CLASS_NAMES } from '../const';
 import renderEmptyCatalog from '../pages/catalog/render/render-empty-catalog';
-import renderAllProducts from '../pages/catalog/render/render-all-products';
+import renderCatalogContent from '../pages/catalog/render/render-catalog-content';
 import renderCart from '../pages/cart/render/render-cart';
+import Pages from '../services/pages';
 
 export default class App {
   private header: Header;
@@ -107,6 +108,9 @@ export default class App {
         const categories = document.querySelector('.categories');
         if (categories) categories.remove();
 
+        Pages.reset();
+        Pages.cardsPerPage.update();
+
         await renderCatetoryProducts(key);
         Breadcrumbs.update();
       });
@@ -126,7 +130,7 @@ export default class App {
   private async renderCatalog() {
     this.prepare();
     this.contentNode.append(renderEmptyCatalog());
-    await renderAllProducts();
+    await renderCatalogContent();
   }
 
   private renderRegistrationPage() {

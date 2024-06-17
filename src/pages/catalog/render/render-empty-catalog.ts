@@ -7,6 +7,8 @@ import renderFilterBlock from './render-filter-block';
 import Breadcrumbs from './breadcrumbs';
 import Router from '../../../services/router';
 import renderCategories from './render-categories';
+import renderPaginationBlock from './render-pagination-block';
+import Pages from '../../../services/pages';
 
 export default function renderEmptyCatalog(): HTMLElement {
   const catalog = new BaseComponent('div', 'catalog');
@@ -31,6 +33,10 @@ export default function renderEmptyCatalog(): HTMLElement {
   DOM.add(CLASS_NAMES.productsWrapper, wrapper.node);
 
   rightColumn.node.append(wrapper.node);
+
+  renderPaginationBlock(rightColumn.node);
+  Pages.reset();
+  Pages.cardsPerPage.update();
 
   content.node.append(leftColumn.node, rightColumn.node);
 
