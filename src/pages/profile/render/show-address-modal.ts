@@ -2,6 +2,8 @@ import BaseComponent from '../../../components/base-component';
 import ButtonComponent from '../../../components/button-component';
 import AddressSectionComponent from '../../../modules/address-module';
 
+const openModals: HTMLElement[] = [];
+
 export default function showAddressModal(addressComponent: AddressSectionComponent): void {
   const originalParent = addressComponent.node.parentNode;
   const originalNextSibling = addressComponent.node.nextSibling;
@@ -25,9 +27,12 @@ export default function showAddressModal(addressComponent: AddressSectionCompone
   const closeButton = new ButtonComponent(
     'close-button',
     () => {
-      backdrop.node.remove();
-      modal.node.remove();
+      openModals.forEach((modalElement) => {
+        modalElement.remove();
+      });
+      openModals.length = 0;
       restoreAddressComponent(addressComponent);
+      addressComponent.closeModal();
     },
     '',
     false,
@@ -43,4 +48,5 @@ export default function showAddressModal(addressComponent: AddressSectionCompone
   addressComponent.saveButton.node.classList.remove('hidden');
 
   document.body.append(backdrop.node, modal.node);
+  openModals.push(backdrop.node, modal.node);
 }
