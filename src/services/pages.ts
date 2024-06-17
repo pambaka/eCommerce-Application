@@ -1,4 +1,6 @@
 import { CLASS_NAMES, DOM } from '../const';
+import handleNextButtonState from '../pages/catalog/logic/handle-next-button-state';
+import handlePrevButtonState from '../pages/catalog/logic/handle-prev-button-state';
 
 const CATALOG_GAP = 20;
 const OUTER_MARGIN = 40;
@@ -14,7 +16,9 @@ export default class Pages {
   static cardsPerPage = {
     value: 6,
 
-    calculate: (screenWidth: number) => {
+    update: () => {
+      const screenWidth = window.innerWidth;
+
       switch (true) {
         case screenWidth <= 600:
           this.cardsPerPage.value = this.rowsPerPage * 1;
@@ -33,6 +37,9 @@ export default class Pages {
         default:
           break;
       }
+
+      handlePrevButtonState();
+      handleNextButtonState();
     },
   };
 

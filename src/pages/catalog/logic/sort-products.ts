@@ -1,5 +1,6 @@
 import getSortedProducts from '../../../api/get-sorted-products';
 import { CLASS_NAMES, DOM } from '../../../const';
+import Pages from '../../../services/pages';
 import useToken from '../../../services/use-token';
 import LANGUAGE from '../../../types/const';
 import { ProductProjection } from '../../../types/products';
@@ -10,6 +11,8 @@ import resetFilters from './reset-filters';
 
 export default async function sortProducts(this: HTMLElement): Promise<void> {
   resetFilters();
+
+  Pages.cardsPerPage.update();
 
   const dropdown: HTMLElement | null = document.querySelector('.dropdown-text');
 

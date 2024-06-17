@@ -8,7 +8,6 @@ import Breadcrumbs from './breadcrumbs';
 import Router from '../../../services/router';
 import renderCategories from './render-categories';
 import renderPaginationBlock from './render-pagination-block';
-import resetPagination from '../logic/reset-pagination';
 import Pages from '../../../services/pages';
 
 export default function renderEmptyCatalog(): HTMLElement {
@@ -36,8 +35,8 @@ export default function renderEmptyCatalog(): HTMLElement {
   rightColumn.node.append(wrapper.node);
 
   renderPaginationBlock(rightColumn.node);
-  Pages.cardsPerPage.calculate(window.innerWidth);
-  resetPagination();
+  Pages.reset();
+  Pages.cardsPerPage.update();
 
   content.node.append(leftColumn.node, rightColumn.node);
 

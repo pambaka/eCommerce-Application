@@ -17,6 +17,8 @@ export default async function searchProducts(event?: Event) {
 
   resetFilters();
 
+  Pages.cardsPerPage.update();
+
   const input = DOM.elements[CLASS_NAMES.searchInput] as HTMLInputElement;
 
   const dropdownText = DOM.elements[CLASS_NAMES.dropdownText];

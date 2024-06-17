@@ -11,13 +11,16 @@ import getProducts from '../../../api/get-products';
 export default async function showPrevPage() {
   disablePaginationButtons();
 
-  const query = getQuery();
-
   const token = await useToken.client.access.get();
-
-  if (!token) return;
+  if (!token) {
+    handlePrevButtonState();
+    handleNextButtonState();
+    return;
+  }
 
   if (Pages.currentPage > 1) {
+    const query = getQuery();
+
     const products = await getProducts(token, {
       limit: Pages.cardsPerPage.value,
       offset: (Pages.currentPage - 2) * Pages.cardsPerPage.value,
@@ -32,8 +35,8 @@ export default async function showPrevPage() {
 
       Pages.decrement();
     }
-
-    handlePrevButtonState();
-    handleNextButtonState();
   }
+
+  handlePrevButtonState();
+  handleNextButtonState();
 }

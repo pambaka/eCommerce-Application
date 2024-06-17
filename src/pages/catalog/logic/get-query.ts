@@ -1,20 +1,18 @@
-import { CLASS_NAMES, DOM } from '../../../const';
-import { SORTING_ORDER } from '../const';
 import getCategoryQuery from './get-category-query';
+import getSearchQuery from './get-search-query';
+import getSortQuery from './get-sort-query';
 
 export default function getQuery(): string | undefined {
   const queries: string[] = [];
 
-  const categoryQuery = getCategoryQuery();
+  const categoryQuery: string | undefined = getCategoryQuery();
   if (categoryQuery) queries.push(categoryQuery);
 
-  const dropdown: HTMLElement | undefined = DOM.elements[CLASS_NAMES.dropdownText];
+  const searchQuery: string | undefined = getSearchQuery();
+  if (searchQuery) queries.push(searchQuery);
 
-  if (dropdown && dropdown.textContent) {
-    const sortingOrder: string | undefined = SORTING_ORDER[dropdown.textContent];
-    const sortQuery = `sort=${sortingOrder}`;
-    if (sortingOrder) queries.push(sortQuery);
-  }
+  const sortQuery: string | undefined = getSortQuery();
+  if (sortQuery) queries.push(sortQuery);
 
   return queries.join('&');
 }
