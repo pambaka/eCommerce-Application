@@ -24,18 +24,23 @@
   .card__image {
     width: 200px;
     height: 150px;
-    background-color: #5f8575;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px $color-bg-dark;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    -webkit-mask-image: url('../../assets/elephant.svg');
-    mask-image: url('../../assets/elephant.svg');
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
+
+    &.elephant {
+      background-color: #5f8575;
+      -webkit-mask-image: url('../../assets/elephant.svg');
+      mask-image: url('../../assets/elephant.svg');
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+    }
   }
 
   .card__description {
