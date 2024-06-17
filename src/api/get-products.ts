@@ -21,7 +21,6 @@ export default async function getProducts(
     else pagination = `?limit=${options.limit}&offset=${options.offset}`;
   }
 
-  // await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/products${pagination}`, {
   await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/product-projections${pagination}`, {
     method: 'GET',
     headers: {
@@ -29,11 +28,8 @@ export default async function getProducts(
     },
   })
     .then((res) => {
-      console.log(res);
-
       if (res.status !== 200) {
         if (res.status === 401) {
-          console.log(accessToken);
           useToken.client.access.set();
         }
         showModal('Something went wrong', 'Please keep calm and try reloading the page');
@@ -44,7 +40,6 @@ export default async function getProducts(
       return res.json();
     })
     .then((data) => {
-      console.log(data);
       if (!data) return;
 
       products = data.results;

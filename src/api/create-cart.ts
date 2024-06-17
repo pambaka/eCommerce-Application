@@ -13,20 +13,14 @@ export default async function createCart(token: string): Promise<Cart | undefine
     body: JSON.stringify({ currency: 'EUR' }),
   })
     .then((res) => {
-      console.log(res);
-
       if (res.status !== 201) return undefined;
 
       return res.json();
     })
     .then((data) => {
-      console.log(data);
-
       if (data) cart = data;
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => error);
 
   return cart;
 }

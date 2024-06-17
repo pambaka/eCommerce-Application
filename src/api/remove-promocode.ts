@@ -28,21 +28,15 @@ export default async function removePromo(
       ],
     }),
   })
-    .then((res) => {
-      console.log(res, res.status);
-      return res.json();
-    })
+    .then((res) => res.json())
     .then((data) => {
       if (data.statusCode === 400) {
         showModal(data.message, '');
         return;
       }
       updatedCart = data;
-      console.log(data);
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => error);
 
   return updatedCart;
 }

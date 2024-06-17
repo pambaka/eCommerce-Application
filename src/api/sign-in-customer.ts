@@ -22,8 +22,6 @@ export default async function signInCustomer(email: string, password: string): P
       }),
     })
       .then((res) => {
-        console.log(res);
-
         if (res.status !== 200) {
           showModal(':(', '');
           return undefined;
@@ -34,7 +32,6 @@ export default async function signInCustomer(email: string, password: string): P
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         if (data) Customer.logIn(data.customer.firstName);
         else Customer.logOut();
 

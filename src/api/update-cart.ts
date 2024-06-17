@@ -32,7 +32,6 @@ export default async function updateCart(
     }),
   })
     .then((res) => {
-      console.log(res, res.status);
       if (res.status !== 200) {
         let suggestion: string = MESSAGES.suggestion.reloadAndTryAgain;
         if (res.status === 409) {
@@ -51,11 +50,8 @@ export default async function updateCart(
         updatedCart = data;
         Counter.update(false, data);
       }
-      console.log(data);
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => error);
 
   return updatedCart;
 }
