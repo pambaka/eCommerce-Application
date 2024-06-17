@@ -22,6 +22,7 @@ export default function showAddressModal(addressComponent: AddressSectionCompone
   }
 
   const backdrop = new BaseComponent('div', 'backdrop');
+  backdrop.node.classList.add('backdrop-address');
   const modal = new BaseComponent('div', 'modal-window');
 
   const closeButton = new ButtonComponent(

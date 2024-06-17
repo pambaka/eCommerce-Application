@@ -87,7 +87,6 @@ export default function renderProfileSectionContent(userInfo: CustomerIncomeData
         newAddress,
         updatedUserInfo.addresses.length - 1,
         updatedUserInfo,
-        () => {},
         true,
       );
       addressSections.push(newAddressSection);
@@ -102,7 +101,7 @@ export default function renderProfileSectionContent(userInfo: CustomerIncomeData
   addNewAddressButton.node.classList.add(CLASS_NAMES.profileAddAddressButton);
 
   userInfo.addresses.forEach((address, index) => {
-    const addressSection = new AddressSectionComponent(address, index, updatedUserInfo, () => {});
+    const addressSection = new AddressSectionComponent(address, index, updatedUserInfo);
     addressSections.push(addressSection);
     addressColumn.node.appendChild(addressSection.node);
   });

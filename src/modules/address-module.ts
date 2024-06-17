@@ -44,8 +44,6 @@ export default class AddressSectionComponent extends BaseComponent {
 
   public onDeleteButtonClick: () => void;
 
-  public updateAddNewAddressButtonState: () => void;
-
   private shippingChecked: boolean;
 
   private billingChecked: boolean;
@@ -54,13 +52,7 @@ export default class AddressSectionComponent extends BaseComponent {
 
   private defaultBillingChecked: boolean;
 
-  constructor(
-    address: Address,
-    index: number,
-    userInfo: CustomerIncomeData,
-    updateAddNewAddressButtonState: () => void,
-    isNew: boolean = false,
-  ) {
+  constructor(address: Address, index: number, userInfo: CustomerIncomeData, isNew: boolean = false) {
     super('div', 'profile_page__address_wrapper');
     this.address = address;
     this.userInfo = userInfo;
@@ -71,7 +63,6 @@ export default class AddressSectionComponent extends BaseComponent {
     this.onFieldChange = () => {};
     this.onSaveButtonClick = () => {};
     this.onDeleteButtonClick = () => {};
-    this.updateAddNewAddressButtonState = updateAddNewAddressButtonState;
 
     this.saveButton = createSaveButton(this.handleSaveButtonClick.bind(this));
     this.deleteButton = createDeleteButton(this.handleDeleteButtonClick.bind(this));
@@ -128,7 +119,6 @@ export default class AddressSectionComponent extends BaseComponent {
         }
       }
     }
-    this.updateAddNewAddressButtonState();
     this.closeModal();
   }
 
@@ -221,7 +211,6 @@ export default class AddressSectionComponent extends BaseComponent {
         showModal('Something went wrong...', '', false);
       }
     }
-    this.updateAddNewAddressButtonState();
   }
 
   private async getAddressId(customerUpdater: CustomerUpdater): Promise<string | null> {
@@ -311,23 +300,11 @@ export default class AddressSectionComponent extends BaseComponent {
     }
   }
 
-  // public closeModal() {
-  //   this.node.classList.remove('address-modal');
-  //   this.updateButtonVisibility();
-  //   if (this.isNew) {
-  //     this.node.remove();
-  //     this.onDeleteButtonClick();
-  //   } else {
-  //     this.updatedAddress = { ...this.address };
-  //     this.render();
-  //   }
-  // }
-
   public closeModal() {
     this.node.classList.remove('address-modal');
     this.updateButtonVisibility();
 
-    if (this.isNew && !this.address.id) {
+    if (this.isNew) {
       this.node.remove();
       this.onDeleteButtonClick();
     } else {
@@ -335,6 +312,19 @@ export default class AddressSectionComponent extends BaseComponent {
       this.render();
     }
   }
+
+  // public closeModal() {
+  //   this.node.classList.remove('address-modal');
+  //   this.updateButtonVisibility();
+
+  //   if (this.isNew && !this.address.id) {
+  //     this.node.remove();
+  //     this.onDeleteButtonClick();
+  //   } else {
+  //     this.updatedAddress = { ...this.address };
+  //     this.render();
+  //   }
+  // }
 
   private render() {
     this.node.innerHTML = '';
