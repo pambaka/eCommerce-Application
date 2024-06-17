@@ -47,24 +47,26 @@ export default class MainSection extends BaseComponent {
     const title = new BaseTextComponent('h1', 'main_page__title', 'Explore the world with our toys');
     wrapper.node.appendChild(title.node);
 
+    this.promoCodeModules = [];
+    const carouselContainer = new BaseComponent('div', 'carousel_container');
+    wrapper.node.appendChild(carouselContainer.node);
+
     const promoCodeComponent1 = new PromoCodeModule({
       images: [image1, image2, image3],
-      promoText: 'Use code <span class="highlight">CALM20</span> for 20% off!',
+      promoText: 'Use code <span class="highlight">CALM20</span> for 20% off on all products in our catalog',
       backgroundImage: shape,
     });
 
     const promoCodeComponent2 = new PromoCodeModule({
       images: [image4],
       promoText:
-        'Only in June: 15% discount on "Science & Education toys" using promo <span class="highlight">SCIENCE15</span>',
+        'Only in June: -15% on "Science & Education toys" using promo <span class="highlight">SCIENCE15</span>',
       backgroundImage: shape,
     });
 
     this.promoCodeModules.push(promoCodeComponent1, promoCodeComponent2);
 
-    const carouselContainer = new BaseComponent('div', 'carousel_container');
     carouselContainer.node.append(promoCodeComponent1.node, promoCodeComponent2.node);
-    wrapper.node.appendChild(carouselContainer.node);
 
     this.renderDots(wrapper.node);
 
@@ -87,7 +89,7 @@ export default class MainSection extends BaseComponent {
       signupButton.node.classList.add('button');
       signupLink.node.appendChild(signupButton.node);
 
-      const loginText = new BaseTextComponent('p', 'main_page__login', 'Already have an account? Log in');
+      const loginText = new BaseTextComponent('p', 'main_page__login', 'Already have an account? Log in ');
       wrapper.node.appendChild(loginText.node);
 
       const loginLink = new BaseLinkComponent('#login', '', 'here');
@@ -127,9 +129,13 @@ export default class MainSection extends BaseComponent {
   }
 
   showModule(index: number) {
-    this.promoCodeModules[this.currentModuleIndex].node.classList.remove('visible');
+    const currentModule = this.promoCodeModules[this.currentModuleIndex].node;
+    const nextModule = this.promoCodeModules[index].node;
+
+    currentModule.classList.remove('visible');
+    nextModule.classList.add('visible');
+
     this.currentModuleIndex = index;
-    this.promoCodeModules[this.currentModuleIndex].node.classList.add('visible');
     this.updateDots();
     this.resetCarouselInterval();
   }
@@ -138,7 +144,7 @@ export default class MainSection extends BaseComponent {
     this.carouselInterval = window.setInterval(() => {
       const nextIndex = (this.currentModuleIndex + 1) % this.promoCodeModules.length;
       this.showModule(nextIndex);
-    }, 5000);
+    }, 8000);
   }
 
   resetCarouselInterval() {
