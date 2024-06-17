@@ -1,9 +1,8 @@
 import deleteCart from '../../../api/delete-cart';
 import getActiveCart from '../../../api/get-active-cart';
-import Counter from '../../../services/counter';
 import useToken from '../../../services/use-token';
 import { Cart } from '../../../types/cart';
-import renderEmptyCart from '../render/empty-cart';
+import preparePageForEmptyView from '../render/prepare-for-empty-cart-view';
 
 export default async function clearCart() {
   const token = await useToken.access.get();
@@ -13,11 +12,6 @@ export default async function clearCart() {
 
   const clearedCart = await deleteCart(token, activeCart.id, activeCart.version);
   if (clearedCart) {
-    const cartWrapper = document.querySelector('.cart-wrapper');
-    if (cartWrapper instanceof HTMLElement) {
-      cartWrapper.innerHTML = '';
-      renderEmptyCart(cartWrapper);
-      Counter.reset();
-    }
+    preparePageForEmptyView();
   }
 }

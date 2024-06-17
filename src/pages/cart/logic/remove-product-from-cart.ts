@@ -2,6 +2,7 @@ import getActiveCart from '../../../api/get-active-cart';
 import updateCart from '../../../api/update-cart';
 import useToken from '../../../services/use-token';
 import { Cart, CartProduct, UpdateCartData } from '../../../types/cart';
+import preparePageForEmptyView from '../render/prepare-for-empty-cart-view';
 import updateTotalPrice from './update-total-price';
 
 export default async function removeProductFromCart(event: Event, cartItem: CartProduct) {
@@ -22,8 +23,12 @@ export default async function removeProductFromCart(event: Event, cartItem: Cart
       const cartProductNode = event.target.closest('.cart__product');
 
       if (updatedCart && cartProductNode instanceof HTMLElement) {
-        cartProductNode.remove();
-        updateTotalPrice(updatedCart);
+        if (updatedCart.lineItems.length === 0) {
+          preparePageForEmptyView();
+        } else {
+          cartProductNode.remove();
+          updateTotalPrice(updatedCart);
+        }
       }
     }
   }
