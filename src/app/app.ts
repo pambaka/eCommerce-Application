@@ -15,7 +15,6 @@ import { CLASS_NAMES } from '../const';
 import renderEmptyCatalog from '../pages/catalog/render/render-empty-catalog';
 import renderCatalogContent from '../pages/catalog/render/render-catalog-content';
 import renderCart from '../pages/cart/render/render-cart';
-// import resetPagination from '../pages/catalog/logic/reset-pagination';
 import Pages from '../services/pages';
 
 export default class App {
