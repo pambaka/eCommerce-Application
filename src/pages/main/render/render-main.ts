@@ -13,7 +13,6 @@ import image3 from '../../../assets/images/3.jpg';
 import image4 from '../../../assets/images/4.jpg';
 import bird from '../../../assets/bird.svg';
 import shape from '../../../assets/shape.svg';
-import leaf from '../../../assets/leaf.svg';
 
 export default class MainSection extends BaseComponent {
   private promoCodeModules: PromoCodeModule[];
@@ -58,7 +57,7 @@ export default class MainSection extends BaseComponent {
       images: [image4],
       promoText:
         'Only in June: 15% discount on "Science & Education" category using promo code <span class="highlight">SCIENCE15</span>',
-      backgroundImage: leaf,
+      backgroundImage: shape,
     });
 
     this.promoCodeModules.push(promoCodeComponent1, promoCodeComponent2);
