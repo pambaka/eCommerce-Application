@@ -65,6 +65,7 @@ export default class MainSection extends BaseComponent {
     });
 
     this.promoCodeModules.push(promoCodeComponent1, promoCodeComponent2);
+    promoCodeComponent1.node.classList.add('visible');
 
     carouselContainer.node.append(promoCodeComponent1.node, promoCodeComponent2.node);
 
