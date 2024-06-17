@@ -44,6 +44,7 @@
     height: auto;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
     border-radius: 16px;
+    max-height: 300px;
 
     @media (min-width: 769px) and (max-width: 1024px) {
       margin: 0 auto;
