@@ -177,14 +177,47 @@
   margin-left: 5%;
   font-size: 18px;
 
+  @media screen and (max-width: 550px) {
+    gap: 10px;
+    font-size: 15px;
+  }
+
+  .applied-promo-wrapper {
+    position: relative;
+  }
+
   .promo-text {
     color: #4d73a1;
     font-weight: 700;
+    padding: 2px 24px 1px 12px;
+    background-color: #e6e6e6;
+    border-radius: 3px;
+
+    @media screen and (max-width: 550px) {
+      padding: 2px 14px 1px 14px;
+    }
+  }
+  .remove-promo-button {
+    width: 15px;
+    height: 15px;
+    background-image: url('../../../assets/red-cross.svg');
+    background-size: contain;
+    background-color: #e6e6e6;
+    position: absolute;
+    right: -40px;
+    top: 0px;
+    border-radius: 2px;
+
+    @media screen and (max-width: 550px) {
+      width: 14px;
+      height: 14px;
+      right: -25px;
+    }
   }
 }
 
 .promo-title {
-  font-size: 19px;
+  font-size: 18px;
 
   @media screen and (max-width: 550px) {
     font-size: 15px;
@@ -192,6 +225,7 @@
 }
 .promo-input {
   max-width: 170px;
+  height: 26px;
 
   @media screen and (max-width: 550px) {
     max-width: 100px;
@@ -224,7 +258,7 @@
     color: #9b9b9b;
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-image: linear-gradient(to bottom, #b4c9d4, #9aaabe);
   }
 }

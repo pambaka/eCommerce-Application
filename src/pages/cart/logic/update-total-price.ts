@@ -8,6 +8,10 @@ export default function updateTotalPrice(cart: Cart) {
     totalPrice.innerText = `${cart.totalPrice.centAmount / 100}`;
     const fullTotalPriceValue = getFullPriceFromCart(cart);
 
-    totalFullPrice.innerText = `€\xa0${fullTotalPriceValue / 100}`;
+    if (fullTotalPriceValue !== cart.totalPrice.centAmount) {
+      totalFullPrice.innerText = `€\xa0${fullTotalPriceValue / 100}`;
+    } else {
+      totalFullPrice.innerText = '';
+    }
   }
 }

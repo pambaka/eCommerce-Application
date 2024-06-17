@@ -50,7 +50,18 @@ export interface AddPromoCode {
   code: string;
 }
 
+export interface DiscountCodeInRemove {
+  typeId: 'discount-code';
+  id: string;
+}
+
+export interface RemovePromoCode {
+  action: 'removeDiscountCode';
+  discountCode: DiscountCodeInRemove;
+}
+
 export interface Promocode {
+  id: string;
   name: {
     [LANGUAGE]: 'string';
   };
