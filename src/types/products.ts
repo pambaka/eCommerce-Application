@@ -21,6 +21,7 @@ export interface ProductData {
 }
 
 export interface Product {
+  id: string;
   key: string;
   masterData: {
     current: ProductData;
@@ -28,6 +29,7 @@ export interface Product {
 }
 
 export interface ProductProjection extends ProductData {
+  id: string;
   key: string;
 }
 

@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "module": "NodeNext",
+    "target": "es2021",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "moduleResolution": "nodenext"
   }
 }

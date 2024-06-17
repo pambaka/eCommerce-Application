@@ -2,12 +2,8 @@
   padding: 0 var(--outer-margin);
   display: flex;
   justify-content: space-between;
+  gap: 10px;
   flex-wrap: wrap;
-
-  @media screen and (max-width: $width-tablet-min) {
-    flex-direction: column;
-    gap: 10px;
-  }
 }
 
 .breadcrumbs {
@@ -40,6 +36,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  flex-wrap: wrap;
 
   p {
     cursor: pointer;
