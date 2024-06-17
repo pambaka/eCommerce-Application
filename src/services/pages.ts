@@ -45,23 +45,19 @@ export default class Pages {
 
   static setLastPage(productsQuantity: number) {
     this.lastPage = Math.ceil(productsQuantity / this.cardsPerPage.value);
-    console.log('last page:', this.lastPage);
   }
 
   static increment() {
     this.currentPage += 1;
     this.updatePageNumber();
-    console.log('page:', this.currentPage);
   }
 
   static decrement() {
     this.currentPage -= 1;
     this.updatePageNumber();
-    console.log('page:', this.currentPage);
   }
 
   static reset() {
-    console.log('reseting page');
     this.currentPage = 1;
     this.updatePageNumber();
   }
