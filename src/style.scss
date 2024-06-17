@@ -60,8 +60,10 @@ body {
 
 @mixin regular-text {
   font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   color: $dark-text;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 150%;
 }
 
