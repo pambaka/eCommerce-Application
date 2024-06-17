@@ -1,10 +1,10 @@
 import Artem from '../../../assets/member-images/Artem.png';
 import Toma from '../../../assets/member-images/Toma.png';
+import Tanya from '../../../assets/member-images/Tanya.png';
 
 const teamMembers = [
   {
-    imgSrc:
-      'https://s3-alpha-sig.figma.com/img/8bc0/e6fb/f5ad56664fb09f937ce07331f24012f5?Expires=1718582400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BHUmSjSBm4CubwZSsxBFccKoKqs3tlv0NCzt4G0ah2cEJWNcpXJ7bOYCOkRCN5KgkUQ7JsGZLPrzJFBaGfqHL7fJp1rghlS-6YHiPMbvN6yb4ffmLJ8YG~UI39~e-DJ35sEgtUywZ2mSYMJ1JGkYjBD9OXVHkVuxqAaa5NJmF~d76~Zkj3bjvyYPr05dbVFI233owQAwP7zBxLl20vpuH8HotnBVeiJQWEy0KgEjyhx4mIzYKLpruUTvq~qSue6YpDwcmXtASnLPFPv1AD8D7-IRd2~ZkIHCwhI81bs8yQzpMv5kfrepLDkVayp7CDU4Xt1InelXKL3ErAeZAVdWmA__',
+    imgSrc: Tanya,
     imgAlt: 'Tanya Telegina',
     name: 'Tanya Telegina',
     role: 'Lead Developer',
@@ -42,7 +42,7 @@ const teamMembers = [
     name: 'Tamara Maltseva',
     role: 'Developer',
     bio: [
-      'Graduated from St. Petersburg Technological University. Worked as a trade marketing manager for several years. Currently studying JavaScript, interested in mastering a game engine or library for creating game mechanics',
+      'Graduated from St. Petersburg Technological University. Worked as a trade marketing manager for several years. Interested in mastering a game engine or library for creating game mechanics',
       '',
       '<b>Contribution to the project:</b>',
       ' - About Us page',

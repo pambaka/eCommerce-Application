@@ -38,14 +38,19 @@
   }
 
   .teammate-image {
-    padding: 20px;
+    margin: 20px auto;
     max-width: 300px;
     width: 100%;
     height: auto;
-    margin: 0 auto;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
 
-    @media (max-width: 768px) {
-      padding-top: 20px;
+    @media (min-width: 769px) and (max-width: 1024px) {
+      margin: 0 auto;
+    }
+
+    @media (min-width: 650px) and (max-width: 768px) {
+      margin: 20px 20px;
     }
   }
 
@@ -71,14 +76,14 @@
     background-color: #f9f8f8;
     width: 100%;
     max-width: 80vw;
-    height: 750px;
+    height: 800px;
     position: relative;
 
     @media (max-width: 768px) {
       max-width: 90vw;
     }
 
-    @media (min-width: 600px) and (max-width: 768px) {
+    @media (min-width: 650px) and (max-width: 768px) {
       flex-direction: row;
       height: auto;
 
@@ -104,7 +109,7 @@
     padding: 30px;
     font-size: 0.9rem;
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       margin: 0 auto;
     }
 
