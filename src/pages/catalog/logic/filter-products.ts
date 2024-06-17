@@ -8,9 +8,14 @@ import getCategoryQuery from './get-category-query';
 import getColorFilterQuery from './get-color-filter-query';
 import getPriceFilterQuery from './get-price-filter-query';
 import resetPagination from './reset-pagination';
+import resetSearchInput from './reset-search-input';
+import resetSortingOrder from './reset-sorting-order';
 
 export default async function filterProducts(event: Event): Promise<void> {
   event.preventDefault();
+
+  resetSearchInput();
+  resetSortingOrder();
 
   const queries: string[] = [];
 

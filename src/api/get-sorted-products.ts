@@ -1,6 +1,7 @@
 import { ProductProjection } from '../types/products';
 import { region } from './const';
 import showModal from '../pages/show-modal';
+import Pages from '../services/pages';
 
 export default async function getSortedProducts(
   accessToken: string,
@@ -8,8 +9,10 @@ export default async function getSortedProducts(
 ): Promise<ProductProjection[] | undefined> {
   let products: ProductProjection[] | undefined;
 
+  const pagination = `&limit=${Pages.cardsPerPage.value}&offset=${Pages.cardsPerPage.value * (Pages.currentPage - 1)}`;
+
   await fetch(
-    `https://api.${region}.commercetools.com/${process.env.project_key}/product-projections/search?sort=${sortingOrder}`,
+    `https://api.${region}.commercetools.com/${process.env.project_key}/product-projections/search?sort=${sortingOrder}${pagination}`,
     {
       method: 'GET',
       headers: {
@@ -18,8 +21,6 @@ export default async function getSortedProducts(
     },
   )
     .then((res) => {
-      // console.log(res);
-
       if (res.status !== 200) {
         showModal('Something went wrong', 'Please keep calm and try reloading the page');
       }
@@ -27,7 +28,6 @@ export default async function getSortedProducts(
       return res.json();
     })
     .then((data) => {
-      // console.log(data);
       products = data.results;
     })
     .catch((error) => error);

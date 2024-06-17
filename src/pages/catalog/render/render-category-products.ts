@@ -3,9 +3,16 @@ import Catalog from '../../../services/catalog';
 import Pages from '../../../services/pages';
 import useToken from '../../../services/use-token';
 import { QUERY_BASE } from '../const';
+import resetFilters from '../logic/reset-filters';
+import resetSearchInput from '../logic/reset-search-input';
+import resetSortingOrder from '../logic/reset-sorting-order';
 import renderProducts from './render-products';
 
 export default async function renderCatetoryProducts(key: string): Promise<void> {
+  resetFilters();
+  resetSearchInput();
+  resetSortingOrder();
+
   const token: string | null = await useToken.client.access.get();
 
   if (token) {
