@@ -1,4 +1,3 @@
-import { CLASS_NAMES, DOM } from '../../../const';
 import Pages from '../../../services/pages';
 import useToken from '../../../services/use-token';
 import renderProducts from '../render/render-products';
@@ -28,9 +27,6 @@ export default async function showNextPage() {
     });
 
     if (products) {
-      const wrapper = DOM.elements[CLASS_NAMES.productsWrapper];
-      wrapper.innerHTML = '';
-
       renderProducts(products);
 
       Pages.increment();
