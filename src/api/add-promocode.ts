@@ -33,9 +33,7 @@ export default async function addPromo(
       }
       updatedCart = data;
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => error);
 
   return updatedCart;
 }

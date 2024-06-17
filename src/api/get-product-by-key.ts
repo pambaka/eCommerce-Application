@@ -11,8 +11,6 @@ export default async function getProductByKey(key: string, accessToken: string):
     },
   })
     .then((res) => {
-      // console.log(res);
-
       if (res.status !== 200) {
         return undefined;
       }
@@ -20,8 +18,6 @@ export default async function getProductByKey(key: string, accessToken: string):
       return res.json();
     })
     .then((data) => {
-      // console.log(data);
-
       product = data;
     })
     .catch((error) => error);

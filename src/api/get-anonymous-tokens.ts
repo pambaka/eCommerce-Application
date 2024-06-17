@@ -11,10 +11,9 @@ export default async function getAnonymousTokens(): Promise<string | undefined> 
   })
     .then((res: Response) => res.json())
     .then((data) => {
-      console.log(data);
       token = data.access_token;
     })
-    .catch((error) => console.log(error));
+    .catch((error) => error);
 
   return token;
 }

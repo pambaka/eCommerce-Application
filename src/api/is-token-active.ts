@@ -9,17 +9,11 @@ export default async function isTokenActive(token: string): Promise<boolean> {
     },
     body: `token=${token}`,
   })
-    .then((res) => {
-      console.log(res);
-
-      return res.json();
-    })
+    .then((res) => res.json())
     .then((data) => {
-      console.log(data, data.active);
-
       if (data.active) isActive = true;
     })
-    .catch((error) => console.log(error));
+    .catch((error) => error);
 
   return isActive;
 }

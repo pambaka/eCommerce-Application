@@ -23,7 +23,6 @@ export default class useToken {
 
         if (token) {
           isActive = await isTokenActive(token);
-          console.log('is anonymous token active', isActive);
         }
 
         if (!token || !isActive) {
@@ -57,9 +56,7 @@ export default class useToken {
       },
       get: () => {
         const token = localStorage.getItem(CUSTOMER_REFRESH_TOKEN);
-        if (!token) {
-          console.error('Customer refresh token is missing or invalid.');
-        }
+
         return token;
       },
     },
@@ -68,11 +65,9 @@ export default class useToken {
   static access = {
     async get() {
       let token = useToken.customer.access.get();
-      console.log('customer', token);
 
       if (!token) {
         token = await useToken.anonymous.access.get();
-        console.log('anonymous', token);
       }
 
       return token;

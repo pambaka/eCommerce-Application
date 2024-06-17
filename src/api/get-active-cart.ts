@@ -21,7 +21,7 @@ export default async function getActiveCart(token: string): Promise<Cart | undef
     .then((data) => {
       if (data) cart = data;
     })
-    .catch((error) => console.log(error));
+    .catch((error) => error);
 
   return cart;
 }
