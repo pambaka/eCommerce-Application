@@ -36,7 +36,7 @@ describe('getActiveCart', () => {
 
     const result = await getActiveCart(mockToken);
 
-    expect(showModal).toHaveBeenCalledWith('Something went wrong', 'Please try adding the product to the cart again');
+    expect(showModal).toHaveBeenCalledWith('Something went wrong', 'Please reload the page and try again');
     expect(result).toBeUndefined();
   });
 
