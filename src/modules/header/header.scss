@@ -158,6 +158,10 @@
     overflow-y: auto;
     padding-top: 100px;
 
+    @media screen and (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+
     .side-menu-nav {
       display: inline-block;
       list-style-type: none;
