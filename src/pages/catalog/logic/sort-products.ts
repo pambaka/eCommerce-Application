@@ -27,7 +27,7 @@ export default async function sortProducts(this: HTMLElement): Promise<void> {
       });
 
       if (products) {
-        renderProducts(products);
+        await renderProducts(products);
       }
     }
   }

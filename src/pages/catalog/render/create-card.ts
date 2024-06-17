@@ -2,7 +2,11 @@ import ProductCard from '../../../modules/product-card/product-card';
 import { CardPrice, ProductData } from '../../../types/products';
 import showProduct from '../logic/show-product';
 
-export default function createCard(key: string, productData: ProductData): HTMLElement {
+export default function createCard(
+  key: string,
+  productData: ProductData,
+  isProductInCart: boolean = false,
+): HTMLElement {
   const title: string = productData.name['en-US'];
 
   const imageUrl: string = productData.masterVariant.images[0]?.url ?? '';
@@ -15,7 +19,7 @@ export default function createCard(key: string, productData: ProductData): HTMLE
   const discounted = productData.masterVariant.prices[0]?.discounted;
   if (discounted) price.discounted = discounted.value.centAmount / 100;
 
-  const card = new ProductCard(title, imageUrl, description, price);
+  const card = new ProductCard(title, imageUrl, description, price, isProductInCart);
   card.node.setAttribute('key', key);
   card.node.addEventListener('click', showProduct);
 

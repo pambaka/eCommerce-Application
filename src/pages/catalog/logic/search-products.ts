@@ -23,7 +23,7 @@ export default async function searchProducts(event?: Event) {
     });
 
     if (products) {
-      renderProducts(products);
+      await renderProducts(products);
 
       handleNextButtonState();
     }

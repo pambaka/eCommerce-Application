@@ -5,15 +5,22 @@ import { CardPrice } from '../../types/products';
 import CardCartButton from '../card-cart-button/card-cart-button';
 import addToCart from '../../pages/add-to-cart';
 import { CLASS_NAMES } from '../../const';
+import { CARD_BUTTON_TEXT } from '../../pages/const';
 
 export default class ProductCard extends BaseComponent {
-  constructor(title: string, imageUrl: string, description: string, price: CardPrice) {
+  constructor(
+    title: string,
+    imageUrl: string,
+    description: string,
+    price: CardPrice,
+    isProductInCart: boolean = false,
+  ) {
     super('article', 'product-card');
 
     this.addTitle(title);
     this.addImage(imageUrl, title);
     this.addDescription(description);
-    this.addCardBottom(price);
+    this.addCardBottom(price, isProductInCart);
   }
 
   private addTitle(title: string) {
@@ -37,10 +44,10 @@ export default class ProductCard extends BaseComponent {
     this.node.append(cardDescription.node);
   }
 
-  private addCardBottom(price: CardPrice) {
+  private addCardBottom(price: CardPrice, isProductInCart: boolean) {
     const cardBottom = new BaseComponent('div', 'card-bottom');
 
-    cardBottom.node.append(ProductCard.prices(price), ProductCard.button());
+    cardBottom.node.append(ProductCard.prices(price), ProductCard.button(isProductInCart));
 
     this.node.append(cardBottom.node);
   }
@@ -60,8 +67,14 @@ export default class ProductCard extends BaseComponent {
     return prices.node;
   }
 
-  private static button(): HTMLElement {
-    const button = new CardCartButton(CLASS_NAMES.addToCartButton, addToCart, 'add to cart', false);
+  private static button(isProductInCart: boolean): HTMLElement {
+    const button = new CardCartButton(
+      CLASS_NAMES.addToCartButton,
+      addToCart,
+      CARD_BUTTON_TEXT.addToCart,
+      isProductInCart,
+    );
+    if (isProductInCart) button.node.textContent = CARD_BUTTON_TEXT.inTheCart;
 
     return button.node;
   }

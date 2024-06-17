@@ -21,7 +21,7 @@ export default async function renderCatetoryProducts(key: string): Promise<void>
     const products = await getProducts(token, { limit: Pages.cardsPerPage.value, offset: 0, query });
 
     if (products) {
-      renderProducts(products);
+      await renderProducts(products);
     }
   }
 }
