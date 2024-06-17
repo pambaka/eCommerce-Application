@@ -16,11 +16,14 @@ export default class PromoCodeModule extends BaseComponent {
 
   private rotationInterval: number | undefined;
 
-  constructor({ images, promoText }: PromoCodeComponentProps) {
+  private backgroundImage?: string;
+
+  constructor({ images, promoText, backgroundImage }: PromoCodeComponentProps) {
     super('div', 'promo_code_container');
     this.currentImageIndex = 0;
     this.images = images;
     this.promoText = promoText;
+    this.backgroundImage = backgroundImage;
     this.renderPromoCode();
     if (this.images.length > 1) {
       this.startImageRotation();
@@ -45,6 +48,10 @@ export default class PromoCodeModule extends BaseComponent {
       }
       this.imageContainer.node.appendChild(image.node);
     });
+
+    if (this.backgroundImage) {
+      this.node.style.backgroundImage = `url(${this.backgroundImage})`;
+    }
   }
 
   updateImage() {

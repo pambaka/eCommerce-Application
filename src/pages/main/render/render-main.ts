@@ -12,6 +12,8 @@ import image2 from '../../../assets/images/2.jpg';
 import image3 from '../../../assets/images/3.jpg';
 import image4 from '../../../assets/images/4.jpg';
 import bird from '../../../assets/bird.svg';
+import shape from '../../../assets/shape.svg';
+import leaf from '../../../assets/leaf.svg';
 
 export default class MainSection extends BaseComponent {
   private promoCodeModules: PromoCodeModule[];
@@ -49,11 +51,14 @@ export default class MainSection extends BaseComponent {
     const promoCodeComponent1 = new PromoCodeModule({
       images: [image1, image2, image3],
       promoText: 'Use code <span class="highlight">CALM20</span> for 20% off!',
+      backgroundImage: shape,
     });
+
     const promoCodeComponent2 = new PromoCodeModule({
       images: [image4],
       promoText:
-        'Only in June: 15% discount on toys in the "Science" category using promo code <span class="highlight">SCIENCE15</span>',
+        'Only in June: 15% discount on "Science & Education" category using promo code <span class="highlight">SCIENCE15</span>',
+      backgroundImage: leaf,
     });
 
     this.promoCodeModules.push(promoCodeComponent1, promoCodeComponent2);
