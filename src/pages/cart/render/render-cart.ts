@@ -10,6 +10,7 @@ import renderPromo from './render-promo';
 import getFullPriceFromCart from '../logic/get-full-price-from-cart';
 import lookForAppliedPromocodes from '../logic/look-for-applied-promocodes';
 import showAppliedPromocodes from '../logic/show-applied-promocodes';
+import createClearAndCheckoutButtons from './create-clear-and-checkout-buttons';
 
 export default async function renderCart(): Promise<HTMLElement> {
   const token = await useToken.access.get();
@@ -47,6 +48,8 @@ export default async function renderCart(): Promise<HTMLElement> {
     const total = new BaseTextComponent('span', 'total', `€ ${cartTotalPrice / 100}`);
     totalWrapper.node.append(totalTitle.node, totalWithoutDiscount.node, total.node);
     cartWrapper.node.append(totalWrapper.node);
+
+    createClearAndCheckoutButtons(cartWrapper.node);
 
     showAppliedPromocodes(token, activeCart, totalWrapper.node);
   }
