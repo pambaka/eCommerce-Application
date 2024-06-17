@@ -26,7 +26,7 @@ const teamMembers = [
     name: 'Artyom Pavlushov',
     role: 'Developer',
     bio: [
-      'Graduated from Bauman Moscow State Technical University. Has experience in digital marketing; as a FrontEnd Developer (JQuery); as an HTML-email layout coder. Has completed React courses in 2023',
+      'Graduated from Bauman Moscow State Technical University. Has experience in digital marketing, as a FrontEnd Developer (JQuery), as an HTML-email layout coder. Has completed React courses in 2023',
       '',
       '<b>Contribution to the project:</b>',
       ' - CommerceTools administration',
