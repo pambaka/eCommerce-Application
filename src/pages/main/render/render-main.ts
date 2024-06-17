@@ -56,7 +56,7 @@ export default class MainSection extends BaseComponent {
     const promoCodeComponent2 = new PromoCodeModule({
       images: [image4],
       promoText:
-        'Only in June: 15% discount on "Science & Education" category using promo code <span class="highlight">SCIENCE15</span>',
+        'Only in June: 15% discount on "Science & Education toys" using promo <span class="highlight">SCIENCE15</span>',
       backgroundImage: shape,
     });
 
