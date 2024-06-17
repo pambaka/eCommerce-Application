@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 60px;
+  gap: 40px;
 
   .header-logo {
     width: 70px;
@@ -36,8 +36,8 @@
       display: flex;
       flex-wrap: nowrap;
       justify-content: flex-start;
-      gap: 40px;
       align-items: center;
+      gap: 30px;
 
       .nav_item {
         font-size: 1.5rem;
@@ -55,7 +55,7 @@
 
   @media (max-width: 768px) {
     .burger-menu-wrapper {
-      width: 80px;
+      width: 60px;
       height: 60px;
       position: relative;
       z-index: 1000;
@@ -69,25 +69,25 @@
         width: 45px;
         position: absolute;
         z-index: 10;
-        right: 0;
         top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 
         span {
           width: 45px;
           height: 2px;
           position: absolute;
           top: 0;
-          left: 5%;
-          transform: translate(-50%, -50%);
+          left: 0;
           background-color: #2b2a2a;
           transition: all 0.5s;
 
           &:nth-of-type(2) {
-            top: calc(0% - 10px);
+            top: calc(0% - 12px);
           }
 
           &:nth-of-type(3) {
-            top: calc(0% + 10px);
+            top: calc(0% + 12px);
           }
         }
 
@@ -98,13 +98,13 @@
             }
 
             &:nth-of-type(2) {
-              top: 220%;
-              transform: translate(-50%, 0%) rotate(45deg);
+              top: 0;
+              transform: rotate(45deg);
             }
 
             &:nth-of-type(3) {
-              top: 220%;
-              transform: translate(-50%, 0%) rotate(-45deg);
+              top: 0;
+              transform: rotate(-45deg);
             }
           }
         }
