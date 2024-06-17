@@ -25,17 +25,13 @@ export default async function addPromo(
       ],
     }),
   })
-    .then((res) => {
-      console.log(res, res.status);
-      return res.json();
-    })
+    .then((res) => res.json())
     .then((data) => {
       if (data.statusCode === 400) {
-        showModal(data.message, '');
+        showModal(data.message, 'Use capital letters and check for\xa0typos');
         return;
       }
       updatedCart = data;
-      console.log(data);
     })
     .catch((error) => {
       console.log(error);

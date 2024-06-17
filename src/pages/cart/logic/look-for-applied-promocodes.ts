@@ -9,6 +9,5 @@ export default function lookForAppliedPromocodes(cart: Cart): Set<string> {
       });
     });
   });
-  console.log('setOfPromocodes: ', setOfPromocodes);
   return setOfPromocodes;
 }

@@ -3,13 +3,9 @@ import BaseTextComponent from '../../../components/base-text-component';
 import ButtonComponent from '../../../components/button-component';
 import { Cart, Promocode } from '../../../types/cart';
 import LANGUAGE from '../../../types/const';
-// import showModal from '../../show-modal';
 import renderAppliedPromocode from '../render/render-applied-promocode';
 import lookForAppliedPromocodes from './look-for-applied-promocodes';
-// import removePromocode from './remove-promocode';
 import updatePageAfterRemovedPromo from './update-page-after-removed-promo';
-// import updateSubtotalPrice from './update-subtotal-price';
-// import updateTotalPrice from './update-total-price';
 
 export default function showAppliedPromocodes(token: string, cart: Cart, neighbourElement: HTMLElement) {
   document.querySelector('.applied-promocodes')?.remove();

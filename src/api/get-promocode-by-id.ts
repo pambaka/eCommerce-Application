@@ -12,12 +12,6 @@ export default async function getPromocodeById(accessToken: string, id: string):
     },
   })
     .then((res) => {
-      console.log(res);
-
-      // if (res.status === 401) {
-      //   console.log(accessToken);
-      //   showModal('Something went wrong', 'Please keep calm and try reloading the page');
-      // }
       if (res.status !== 200) {
         showModal('Something went wrong', 'Please keep calm and try reloading the page');
       }
@@ -25,7 +19,6 @@ export default async function getPromocodeById(accessToken: string, id: string):
       return res.json();
     })
     .then((data) => {
-      console.log(data);
       promocode = data;
     })
     .catch((error) => error);
