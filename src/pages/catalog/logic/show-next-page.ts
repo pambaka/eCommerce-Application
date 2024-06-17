@@ -27,7 +27,7 @@ export default async function showNextPage() {
     });
 
     if (products) {
-      renderProducts(products);
+      await renderProducts(products);
 
       Pages.increment();
     }

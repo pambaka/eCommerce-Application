@@ -12,7 +12,7 @@ export default async function renderCatalogContent() {
 
   const products = await getProducts(token, { limit: Pages.cardsPerPage.value, offset: 0 });
   if (products) {
-    renderProducts(products);
+    await renderProducts(products);
 
     handlePrevButtonState();
     handleNextButtonState();

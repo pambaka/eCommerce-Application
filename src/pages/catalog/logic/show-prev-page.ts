@@ -27,7 +27,7 @@ export default async function showPrevPage() {
     });
 
     if (products) {
-      renderProducts(products);
+      await renderProducts(products);
 
       Pages.decrement();
     }

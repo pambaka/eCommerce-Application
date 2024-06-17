@@ -29,6 +29,7 @@ export interface Product {
 }
 
 export interface ProductProjection extends ProductData {
+  id: string;
   key: string;
 }
 
