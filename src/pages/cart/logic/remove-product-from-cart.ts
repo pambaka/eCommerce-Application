@@ -2,7 +2,7 @@ import getActiveCart from '../../../api/get-active-cart';
 import updateCart from '../../../api/update-cart';
 import useToken from '../../../services/use-token';
 import { Cart, CartProduct, UpdateCartData } from '../../../types/cart';
-import updateTotalPrice from './update-total-rice';
+import updateTotalPrice from './update-total-price';
 
 export default async function removeProductFromCart(event: Event, cartItem: CartProduct) {
   const token = await useToken.access.get();
@@ -20,9 +20,10 @@ export default async function removeProductFromCart(event: Event, cartItem: Cart
 
       const updatedCart: Cart | undefined = await updateCart(activeCart, cartItem.productId, updateCartData, token);
       const cartProductNode = event.target.closest('.cart__product');
+
       if (updatedCart && cartProductNode instanceof HTMLElement) {
         cartProductNode.remove();
-        updateTotalPrice(updatedCart.totalPrice.centAmount);
+        updateTotalPrice(updatedCart);
       }
     }
   }

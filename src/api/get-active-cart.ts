@@ -12,18 +12,13 @@ export default async function getActiveCart(token: string): Promise<Cart | undef
     },
   })
     .then((res) => {
-      console.log(res);
-
       if (res.status === 401 || res.status === 403) {
-        console.log(token);
-        showModal('Something went wrong', 'Please try adding the product to the cart again');
+        showModal('Something went wrong', 'Please reload the page and try again');
       }
       if (res.status !== 200) return undefined;
       return res.json();
     })
     .then((data) => {
-      console.log(data);
-
       if (data) cart = data;
     })
     .catch((error) => console.log(error));

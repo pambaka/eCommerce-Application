@@ -2,9 +2,8 @@ import getActiveCart from '../../../api/get-active-cart';
 import updateCart from '../../../api/update-cart';
 import useToken from '../../../services/use-token';
 import { Cart, CartProduct, UpdateCartData } from '../../../types/cart';
-import getActualPrice from './get-actual-price';
 import updateSubtotalPrice from './update-subtotal-price';
-import updateTotalPrice from './update-total-rice';
+import updateTotalPrice from './update-total-price';
 
 export default async function handleQuantityChange(event: Event, cartItem: CartProduct) {
   const inputField = event.currentTarget;
@@ -23,9 +22,8 @@ export default async function handleQuantityChange(event: Event, cartItem: CartP
 
     const cartProductNode = inputField.closest('.cart__product');
     if (updatedCart && cartProductNode instanceof HTMLElement) {
-      const actualPrice = getActualPrice(cartItem);
-      updateSubtotalPrice(cartProductNode, actualPrice, Number(inputField.value));
-      updateTotalPrice(updatedCart.totalPrice.centAmount);
+      updateSubtotalPrice(cartProductNode, cartItem, Number(inputField.value), updatedCart);
+      updateTotalPrice(updatedCart);
     }
   }
 }

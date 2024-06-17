@@ -57,6 +57,14 @@
   align-self: end;
 }
 
+.subtotal-full,
+.total-full {
+  font-weight: normal;
+  text-decoration: line-through;
+  color: #464646;
+  margin-right: 5px;
+}
+
 .cart__product-price {
   font-size: 13px;
 }
@@ -137,11 +145,122 @@
   }
 }
 
-.total {
+.total-wrapper {
   width: 90%;
   text-align: right;
   border-bottom: 1px solid $color-border-dark;
   padding-bottom: 25px;
   font-size: 24px;
   font-weight: bold;
+}
+
+.promo-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 450px;
+  width: 100%;
+  align-self: self-start;
+  margin-left: 5%;
+
+  @media screen and (max-width: 550px) {
+    max-width: 320px;
+  }
+}
+
+.applied-promocodes {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 30px;
+  width: 100%;
+  align-self: self-start;
+  margin-left: 5%;
+  font-size: 18px;
+
+  @media screen and (max-width: 550px) {
+    gap: 10px;
+    font-size: 15px;
+  }
+
+  .applied-promo-wrapper {
+    position: relative;
+  }
+
+  .promo-text {
+    color: #4d73a1;
+    font-weight: 700;
+    padding: 2px 24px 1px 12px;
+    background-color: #e6e6e6;
+    border-radius: 3px;
+
+    @media screen and (max-width: 550px) {
+      padding: 2px 14px 1px 14px;
+    }
+  }
+  .remove-promo-button {
+    width: 15px;
+    height: 15px;
+    background-image: url('../../../assets/red-cross.svg');
+    background-size: contain;
+    background-color: #e6e6e6;
+    position: absolute;
+    right: -40px;
+    top: 0px;
+    border-radius: 2px;
+
+    @media screen and (max-width: 550px) {
+      width: 14px;
+      height: 14px;
+      right: -25px;
+    }
+  }
+}
+
+.promo-title {
+  font-size: 18px;
+
+  @media screen and (max-width: 550px) {
+    font-size: 15px;
+  }
+}
+.promo-input {
+  padding-left: 5px;
+  max-width: 170px;
+  height: 26px;
+
+  @media screen and (max-width: 550px) {
+    max-width: 100px;
+  }
+}
+.promo-btn {
+  width: 100%;
+  min-width: 110px;
+  max-width: 110px;
+  height: 26px;
+  line-height: 16px;
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 5px #7e7e94;
+  text-shadow: 0 1px 5px rgb(219, 219, 219);
+  background-image: linear-gradient(to bottom, #bccdd6, #a2adbb);
+  transition: 0.5s;
+
+  @media screen and (max-width: 550px) {
+    min-width: 80px;
+    max-width: 80px;
+  }
+
+  &:disabled {
+    cursor: default;
+    background-image: none;
+    background-color: #d3d8e0;
+    box-shadow: 0px 0px 2px gray inset;
+    text-shadow: none;
+    color: #9b9b9b;
+  }
+
+  &:hover:not(:disabled) {
+    background-image: linear-gradient(to bottom, #b4c9d4, #9aaabe);
+  }
 }
