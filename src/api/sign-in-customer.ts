@@ -5,41 +5,44 @@ import Router from '../services/router';
 import Customer from '../utils/customer';
 import Counter from '../services/counter';
 import showModal from '../pages/show-modal';
+import withSpinner from '../utils/with-spinner';
 
 export default async function signInCustomer(email: string, password: string): Promise<void> {
-  const customerAccessToken: string | undefined = await getCustomerTokens(email, password);
+  await withSpinner(async () => {
+    const customerAccessToken: string | undefined = await getCustomerTokens(email, password);
 
-  if (customerAccessToken) {
-    await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/login`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${customerAccessToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then((res) => {
-        if (res.status !== 200) {
-          showModal(':(', '');
-          return undefined;
-        }
-
-        replaceLocation(Router.pages.main);
-
-        return res.json();
+    if (customerAccessToken) {
+      await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/login`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${customerAccessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
       })
-      .then((data) => {
-        if (data) Customer.logIn(data.customer.firstName);
-        else Customer.logOut();
+        .then((res) => {
+          if (res.status !== 200) {
+            showModal(':(', '');
+            return undefined;
+          }
 
-        if (data.cart) Counter.update(false, data.cart);
-        else {
-          Counter.reset();
-        }
-      })
-      .catch((error) => error);
-  }
+          replaceLocation(Router.pages.main);
+
+          return res.json();
+        })
+        .then((data) => {
+          if (data) Customer.logIn(data.customer.firstName);
+          else Customer.logOut();
+
+          if (data.cart) Counter.update(false, data.cart);
+          else {
+            Counter.reset();
+          }
+        })
+        .catch((error) => error);
+    }
+  });
 }
