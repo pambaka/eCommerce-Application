@@ -1,7 +1,6 @@
 import BaseComponent from '../../../components/base-component';
 import BaseTextComponent from '../../../components/base-text-component';
 import ButtonComponent from '../../../components/button-component';
-import '../../../styles/modal.scss';
 import clearCart from '../logic/clear-cart';
 
 export default function confirmClearcart(): void {
@@ -22,8 +21,12 @@ export default function confirmClearcart(): void {
   const buttonsContainer = new BaseComponent('div', 'clear-modal__buttons');
   const yesButton = new ButtonComponent(
     'buttons-yes',
-    () => {
-      clearCart();
+    async () => {
+      buttonsContainer.node.remove();
+      closeButton.node.remove();
+      const clearing = new BaseTextComponent('p', 'clearing', 'Clearing...');
+      modal.node.append(clearing.node);
+      await clearCart();
       closeThisModal();
     },
     'Yes',

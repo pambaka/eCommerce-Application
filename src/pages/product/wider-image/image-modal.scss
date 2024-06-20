@@ -34,7 +34,7 @@
   max-height: 87vh;
 }
 
-.close-button {
+footer + .close-button {
   position: fixed;
   top: 10px;
   right: 10px;
@@ -93,7 +93,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .close-button {
+  footer + .close-button {
     scale: 0.7;
   }
 }
