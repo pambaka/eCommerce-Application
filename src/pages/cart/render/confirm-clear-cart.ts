@@ -7,11 +7,9 @@ import clearCart from '../logic/clear-cart';
 export default function confirmClearcart(): void {
   const backdrop = new BaseComponent('div', 'backdrop');
 
-  const modal = new BaseComponent('div', 'modal-window');
+  const modal = new BaseComponent('div', 'request-modal');
 
   const title = new BaseTextComponent('p', 'modal-title', 'Do you want to clear the cart?');
-  title.node.classList.add('success');
-
   function closeThisModal() {
     backdrop.node.remove();
     modal.node.remove();
