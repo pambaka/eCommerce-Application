@@ -5,6 +5,10 @@ import ButtonWithSvgIcon from '../../../../components/button-with-svg-icon';
 import editIcon from '../../../../assets/edit-icons-sprite.svg';
 import updateSaveChangesButtonState from './update-save-changes-state';
 
+function isEditableArea(element: HTMLElement): boolean {
+  return element.closest('.modal-window') !== null || element.closest('.profile_page__address_wrapper') === null;
+}
+
 export default function createEditableField(
   labelText: string,
   value: string,
@@ -26,15 +30,19 @@ export default function createEditableField(
   }
 
   text.node.addEventListener('click', (event) => {
-    editCallback(event);
-    updateSaveChangesButtonState();
+    if (isEditableArea(text.node)) {
+      editCallback(event);
+      updateSaveChangesButtonState();
+    }
   });
 
   const editButton = new ButtonWithSvgIcon(
     'edit-button',
     (event) => {
-      editCallback(event);
-      updateSaveChangesButtonState();
+      if (isEditableArea(editButton.node)) {
+        editCallback(event);
+        updateSaveChangesButtonState();
+      }
     },
     `Edit ${labelText}`,
     'Edit',

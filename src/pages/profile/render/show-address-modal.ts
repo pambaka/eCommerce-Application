@@ -2,59 +2,18 @@ import BaseComponent from '../../../components/base-component';
 import ButtonComponent from '../../../components/button-component';
 import AddressSectionComponent from '../../../modules/address-module';
 
-// const openModals: HTMLElement[] = [];
-
-// export default function showAddressModal(addressComponent: AddressSectionComponent): void {
-//   const originalParent = addressComponent.node.parentNode;
-//   const originalNextSibling = addressComponent.node.nextSibling;
-
-//   function restoreAddressComponent(component: AddressSectionComponent) {
-//     if (originalParent) {
-//       if (originalNextSibling) {
-//         originalParent.insertBefore(component.node, originalNextSibling);
-//       } else {
-//         originalParent.appendChild(component.node);
-//       }
-//     }
-//     component.editButton.node.classList.remove('hidden');
-//     component.deleteButton.node.classList.remove('hidden');
-//     component.saveButton.node.classList.add('hidden');
-//   }
-
-//   const backdrop = new BaseComponent('div', 'backdrop');
-//   backdrop.node.classList.add('backdrop-address');
-//   const modal = new BaseComponent('div', 'modal-window');
-
-//   const closeButton = new ButtonComponent(
-//     'close-button',
-//     () => {
-//       openModals.forEach((modalElement) => {
-//         modalElement.remove();
-//       });
-//       openModals.length = 0;
-//       restoreAddressComponent(addressComponent);
-//       addressComponent.closeModal();
-//     },
-//     '',
-//     false,
-//   );
-
-//   closeButton.node.ariaLabel = 'Close';
-
-//   modal.node.appendChild(addressComponent.node);
-//   modal.node.appendChild(closeButton.node);
-
-//   addressComponent.editButton.node.classList.add('hidden');
-//   addressComponent.deleteButton.node.classList.add('hidden');
-//   addressComponent.saveButton.node.classList.remove('hidden');
-
-//   document.body.append(backdrop.node, modal.node);
-//   openModals.push(backdrop.node, modal.node);
-// }
-
 const openModals: HTMLElement[] = [];
 
 export default function showAddressModal(addressComponent: AddressSectionComponent): void {
+  openModals.forEach((modalElement) => {
+    modalElement.remove();
+  });
+  openModals.length = 0;
+
+  if (document.querySelector('.modal-window')) {
+    return;
+  }
+
   const addressCopy = new AddressSectionComponent(
     { ...addressComponent.address },
     addressComponent.index,
@@ -78,8 +37,10 @@ export default function showAddressModal(addressComponent: AddressSectionCompone
         addressComponent.node.remove();
         addressComponent.onDeleteButtonClick();
       } else {
-        addressComponent.render();
+        addressComponent.updateAddress(addressCopy.updatedAddress);
       }
+      addressComponent.resetButtonVisibility();
+      AddressSectionComponent.removeModalElements();
     },
     '',
     false,
@@ -87,9 +48,34 @@ export default function showAddressModal(addressComponent: AddressSectionCompone
 
   closeButton.node.ariaLabel = 'Close';
 
-  modal.node.appendChild(addressCopy.node);
-  modal.node.appendChild(closeButton.node);
+  modal.node.append(addressCopy.node, closeButton.node);
+
+  addressCopy.editButton.node.classList.add('hidden');
+  addressCopy.deleteButton.node.classList.add('hidden');
+  addressCopy.saveButton.node.classList.remove('hidden');
+  addressCopy.node.querySelectorAll('.edit-button').forEach((button) => {
+    button.classList.remove('hidden');
+  });
+
+  addressCopy.updateButtonVisibility(true);
 
   document.body.append(backdrop.node, modal.node);
   openModals.push(backdrop.node, modal.node);
+
+  addressCopy.saveButton.node.addEventListener('click', async () => {
+    await addressComponent.updateCheckboxStatesFromModal(
+      addressCopy.shippingChecked,
+      addressCopy.billingChecked,
+      addressCopy.defaultShippingChecked,
+      addressCopy.defaultBillingChecked,
+    );
+
+    openModals.forEach((modalElement) => {
+      modalElement.remove();
+    });
+    openModals.length = 0;
+    AddressSectionComponent.removeModalElements();
+
+    addressComponent.updateAddress(addressCopy.updatedAddress);
+  });
 }

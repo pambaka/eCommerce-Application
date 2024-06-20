@@ -1,3 +1,46 @@
+@mixin title {
+  margin: 0;
+  color: $color-head;
+  font-weight: bold;
+}
+
+.profile_page__wrapper {
+  gap: 40px;
+}
+
+.backdrop-address {
+  background-color: rgb(93 93 93 / 40%) !important;
+  backdrop-filter: blur(5px);
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  width: 90%;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #919191;
+
+  .tab {
+    @include title;
+    background-color: transparent;
+    font-size: 1.6rem;
+    color: #919191;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #feba3d;
+    }
+
+    &.active {
+      color: #2b2a2a;
+    }
+  }
+}
+
 .profile_page__content_wrapper {
   font-size: 1rem;
   width: 85%;
@@ -30,6 +73,12 @@
     .profile_page__editable_field {
       position: relative;
       text-overflow: ellipsis;
+
+      .profile_page__input {
+        &:hover {
+          color: #feba3d;
+        }
+      }
 
       &:last-child {
         button {
@@ -65,7 +114,7 @@
     gap: 1rem;
     margin-bottom: 40px;
 
-    @media (max-width: 450px) {
+    @media (max-width: 500px) {
       margin: 0 0 40px 0;
       display: flex;
       flex-direction: column;
@@ -89,6 +138,10 @@
       margin: 0 auto;
       text-align: start;
       position: relative;
+
+      @media (max-width: 500px) {
+        height: 300px;
+      }
 
       .profile_page__address_title_wrapper,
       .profile_page__default_status_wrapper {
@@ -160,6 +213,7 @@
         min-width: 330px;
         max-width: 90%;
         box-sizing: content-box;
+        height: 250px;
       }
 
       .button {
@@ -324,7 +378,13 @@
   border-radius: none;
   box-shadow: none;
   height: 500px;
-  top: 50%;
+  top: 51%;
+
+  .profile_page__input {
+    &:hover {
+      color: #feba3d;
+    }
+  }
 
   .relative-wrapper p {
     font-size: 14px;
@@ -422,8 +482,4 @@
       }
     }
   }
-}
-
-.backdrop-address {
-  background-color: rgb(74 74 74 / 40%) !important;
 }

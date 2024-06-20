@@ -1,7 +1,6 @@
 import useToken from '../services/use-token';
 import getUserInfo from './get-user-info';
 import showModal from '../pages/show-modal';
-// import showPasswordModal from '../pages/profile/render/show-password-modal';
 import { region } from './const';
 import getCustomerTokens from './get-customer-tokens';
 
@@ -68,9 +67,5 @@ export default async function updateCustomerPassword(currentPassword: string, ne
     } else {
       showModal('Failed to update data', 'Something went wrong...', false);
     }
-
-    // showPasswordModal(async (currentPwd, newPwd) => {
-    //   await updateCustomerPassword(currentPwd, newPwd);
-    // });
   }
 }

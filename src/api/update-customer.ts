@@ -66,7 +66,8 @@ export default class CustomerUpdater {
       const responseBody: FetchUpdateResponse = await response.json();
 
       if (!response.ok) {
-        showModal('Failed to update customer data', 'Unknown error', false);
+        const errorMessage = responseBody.message || 'Unknown error';
+        showModal('Failed to update customer data', errorMessage, false);
         return null;
       }
 
