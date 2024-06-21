@@ -10,7 +10,7 @@ function createCheckbox(
   const checkbox = new BaseComponent('input', className);
   const inputElement = checkbox.node as HTMLInputElement;
   inputElement.type = 'checkbox';
-  inputElement.checked = initialChecked; // Updated usage
+  inputElement.checked = initialChecked;
   inputElement.id = `${idPrefix}-${index}`;
   inputElement.addEventListener('change', () => onChange(inputElement.checked));
   return inputElement;
