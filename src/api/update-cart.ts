@@ -3,6 +3,7 @@ import showModal from '../pages/show-modal';
 import Counter from '../services/counter';
 import { Cart, UpdateCartData } from '../types/cart';
 import { region } from './const';
+import withSpinner from '../utils/with-spinner';
 
 export default async function updateCart(
   cart: Cart,
@@ -12,46 +13,48 @@ export default async function updateCart(
 ): Promise<Cart | undefined> {
   let updatedCart: Cart | undefined;
 
-  await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/me/carts/${cart.id}`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      version: cart.version,
-      actions: [
-        {
-          action: updateCartData.action,
-          productId,
-          variantId: 1,
-          quantity: updateCartData.quantity,
-          lineItemId: updateCartData.lineItemId,
-        },
-      ],
-    }),
-  })
-    .then((res) => {
-      if (res.status !== 200) {
-        let suggestion: string = MESSAGES.suggestion.reloadAndTryAgain;
-        if (res.status === 409) {
-          suggestion = MESSAGES.suggestion.wait;
+  await withSpinner(async () => {
+    await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/me/carts/${cart.id}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        version: cart.version,
+        actions: [
+          {
+            action: updateCartData.action,
+            productId,
+            variantId: 1,
+            quantity: updateCartData.quantity,
+            lineItemId: updateCartData.lineItemId,
+          },
+        ],
+      }),
+    })
+      .then((res) => {
+        if (res.status !== 200) {
+          let suggestion: string = MESSAGES.suggestion.reloadAndTryAgain;
+          if (res.status === 409) {
+            suggestion = MESSAGES.suggestion.wait;
+          }
+
+          showModal(MESSAGES.error.updateCart, suggestion);
+
+          return undefined;
         }
 
-        showModal(MESSAGES.error.updateCart, suggestion);
-
-        return undefined;
-      }
-
-      return res.json();
-    })
-    .then((data) => {
-      if (data) {
-        updatedCart = data;
-        Counter.update(false, data);
-      }
-    })
-    .catch((error) => error);
+        return res.json();
+      })
+      .then((data) => {
+        if (data) {
+          updatedCart = data;
+          Counter.update(false, data);
+        }
+      })
+      .catch((error) => error);
+  });
 
   return updatedCart;
 }

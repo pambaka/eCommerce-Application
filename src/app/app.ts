@@ -17,6 +17,8 @@ import renderCatalogContent from '../pages/catalog/render/render-catalog-content
 import renderCart from '../pages/cart/render/render-cart';
 import AboutSection from '../pages/about/render/about-render-page';
 import Pages from '../services/pages';
+import withSpinner from '../utils/with-spinner';
+import Spinner from '../components/spinner-component';
 
 export default class App {
   private header: Header;
@@ -33,6 +35,8 @@ export default class App {
 
   private router: Router;
 
+  private spinner: Spinner;
+
   constructor() {
     this.header = new Header();
     this.mainSection = new MainSection();
@@ -41,15 +45,20 @@ export default class App {
     this.footer = new Footer();
     this.contentNode = document.createElement('main');
     this.router = new Router();
+    this.spinner = new Spinner();
     this.registerRoutes();
   }
 
   init() {
     document.addEventListener('DOMContentLoaded', async () => {
       this.setupInitialLayout();
-      await this.registerProductRoutes();
-      await this.registerCategoryRoutes();
-      this.render();
+      try {
+        await this.registerProductRoutes();
+        await this.registerCategoryRoutes();
+        this.render();
+      } finally {
+        this.spinner.node.remove();
+      }
     });
   }
 
@@ -58,28 +67,28 @@ export default class App {
   }
 
   registerRoutes() {
-    this.router.register(Router.pages.main, () => this.renderMainPage());
-    this.router.register(Router.pages.notFound, () => this.renderErrorPage());
-    this.router.register(Router.pages.about, () => this.renderAboutPage());
-    this.router.register(Router.pages.catalog, () => this.renderCatalog());
-    this.router.register(Router.pages.cart, () => this.renderCartPage());
+    this.router.register(Router.pages.main, () => withSpinner(() => Promise.resolve(this.renderMainPage())));
+    this.router.register(Router.pages.notFound, () => withSpinner(() => Promise.resolve(this.renderErrorPage())));
+    this.router.register(Router.pages.about, () => withSpinner(() => Promise.resolve(this.renderAboutPage())));
+    this.router.register(Router.pages.catalog, () => withSpinner(() => Promise.resolve(this.renderCatalog())));
+    this.router.register(Router.pages.cart, () => withSpinner(() => Promise.resolve(this.renderCartPage())));
     this.router.register(Router.pages.login, () => {
       if (!isCustomerAuthorized()) {
-        this.renderLogInPage();
+        withSpinner(() => Promise.resolve(this.renderLogInPage()));
       } else {
         replaceLocation(Router.pages.main);
       }
     });
     this.router.register(Router.pages.registration, () => {
       if (!isCustomerAuthorized()) {
-        this.renderRegistrationPage();
+        withSpinner(() => Promise.resolve(this.renderRegistrationPage()));
       } else {
         replaceLocation(Router.pages.main);
       }
     });
     this.router.register(Router.pages.profile, () => {
       if (isCustomerAuthorized()) {
-        this.renderProfilePage();
+        withSpinner(() => Promise.resolve(this.renderProfilePage()));
       } else {
         replaceLocation(Router.pages.login);
       }
@@ -93,7 +102,7 @@ export default class App {
     Object.keys(Router.productPages).forEach((key) => {
       this.router.register(Router.productPages[key], () => {
         this.prepare();
-        renderProduct(key);
+        withSpinner(() => renderProduct(key));
       });
     });
   }
@@ -107,7 +116,9 @@ export default class App {
 
         if (!wrapper) {
           this.prepare();
-          this.contentNode.append(renderEmptyCatalog());
+          await withSpinner(async () => {
+            this.contentNode.append(renderEmptyCatalog());
+          });
         }
 
         const categories = document.querySelector('.categories');
@@ -116,7 +127,7 @@ export default class App {
         Pages.reset();
         Pages.cardsPerPage.update();
 
-        await renderCatetoryProducts(key);
+        await withSpinner(() => renderCatetoryProducts(key));
         Breadcrumbs.update();
       });
     });

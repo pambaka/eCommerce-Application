@@ -28,7 +28,7 @@
   background-color: $color-bg-light;
   border-radius: 5px;
   box-shadow: rgba(36, 36, 36, 0.6) 0 5px 10px;
-  z-index: 2;
+  z-index: 1000;
 
   p:first-child {
     width: min(300px, 100%);

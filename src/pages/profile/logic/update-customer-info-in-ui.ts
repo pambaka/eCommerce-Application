@@ -1,5 +1,6 @@
 import updateCustomerPassword from '../../../api/update-customer-password';
 import CustomerUpdater from '../../../api/update-customer';
+import withSpinner from '../../../utils/with-spinner';
 
 export default async function updateCustomerInfo(
   id: string,
@@ -11,10 +12,11 @@ export default async function updateCustomerInfo(
   try {
     if (isPassword) {
       const [currentPassword, newPassword] = value.split(':');
-      await updateCustomerPassword(currentPassword, newPassword);
+      await withSpinner(() => updateCustomerPassword(currentPassword, newPassword));
       return true;
     }
-    return await customerUpdater.updateCustomerData(id, value);
+    await withSpinner(() => customerUpdater.updateCustomerData(id, value).then(() => {}));
+    return true;
   } catch (error) {
     return false;
   }

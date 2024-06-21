@@ -4,6 +4,7 @@ import getUserInfo from './get-user-info';
 import showModal from '../pages/show-modal';
 import { AddressAction, FetchUpdateResponse } from '../types/addresses';
 import { Address, CustomerIncomeData } from '../types/index';
+import withSpinner from '../utils/with-spinner';
 
 export default class CustomerUpdater {
   private accessToken: string | null;
@@ -112,51 +113,53 @@ export default class CustomerUpdater {
     address?: Address,
     index?: number,
   ): Promise<boolean> {
-    try {
-      const customerData = await getUserInfo();
-      if (customerData) {
-        const requestBody: { version: number; actions: object[] } = {
-          version: customerData.version,
-          actions: [
-            {
-              action,
-              ...(action === 'removeAddress' ? { addressId: addressIdOrKey } : { addressId: addressIdOrKey }),
-              ...(address ? { address } : {}),
-            },
-          ],
-        };
+    return withSpinner(async () => {
+      try {
+        const customerData = await getUserInfo();
+        if (customerData) {
+          const requestBody: { version: number; actions: object[] } = {
+            version: customerData.version,
+            actions: [
+              {
+                action,
+                ...(action === 'removeAddress' ? { addressId: addressIdOrKey } : { addressId: addressIdOrKey }),
+                ...(address ? { address } : {}),
+              },
+            ],
+          };
 
-        const response = await this.fetchUpdate(requestBody);
+          const response = await this.fetchUpdate(requestBody);
 
-        if (response) {
-          if (action === 'addAddress' && response.addresses) {
-            const newAddress = response.addresses[response.addresses.length - 1];
-            if (newAddress) {
-              const addedAddress = address;
-              addedAddress!.id = newAddress.id;
-              addedAddress!.key = newAddress.key;
+          if (response) {
+            if (action === 'addAddress' && response.addresses) {
+              const newAddress = response.addresses[response.addresses.length - 1];
+              if (newAddress) {
+                const addedAddress = address;
+                addedAddress!.id = newAddress.id;
+                addedAddress!.key = newAddress.key;
 
-              localStorage.setItem(`newAddressId-${index}`, newAddress.id!);
-            }
-          } else if (action === 'changeAddress') {
-            if (addressIdOrKey) {
-              const existingAddress = customerData.addresses.find((addr) => addr.id === addressIdOrKey);
-              if (existingAddress && existingAddress.id) {
-                localStorage.setItem(`newAddressId-${index}`, existingAddress.id);
+                localStorage.setItem(`newAddressId-${index}`, newAddress.id!);
               }
+            } else if (action === 'changeAddress') {
+              if (addressIdOrKey) {
+                const existingAddress = customerData.addresses.find((addr) => addr.id === addressIdOrKey);
+                if (existingAddress && existingAddress.id) {
+                  localStorage.setItem(`newAddressId-${index}`, existingAddress.id);
+                }
+              }
+            } else if (action === 'removeAddress') {
+              localStorage.removeItem(`newAddressId-${index}`);
             }
-          } else if (action === 'removeAddress') {
-            localStorage.removeItem(`newAddressId-${index}`);
+            return true;
           }
-          return true;
+          return false;
         }
         return false;
+      } catch (error) {
+        CustomerUpdater.handleError(error);
+        return false;
       }
-      return false;
-    } catch (error) {
-      CustomerUpdater.handleError(error);
-      return false;
-    }
+    });
   }
 
   private static handleError(error: unknown): void {
