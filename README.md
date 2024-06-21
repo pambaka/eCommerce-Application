@@ -4,7 +4,7 @@
 </h1>
 <br>
     <div align="center">
-        <img src="./src/assets/images/project-shot.png" alt="Screenshot" width="250">
+        <img src="./src/assets/images/project-shot.png" alt="Screenshot" width="600">
     </div>
 
 <h3 align="left">
