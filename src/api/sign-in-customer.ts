@@ -5,6 +5,7 @@ import Router from '../services/router';
 import Customer from '../utils/customer';
 import Counter from '../services/counter';
 import showModal from '../pages/show-modal';
+import { Successful } from '../types';
 
 export default async function signInCustomer(email: string, password: string): Promise<void> {
   const customerAccessToken: string | undefined = await getCustomerTokens(email, password);
@@ -22,7 +23,7 @@ export default async function signInCustomer(email: string, password: string): P
       }),
     })
       .then((res) => {
-        if (res.status !== 200) {
+        if (res.status !== Successful.ok) {
           showModal(':(', '');
           return undefined;
         }

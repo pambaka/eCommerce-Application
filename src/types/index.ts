@@ -66,3 +66,22 @@ export interface CustomerIncomeData {
   defaultShippingAddressId?: string | null;
   defaultBillingAddressId?: string | null;
 }
+
+export enum Successful {
+  ok = 200,
+  created = 201,
+}
+
+export enum ClientErrors {
+  badRequest = 400,
+  unauthorized = 401,
+  forbidden = 403,
+  conflict = 409,
+}
+
+export enum ServerErrors {
+  internal = 500,
+  notImplemented = 501,
+  serviceUnavailable = 503,
+  gatewayTimeout = 504,
+}

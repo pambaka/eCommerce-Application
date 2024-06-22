@@ -1,4 +1,5 @@
 import showModal from '../pages/show-modal';
+import { ClientErrors } from '../types';
 import { Cart, AddPromoCode } from '../types/cart';
 import { region } from './const';
 
@@ -27,7 +28,7 @@ export default async function addPromo(
   })
     .then((res) => res.json())
     .then((data) => {
-      if (data.statusCode === 400) {
+      if (data.statusCode === ClientErrors.badRequest) {
         showModal(data.message, 'Use capital letters and check for\xa0typos');
         return;
       }

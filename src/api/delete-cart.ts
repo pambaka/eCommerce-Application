@@ -1,4 +1,5 @@
 import showModal from '../pages/show-modal';
+import { Successful } from '../types';
 import { Cart } from '../types/cart';
 import { region } from './const';
 
@@ -18,7 +19,7 @@ export default async function deleteCart(
     },
   )
     .then((res) => {
-      if (res.status !== 200) {
+      if (res.status !== Successful.ok) {
         showModal('Something went wrong', 'Please keep calm and try again');
       }
       return res.json();

@@ -1,6 +1,7 @@
 import { MESSAGES } from '../pages/const';
 import showModal from '../pages/show-modal';
 import Counter from '../services/counter';
+import { ClientErrors, Successful } from '../types';
 import { Cart, UpdateCartData } from '../types/cart';
 import { region } from './const';
 
@@ -32,9 +33,9 @@ export default async function updateCart(
     }),
   })
     .then((res) => {
-      if (res.status !== 200) {
+      if (res.status !== Successful.ok) {
         let suggestion: string = MESSAGES.suggestion.reloadAndTryAgain;
-        if (res.status === 409) {
+        if (res.status === ClientErrors.conflict) {
           suggestion = MESSAGES.suggestion.wait;
         }
 

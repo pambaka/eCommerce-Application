@@ -1,6 +1,6 @@
 import showModal from '../pages/show-modal';
 import Router from '../services/router';
-import { Address, CustomerData } from '../types/index';
+import { Address, CustomerData, ServerErrors } from '../types/index';
 import replaceLocation from '../utils/replace-location';
 import { region } from './const';
 import getAccessToken from './get-access-token';
@@ -55,7 +55,7 @@ export default async function signUpCustomer(
             'Log in with this email address or use another email address for registration.',
           );
         }
-        if (res.status === 500 || res.status === 502 || res.status === 503 || res.status === 504) {
+        if (Object.values(ServerErrors).includes(res.status)) {
           showModal('Unfortunately, something went wrong during the registration process.', 'Please try again later.');
         }
         return res.json();

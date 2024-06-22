@@ -1,3 +1,4 @@
+import { Successful } from '../types';
 import { Cart } from '../types/cart';
 import { region } from './const';
 
@@ -13,7 +14,7 @@ export default async function createCart(token: string): Promise<Cart | undefine
     body: JSON.stringify({ currency: 'EUR' }),
   })
     .then((res) => {
-      if (res.status !== 201) return undefined;
+      if (res.status !== Successful.created) return undefined;
 
       return res.json();
     })

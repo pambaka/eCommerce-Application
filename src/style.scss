@@ -52,6 +52,7 @@ body {
   margin: 0;
   color: $color-head;
   font-weight: bold;
+  font-family: 'Cabin Sketch', sans-serif;
 }
 
 @mixin accent-text {
@@ -60,7 +61,6 @@ body {
 }
 
 @mixin regular-text {
-  font-family: 'Inter', sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
   color: $dark-text;
@@ -79,7 +79,7 @@ body,
 html {
   min-width: 360px;
   height: 100vh;
-  font-family: 'Cabin Sketch', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 16px;
