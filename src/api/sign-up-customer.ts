@@ -6,6 +6,13 @@ import { region } from './const';
 import getAccessToken from './get-access-token';
 import signInCustomer from './sign-in-customer';
 
+enum ServerErrors {
+  Err500 = 500,
+  Err501 = 501,
+  Err503 = 503,
+  Err504 = 504,
+}
+
 export default async function signUpCustomer(
   email: string,
   password: string,
@@ -55,7 +62,7 @@ export default async function signUpCustomer(
             'Log in with this email address or use another email address for registration.',
           );
         }
-        if (res.status === 500 || res.status === 502 || res.status === 503 || res.status === 504) {
+        if (Object.values(ServerErrors).includes(res.status)) {
           showModal('Unfortunately, something went wrong during the registration process.', 'Please try again later.');
         }
         return res.json();

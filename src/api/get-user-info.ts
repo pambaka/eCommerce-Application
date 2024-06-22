@@ -1,4 +1,4 @@
-import { CustomerIncomeData } from '../types/index';
+import { ClientErrors, CustomerIncomeData } from '../types/index';
 import { region } from './const';
 import useToken from '../services/use-token';
 import replaceLocation from '../utils/replace-location';
@@ -23,7 +23,7 @@ export default function getUserInfo(): Promise<CustomerIncomeData | undefined> {
     },
   })
     .then((response) => {
-      if (response.status === 401) {
+      if (response.status === ClientErrors.unauthorized) {
         replaceLocation(Router.pages.main);
         Customer.logOut();
         return undefined;

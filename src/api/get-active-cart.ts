@@ -1,4 +1,5 @@
 import showModal from '../pages/show-modal';
+import { ClientErrors, Successful } from '../types';
 import { Cart } from '../types/cart';
 import { region } from './const';
 
@@ -12,10 +13,10 @@ export default async function getActiveCart(token: string): Promise<Cart | undef
     },
   })
     .then((res) => {
-      if (res.status === 401 || res.status === 403) {
+      if (res.status === ClientErrors.unauthorized || res.status === ClientErrors.forbidden) {
         showModal('Something went wrong', 'Please reload the page and try again');
       }
-      if (res.status !== 200) return undefined;
+      if (res.status !== Successful.ok) return undefined;
       return res.json();
     })
     .then((data) => {

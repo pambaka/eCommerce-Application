@@ -1,4 +1,5 @@
 import showModal from '../pages/show-modal';
+import { ClientErrors } from '../types';
 import { Cart, RemovePromoCode } from '../types/cart';
 import { region } from './const';
 
@@ -30,7 +31,7 @@ export default async function removePromo(
   })
     .then((res) => res.json())
     .then((data) => {
-      if (data.statusCode === 400) {
+      if (data.statusCode === ClientErrors.badRequest) {
         showModal(data.message, '');
         return;
       }

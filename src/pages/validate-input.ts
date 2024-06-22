@@ -35,18 +35,27 @@ export default function validateInput(formType: FormType, input: HTMLInputElemen
       break;
     case 'text':
       // for the case when checkbox changes input type password to text
-      if (inputName === 'password') {
-        warning[formType].password = validatePassword(input.value);
-      } else if (inputName === 'first-name') {
-        warning[formType]['first-name'] = validateName(input.value, inputName);
-      } else if (inputName === 'last-name') {
-        warning[formType]['last-name'] = validateName(input.value, inputName);
-      } else if (inputName === 'postal-code') {
-        warning[formType]['postal-code'] = validatePostalCode(input.value);
-      } else if (inputName === 'city') {
-        warning[formType].city = validateName(input.value, inputName);
-      } else if (inputName === 'street') {
-        warning[formType].street = validateStreet(input.value);
+      switch (inputName) {
+        case 'password':
+          warning[formType].password = validatePassword(input.value);
+          break;
+        case 'first-name':
+          warning[formType]['first-name'] = validateName(input.value, inputName);
+          break;
+        case 'last-name':
+          warning[formType]['last-name'] = validateName(input.value, inputName);
+          break;
+        case 'postal-code':
+          warning[formType]['postal-code'] = validatePostalCode(input.value);
+          break;
+        case 'city':
+          warning[formType].city = validateName(input.value, inputName);
+          break;
+        case 'street':
+          warning[formType].street = validateStreet(input.value);
+          break;
+        default:
+          break;
       }
       break;
 

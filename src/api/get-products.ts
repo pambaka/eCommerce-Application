@@ -4,6 +4,7 @@ import { Product } from '../types/products';
 import { region } from './const';
 import Pages from '../services/pages';
 import handleNextButtonState from '../pages/catalog/logic/handle-next-button-state';
+import { ClientErrors, Successful } from '../types';
 
 export default async function getProducts(
   accessToken: string,
@@ -28,8 +29,8 @@ export default async function getProducts(
     },
   })
     .then((res) => {
-      if (res.status !== 200) {
-        if (res.status === 401) {
+      if (res.status !== Successful.ok) {
+        if (res.status === ClientErrors.unauthorized) {
           useToken.client.access.set();
         }
         showModal('Something went wrong', 'Please keep calm and try reloading the page');

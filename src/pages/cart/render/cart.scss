@@ -314,21 +314,24 @@
     font-size: 1.2rem;
     color: #5f8575;
   }
-  .close-button {
-    top: 5px;
-    right: 5px;
-    width: 22px;
-    height: 22px;
-    background-size: contain;
-    border: 1px solid #a3a3a3;
-    position: fixed;
-    background-image: url('../../../assets/dark-cross.svg');
-    animation: none;
-  }
   .clearing {
     font-size: 1.2rem;
     margin-top: -20px;
   }
+}
+
+.request-modal .close-button,
+.right-arrow-wide + .close-button {
+  top: 5px;
+  right: 5px;
+  width: 22px;
+  height: 22px;
+  background-size: contain;
+  border: 1px solid #a3a3a3;
+  position: fixed;
+  background-image: url('../../../assets/dark-cross.svg');
+  animation: none;
+  z-index: 2;
 }
 
 .clear-modal__buttons {

@@ -1,4 +1,5 @@
 import showModal from '../pages/show-modal';
+import { Successful } from '../types';
 import { Promocode } from '../types/cart';
 import { region } from './const';
 
@@ -12,7 +13,7 @@ export default async function getPromocodeById(accessToken: string, id: string):
     },
   })
     .then((res) => {
-      if (res.status !== 200) {
+      if (res.status !== Successful.ok) {
         showModal('Something went wrong', 'Please keep calm and try reloading the page');
       }
 
