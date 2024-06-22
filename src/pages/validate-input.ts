@@ -40,16 +40,12 @@ export default function validateInput(formType: FormType, input: HTMLInputElemen
           warning[formType][inputName] = validatePassword(input.value);
           break;
         case 'first-name':
-          warning[formType][inputName] = validateName(input.value, inputName);
-          break;
         case 'last-name':
+        case 'city':
           warning[formType][inputName] = validateName(input.value, inputName);
           break;
         case 'postal-code':
           warning[formType][inputName] = validatePostalCode(input.value);
-          break;
-        case 'city':
-          warning[formType][inputName] = validateName(input.value, inputName);
           break;
         case 'street':
           warning[formType][inputName] = validateStreet(input.value);
