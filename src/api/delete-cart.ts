@@ -21,6 +21,7 @@ export default async function deleteCart(
     .then((res) => {
       if (res.status !== Successful.ok) {
         showModal('Something went wrong', 'Please keep calm and try again');
+        return undefined;
       }
       return res.json();
     })
