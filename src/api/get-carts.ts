@@ -1,15 +1,12 @@
-import isActiveCartExist from './is-active-cart-exist';
 import showModal from '../pages/show-modal';
 import { ClientErrors, Successful } from '../types';
 import { Cart } from '../types/cart';
 import { region } from './const';
 
-export default async function getActiveCart(token: string): Promise<Cart | undefined> {
-  let cart: Cart | undefined;
+export default async function getCarts(token: string): Promise<Cart[]> {
+  let cart: Cart[] = [];
 
-  if (!(await isActiveCartExist(token))) return undefined;
-
-  await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/me/active-cart`, {
+  await fetch(`https://api.${region}.commercetools.com/${process.env.project_key}/me/carts`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -27,7 +24,7 @@ export default async function getActiveCart(token: string): Promise<Cart | undef
       return res.json();
     })
     .then((data) => {
-      if (data) cart = data;
+      if (data.results) cart = data.results;
     })
     .catch((error) => error);
 
