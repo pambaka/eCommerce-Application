@@ -41,20 +41,28 @@ export default function makeFieldEditable(
     'save-button',
     async () => {
       let warning = '';
-      if (id === ID_NAMES.customerEmail) {
-        warning = validateEmail(input.value);
-      } else if (id === ID_NAMES.customerName) {
-        warning = validateName(input.value, 'first-name');
-      } else if (id === ID_NAMES.customerSurname) {
-        warning = validateName(input.value, 'last-name');
-      } else if (id === ID_NAMES.customerDob) {
-        warning = validateBirthDate(input.value);
-      } else if (id.startsWith('address-postalCode')) {
-        warning = validatePostalCode(input.value);
-      } else if (id.startsWith('address-streetName')) {
-        warning = validateStreet(input.value);
-      } else if (id.startsWith('address-city')) {
-        warning = validateName(input.value, 'city');
+      switch (id) {
+        case ID_NAMES.customerEmail:
+          warning = validateEmail(input.value);
+          break;
+        case ID_NAMES.customerName:
+          warning = validateName(input.value, 'first-name');
+          break;
+        case ID_NAMES.customerSurname:
+          warning = validateName(input.value, 'last-name');
+          break;
+        case ID_NAMES.customerDob:
+          warning = validateBirthDate(input.value);
+          break;
+        default:
+          if (id.startsWith('address-postalCode')) {
+            warning = validatePostalCode(input.value);
+          } else if (id.startsWith('address-streetName')) {
+            warning = validateStreet(input.value);
+          } else if (id.startsWith('address-city')) {
+            warning = validateName(input.value, 'city');
+          }
+          break;
       }
 
       const parentElement = input.parentNode as HTMLElement;

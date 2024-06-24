@@ -10,28 +10,31 @@ import CustomerUpdater from '../api/update-customer';
 import showModal from '../pages/show-modal';
 import createEditableField from '../pages/profile/render/editable-field/create-editable-field';
 import { CLASS_NAMES } from '../const';
-import handleAddressTypeAndDefaultStatus from '../pages/profile/logic/handle-address-type-and-status';
 import {
   createBillingCheckbox,
   createShippingCheckbox,
   createDefaultShippingCheckbox,
   createDefaultBillingCheckbox,
 } from '../pages/profile/render/create-type-status-boxes';
+import showAddressModal from '../pages/profile/render/show-address-modal';
+import { ActionPayload } from '../types/addresses';
 
 export default class AddressSectionComponent extends BaseComponent {
-  private address: Address;
+  public address: Address;
 
-  private userInfo: CustomerIncomeData;
+  public userInfo: CustomerIncomeData;
 
-  private index: number;
+  public index: number;
 
-  private saveButton: ButtonComponent;
+  public saveButton: ButtonComponent;
 
-  private deleteButton: ButtonComponent;
+  public deleteButton: ButtonComponent;
 
-  private updatedAddress: Partial<Address>;
+  public editButton: ButtonComponent;
 
-  private isNew: boolean;
+  public updatedAddress: Partial<Address>;
+
+  public isNew: boolean;
 
   private fieldsValid: { [key: string]: boolean } = {};
 
@@ -41,15 +44,15 @@ export default class AddressSectionComponent extends BaseComponent {
 
   public onDeleteButtonClick: () => void;
 
-  public updateAddNewAddressButtonState: () => void;
+  public shippingChecked: boolean;
 
-  constructor(
-    address: Address,
-    index: number,
-    userInfo: CustomerIncomeData,
-    updateAddNewAddressButtonState: () => void,
-    isNew: boolean = false,
-  ) {
+  public billingChecked: boolean;
+
+  public defaultShippingChecked: boolean;
+
+  public defaultBillingChecked: boolean;
+
+  constructor(address: Address, index: number, userInfo: CustomerIncomeData, isNew: boolean = false) {
     super('div', 'profile_page__address_wrapper');
     this.address = address;
     this.userInfo = userInfo;
@@ -60,15 +63,47 @@ export default class AddressSectionComponent extends BaseComponent {
     this.onFieldChange = () => {};
     this.onSaveButtonClick = () => {};
     this.onDeleteButtonClick = () => {};
-    this.updateAddNewAddressButtonState = updateAddNewAddressButtonState;
 
     this.saveButton = createSaveButton(this.handleSaveButtonClick.bind(this));
     this.deleteButton = createDeleteButton(this.handleDeleteButtonClick.bind(this));
+    this.editButton = new ButtonComponent('edit_address__btn', this.handleEditButtonClick.bind(this), 'Edit', false);
+    this.editButton.node.classList.add('button');
+
+    this.shippingChecked = this.userInfo?.shippingAddressIds?.includes(this.address?.id ?? '') || false;
+    this.billingChecked = this.userInfo?.billingAddressIds?.includes(this.address?.id ?? '') || false;
+    this.defaultShippingChecked = this.userInfo?.defaultShippingAddressId === this.address.id;
+    this.defaultBillingChecked = this.userInfo?.defaultBillingAddressId === this.address.id;
 
     this.render();
   }
 
-  private async handleSaveButtonClick() {
+  public async handleEditButtonClick() {
+    await this.updateCheckboxStatesFromServer();
+    showAddressModal(this);
+    this.node.classList.add('address-modal');
+    this.updateButtonVisibility(false);
+  }
+
+  public async updateCheckboxStatesFromServer() {
+    const customerUpdater = new CustomerUpdater();
+    const customerData = await customerUpdater.fetchCustomerData();
+
+    if (!customerData) {
+      showModal('Failed to fetch customer data', 'Something went wrong...', false);
+      return;
+    }
+
+    this.userInfo = customerData;
+
+    this.shippingChecked = this.userInfo?.shippingAddressIds?.includes(this.address?.id ?? '') || false;
+    this.billingChecked = this.userInfo?.billingAddressIds?.includes(this.address?.id ?? '') || false;
+    this.defaultShippingChecked = this.userInfo?.defaultShippingAddressId === this.address.id;
+    this.defaultBillingChecked = this.userInfo?.defaultBillingAddressId === this.address.id;
+
+    this.updateCheckboxStates();
+  }
+
+  public async handleSaveButtonClick() {
     if (this.areAllFieldsValid()) {
       const customerUpdater = new CustomerUpdater();
       if (this.isNew) {
@@ -77,10 +112,12 @@ export default class AddressSectionComponent extends BaseComponent {
         if (success) {
           this.onSaveButtonClick();
           this.isNew = false;
-          showModal('Address added successfully', '', true);
 
-          // Call handleAddressTypeAndDefaultStatus to update the address type and default status
-          await handleAddressTypeAndDefaultStatus(this.node, this.index, this.address.id || this.address.key || '');
+          await this.updateAddressTypeAndDefaultStatus();
+          this.updateCheckboxStates();
+          this.closeModal();
+          AddressSectionComponent.removeModalElements();
+          showModal('Address added successfully', '', true);
         } else {
           this.saveButton.node.disabled = false;
           showModal('Failed to add address', '', false);
@@ -92,20 +129,96 @@ export default class AddressSectionComponent extends BaseComponent {
           const success = await customerUpdater.updateAddress('changeAddress', addressId, this.address, this.index);
           if (success) {
             this.onSaveButtonClick();
-            showModal('Address updated successfully', '', true);
 
-            // Call handleAddressTypeAndDefaultStatus to update the address type and default status
-            await handleAddressTypeAndDefaultStatus(this.node, this.index, this.address.id || this.address.key || '');
+            await this.updateAddressTypeAndDefaultStatus();
+            this.updateCheckboxStates();
+            this.closeModal();
+            AddressSectionComponent.removeModalElements();
+            showModal('Address updated successfully', '', true);
           } else {
             this.saveButton.node.disabled = false;
             showModal('Failed to update address', '', false);
           }
         } else {
-          showModal('Something went wrong...', '', false);
+          showModal('Something went wrong...', 'Please keep calm and try again', false);
         }
       }
     }
-    this.updateAddNewAddressButtonState();
+  }
+
+  public static removeModalElements(): void {
+    const openModals = document.querySelectorAll('.backdrop-address, .modal-window, .backdrop');
+    openModals.forEach((modalElement) => {
+      modalElement.remove();
+    });
+  }
+
+  private async updateAddressTypeAndDefaultStatus() {
+    const customerUpdater = new CustomerUpdater();
+    const customerData = await customerUpdater.fetchCustomerData();
+
+    if (!customerData) {
+      showModal('Failed to fetch customer data', 'Something went wrong...', false);
+      return;
+    }
+
+    const actions: ActionPayload[] = [];
+
+    if (this.shippingChecked) {
+      actions.push({ action: 'addShippingAddressId', addressId: this.address.id || this.address.key! });
+    } else if (customerData.shippingAddressIds.includes(this.address.id || this.address.key!)) {
+      actions.push({ action: 'removeShippingAddressId', addressId: this.address.id || this.address.key! });
+      if (customerData.defaultShippingAddressId === (this.address.id || this.address.key!)) {
+        actions.push({ action: 'setDefaultShippingAddress', addressId: null });
+        this.defaultShippingChecked = false;
+      }
+    }
+
+    if (this.billingChecked) {
+      actions.push({ action: 'addBillingAddressId', addressId: this.address.id || this.address.key! });
+    } else if (customerData.billingAddressIds.includes(this.address.id || this.address.key!)) {
+      actions.push({ action: 'removeBillingAddressId', addressId: this.address.id || this.address.key! });
+      if (customerData.defaultBillingAddressId === (this.address.id || this.address.key!)) {
+        actions.push({ action: 'setDefaultBillingAddress', addressId: null });
+        this.defaultBillingChecked = false;
+      }
+    }
+
+    if (
+      (this.defaultShippingChecked && customerData.defaultShippingAddressId !== this.address.id) ||
+      this.address.key
+    ) {
+      actions.push({ action: 'setDefaultShippingAddress', addressId: this.address.id || this.address.key! });
+    } else if (
+      (!this.defaultShippingChecked && customerData.defaultShippingAddressId === this.address.id) ||
+      this.address.key
+    ) {
+      actions.push({ action: 'setDefaultShippingAddress', addressId: null });
+    }
+
+    if ((this.defaultBillingChecked && customerData.defaultBillingAddressId !== this.address.id) || this.address.key) {
+      actions.push({ action: 'setDefaultBillingAddress', addressId: this.address.id || this.address.key! });
+    } else if (
+      (!this.defaultBillingChecked && customerData.defaultBillingAddressId === this.address.id) ||
+      this.address.key
+    ) {
+      actions.push({ action: 'setDefaultBillingAddress', addressId: null });
+    }
+
+    if (actions.length === 0) return;
+
+    const requestBody = {
+      version: customerData.version,
+      actions,
+    };
+
+    const success = await customerUpdater.fetchUpdate(requestBody);
+
+    if (success) {
+      showModal('Address updated successfully', '', true);
+    } else {
+      showModal('Failed to update address', 'Something went wrong...', false);
+    }
   }
 
   private async handleDeleteButtonClick() {
@@ -129,7 +242,6 @@ export default class AddressSectionComponent extends BaseComponent {
         showModal('Something went wrong...', '', false);
       }
     }
-    this.updateAddNewAddressButtonState();
   }
 
   private async getAddressId(customerUpdater: CustomerUpdater): Promise<string | null> {
@@ -150,7 +262,42 @@ export default class AddressSectionComponent extends BaseComponent {
     this.updateCheckboxStates();
   }
 
-  private updateCheckboxStates() {
+  public updateAddress(updatedAddress: Partial<Address>) {
+    Object.assign(this.address, updatedAddress);
+    this.render();
+  }
+
+  public updateCheckboxStatesFromModal(
+    shippingChecked: boolean,
+    billingChecked: boolean,
+    defaultShippingChecked: boolean,
+    defaultBillingChecked: boolean,
+  ) {
+    this.shippingChecked = shippingChecked;
+    this.billingChecked = billingChecked;
+    this.defaultShippingChecked = defaultShippingChecked;
+    this.defaultBillingChecked = defaultBillingChecked;
+    this.updateCheckboxStates();
+    this.disableCheckboxes();
+  }
+
+  private disableCheckboxes() {
+    const shippingCheckbox = this.node.querySelector(`#shipping-checkbox-${this.index}`) as HTMLInputElement;
+    const billingCheckbox = this.node.querySelector(`#billing-checkbox-${this.index}`) as HTMLInputElement;
+    const defaultShippingCheckbox = this.node.querySelector(
+      `#default-shipping-checkbox-${this.index}`,
+    ) as HTMLInputElement;
+    const defaultBillingCheckbox = this.node.querySelector(
+      `#default-billing-checkbox-${this.index}`,
+    ) as HTMLInputElement;
+
+    shippingCheckbox.disabled = true;
+    billingCheckbox.disabled = true;
+    defaultShippingCheckbox.disabled = true;
+    defaultBillingCheckbox.disabled = true;
+  }
+
+  public updateCheckboxStates() {
     const shippingCheckbox = this.node.querySelector(`#shipping-checkbox-${this.index}`) as HTMLInputElement;
     const billingCheckbox = this.node.querySelector(`#billing-checkbox-${this.index}`) as HTMLInputElement;
     const defaultShippingCheckbox = this.node.querySelector(
@@ -166,6 +313,11 @@ export default class AddressSectionComponent extends BaseComponent {
     billingCheckbox.disabled = !allFieldsValid;
     defaultShippingCheckbox.disabled = !allFieldsValid || !shippingCheckbox.checked;
     defaultBillingCheckbox.disabled = !allFieldsValid || !billingCheckbox.checked;
+
+    shippingCheckbox.checked = this.shippingChecked;
+    billingCheckbox.checked = this.billingChecked;
+    defaultShippingCheckbox.checked = this.defaultShippingChecked;
+    defaultBillingCheckbox.checked = this.defaultBillingChecked;
 
     if (!shippingCheckbox.checked) {
       defaultShippingCheckbox.checked = false;
@@ -188,58 +340,82 @@ export default class AddressSectionComponent extends BaseComponent {
     return this.saveButton.node.classList.contains('hidden');
   }
 
-  private render() {
+  public resetButtonVisibility() {
+    this.editButton.node.classList.remove('hidden');
+    this.deleteButton.node.classList.remove('hidden');
+    this.saveButton.node.classList.add('hidden');
+    this.node.querySelectorAll('.edit-button').forEach((button) => {
+      button.classList.add('hidden');
+    });
+  }
+
+  public updateButtonVisibility(isModal: boolean = false) {
+    const editButtons = this.node.querySelectorAll('.edit-button') as NodeListOf<HTMLElement>;
+    const checkboxes = this.node.querySelectorAll('input[type="checkbox"]') as NodeListOf<HTMLInputElement>;
+
+    if (isModal) {
+      this.editButton.node.classList.add('hidden');
+      this.saveButton.node.classList.remove('hidden');
+      this.deleteButton.node.classList.add('hidden');
+      editButtons.forEach((button) => button.classList.remove('hidden'));
+      checkboxes.forEach((checkbox) => {
+        const cb = checkbox;
+        cb.disabled = false;
+      });
+    } else {
+      this.resetButtonVisibility();
+      editButtons.forEach((button) => button.classList.add('hidden'));
+      checkboxes.forEach((checkbox) => {
+        const cb = checkbox;
+        cb.disabled = true;
+      });
+    }
+  }
+
+  public closeModal() {
+    this.node.classList.remove('address-modal');
+    this.updateButtonVisibility(false);
+
+    if (this.isNew) {
+      this.node.remove();
+      this.onDeleteButtonClick();
+    } else {
+      this.updatedAddress = { ...this.address };
+
+      this.render();
+    }
+  }
+
+  public render() {
+    this.node.innerHTML = '';
+
     const isShippingChecked = this.userInfo?.shippingAddressIds?.includes(this.address?.id ?? '');
     const isBillingChecked = this.userInfo?.billingAddressIds?.includes(this.address?.id ?? '');
     const isDefaultShipping = this.userInfo?.defaultShippingAddressId === this.address.id;
     const isDefaultBilling = this.userInfo?.defaultBillingAddressId === this.address.id;
 
-    const shippingCheckbox = createShippingCheckbox(isShippingChecked, this.index, async (isChecked) => {
-      if (this.isNew || !this.areAllFieldsValid()) return;
-      this.updatedAddress.defaultShipping = isChecked;
+    const shippingCheckbox = createShippingCheckbox(isShippingChecked, this.index, (isChecked) => {
+      this.shippingChecked = isChecked;
       this.validateFields();
       this.onFieldChange();
-      try {
-        await handleAddressTypeAndDefaultStatus(this.node, this.index, this.address.id || this.address.key || '');
-      } catch (error) {
-        showModal('Failed to update shipping address', 'Something went wrong...', false);
-      }
     });
 
-    const billingCheckbox = createBillingCheckbox(isBillingChecked, this.index, async (isChecked) => {
-      if (this.isNew || !this.areAllFieldsValid()) return;
-      this.updatedAddress.defaultBilling = isChecked;
+    const billingCheckbox = createBillingCheckbox(isBillingChecked, this.index, (isChecked) => {
+      this.billingChecked = isChecked;
       this.validateFields();
       this.onFieldChange();
-      try {
-        await handleAddressTypeAndDefaultStatus(this.node, this.index, this.address.id || this.address.key || '');
-      } catch (error) {
-        showModal('Failed to update billing address', 'Something went wrong...', false);
-      }
     });
 
-    const defaultShippingCheckbox = createDefaultShippingCheckbox(isDefaultShipping, this.index, async (isChecked) => {
-      if (this.isNew || !this.areAllFieldsValid()) return;
-      this.updatedAddress.defaultShipping = isChecked;
+    const defaultShippingCheckbox = createDefaultShippingCheckbox(isDefaultShipping, this.index, (isChecked) => {
+      this.defaultShippingChecked = isChecked;
       this.validateFields();
       this.onFieldChange();
-      try {
-        await handleAddressTypeAndDefaultStatus(this.node, this.index, this.address.id || this.address.key || '');
-      } catch (error) {
-        showModal('Failed to update default shipping address', 'Something went wrong...', false);
-      }
     });
 
-    const defaultBillingCheckbox = createDefaultBillingCheckbox(isDefaultBilling, this.index, async (isChecked) => {
-      if (this.isNew || !this.areAllFieldsValid()) return;
-      this.updatedAddress.defaultBilling = isChecked;
+    const defaultBillingCheckbox = createDefaultBillingCheckbox(isDefaultBilling, this.index, (isChecked) => {
+      this.defaultBillingChecked = isChecked;
       this.validateFields();
       this.onFieldChange();
-      try {
-        await handleAddressTypeAndDefaultStatus(this.node, this.index, this.address.id || this.address.key || '');
-      } catch (error) {
-        showModal('Failed to update default billing address', 'Something went wrong...', false);
-      }
     });
 
     const checkboxContainer = new BaseComponent('div', 'address-checkbox-container');
@@ -310,9 +486,11 @@ export default class AddressSectionComponent extends BaseComponent {
     });
 
     const buttonWrapper = new BaseComponent('div', 'address-button-container');
-    buttonWrapper.node.append(this.saveButton.node, this.deleteButton.node);
+    buttonWrapper.node.append(this.editButton.node, this.saveButton.node, this.deleteButton.node);
 
     this.node.appendChild(buttonWrapper.node);
     this.validateFields();
+
+    this.updateButtonVisibility();
   }
 }

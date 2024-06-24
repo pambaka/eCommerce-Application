@@ -2,10 +2,10 @@ import BaseComponent from '../../../components/base-component';
 import BaseTextComponent from '../../../components/base-text-component';
 import getUserInfo from '../../../api/get-user-info';
 import { CustomerIncomeData } from '../../../types/index';
-import renderProfileSectionContent from '../render/render-profile-section';
+import RenderProfileSectionContent from '../render/render-profile-section';
 
 export default class ProfileSection extends BaseComponent {
-  private userInfo: CustomerIncomeData | undefined;
+  public userInfo: CustomerIncomeData | undefined;
 
   constructor() {
     super('div', 'profile_page__wrapper');
@@ -29,6 +29,33 @@ export default class ProfileSection extends BaseComponent {
       return;
     }
 
-    renderProfileSectionContent(this.userInfo, this.node);
+    const profileContent = new RenderProfileSectionContent(this.userInfo, this.node);
+
+    const tabs = new BaseComponent('div', 'tabs');
+    const infoTab = new BaseTextComponent('button', 'tab', 'Personal Info');
+    const addressTab = new BaseTextComponent('button', 'tab', 'Addresses');
+
+    const setActiveTab = (activeTab: HTMLElement) => {
+      [infoTab.node, addressTab.node].forEach((tab) => {
+        tab.classList.remove('active');
+      });
+      activeTab.classList.add('active');
+    };
+
+    infoTab.node.addEventListener('click', () => {
+      profileContent.showInfo();
+      setActiveTab(infoTab.node);
+    });
+
+    addressTab.node.addEventListener('click', () => {
+      profileContent.showAddresses();
+      setActiveTab(addressTab.node);
+    });
+
+    tabs.node.append(infoTab.node, addressTab.node);
+    this.node.insertBefore(tabs.node, title.node.nextSibling);
+
+    profileContent.showInfo();
+    setActiveTab(infoTab.node);
   }
 }

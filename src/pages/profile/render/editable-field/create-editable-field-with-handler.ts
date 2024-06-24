@@ -20,17 +20,13 @@ export default function createEditableFieldWithHandler(
       const target = event.currentTarget as HTMLElement;
       if (id === ID_NAMES.customerPassword) {
         showPasswordModal(async (currentPassword, newPassword) => {
-          try {
-            await updateCustomerPassword(currentPassword, newPassword);
-          } catch (error) {
-            console.error('Error updating password:', error);
-          }
+          await updateCustomerPassword(currentPassword, newPassword);
         });
       } else {
         makeFieldEditable(
           target.parentNode as HTMLElement,
           label,
-          value,
+          value || 'FR',
           id,
           updateCallback,
           className,

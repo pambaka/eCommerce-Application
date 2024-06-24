@@ -79,5 +79,6 @@ export default function showPasswordModal(onSave: (currentPassword: string, newP
     saveButton.node,
     closeButton.node,
   );
+
   document.body.append(backdrop.node, modal.node);
 }

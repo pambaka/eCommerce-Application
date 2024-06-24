@@ -1,3 +1,46 @@
+@mixin title {
+  margin: 0;
+  color: $color-head;
+  font-weight: bold;
+}
+
+.profile_page__wrapper {
+  gap: 40px;
+}
+
+.backdrop-address {
+  background-color: rgb(93 93 93 / 40%) !important;
+  backdrop-filter: blur(5px);
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  width: 90%;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #919191;
+
+  .tab {
+    @include title;
+    background-color: transparent;
+    font-size: 1.6rem;
+    color: #919191;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #feba3d;
+    }
+
+    &.active {
+      color: #2b2a2a;
+    }
+  }
+}
+
 .profile_page__content_wrapper {
   font-size: 1rem;
   width: 85%;
@@ -30,6 +73,12 @@
     .profile_page__editable_field {
       position: relative;
       text-overflow: ellipsis;
+
+      .profile_page__input {
+        &:hover {
+          color: #feba3d;
+        }
+      }
 
       &:last-child {
         button {
@@ -65,7 +114,7 @@
     gap: 1rem;
     margin-bottom: 40px;
 
-    @media (max-width: 450px) {
+    @media (max-width: 500px) {
       margin: 0 0 40px 0;
       display: flex;
       flex-direction: column;
@@ -76,7 +125,7 @@
       font-size: 0.8rem;
       width: 100%;
       width: 350px;
-      height: auto;
+      height: 500px;
       display: grid;
       grid-template-columns: auto 1fr auto;
       align-items: center;
@@ -89,6 +138,10 @@
       margin: 0 auto;
       text-align: start;
       position: relative;
+
+      @media (max-width: 500px) {
+        height: 300px;
+      }
 
       .profile_page__address_title_wrapper,
       .profile_page__default_status_wrapper {
@@ -160,6 +213,7 @@
         min-width: 330px;
         max-width: 90%;
         box-sizing: content-box;
+        height: 250px;
       }
 
       .button {
@@ -289,7 +343,8 @@
 }
 
 .save_changes__btn,
-.delete_address__btn {
+.delete_address__btn,
+.edit_address__btn {
   margin: 0 auto;
   width: 50%;
   height: 10%;
@@ -315,5 +370,116 @@
   p {
     color: rgb(219, 46, 46);
     padding: 10px 10px 0 10px;
+  }
+}
+
+.modal-window:has(.profile_page__address_wrapper) {
+  background-color: transparent;
+  border-radius: none;
+  box-shadow: none;
+  height: 500px;
+  top: 51%;
+
+  .profile_page__input {
+    &:hover {
+      color: #feba3d;
+    }
+  }
+
+  .relative-wrapper p {
+    font-size: 14px;
+  }
+
+  button:not(.close-button) {
+    position: static;
+    background-image: none;
+    background-color: #f9f8f8;
+  }
+
+  .close-button {
+    right: 10px;
+  }
+
+  .profile_page__address_wrapper {
+    position: relative;
+    text-overflow: ellipsis;
+    font-size: 0.8rem;
+    width: 100%;
+    width: 350px;
+    height: 500px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+    background-color: #f9f8f8;
+    padding: 30px 10px 250px;
+    margin-bottom: 40px;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    margin: 0 auto;
+    text-align: start;
+
+    .profile_page__address_title_wrapper,
+    .profile_page__default_status_wrapper {
+      display: flex;
+      gap: 15px;
+    }
+
+    .profile_page__default_status_label_wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 10px;
+
+      span {
+        display: none;
+      }
+    }
+
+    .profile_page__address_label input {
+      margin-left: 5px;
+    }
+
+    .address-button-container {
+      display: flex;
+      margin: 0 auto;
+      position: absolute;
+      bottom: 7%;
+      width: 100%;
+
+      button {
+        width: 40%;
+        height: 50px;
+        font-size: 1.1rem;
+        margin: 0 auto;
+      }
+    }
+
+    .address-checkbox-container {
+      display: flex;
+      margin: 0 auto;
+      align-items: center;
+      position: absolute;
+      top: 60%;
+      justify-content: center;
+
+      .profile_page__address_title_wrapper {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        input {
+          cursor: pointer;
+        }
+
+        &:nth-child(3),
+        &:nth-child(4) {
+          color: darkgreen;
+        }
+
+        .label-disabled {
+          color: gray;
+        }
+      }
+    }
   }
 }
