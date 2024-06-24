@@ -2,6 +2,7 @@
 @import url('./pages/main/main.scss');
 @import url('./pages/error/error-page.scss');
 @import url('./pages/profile/profile.scss');
+@import url('./pages/about/about.scss');
 
 $color-bg: #d3dfdf;
 $color-head: #182541;
@@ -51,6 +52,7 @@ body {
   margin: 0;
   color: $color-head;
   font-weight: bold;
+  font-family: 'Cabin Sketch', sans-serif;
 }
 
 @mixin accent-text {
@@ -59,9 +61,10 @@ body {
 }
 
 @mixin regular-text {
-  font-family: 'Inter';
+  font-optical-sizing: auto;
+  font-style: normal;
   color: $dark-text;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 150%;
 }
 
@@ -76,15 +79,30 @@ body,
 html {
   min-width: 360px;
   height: 100vh;
-  font-family: 'Gill Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-style: normal;
   font-size: 16px;
   scroll-behavior: smooth;
   background: linear-gradient(to right, $color-bg2, $color-bg3);
 }
 
+p,
+span,
+a,
+label,
+input,
+button {
+  @include regular-text;
+}
+
 h1 {
   @include title;
   font-size: 3rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 }
 
 h2 {
@@ -115,6 +133,7 @@ a {
   text-decoration: none;
   transition: transform 0.5s ease;
   color: $dark-text;
+  transition: color 0.3s ease;
 
   &:hover {
     color: $color-accent;

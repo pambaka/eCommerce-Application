@@ -17,6 +17,9 @@ module.exports = {
     'import/extensions': [2, {}],
     // 'no-console': 'off' for more convenient testing:
     'no-console': 0,
+    // next 2 lines are to work around eslint bug with enums:
+    'no-shadow': 0,
+    '@typescript-eslint/no-shadow': 2,
   },
   settings: {
     'import/resolver': {

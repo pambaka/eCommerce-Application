@@ -1,9 +1,9 @@
-import { CustomerIncomeData } from '../types/index';
+import { ClientErrors, CustomerIncomeData } from '../types/index';
 import { region } from './const';
 import useToken from '../services/use-token';
 import replaceLocation from '../utils/replace-location';
 import Router from '../services/router';
-import Customer from '../utils/customer';
+import Customer from '../services/customer';
 import showModal from '../pages/show-modal';
 
 export default function getUserInfo(): Promise<CustomerIncomeData | undefined> {
@@ -23,7 +23,7 @@ export default function getUserInfo(): Promise<CustomerIncomeData | undefined> {
     },
   })
     .then((response) => {
-      if (response.status === 401) {
+      if (response.status === ClientErrors.unauthorized) {
         replaceLocation(Router.pages.main);
         Customer.logOut();
         return undefined;

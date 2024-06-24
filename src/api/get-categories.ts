@@ -1,3 +1,4 @@
+import { Successful } from '../types';
 import { Category } from '../types/products';
 import { region } from './const';
 
@@ -13,7 +14,7 @@ export default async function getCategories(accessToken: string): Promise<Catego
     .then((res) => {
       //   console.log(res);
 
-      if (res.status !== 200) {
+      if (res.status !== Successful.ok) {
         return undefined;
       }
 

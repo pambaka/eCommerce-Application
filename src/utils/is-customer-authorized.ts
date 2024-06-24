@@ -1,5 +1,7 @@
-export default function isCustomerAuthorized(): boolean {
-  const value = localStorage.getItem('isCustomerAuthorized');
+import { CUSTOMER_ACCESS_TOKEN } from '../api/const';
 
-  return value === 'true';
+export default function isCustomerAuthorized(): boolean {
+  const value = localStorage.getItem(CUSTOMER_ACCESS_TOKEN);
+
+  return Boolean(value);
 }

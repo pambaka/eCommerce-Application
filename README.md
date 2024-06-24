@@ -1,19 +1,20 @@
+
 <h1 align="center">
     eCommerce-Application
 </h1>
 <br>
     <div align="center">
-         <img src="https://freeillustrations.xyz/wp-content/uploads/2021/03/Blues-Dual-tone-shopping-illustration_lg.png" alt="logo" width="250">
+        <img src="./src/assets/images/project-shot.png" alt="Screenshot" width="600">
     </div>
 
 <h3 align="left">
     Team: Keep Calm and Code
 </h3>
 <br>
-Welcome to our application! eCommerce Application project is a team task in which the team of three students of RS School develop an eCommerce application.
+Welcome to our eCommerce Application! This project is a team task in which our team of three students of RS School develop an eCommerce application.
 <br>
 <h2 align="left">
-    Deploy Link: [...]
+    [Deploy Link](https://keep-calm-and-code.netlify.app/)
 </h2>
 
 ## About project
@@ -26,24 +27,24 @@ We wish you successful shopping and a pleasant user experience!
 ### Project goals
 The main goal of the project is to explore the use of front-end technologies and provide a convenient platform for purchasing goods, specifically:
 
-- Explore registration/login systems and create registration/login forms
+- Explore sign-in/sign-up systems and create registration/login forms
 - Integrate the CommerceTools into project
-- Implement of a product catalog, detailed product description and user profile pages
+- Implement of a product catalog, detailed product description and user profile page
 - Implement of a product cart and promocodes
 - Create product detail page for every item
 
 
 ### Project structure
 This application includes several key pages:
-- Login page
-- Registration page
+- Sign In page
+- Sign Up page
 - Main page
-- Catalog of goods page
-- Detailed Product page
+- Catalog page
+- Product page
 - Profile page
-- Product basket
+- Cart page
 - About Us page
-- 404 (Not Found)
+- 404 (Not Found) page
 
 ### Project developers team
 - [pambaka](https://github.com/pambaka)
@@ -52,11 +53,12 @@ This application includes several key pages:
 
 ### Technology stack
 <div style="display: flex; gap: 10px;">
-    <img src="https://www.svgrepo.com/show/374144/typescript.svg" alt="ts" width="50">
-    <img src="https://www.svgrepo.com/show/374061/sass.svg" alt="sass" width="50">
-    <img src="https://www.svgrepo.com/show/353884/html-5.svg" alt="html-5" width="50">
-    <img src="https://www.svgrepo.com/show/354552/webpack.svg" alt="webpack" width="50">
-    <img src="https://www.svgrepo.com/show/373700/jest.svg" alt="jest" width="50">
+    <img src="./src/assets/stack-images/typescript.svg" alt="ts" width="50">
+    <img src="./src/assets/stack-images/sass.svg" alt="sass" width="50">
+    <img src="./src/assets/stack-images/html-5.svg" alt="html-5" width="50">
+    <img src="./src/assets/stack-images/webpack.svg" alt="webpack" width="50">
+    <img src="./src/assets/stack-images/jest.svg" alt="jest" width="50">
+    <img src="./src/assets/stack-images/bootstrap-logo.svg" alt="bootstrap" width="50">
 </div>
 
 ### Scripts
@@ -65,7 +67,7 @@ This application includes several key pages:
 `ci:format`: to check code format compliance in CI.\
 `test`: to run tests once.\
 `test:watch`: to run tests in observation mode.\
-`test:coverage`: to run tests and generates a code coverage report.\
+`test:coverage`: to run tests and generates a code coverage report.
 
 ### Project Installation
 ```sh
@@ -88,7 +90,7 @@ npm run prepare
 ### Project build
 ```sh
 ## To build the project run the following command using npm:
-npm run build
+npm run-build
 
 ## and using yarn:
 yarn build

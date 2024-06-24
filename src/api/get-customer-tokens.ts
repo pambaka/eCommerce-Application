@@ -1,6 +1,7 @@
 import { region } from './const';
 import handleErrorMessage from '../pages/handle-error-message';
 import useToken from '../services/use-token';
+import { ClientErrors } from '../types';
 
 export default async function getCustomerTokens(email: string, password: string): Promise<string | undefined> {
   let accessToken: string | undefined;
@@ -16,7 +17,7 @@ export default async function getCustomerTokens(email: string, password: string)
   })
     .then((res) => res.json())
     .then((data) => {
-      if (data.statusCode === 400) {
+      if (data.statusCode === ClientErrors.badRequest) {
         handleErrorMessage(data.message);
       } else {
         accessToken = data.access_token;

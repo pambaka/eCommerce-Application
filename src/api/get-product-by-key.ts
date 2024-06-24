@@ -1,3 +1,4 @@
+import { Successful } from '../types';
 import { Product } from '../types/products';
 import { region } from './const';
 
@@ -11,17 +12,13 @@ export default async function getProductByKey(key: string, accessToken: string):
     },
   })
     .then((res) => {
-      // console.log(res);
-
-      if (res.status !== 200) {
+      if (res.status !== Successful.ok) {
         return undefined;
       }
 
       return res.json();
     })
     .then((data) => {
-      // console.log(data);
-
       product = data;
     })
     .catch((error) => error);

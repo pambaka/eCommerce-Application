@@ -8,7 +8,8 @@
   .login-button,
   .logout-button,
   .signup-button,
-  .user-profile {
+  .user-profile,
+  .cart-button {
     box-sizing: content-box;
     padding: 4px;
     // background-color: transparent;
@@ -20,6 +21,30 @@
     &:hover {
       transition: 0.2s;
       color: #5f8575;
+    }
+  }
+
+  .cart-button {
+    margin-left: 10px;
+    position: relative;
+
+    .cart-counter {
+      position: absolute;
+      top: -15px;
+      right: -10px;
+      min-width: 20px;
+      height: 20px;
+      padding: 1px 4px 0px 4px;
+      display: grid;
+      place-content: center;
+      background-color: #feba3d;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .cart-counter--hidden {
+      display: none;
     }
   }
 

@@ -12,8 +12,9 @@
 }
 
 .modal-window {
-  width: 360px;
-  height: 200px;
+  width: min(360px, 96%);
+  min-height: 200px;
+  padding: 20px 2px;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -22,6 +23,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  gap: 20px;
   text-align: center;
   background-color: $color-bg-light;
   border-radius: 5px;
@@ -29,7 +31,7 @@
   z-index: 2;
 
   p:first-child {
-    width: 300px;
+    width: min(300px, 100%);
     font-size: 20px;
     line-height: 1.6;
     color: $color-warning;
@@ -40,13 +42,13 @@
   }
 
   p:nth-child(2) {
-    width: 250px;
+    width: min(250px, 100%);
     font-size: 16px;
     line-height: 1.2;
     color: #7f7f7f;
   }
 
-  button {
+  .close-button {
     width: 20px;
     height: 20px;
     position: absolute;
