@@ -7,7 +7,7 @@ import replaceLocation from '../../utils/replace-location';
 import ButtonWithSvgIcon from '../../components/button-with-svg-icon';
 import userNavIcons from '../../assets/user-nav-icons-sprite.svg';
 import { subscribeToAuthorizationChangeEvent } from '../../utils/authorization-event';
-import Customer from '../../utils/customer';
+import Customer from '../../services/customer';
 import { CLASS_NAMES, DOM } from '../../const';
 import Counter from '../../services/counter';
 

@@ -2,7 +2,7 @@ import { region } from './const';
 import getCustomerTokens from './get-customer-tokens';
 import replaceLocation from '../utils/replace-location';
 import Router from '../services/router';
-import Customer from '../utils/customer';
+import Customer from '../services/customer';
 import Counter from '../services/counter';
 import showModal from '../pages/show-modal';
 import { Successful } from '../types';

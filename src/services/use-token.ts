@@ -5,7 +5,7 @@ import {
   CUSTOMER_ACCESS_TOKEN,
   CUSTOMER_REFRESH_TOKEN,
 } from '../api/const';
-import Customer from '../utils/customer';
+import Customer from './customer';
 import getAnonymousToken from '../api/get-anonymous-tokens';
 import getAccessToken from '../api/get-access-token';
 import isTokenActive from '../api/is-token-active';

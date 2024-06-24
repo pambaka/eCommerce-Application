@@ -3,7 +3,7 @@ import { region } from './const';
 import useToken from '../services/use-token';
 import replaceLocation from '../utils/replace-location';
 import Router from '../services/router';
-import Customer from '../utils/customer';
+import Customer from '../services/customer';
 import showModal from '../pages/show-modal';
 
 export default function getUserInfo(): Promise<CustomerIncomeData | undefined> {

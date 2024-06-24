@@ -2,7 +2,7 @@ import getUserInfo from '../src/api/get-user-info';
 import useToken from '../src/services/use-token';
 import replaceLocation from '../src/utils/replace-location';
 import Router from '../src/services/router';
-import Customer from '../src/utils/customer';
+import Customer from '../src/services/customer';
 import showModal from '../src/pages/show-modal';
 
 jest.mock('../src/services/use-token');
