@@ -1,6 +1,6 @@
 import { CUSTOMER_ACCESS_TOKEN, CUSTOMER_REFRESH_TOKEN } from '../api/const';
-import { dispatchAuthorizationChangeEvent } from './authorization-event';
-import Counter from '../services/counter';
+import { dispatchAuthorizationChangeEvent } from '../utils/authorization-event';
+import Counter from './counter';
 
 export default class Customer {
   static logIn(username?: string) {
