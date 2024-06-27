@@ -1,0 +1,60 @@
+@import './variables.scss';
+
+.form-wrapper {
+  min-height: fit-content;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+
+  .input-module {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+  }
+
+  .input-module::after {
+    content: attr(warning);
+    display: block;
+    color: $color-warning;
+    font-style: italic;
+    font-size: $font-size-warning;
+    line-height: calc($font-size-warning + 2px);
+    height: calc(($font-size-warning + 2px) * 2);
+  }
+
+  label:has(input) {
+    font-size: 16px;
+    color: gray;
+    align-self: start;
+    display: flex;
+  }
+
+  input,
+  button {
+    font-size: inherit;
+    padding: 5px;
+  }
+
+  input {
+    border: 1px solid gray;
+  }
+
+  .input-invalid {
+    border: 1px solid $color-warning;
+  }
+
+  button:last-of-type {
+    margin-top: 20px;
+  }
+}
