@@ -82,8 +82,13 @@ export default class useToken {
       },
       get: async () => {
         let token = localStorage.getItem(CLIENT_ACCESS_TOKEN);
+        let isActive = false;
 
-        if (!token) {
+        if (token) {
+          isActive = await isTokenActive(token);
+        }
+
+        if (!token || !isActive) {
           await this.client.access.set();
           token = localStorage.getItem(CLIENT_ACCESS_TOKEN);
         }
