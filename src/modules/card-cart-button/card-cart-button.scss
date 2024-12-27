@@ -1,0 +1,41 @@
+@import '../../styles/variables.scss';
+
+.card-cart-button {
+  width: 100%;
+  min-width: 180px;
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 5px $color-bg-dark;
+  text-shadow: 0 1px 5px white;
+  background-color: #d7d2d2;
+  transition: 0.5s;
+
+  &:hover {
+    transition: 0.5s;
+  }
+
+  &:disabled {
+    cursor: default;
+    background-image: none;
+    background-color: #d7d2d2;
+    box-shadow: 0px 0px 2px gray inset;
+    text-shadow: none;
+    color: $color-bg-dark;
+  }
+}
+
+.add-to-cart-button {
+  background-image: linear-gradient(to bottom, #fedd9e, #feba3d);
+
+  &:hover:not(:disabled) {
+    background-image: linear-gradient(to bottom, #fed68b, #feb329);
+  }
+}
+
+.remove-from-cart-button {
+  background-image: linear-gradient(to bottom, $color-bg-light, #cec7c7);
+
+  &:hover:not(:disabled) {
+    background-image: linear-gradient(to bottom, #d7d2d2, #c4bdbd);
+  }
+}
